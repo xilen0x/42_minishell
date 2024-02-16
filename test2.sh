@@ -1,1 +1,1 @@
-Editado por joan.
+prueba de merge mismo file
