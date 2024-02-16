@@ -1,0 +1,1 @@
+Editado por joan.
