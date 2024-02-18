@@ -1,2 +1,0 @@
-file_1
-la crea (joan) desde casa y desde la rama 'joan'
