@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minsh.c                                            :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:31:05 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/02/27 18:21:34 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:07:08 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-/*
-typedef struct s_env
-{
-	char	**env_cpy;
-	char	*key;
-	char	*value;
-}			t_env;
-*/
+#include "minishell.h"
 
 /*-----------Makes an allocated char ** copy-------------*/
 char	**env_cpy(char *e[])
@@ -39,7 +28,7 @@ char	**env_cpy(char *e[])
 		exit (EXIT_FAILURE);//definirlo en el .h
 	while (i < len)
 	{
-		*env[i] = ft_strdup(e[i]);
+		env[i] = ft_strdup(e[i]);
 		i++;
 	}
 	env[i] = NULL;
@@ -62,7 +51,7 @@ int main(int ac, char *av[], char *e[])
 
 	while (1)//en teoria, loop infinito hasta que se presione Ctrl + C
 	{
-    	line = readline("minishell:-> ");// Muestra prompt y lee la línea de entrada
+    	line = readline("minishell$ ");// Muestra prompt y lee la línea de entrada
 
 		add_history(line);//agrega line al historial
 		free(line);
