@@ -2,3 +2,7 @@
 libft/obj/*.o
 libft/obj/*.d
 objs/main.o.*
+.DS_Store
+a.out
+*.swp
+minishell
