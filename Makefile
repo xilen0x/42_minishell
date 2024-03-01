@@ -1,79 +1,77 @@
-NAME = minishell
+# Nombre del programa
+TARGET = minishell
 
-# Readline
-RL_DIR		= readline/
-INCFLAG		+= -I $(RL_DIR)
-READLINE	:= $(RL_DIR)libreadline.a $(RL_DIR)libhistory.a
-RL_FILE		= readline.tar.gz
-RL_URL		= http://git.savannah.gnu.org/cgit/readline.git/snapshot/readline-bfe9c573a9e376323929c80b2b71c59727fab0cc.tar.gz
-
-# Libft
-LIBFT_DIR 	= libft/
-LIBFT_FILE 	= libft.a
-LIBFT 		= $(addprefix $(LIBFT_DIR), $(LIBFT_FILE))
-
-LIBS		+= -lreadline -ltermcap
-DEFS		= -DREADLINE_LIBRARY
-
-SRCS_DIR 	= src/
-SRC_FILES 	= main.c libft_utils.c
-
-OBJS_DIR	= objs/
-OBJ_FILES	= $(SRC_FILES:.c=.o)
-OBJS		= $(addprefix $(OBJS_DIR), $(OBJ_FILES))
-DEPS		:= $(OBJS:.o=.d)
-
-INCLUDE 	= -I include/ -I libft/
-
+# Compilador
 CC = clang
-CFLAGS = -g -Wall -Wextra -Werror $(INCLUDE)
 
-RM = rm -rf
-AR = ar rc
+# Directorios de los archivos de encabezado, archivos objeto y bibliotecas
+INCLUDE_DIR = ./include
+LIBFT_DIR = ./libft
+READLINE_DIR = ./readline
+OBJ_DIR = ./objs
 
-all: $(NAME)
+# Directorio de los archivos fuente
+SRC_DIR = ./src
 
-subsystems:
+# Opciones de compilación
+CFLAGS = -g -Wall -Wextra -Werror
+
+# Incluir bibliotecas
+LIBFT = $(LIBFT_DIR)/libft.a
+READLINE = $(READLINE_DIR)/libreadline.a $(READLINE_DIR)/libhistory.a
+
+# Bibliotecas adicionales necesarias
+LIBS = -lreadline -ltermcap
+
+# Archivos fuente
+SOURCES = $(wildcard $(SRC_DIR)/*.c)
+
+# Archivos objeto generados por el compilador
+OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+DEPS = $(OBJECTS:.o=.d)
+
+# Incluir archivos de encabezado
+INCLUDES = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(READLINE_DIR)
+
+# Regla por defecto, compilación del programa
+all: $(TARGET)
+
+# Regla para compilar el programa
+$(TARGET): $(LIBFT) $(READLINE) $(OBJECTS)
+	@$(CC) $(CFLAGS) $(INCLUDES) $^ -o $@ $(LIBFT) $(READLINE) $(LIBS)
+
+# Regla para compilar cada archivo fuente
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
+
+# Regla para construir la biblioteca libft
+$(LIBFT):
 	@make -C $(LIBFT_DIR)
 
-$(RL_DIR):
-	@curl -k $(RL_URL) > $(RL_FILE)
-	@tar -xf $(RL_FILE) && mv readline-* readline
-	@rm -rf $(RL_FILE)
+# Regla para construir la biblioteca readline
+$(READLINE):
+	@make -C $(READLINE_DIR)
 
-$(READLINE): $(RL_DIR)
-	@if [ ! -f $(RL_DIR)config.status ] ; then \
-		printf "\t$(YELLOW)Configuring READLINE...$(DEFAULT)" && \
-		cd ./$(RL_DIR) && \
-		./configure &> /dev/null && \
-		echo ✅; \
-	fi
-	@printf "\t$(YELLOW)Making READLINE...$(DEFAULT)"
-	@cd ./$(RL_DIR) && make &> /dev/null
-	@echo ✅
-
-# ********* Modificación realizada aquí *********
-$(LIBFT): $(OBJS)
-	@ar rcs libft.a $(OBJS) >/dev/null 2>&1
-
-$(NAME): subsystems $(OBJS_DIR) $(OBJS) $(READLINE) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) -L libft/ -lft -o $@
-
-$(OBJS_DIR):
-	@mkdir -p $@
-
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@$(CC) -c $(CFLAGS) $< -o $@
-
-clean: 
+# Regla para limpiar archivos temporales y el programa compilado
+clean:
+	@rm -rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
-	@$(RM) $(OBJS) $(DEPS)
+	@make -C $(READLINE_DIR) clean
 
+# Regla para limpiar archivos temporales y el programa compilado
 fclean: clean
+	@rm -f $(TARGET)
 	@make -C $(LIBFT_DIR) fclean
-	@$(RM) $(NAME) $(READLINE)
 
+# Regla para reconstruir el proyecto desde cero
 re: fclean all
+
+# Crea el directorio de objetos si no existe
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+# Incluye las dependencias
 -include $(DEPS)
 
-.PHONY: all clean fclean re subsystems
+# Reglas PHONY
+.PHONY: all clean fclean re
