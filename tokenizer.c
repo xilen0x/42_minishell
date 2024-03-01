@@ -11,22 +11,21 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*------CREAMOS UN NODO PARA CADA TOKEN + INFO---------*/
-t_token	*my_lstnew(void *content, int keyword, int position)
-{
-	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token));
+/*------CREAMOS UN NODO PARA CADA TOKEN + INFO---------*/
+t_list	*my_lstnew(void *content, int keyword)
+{
+	t_list	*token;
+
+	token = (t_list *)malloc(sizeof(t_list));
 	if (!token)
 		return (NULL);
-	token->value = content;
+	token->value = *content;
 	token->keyword = keyword;
-	token->position = position;
-	token->next = NULL;
-	return (token);
+    token->next = NULL;
 }
 
-t_token    **tokenizer(char *line)
+t_list    **tokenizer(char *line)
 {
 /*crear una lista de nodos **token
 cada nodo contiene: 
@@ -39,7 +38,8 @@ trimar spaces y tabs, delante y detras (hace falta ????)
     char    *content = NULL;
     int     position = 0;
     int     keyword = 0;
-    
+}
+
 if (*line)
 {
     while (*line == ' ' || *line == '\t' || *line == '\t')

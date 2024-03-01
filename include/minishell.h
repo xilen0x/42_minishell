@@ -19,12 +19,12 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
-typedef struct s_token
+typedef struct s_list
 {
-	char	*value;
-	int		keyword;//no se si el enum deberia ser un int o un char 
-	int		position;
-}			t_token;
+	char			*value;
+	int				keyword;//no se si el enum deberia ser un int o un char 
+	struct	s_list	*next;
+}					t_list;
 
 DEFINIR LOS ENUMS QUE SERAN LOS DIFERENTES TIPOS DE KEYWORDS (no se si char o int)
 
