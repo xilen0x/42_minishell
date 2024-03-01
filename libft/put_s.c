@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   put_s.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joan <jocuni-p@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 13:00:59 by joan              #+#    #+#             */
-/*   Updated: 2023/06/11 13:10:53 by joan             ###   ########.fr       */
+/*   Created: 2023/06/10 23:54:43 by joan              #+#    #+#             */
+/*   Updated: 2023/12/21 10:41:57 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//Envia un int al file descriptr dado
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	put_s(char *s)
 {
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else
-	{
-		if (n < 0)
-		{
-			n = -n;
-			ft_putchar_fd('-', fd);
-		}
-		if (n > 9)
-		{
-			ft_putnbr_fd(n / 10, fd);
-		}
-		ft_putchar_fd(n % 10 + '0', fd);
-	}
+	if (!s)
+		return (write(1, "(null)", 6));
+	return (write(1, s, ft_strlen(s)));
 }

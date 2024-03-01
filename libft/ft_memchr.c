@@ -3,66 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 10:52:36 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/17 10:52:40 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/16 12:39:48 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/07/06 12:03:06 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*The memchr() function locates the first occurrence of character c (converted
+ * to an unsigned char) in the first n bytes of the string pointed by s.
+	 The function returns a pointer to the byte located, or NULL if
+     no such byte exists within n bytes.*/
 
-/*
-DESCRIPTION
-     The memchr() function locates the first occurrence of c (converted to an
-     unsigned char) in string s.
-
-RETURN VALUES
-     The memchr() function returns a pointer to the byte located, or NULL if
-     no such byte exists within n bytes.
-*/
+//#include<stdio.h>
+//#include<string.h>
 #include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*my_string;
-	unsigned char		c_to_find;
-	unsigned int		i;
+	unsigned char	*f;
+	size_t			i;
 
-	my_string = (const unsigned char *)s;
-	c_to_find = (unsigned char)c;
 	i = 0;
-	while (i < n)
+	f = (unsigned char *) s;
+	c = (unsigned char) c;
+	while (n > i)
 	{
-		if (*my_string == c_to_find)
-			return ((void *)my_string);
-		my_string++;
+		if (f[i] == c)
+			return (&f[i]);
 		i++;
 	}
 	return (NULL);
 }
-
-/*#include <stdio.h>
-
+/*
 int	main(void)
 {
-	printf("Test 1\n");
-	printf("Result memchr   : %s\n", memchr(" ", '-', 1));
-	printf("Result ft_memchr: %s\n", ft_memchr(" ", '-', 1));
+	char	s[] = "Las 3x5 cars del *Un@~0  ";
+	char	str[] = "Las 3x5 cars del *Un@~0  ";
+	char	s1[] = "/|\x12\xff\x09\0\x42\042\0\42|\\";
+	char	s2[] = "/|\x12\xff\x09\0\x42\042\0\42|\\";
+	int		c;
+	size_t	n;
 
-	printf("Test 2\n");
-	printf("Result memchr   : %s\n", memchr("", '-', 1));
-	printf("Result ft_memchr: %s\n", ft_memchr("", '-', 1));
-
-	printf("Test 3\n");
-	printf("Result memchr   : %s\n", memchr("holamundo", 'm', 10));
-	printf("Result ft_memchr: %s\n", ft_memchr("holamundo", 'm', 10));
-
-	printf("Test 4\n");
-	printf("Result memchr   : %s\n", memchr("holamundo", 'x', 10));
-	printf("Result ft_memchr: %s\n", ft_memchr("holamundo", 'x', 10));
-
-	printf("Test 5\n");
-	printf("Result memchr   : %s\n", memchr("holamundo", 'm', 2));
-	printf("Result ft_memchr: %s\n", ft_memchr("holamundo", 'm', 2));
+	c = 48;
+	n = 100;
+	printf("*s >%s<\nc = %d\nn = %zu\n", s, c, n);
+	printf("ft_memchr >%s<\n", (unsigned char *)ft_memchr(s, c, n));
+	printf("   memchr >%s<\n", (unsigned char *)memchr(str, c, n));
+	printf("*s1 es >%s<\nc = %d\nn = %zu\n", s1, c, n);
+	printf("ft_memchr >%s<\n", (unsigned char *)ft_memchr(s1, '\0', 12));
+	printf("   memchr >%s<\n", (unsigned char *)memchr(s2, '\0', 12));
 	return (0);
-}
-*/
+}*/

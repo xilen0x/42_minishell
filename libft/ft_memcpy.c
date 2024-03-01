@@ -3,49 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 17:49:08 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/14 13:06:26 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/17 12:03:01 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/07/06 12:20:21 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*The memcpy() function copies n bytes from memory area src to memory area
+     dst.  If dst and src overlap, behavior is undefined.  Applications in
+     which dst and src might overlap should use memmove(3) instead.
+	 Returns the original value of dst.*/
 
-/* Copies from one part of memory to another, ignoring possible overlaps */
-
+//#include<string.h>
+//#include<stdio.h>
 #include "libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	unsigned int	i;
-	char			*psrc;
-	char			*pdst;
+	size_t			i;
+	unsigned char	*s;
+	unsigned char	*d;
 
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	psrc = (char *)src;
-	pdst = (char *)dst;
 	i = 0;
-	while (i < n)
+	s = (unsigned char *)src;
+	d = (unsigned char *)dst;
+	if (!dst && !src)
+		return (0);
+	while (n > i)
 	{
-		pdst[i] = psrc[i];
+		d[i] = s[i];
 		i++;
 	}
-	return (dst);
+	return (d);
 }
-
 /*
-
-int main ()
+int	main(void)
 {
-	printf("\n---------memcpy-------------*\n");
-	char src[] = "every programmer should know memcpy!";
-	char dst[] = "**********";
-	printf("%s\n", (char *)memcpy(dst + 4, src, 5));
-
-	printf("\n---------ft_memcpy----------*\n");
-	char src2[] = "every programmer should know memcpy!";
-	char dst2[] = "**********";
-	printf("%s\n", (char *)ft_memcpy(dst2 + 4, src2, 5));
-	return 0;
-}
-*/
+	char	src[] = "ho\0la mundo";
+	char	dst[] = "xxxxxxxxxx";
+	char	src1[] = "ho\0la mundo";
+	char	dst1[] = "xxxxxxxxxx";
+	char	src2[] = "";
+	char	dst2[] = "";
+	char	src3[] = "";
+	char	dst3[] = "";
+	size_t	n = 2;
+	printf("ft_memcpy>%s<\n", (unsigned char *)ft_memcpy(dst, src, n));
+	printf("  _memcpy>%s<\n", (unsigned char *)memcpy(dst1, src1, n));
+	printf("ft_memcpy>%s<\n", (unsigned char *)ft_memcpy(dst2, src2, n));
+	printf("  _memcpy>%s<\n", (unsigned char *)memcpy(dst3, src3, n));
+	return (0);
+}*/

@@ -3,40 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: joan <jocuni-p@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 14:01:29 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/14 15:47:07 by castorga         ###   ########.fr       */
+/*   Created: 2023/06/10 23:48:03 by joan              #+#    #+#             */
+/*   Updated: 2023/06/11 00:39:30 by joan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Prototipo
-void ft_putchar_fd(char c, int fd);
+/*Esta funcion utiliza la función 'write' de la biblioteca <unistd.h> para
+escribir el carácter 'c' en el descriptor de archivo especificado por 'fd'.
+La función 'write' toma como argumentos el descriptor de archivo (fd), un
+puntero al carácter (&c) y la longitud del buffer (en este caso, 1 porque solo
+se está escribiendo un carácter).
+Notese que le pasamos el char c a traves de su direccion, no como un
+caracter, sino como un puntero.*/
 
-Parámetros 
-c: El carácter a enviar.
-fd: El file descriptor sobre el que escribir.
-
-Valor devuelto 
-Nada
-
-Funciones autorizadas
-write
-
-Descripción 
-Envía el carácter ’c’ al file descriptor especificado.
-*/
 #include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-/*int	main(void)
-{
-	ft_putchar_fd('a', 1);
-	ft_putchar_fd('\n', 1);
-	return (0);
-}*/

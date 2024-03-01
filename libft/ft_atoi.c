@@ -3,74 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 16:05:19 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/19 16:05:22 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/12 16:01:43 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/07/06 11:03:47 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*Reads a String, and, after ignoring spaces with ft_isspace, saves the string 
-into an integer*/
-
-/*
-DESCRIPTION
-     The atoi() function converts the initial portion of the string pointed to
+/*"atoi" proviene de "ASCII to integer"
+ * The atoi() function converts the initial portion of the string pointed to
      by str to int representation.
-
-     It is equivalent to:
-
-           (int)strtol(str, (char **)NULL, 10);
-
-IMPLEMENTATION NOTES
-     The atoi() and atoi_l() functions are thread-safe and async-cancel-safe.
-
-     The strtol() and strtol_l() functions are recommended instead of atoi()
-     and atoi_l() functions, especially in new code.
+	 La función atoi recibe como argumento una cadena de caracteres y devuelve
+	 el valor numérico correspondiente. Funciona leyendo los caracteres de la
+	 cadena hasta encontrar el primer dígito (se ignoran los caracteres
+	 comprendidos en isspace y se maneja el signo), luego interpreta todos los
+	 caracteres siguientes como dígitos numéricos hasta que se encuentra un
+	 carácter no numérico. Todos los caracteres no numéricos después del primer
+	 dígito se ignoran.
 */
-
-#include "libft.h"
-
-static char	*ft_isspace(char *str)
-{
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		++str;
-	return (str);
-}
+//#include<stdio.h>
 
 int	ft_atoi(const char *str)
 {
-	short int	parity;
-	int			number;
-	char		*mystr;
+	int	i;
+	int	nbr;
+	int	flag;
 
-	parity = 0;
-	number = 0;
-	mystr = ft_isspace((char *)str);
-	if (*mystr == '+' || *mystr == '-')
+	i = 0;
+	nbr = 0;
+	flag = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
+		i++;
+	if (str[i] == '+')
+		i++;
+	else if (str[i] == '-')
 	{
-		if (*mystr == '-')
-			parity++;
-		mystr++;
+		flag++;
+		i++;
 	}
-	while (*mystr >= '0' && *mystr <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		number *= 10;
-		number += *mystr - '0';
-		mystr++;
+		nbr = nbr * 10 + (str[i] - 48);
+		i++;
 	}
-	if (parity % 2 == 0)
-		return (number);
-	return (-number);
+	if (flag == 1)
+		nbr = -nbr;
+	return (nbr);
 }
-
 /*
 int	main(void)
 {
-	char	*s = "+-54";
-	//const char *s = "   ---+--+1234ab567";
+	char	str[] = "    	-24las 24horas"; 
 
-	printf("%d\n", ft_atoi(s));
+	printf("input >%s<\n", str);
+	printf("output >%d<\n", ft_atoi(str));
 	return (0);
-}
-*/
+}*/

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 13:14:00 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/09 13:14:03 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/02 16:25:48 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/05/31 09:59:52 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*function computes the length of the string s. Returns the number of 
+ * characters that precede the terminating NUL character.*/
 
 #include "libft.h"
 
@@ -17,23 +19,7 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 }
-
-/*#include <string.h>
-#include <stdio.h>
-int	main(void)
-{
-	char *arg = "welcome";
-
-	printf("\n---strlen----");
-	printf("\nstring lenght: %d", (unsigned)strlen(arg));
-	printf("\n---ft_strlen----");
-	printf("\nstring lenght: %d", (unsigned)ft_strlen(arg));
-
-	return (0);
-}*/

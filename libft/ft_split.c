@@ -1,137 +1,193 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 10:11:11 by castorga          #+#    #+#             */
-/*   Updated: 2023/09/15 11:56:45 by castorga         ###   ########.fr       */
+/*   Created: 2023/06/05 11:36:04 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/06/08 10:08:31 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*Reserva, utilizando malloc, un array de strings resultante de separar la
+ * string 's' en substrings utilizando el caracter 'c' como delimitador. El
+ * array se termina/cierra con un puntero NULL.*/
 
-/*
-Prototipo
-char **ft_split(char const *s, char c);
-
-Parámetros
-s: La string a separar.
-c: El carácter delimitador.
-
-Valor devuelto
-El array de nuevas strings resultante de la separación.
-NULL si falla la reserva de memoria.
-
-Funciones autorizadas
-malloc, free
-
-Descripción
-Reserva (con malloc) un array de strings, resultante de separar
-la string ’s’ en substrings, utilizando el caracter ’c’ como delimitador.
-El array debe terminar con un puntero NULL.
-*/
-
+//#include<stdio.h>
+//#include<stdlib.h>
+//#include<string.h>
 #include "libft.h"
-/* función q calcula la long real de un string(salta los c repetidos a 'c').*/
-static size_t	ft_real_strlen(const char *s, char c)
+/*
+void    *ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t	counter;
+    size_t          i;
+    unsigned char   *s;
+    unsigned char   *d;
 
+    i = 0;
+    s = (unsigned char *)src;
+    d = (unsigned char *)dst;
+    if (!dst && !src)
+        return (0);
+    while (n > i)
+    {
+        d[i] = s[i];
+        i++;
+    }
+    return (d);
+}
+
+size_t  ft_strlen(const char *s)
+{
+    size_t  i;
+
+    i = 0;
+    while (s[i])
+        i++;
+    return (i);
+}
+
+char    *ft_strdup(const char *s1)
+{
+    char    *dup;
+    size_t  len;
+
+    len = ft_strlen(s1) + 1;
+    dup = (char *) malloc(len * sizeof(char));
+    if (!dup)
+        return (NULL);
+    ft_memcpy(dup, s1, len);
+    return (dup);
+}
+
+char    *ft_substr(char const *s, unsigned int start, size_t len)
+{
+    char            *sub;
+    unsigned int    i;
+    unsigned int    s_len;
+
+    i = 0;
+    if (!s)
+        return (NULL);
+    s_len = ft_strlen(s);
+    if (start > s_len)
+        return (ft_strdup(""));
+    if (ft_strlen(&s[start]) < len)
+        len = ft_strlen(&s[start]);
+    sub = (char *) malloc(sizeof(char) * (len + 1));
+    if (!sub)
+        return (NULL);
+    while (s[start + i] && i < len)
+    {
+        sub[i] = s[start + i];
+        i++;
+    }
+    sub[i] = '\0';
+    return (sub);
+}
+
+void    ft_bzero(void *s, size_t n)
+{
+    char    *a;
+    int     i;
+
+    i = 0;
+    a = s;
+    while (n > 0)
+    {
+        a[i] = 0;
+        i++;
+        n--;
+    }
+}
+
+void    *ft_calloc(size_t count, size_t size)
+{
+    void    *array;
+
+    array = malloc(count * size);
+    if (!array)
+        return (NULL);
+    ft_bzero(array, (count * size));
+    return (array);
+}*/
+
+static int	ft_counter(char const *s, char c)
+{
+	int	i;
+	int	counter;
+
+	i = 0;
 	counter = 0;
-	while (*s)
+	if (!s || *s == '\0')
+		return (0);
+	while (s[i])
 	{
-		if (*s != c)
+		if (s[i] != c)
 		{
-			++counter;
-			while (*s && (*s != c))
-				++s;
+			counter++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
 		}
 		else
-			++s;
+			i++;
 	}
 	return (counter);
 }
 
-static void	ft_free_split(char **array_strings)
+static char	**ft_free(char **split, int i)
 {
-	size_t	i;
-
-	i = 0;
-	if (array_strings)
+	while (i >= 0)
 	{
-		while (array_strings[i])
-		{
-			free(array_strings[i]);
-			i++;
-		}
-		free(array_strings);
+		free(split[i]);
+		i--;
 	}
+	free(split);
+	return (NULL);
 }
 
-static char	**ft_process(const char *s, char c, char **array_strings)
+char	**ft_split(char const *s, char c)
 {
-	size_t	len;
-	size_t	i;
+	char	**split;
+	int		i;
+	int		num;
+	int		start;
 
-	i = 0;
-	while (*s)
+	i = -1;
+	num = 0;
+	split = (char **)ft_calloc((ft_counter(s, c) + 1), sizeof(char *));
+	if (!split)
+		return (NULL);
+	while (num < ft_counter(s, c) && i++ >= -1)
 	{
-		if (*s != c)
+		if (s[i] != c && s[i])
 		{
-			len = 0;
-			while ((*s) && (*s != c) && (++len))
-				++s;
-			array_strings[i] = ft_substr(s - len, 0, len);
-			if (!array_strings[i])
-			{
-				ft_free_split(array_strings);
-				return (NULL);
-			}
-			i++;
-		}
-		else
-			++s;
-	}
-	array_strings[i] = (NULL);
-	return (array_strings);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	char	**array_strings;
-
-	if (!s)
-		return (0);
-	array_strings = malloc(sizeof(char *) * (ft_real_strlen(s, c) + 1));
-	if (!array_strings)
-		return (0);
-	array_strings = ft_process(s, c, array_strings);
-	return (array_strings);
-}
-
-
-/*int	main(void)
-{
-	char *str0 = "1";
-	int character = ' ';
-	char **result = ft_split(str0, character);
-
-	//char *str1 = "      split       this for   me  !       ";
-	//printf("Se espera: , 'split', 'this', 'for', 'me', '!'\n");
-	//char **result1 = ft_split(str1, character);
-
-	//char *str2 = "                  olol";
-	//printf("Se espera: , 'olol'\n");
-	//char **result2 = ft_split(str2, character);
-
-	if (result)
-	{
-		size_t i = 0;
-		while (result[i])
-		{
-			printf("%s\n", result[i]);
-			i++;
+			start = i;
+			num++;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+			split[num - 1] = ft_substr(s, (unsigned int)start, i - start);
+			if (!split[num - 1])
+				return (ft_free(split, num - 2));
 		}
 	}
-    return (0);
+	return (split);
+}
+/*
+int	main(void)
+{
+	char	s[] = "       sssss             q      ";
+	char	c = ' ';
+	char	**split;
+	int		i = 0;
+
+	split = ft_split(s, c);
+	printf("split=%p\n", *split);
+	while (split[i])
+	{
+		printf("%i   >%s<\n", i, split[i]);
+		i++;
+	}
+	ft_free(split, i);
+	return (0);
 }*/

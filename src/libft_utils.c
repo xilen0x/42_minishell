@@ -3,56 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: castorga <castorga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:00:09 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/01 10:30:37 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:19:27 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "minishell.h"
 
-
-size_t	ft_strlen(const char *s)
+/*-----------Makes an allocated char ** copy-------------*/
+char	**env_cpy(char *e[])
 {
-	size_t	i;
+	char	**env;
+	int		len;
+	int		i;
 
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	size_t			i;
-	unsigned char	*s;
-	unsigned char	*d;
-
-	i = 0;
-	s = (unsigned char *)src;
-	d = (unsigned char *)dst;
-	if (!dst && !src)
-		return (0);
-	while (n > i)
+	len = 0;
+	while (e && e[len])
+		len++;
+	env = (char **)malloc((len + 1) * sizeof(char *));
+	if (env == NULL)
+		exit (EXIT_FAILURE);//definirlo en el .h
+	while (i < len)
 	{
-		d[i] = s[i];
+		env[i] = ft_strdup(e[i]);
 		i++;
 	}
-	return (d);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*dup;
-	size_t	len;
-
-	len = ft_strlen(s1) + 1;
-	dup = (char *) malloc(len * sizeof(char));
-	if (!dup)
-		return (NULL);
-	ft_memcpy(dup, s1, len);
-	return (dup);
+	env[i] = NULL;
+	return (env);
 }

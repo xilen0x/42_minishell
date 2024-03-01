@@ -3,36 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 12:01:21 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/09 12:01:25 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/04 11:17:44 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/05/31 09:57:24 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*Returns whether a character is printable*/
+/* function tests for any printing character, including space
+     (` ').  The value of the argument must be representable as an unsigned
+     char or the value of EOF. Returns zero if the character tests false and
+     returns non-zero if the character tests true.*/
 
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
-	{
 		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }
-
-/*int	main(void)
-{
-	int	c;
-	int d;
-
-	c = '2';
-	d = 9;
-	printf("\n---isprint----");
-	printf("\nWhen printable is passed: %d", isprint(c));
-	printf("\nWhen non-printable is passed: %d\n", isprint(d));
-	printf("\n---ft_isprint----");
-	printf("\nWhen printable is passed: %d",   ft_isprint(c));
-	printf("\nWhen non-printable is passed: %d\n", ft_isprint(d));
-	return (0);
-}*/

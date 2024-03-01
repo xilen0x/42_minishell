@@ -3,81 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 09:41:52 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/15 12:52:48 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/29 10:43:50 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/05/29 12:21:08 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Prototipo 
-char *ft_strjoin(char const *s1, char const *s2);
-
-Parámetros 
-s1: La primera string.
-s2: La string a añadir a ’s1’.
-
-Valor devuelto
-La nueva string.
-NULL si falla la reserva de memoria.
-
-Funciones autorizadas
-malloc
-
-Descripción 
-Reserva (con malloc) y devuelve una nueva string, formada por la 
-concatenación de ’s1’ y ’s2’.
-*/
-
+//#include<stdlib.h>
+//#include<stdio.h>
+//#include<string.h>
 #include "libft.h"
-
-static char	*ft_strncpy(char *dest, char *src, unsigned int n)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (src[i] != '\0' && i < n)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
-}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*space_reserved;
-	unsigned int	len_s1;
-	unsigned int	len_s2;
+	size_t	len_1;
+	size_t	len_2;
+	size_t	i;
+	char	*join;
 
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	if (s1 == 0 && s2 == 0)
-		return (0);
-	space_reserved = malloc((len_s1 + len_s2) + 1);
-	if (!space_reserved)
-		return (0);
-	else
+	i = 0;
+	len_1 = ft_strlen(s1);
+	len_2 = ft_strlen(s2);
+	join = (char *) malloc((len_1 + len_2 + 1) * sizeof(char));
+	if (!join)
+		return (NULL);
+	while (s1[i])
 	{
-		ft_strncpy(space_reserved, (char *)s1, len_s1);
-		ft_strncpy(space_reserved + len_s1, (char *)s2, len_s2);
-		space_reserved[len_s1 + len_s2] = '\0';
-		return (space_reserved);
+		join[i] = s1[i];
+		i++;
 	}
+	i = 0;
+	while (s2[i])
+	{
+		join[len_1 + i] = s2[i];
+		i++;
+	}
+	join[len_1 + i] = '\0';
+	return (join);
 }
-
-/*int	main(void)
+/*
+int	main(int ac, char **av)
 {
-	char		dst[20] = "Hello ";
-	const char	src[] = "World!";
+	char	*result = NULL;
 
-	printf("%s", ft_strjoin(dst, src));
-	//printf("%s\n", ft_strjoin("", ""));
+	if (ac != 0)
+	{
+		printf("s1 >%s<\ns2 >%s<\n", av[1], av[2]);
+		result = ft_strjoin(av[1], av[2]);
+		printf("join >%s<\n%p\n", result, result);
+	}
+	free(result);
 	return (0);
 }*/

@@ -3,52 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 13:31:08 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/14 15:04:35 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/21 13:49:28 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/07/06 11:40:46 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*function copies len bytes from string src to string dst.
+     The two strings may overlap; the copy is always done in a non-destructive
+     manner. Returns the original value of dst.*/
 
-/* Copies from one part of memory to another, preventing possible overlaps*/
-
+//#include<string.h>
+//#include<stdio.h>
 #include "libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*pdst;
-	unsigned char	*psrc;
+	char		*dst1;
+	const char	*src1;
 
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	psrc = (unsigned char *)src;
-	pdst = (unsigned char *)dst;
-	if (pdst > psrc)
+	dst1 = (char *)dst;
+	src1 = (const char *)src;
+	if (dst1 > src1)
 	{
-		while (len != 0)
-		{
-			len--;
-			pdst[len] = psrc[len];
-		}
+		while (len--)
+			dst1[len] = src1[len];
+		return (dst);
 	}
-	else
-		ft_memcpy(pdst, psrc, len);
-	return (dst);
+	return (ft_memcpy(dst1, src1, len));
 }
-
 /*
-int main (void)
+int	main(void)
 {
-	//char src[] = "welcome!";
-	// printf("\n---------memmove-------------*\n");
-	//char dst[] = "  ";
-	//printf("%s\n", (char *)memmove(dst, src, 3));
+    char    a[] = "1tie";
+    char    b[] = "------";
+    char    a1[] = "1tie";
+    char    b1[] = "------";
+    size_t  len = 5;
 
-	char src[] = "welcome";
-	printf("\n---------ft_memmove----------*\n");
-	char dst2[] = "  ";
-	printf("%s", (char *)ft_memmove(dst2, src, 3));
-
-	return 0;
-}
-*/
+    printf("*a >%s< %p\n", a, a);
+    printf("*b >%s< %p\n", b, b);
+    printf("*a1 >%s< %p\n", a1, a1);
+    printf("*b1 >%s< %p\n", b1, b1);
+    printf("len = %zu\n", len);
+    printf("ft_memmove >%s< %p\n", (char *)ft_memmove(b, a, len),\
+	(char *)ft_memmove(b, a, len));
+    printf("   memmove >%s< %p\n", (char *)memmove(b1, a1, len),\
+	(char *)memmove(b1, a1, len));
+    return (0);
+}*/
+// %p ens mostra la direccio de memoria
+//%s ens mostra el contingut de la dir de memoria

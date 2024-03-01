@@ -3,88 +3,61 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: castorga <castorga@student.42barcel>       +#+  +:+       +#+         #
+#    By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/09 11:59:47 by castorga          #+#    #+#              #
-#    Updated: 2023/06/16 10:20:38 by castorga         ###   ########.fr        #
+#    Created: 2023/05/05 16:15:05 by jocuni-p          #+#    #+#              #
+#    Updated: 2024/01/20 17:07:44 by jocuni-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# ----------------- Variables ---------------------
+CC = cc
+CFLAGS = -Wall -Werror -Wextra
+
 NAME = libft.a
 
-OBJ_DIR = ./obj/
+#'ar' es una utilitat per crear i mantenir grups d'arxius combinats en un sol
+#arxu i l'usarem  per crear la llibreria
+#'r' la reeemplasara si existeix ja i la creara si no existeix
+#'c' fa que es silencii el missatge de la creacio de ar
+#'s' escriu un index d'arxius objecte a dins per el seu control intern
+LIB = ar -rcs
 
-SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c \
-	  ft_isascii.c ft_isprint.c ft_strlen.c \
-	  ft_memset.c ft_bzero.c ft_memcpy.c \
-	  ft_memmove.c ft_strlcpy.c ft_strlcat.c \
-	  ft_toupper.c ft_tolower.c ft_strchr.c \
-	  ft_strrchr.c ft_strncmp.c ft_memchr.c \
-	  ft_memcmp.c ft_strnstr.c ft_atoi.c \
-	  ft_calloc.c ft_strdup.c ft_substr.c \
-	  ft_strjoin.c ft_strtrim.c ft_split.c \
-	  ft_itoa.c ft_strmapi.c ft_striteri.c \
-	  ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
-	  ft_putnbr_fd.c 
+#no inclou el .h perque el llegeix sense compilar-lo
+SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalpha.c ft_isdigit.c ft_isalnum.c\
+	  ft_isascii.c ft_isprint.c ft_strlen.c ft_tolower.c ft_toupper.c\
+	  ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memset.c ft_memchr.c ft_memcpy.c\
+	  ft_memcmp.c ft_memmove.c ft_strlcpy.c ft_strnstr.c ft_strdup.c ft_strlcat.c\
+	  ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c\
+	  ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c\
+	  ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
+	  ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
+	  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c ft_printf.c\
+	  get_next_line_utils.c get_next_line.c put_c.c put_hex.c put_i.c put_p.c\
+	  put_s.c put_u.c sel_fmt.c ft_putnbr.c
 
-SRCBONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
-		   ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
-		   ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
-OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
-OBJBONUS = $(addprefix $(OBJ_DIR), $(SRCBONUS:.c=.o))
+OBJ = $(SRC:.c=.o)
 
-DEPS = $(addsuffix .d, $(basename $(OBJ)))
-MK = mkdir -p
-
-CFLAGS = -Wall -Wextra -Werror
-
-INCLUDE = -I ./
-
-CC = cc
-
-HEADER = libft.h
-
-# -------------------- Rules --------------------
-#SRC = $(patsubst %,%.c,$(myFunctions))
-#OBJS = $(patsubst %,%.o,$(myFunctions))
-
-#Regla para construir archivos objeto a partir de los archivos fuente .c.
-$(OBJ_DIR)%.o: %.c Makefile
-	@echo "Compiling... $<"
-	@$(MK) $(dir $@)
-	@$(CC) $(CFLAGS) -MMD $(INCLUDE) -c $< -o $@
-
-#Regla principal para construir el archivo de biblioteca principal libft.a.
 all: $(NAME)
 
-#Regla para construir el archivo de biblioteca principal libft.a utilizando 
-# los archivos objeto y el archivo de encabezado.
-$(NAME): $(OBJ) $(HEADER)
-	@echo "Building... $@"
-	ar rcs $(NAME) $(OBJ)
 
-bonus: .bonus
-
-.bonus: $(OBJBONUS)
-		@echo "Building bonus..."
-		ar rcs $(NAME) $(OBJBONUS)
-		@touch .bonus
+$(NAME): $(OBJ)
+	$(LIB) $(NAME) $(OBJ)
 
 
--include $(DEPS)
+%.o : %.c libft.h  Makefile libft.a
+	$(CC) -c $(CFLAGS) $< -o $@
+#La var automatica $< agafa el nom del .c (src) i $@ el dona al .o (target)
 
-# -------------------- Clean --------------------
+
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -f *.o 
+# amb -f ignorem els arxius que no existeixen, borrats ja previament
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
-re: fclean $(NAME)
+re: fclean all
 
-#Al declarar estos objetivos como .PHONY, se garantiza que las reglas
-# asociadas se ejecuten independientemente de si hay un archivo con el
-# mismo nombre o no.
-.PHONY: all clean fclean re bonus
+
+.PHONY: clean fclean re all bonus

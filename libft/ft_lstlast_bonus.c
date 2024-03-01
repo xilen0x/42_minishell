@@ -3,87 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 16:12:47 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/08 16:12:50 by castorga         ###   ########.fr       */
+/*   Created: 2023/06/15 10:15:03 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/06/15 16:20:48 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Prototipo 
-t_list *ft_lstlast(t_list *lst);
-
-Parámetros 
-lst: el principio de la lista.
-
-Valor devuelto 
-Último nodo de la lista.
-
-Funciones autorizadas
-Ninguna
-
-Descripción 
-Devuelve el último nodo de la lista.
-*/
+//Devuelve el ultimo nodo de una lista
+//#include<stdio.h>
 #include "libft.h"
+/*
+typedef struct  s_list
+{
+        int				content;
+        struct s_list   *next;
+}                       t_list;*/
 
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst == NULL)
 		return (NULL);
 	while (lst->next != NULL)
-	{
 		lst = lst->next;
-	}
 	return (lst);
 }
 /*
-int	main(void)
+int main(void)
 {
-// declaro e inicializo punteros
-	int *data1 = (int *)malloc(sizeof(int));
-	int *data2 = (int *)malloc(sizeof(int));
-	int *data3 = (int *)malloc(sizeof(int));
-	int *data4 = (int *)malloc(sizeof(int));
-	*data1 = 10;
-	*data2 = 11;
-	*data3 = 12;
-	*data4 = 13;
+    t_list  node1, node2, node3, node4;
+    t_list *head;
+	t_list	*view;;
 
-// Creo nuevos nodos
-	t_list *node1 = ft_lstnew(data1);
-	t_list *node2 = ft_lstnew(data2);
-	t_list *node3 = ft_lstnew(data3);
-	t_list *node4 = ft_lstnew(data4);
-
-// asigno a content de cada nodo, la data
-	node1->content = data1;
-	node2->content = data2;
-	node3->content = data3;
-	node4->content = data4;
-
-// asigno a next de cada nodo, su nuevo puntero
-	node1->next = node2;
-	node2->next = node3;
-	node3->next = node4;
-	node4->next = NULL;
-
-// obtengo el ultimo nodo de la lista
-	t_list *lastNode = ft_lstlast(node1);
-
-// imprimo contenido de ultimo nodo de la lista
-	printf("Contenido del ultimo nodo: %d\n", *(int *)(lastNode->content));
-
-// libero memoria
-	free(data1);
-	free(data2);
-	free(data3);
-	free(data4);
-	free(node1);
-	free(node2);
-	free(node3);
-	free(node4);
-
-	return (0);
+    head = &node1;
+    node1.content = 1;
+    node1.next = &node2;
+    node2.content = 2;
+    node2.next = &node3;
+    node3.content = 3;
+    node3.next = &node4;
+    node4.content = 4;
+    node4.next = NULL;
+//	printf("nodo2 contiene >%d<\n", node2.content);
+	view = ft_lstlast(head);
+    printf("El ultimo nodo contiene %d \n", view->content);
+    return (0);
 }*/

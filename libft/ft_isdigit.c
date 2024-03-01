@@ -3,35 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/03 17:04:19 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/03 17:04:22 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/03 15:05:21 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/05/31 09:50:20 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*function tests for a decimal digit character. The value of the argument
+ * must be representable as an unsigned char or the value of EOF. 
+ * Return zero if the character tests false and return non-zero if 
+ * the character tests true.*/
 
-/*Returns 1 if the input is a number in the ASCII table*/
-
-int	ft_isdigit(int num)
+int	ft_isdigit(int c)
 {
-	if (num >= '0' && num <= '9')
-	{
+	if (c >= 48 && c <= 57)
 		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }
-/*
-int	main(void)
-{
-	char	c, d;
-
-	c = '2';
-	d = 'a';
-	printf("\nWhen digit is passed: %d", isdigit(c));
-	printf("\nWhen non-digit is passed: %d", isdigit(d));
-	printf("\n-------\n");
-	printf("\nWhen digit is passed: %d", ft_isdigit(c));
-	printf("\nWhen non-digit is passed: %d", ft_isdigit(d));
-	return (0);
-}
-*/

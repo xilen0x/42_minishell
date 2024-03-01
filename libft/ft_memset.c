@@ -3,53 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 14:12:31 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/14 15:21:29 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/15 10:23:48 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/07/06 12:28:52 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*function writes len bytes of value c (converted to an
+     unsigned char) to the string b. Returns its first argument.*/
 
+//#include<string.h>
+//#include<stdio.h>
 #include "libft.h"
-/*Asigna un carácter n veces a una parte de la memoria*/
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned int		i;
-	char				*p;
+	int				i;
+	unsigned char	*a;
 
-	p = (char *)b;
 	i = 0;
-	while (i < len)
+	a = b;
+	c = (unsigned char) c;
+	while (len > 0)
 	{
-		p[i] = (char)c;
+		a[i] = c;
 		i++;
+		len--;
 	}
-	return (b);
+	return (a);
 }
-
 /*
-int main ()
+int	main(void)
 {
-	printf("\n---------memset-------------*\n");
-	char str[] = "almost every programmer should know memset!";
-	printf("%s\n", memset(str + 5, '*' , 3));
-	printf("%s\n", (char *)memset(str, '-' , 3));
+	char	b[6];
+	char	a[6];
+	int		c;
+	size_t	len;
 
-	printf("\n---------ft_memset----------*\n");
-	char str2[] = "almost every programmer should know memset!";
-	printf("%s", ft_memset(str + 5, '*', 3));
-	printf("%s", (char *)ft_memset(str2, '-', 3));
-
-	return 0;
+	c = 52;
+	len = 4;
+	printf("ft_memset>%s<\n", (unsigned char *)ft_memset(a, 52, 4));
+	printf("   memset>%s<\n", (unsigned char *)memset(b, c, len));
+	return (0);
 }*/
-
-/*
-//In the case of ft_memset(str, '*', 3)
- 0   1	 2	 3	 4	 5	 6	 7	 8	 9	10	
-'*' '*' '*' 'o' 's' 't' ' ' 'e' 'v' 'e' r'  ...etc
-
-//In the case of ft_memset(str + 5, '*', 3)
- 0   1	 2	 3	 4	 5	 6	 7	 8	 9	10	
-'a' 'l' 'm' 'o' 's' '*' '*' '*' 'v' 'e' r'  ...etc
-*/

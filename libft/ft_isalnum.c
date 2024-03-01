@@ -3,37 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 10:23:37 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/04 10:23:41 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/04 12:13:28 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/05/31 09:52:42 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*Returns 1 if the input is a number or a letter in the ASCII table*/
-
-#include "libft.h"
+/*function tests for any character for which isalpha(3) or
+     isdigit(3) is true.  The value of the argument must be representable as
+     an unsigned char or the value of EOF. Returns zero if the character tests 
+	 false and returns non-zero if the character tests true.*/
 
 int	ft_isalnum(int c)
 {
-	if ((ft_isalpha(c) == 1) || (ft_isdigit(c) == 1))
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57))
 		return (1);
-	return (0);
+	else
+		return (0);
 }
-
-/*int	main(void)
-{
-	char	c = 'a';
-	char	d = '7';
-	char	e = '#';
-
-	printf("\n---------- isalnum ----------\n");
-	printf("%d\n", isalnum(c));
-	printf("%d\n", isalnum(d));
-	printf("%d\n", isalnum(e));
-	printf("\n---------- ft_isalnum ----------\n");
-	printf("%d\n", ft_isalnum(c));
-	printf("%d\n", ft_isalnum(d));
-	printf("%d\n", ft_isalnum(e));
-	return (0);
-}*/

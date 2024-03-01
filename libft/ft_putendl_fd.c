@@ -3,47 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: joan <jocuni-p@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 14:02:10 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/12 14:02:13 by castorga         ###   ########.fr       */
+/*   Created: 2023/06/11 00:16:19 by joan              #+#    #+#             */
+/*   Updated: 2023/06/11 00:42:11 by joan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Nombre de función
-ft_putendl_fd
-
-Prototipo 
-void ft_putendl_fd(char *s, int fd);
-
-Parámetros 
-s: La string a enviar.
-fd: El file descriptor sobre el que escribir.
-
-Valor devuelto Nada
-
-Funciones autorizadas
-write
-
-Descripción 
-Envía la string ’s’ al file descriptor dado, seguido de un salto de línea.
-*/
+/*La función 'write' toma como argumentos el descriptor de archivo (fd), un
+puntero y la longitud del buffer.
+La función write espera un puntero a una cadena de caracteres cuando se
+utiliza el formato write(fd, buffer, length). Al pasar "\n" como argumento, se
+está pasando un puntero a un string que contiene el carácter de salto de línea.
+Por eso no le pasamos el argumento como un caracter '\n'. */
 
 #include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	char	n;
-
-	n = '\n';
 	write(fd, s, ft_strlen(s));
-	write(fd, &n, 1);
+	write(fd, "\n", 1);
 }
-
-/*
-int	main(void)
-{
-	ft_putendl_fd("holamundo42", 1);
-}
-*/

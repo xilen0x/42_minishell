@@ -3,81 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 12:23:46 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/02 12:23:51 by castorga         ###   ########.fr       */
+/*   Created: 2023/06/08 16:01:43 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/06/09 14:16:25 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 /*
-(Applies a function (mapping) to every element in a string)
+//#include<stdio.h>
+//#include<string.h>
+//#include<stdlib.h>
 
-Prototipo 
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
-
-Parámetros 
-s: La string que iterar.
-f: La función a aplicar sobre cada carácter.
-
-Valor devuelto 
-La string creada tras el correcto uso de ’f’ sobre cada carácter.
-NULL si falla la reserva de memoria.
-
-Funciones autorizadas
-malloc
-
-Descripción 
-A cada carácter de la string ’s’, aplica la función ’f’ dando como 
-parámetros el índice de cada carácter dentro de ’s’ y el propio carácter. 
-Genera una nueva string con el resultado del uso sucesivo de ’f’
-*/
-/*
-static char	xtoupper(unsigned int index, char c)
+// Funcion auxiliar para probar la funcion ft_strmapi
+char uppercase(unsigned int index, char c)
 {
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
+    if (index % 2 == 0 && (c >= 97 && c <= 122))
+        return (c - 32); // Convierte a mayuscula si el indice es par
+    else
+        return (c); // Mantiene el caracter original si el indice es impar
 }
 */
-#include "libft.h"
-
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
+	char			*c;
 	unsigned int	i;
 	unsigned int	len;
-	char			*str;
 
-	i = 0;
-	if (!s)
-		return (0);
 	len = ft_strlen(s);
-	str = malloc(len + 1);
-	if (!str)
-		return (0);
-	while (i < len)
+	c = (char *)malloc((len + 1) * sizeof(char));
+	if (!c)
+		return (NULL);
+	i = 0;
+	while (s[i])
 	{
-		str[i] = f(i, s[i]);
+		c[i] = f(i, s[i]);
 		i++;
 	}
-	str[len] = '\0';
-	return (str);
+	c[i] = '\0';
+	return (c);
 }
-
 /*
-int	main(void)
+int main(void)
 {
-	const char *str = "Hello, World!";
-	char *result = ft_strmapi(str, &xtoupper);
-
-	if (result)
-	{
-		printf("Original string		: %s\n", str);
-		printf("Transformed string	: %s\n", result);
-		free(result);
-	}
-	else
-		printf("Error: Failed to allocate memory.\n");
-	return (0);
-}
-*/
+    char    s[12] = "su lfamina";
+    char    *result = ft_strmapi(s, uppercase);
+    printf("*s       >%s<\n", s);
+    printf("*result  >%s<\n", result);
+    free(result);
+    return (0);
+}*/

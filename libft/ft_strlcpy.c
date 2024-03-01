@@ -3,73 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/15 11:23:17 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/15 13:14:21 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/22 11:48:43 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/06/27 17:08:16 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*The strlcpy() and strlcat() functions copy and concatenate strings with
+     the same input parameters.
+	 strlcpy() and strlcat() take the full size of the destination buffer and
+     guarantee NUL-termination if there is room.  Note that room for the NUL
+     should be included in dstsize.
+	 strlcpy() copies up to dstsize - 1 characters from the string src to dst,
+     NUL-terminating the result if dstsize is not 0.
+	 If the src and dst strings overlap, the behavior is undefined.
+	 Function return the total
+     length of the string they tried to create.  For strlcpy() that means the
+     length of src.
+	 If the return value is >= dstsize, the output string has been truncated.
+     It is the caller's responsibility to handle this.*/
 
+//#include<string.h>
+//#include<stdio.h>
 #include "libft.h"
 
-/*Copies n - 1 bytes from a source string to a destination string*/
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	unsigned int	count;
-	unsigned int	j;
+	size_t			i;
+	unsigned int	len;
 
-	count = 0;
-	j = 0;
-	while (src[count])
-		count++;
-	if (size == 0)
-		return (count);
-	while ((j < size - 1) && (j < count))
+	i = 0;
+	len = ft_strlen(src);
+	if (dstsize != 0)
 	{
-		dst[j] = src[j];
-		j++;
+		while (src[i] && i < dstsize - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
 	}
-	dst[j] = '\0';
-	return (count);
+	return (len);
 }
 /*
-#include <stdio.h>
-#include <string.h>
-
-size_t ft_strlcpy(char *dst, const char *src, size_t size);
-
-int main() {
-    char src[] = "Hola, mundo!";
-    char dst[20];
-
-    size_t copied = ft_strlcpy(dst, src, sizeof(dst));
-
-    printf("Cadena copiada: %s\n", dst);
-    printf("Número de caracteres copiados: %zu\n", copied);
-
-    return 0;
-}
-*/
-
-/*
+//dstsize - 1 es para dejar un byte para poder cerrar el string con el \0
 int	main(void)
 {
-	const char	*src = "welcome";
-	char		dst[8];
-	printf("-------strlcpy------------\n");
-	printf("%zu\n", strlcpy(dst, src, sizeof(dst)));
-
-	const char	*src2 = "welcome";
-	char		dst2[8];
-	printf("-------ft_strlcpy------------\n");
-	printf("%ld\n", ft_strlcpy(dst2, src2, sizeof(dst2)));
-}
-*/
-
-/* 
--------strlcpy------------
-7
--------ft_strlcpy------------
-7
-*/
+	char	src[] = "barbados";
+	char	dst[] = "pilar";
+	size_t	dstsize = 2;
+	printf("src >%s<\ndst >%s<\ndstsize >%zu<\n", src, dst, dstsize);
+	printf("dst >%s<\nft_strlcpy >%zu<\n", dst, ft_strlcpy(dst, src, dstsize));
+	printf("dst >%s<\nstrlcpy >%zu<\n", dst, strlcpy(dst, src, dstsize));
+	return (0);
+}*/

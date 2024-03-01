@@ -3,43 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 16:48:27 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/09 16:48:30 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/15 15:18:08 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/05/31 10:09:34 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*function writes n zeroed bytes to the string s.  If n is
+     zero, bzero() does nothing.*/
 
-/* Writes n zeroes in the string s */
-
+//#include<strings.h>
+//#include<stdio.h>
 #include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-	char			*p;
+	char	*a;
+	int		i;
 
-	p = (char *)s;
 	i = 0;
-	while (i < n)
+	a = s;
+	while (n > 0)
 	{
-		p[i] = 0;
+		a[i] = 0;
 		i++;
+		n--;
 	}
 }
 /*
 int	main(void)
 {
-	char	s[] = "+-54";
-	size_t	n = 10;
-	ft_bzero((void *)s, n);
-	printf(":%s:\n", s);
-    
-    char str[20] = "Hola, mundo!";
-	printf("Antes de ft_bzero: %s\n", str);
-    ft_bzero(str, sizeof(str));
-    printf("Después de ft_bzero: %s\n", str);
-	
+	char	s[] = "hola mundo";
+	char	f[] = "hola mundo";
+	size_t	n;
+
+	n = 8;
+	printf("  antes *s contiene>%s<\n", s);
+	ft_bzero(s, n);
+	printf("despues *s contiene>%s<\n", s);
+	printf("   bzero>%s<\n", bzero(f, n));
 	return (0);
-}
-*/
+}*/

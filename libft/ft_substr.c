@@ -3,62 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 13:12:46 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/23 13:12:51 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/25 16:24:53 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/06/01 11:03:41 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*Reserva, con malloc, y devuelve una substring de la string ’s’.
+La substring empieza desde el índice ’start’ y tiene una longitud máxima len*/
 
-/*
-Parámetros: 
-	s	  : La string desde la que crear la substring.
-	start : El índice del caracter en ’s’ desde el que empezar la substring.
-	len	  : La longitud máxima de la substring.
-
-Valor devuelto:
-	La substring resultante.
-	NULL si falla la reserva de memoria.
-
-Funciones autorizadas
-	malloc
-
-Descripción
-	Reserva memoria y devuelve una substring de	la string principal ’s’.
-	La substring empieza desde el índice ’start’ y tiene una longitud
-	máxima ’len’.
-*/
-
+//#include<stdlib.h>
+//#include<stdio.h>
+//#include<string.h>
 #include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*space_reserved;
+	char			*sub;
 	unsigned int	i;
+	unsigned int	s_len;
 
 	i = 0;
-	if (start >= ft_strlen(s))
-		len = 0;
-	else if (start + len > ft_strlen(s))
-		len = ft_strlen(s) - start;
-	space_reserved = malloc(sizeof(char) * (len + 1));
-	if (!space_reserved)
-		return (0);
-	while (i < len && s[start])
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (start > s_len)
+		return (ft_strdup(""));
+	if (ft_strlen(&s[start]) < len)
+		len = ft_strlen(&s[start]);
+	sub = (char *) malloc(sizeof(char) * (len + 1));
+	if (!sub)
+		return (NULL);
+	while (s[start + i] && i < len)
 	{
-		space_reserved[i] = s[start];
+		sub[i] = s[start + i];
 		i++;
-		start++;
 	}
-	space_reserved[i] = '\0';
-	return (space_reserved);
+	sub[i] = '\0';
+	return (sub);
 }
-
 /*
 int	main(void)
 {
-	//en este ej. imprime del string, despues del 3er caracter, 
-	//los 4 caracteres siguientes
-	printf("%s\n", ft_substr("holamundo", 3, 4));
+//		return (NULL);
+//	char			*s = NULL;
+//	char			*s = "";
+	unsigned int	start = 0;
+//	unsigned int	start = 10;
+//	unsigned int	start = 100;
+//	size_t			len = 0;
+	size_t			len = 2;
+//	size_t			len = 10;
+//	size_t			len = 100;
+	char	s[] = "La vuelta de, ciclismo 43 es para pro-fesionales";
+	char	*result = ft_substr(s, start, len);
+
+	printf("ft_substr >%p<\n", result);
+	free(result);
 	return (0);
+//if (1): si no existe s, retorna NULL
+//if (2): si start es mayor que len, retorna un puntero a reserva mem vacio
+//if (3): si longitud de s, a partir de start, es menor que len, reserva mem + 1
+//if (4): si falla malloc con la reserva de mem, retorna NULL
 }*/

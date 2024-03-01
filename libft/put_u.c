@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   put_u.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joan <jocuni-p@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 13:00:59 by joan              #+#    #+#             */
-/*   Updated: 2023/06/11 13:10:53 by joan             ###   ########.fr       */
+/*   Created: 2023/08/02 21:16:25 by joan              #+#    #+#             */
+/*   Updated: 2023/12/21 10:43:30 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//Envia un int al file descriptr dado
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	put_u(unsigned int n)
 {
-	if (n == -2147483648)
-		write(fd, "-2147483648", 11);
-	else
+	int				j;
+	int				count;
+	int				c;
+	char			str[20];
+
+	j = 0;
+	count = 0;
+	c = 0;
+	if (n == 0)
+		str[j++] = '0';
+	while (n > 0)
 	{
-		if (n < 0)
-		{
-			n = -n;
-			ft_putchar_fd('-', fd);
-		}
-		if (n > 9)
-		{
-			ft_putnbr_fd(n / 10, fd);
-		}
-		ft_putchar_fd(n % 10 + '0', fd);
+		str[j++] = (n % 10) + '0';
+		if (n < 10)
+			break ;
+		n /= 10;
 	}
+	count = j;
+	while (j--)
+	{
+		c = put_c(str[j]);
+		if (c == -1)
+			return (-1);
+	}
+	return (count);
 }

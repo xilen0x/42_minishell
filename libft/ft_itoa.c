@@ -3,102 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 15:53:49 by castorga          #+#    #+#             */
-/*   Updated: 2023/05/30 15:53:52 by castorga         ###   ########.fr       */
+/*   Created: 2023/06/06 16:51:44 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/06/28 16:58:51 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* Saves the given number as a string (char array) */
-
-/*
-Prototipo 
-char *ft_itoa(int n);
-
-Parámetros 
-n: el entero a convertir.
-
-Valor devuelto 
-La string que represente el número.
-NULL si falla la reserva de memoria.
-
-Funciones autorizadas
-malloc
-
-Descripción 
-Utilizando malloc(3), genera una string que represente el valor entero recibido 
-como argumento.
-Los números negativos tienen que gestionarse.
-*/
+/*Utilizando malloc(3), genera una string que representa el valor entero
+recibido como argumento. Los números negativos tambien se gestionan.*/
+//#include<stdio.h>
+//#include<stdlib.h>
 #include "libft.h"
 
-static size_t	ft_numlen(long long n)
+static int	count_dig(int n)
 {
-	size_t	count;
+	int	c;
 
-	count = 1;
-	if (n <= 0)
-		count++;
-	while (n / 10 != 0)
-	{
-		n /= 10;
-		count++;
-	}
+	c = 0;
 	if (n == 0)
-		return (--count);
-	return (count);
-}
-
-static char	*ft_int_to_str(long long n, size_t len)
-{
-	char	*str;
-	size_t	i;
-
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	i = len - 1;
+		return (1);
 	if (n < 0)
 	{
-		str[0] = '-';
+		c = 1;
 		n = -n;
-	}
-	if (n == 0)
-	{
-		str[0] = '0';
-		str[1] = '\0';
 	}
 	while (n > 0)
 	{
-		str[i--] = (n % 10) + '0';
-		n /= 10;
+		n = n / 10;
+		c++;
 	}
-	str[len] = '\0';
-	return (str);
+	return (c);
 }
 
 char	*ft_itoa(int n)
 {
-	long long	num;
-	size_t		len;
-	char		*str;
+	char	*itoa;
+	int		i;
 
-	num = n;
-	len = ft_numlen(num);
-	str = ft_int_to_str(num, len);
-	return (str);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	i = count_dig(n);
+	itoa = (char *)ft_calloc(i + 1, sizeof(char));
+	if (!itoa)
+		return (NULL);
+	if (n < 0)
+	{
+		n = -n;
+		itoa[0] = '-';
+	}
+	while (i > 0)
+	{
+		itoa[i - 1] = (n % 10) + 48;
+		n = n / 10;
+		i--;
+		if (i != 0 && itoa[i - 1] == '-')
+			return (itoa);
+	}
+	return (itoa);
 }
-
 /*
 int	main(void)
 {
-	int number = -2147483648;
-	//int number = 0;
-	char *str_number = ft_itoa(number);
-	printf("Number: %d\n", number);
-	printf("String: %s\n", str_number);
-	free(str_number);
+	int		n = -77747745;
+	char	*itoa;
+
+	printf("int  >%i<\n", n);
+	itoa = ft_itoa(n);
+	printf("ascii>%s<\n\n", itoa);
+	free(itoa);
 	return (0);
-}
-*/
+}*/

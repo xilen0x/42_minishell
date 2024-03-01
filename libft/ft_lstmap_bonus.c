@@ -3,133 +3,164 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/12 09:03:46 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/12 09:03:49 by castorga         ###   ########.fr       */
+/*   Created: 2023/06/23 15:47:29 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/06/27 16:53:44 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Prototipo 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *),void (*del)(void *));
-
-Parámetros 
-lst: un puntero a un nodo.
-f: la dirección de un puntero a una función usada en la iteración de cada 
-elemento de la lista.
-del: un puntero a función utilizado para eliminar el contenido de un nodo, 
-si es necesario.
-
-Valor devuelto 
-La nueva lista.
-NULL si falla la reserva de memoria.
-
-Funciones autorizadas
-malloc, free
-
-Descripción 
-Itera la lista ’lst’ y aplica la función ’f’ al contenido de cada nodo. 
-
-Crea una lista resultante de la aplicación correcta y sucesiva de la 
-función ’f’ sobre cada nodo. 
-
-Función ’del’ se utiliza para eliminar el contenido de un nodo, si hace falta.
-*/
+/*Itera la lista ’lst’ y aplica la función ’f’ al contenido de cada nodo.
+ * Crea una lista resultante de la aplicación correcta y sucesiva de la
+ * función ’f’ sobre cada nodo. La función ’del’ se utiliza para eliminar el
+ * contenido de un nodo, si hace falta.
+ * Retorna: la nueva lista o NULL si falla la lista. */
 
 #include "libft.h"
+//#include<stdio.h>
+/*
+t_list  *ft_lstlast(t_list *lst)
+{
+    if (lst == NULL)
+        return (NULL);
+    while (lst->next != NULL)
+        lst = lst->next;
+    return (lst);
+}
+
+t_list  *ft_lstnew(void *content)
+{
+    t_list  *node1;
+
+    node1 = (t_list *)malloc(sizeof(t_list));
+    if (!node1)
+        return (NULL);
+    node1->content = content;
+    node1->next = NULL;
+    return (node1);
+}
+
+void    ft_lstiter(t_list *lst, void (*f)(void *))
+{
+    while (lst)
+    {
+        f(lst->content);
+        lst = lst->next;
+    }
+}
+
+void    ft_lstadd_front(t_list **lst, t_list *new)
+{
+    if (!*lst)
+        *lst = new;
+    else
+    {
+        new->next = *lst;
+        *lst = new;
+    }
+}
+
+void    ft_lstclear(t_list **lst, void (*del)(void *))
+{
+    t_list  *aux;
+
+    aux = *lst;
+    while (aux)
+    {
+        *lst = aux->next;
+        del(aux->content);
+        free(aux);
+        aux = *lst;
+    }
+    *lst = NULL;
+}
+
+void    ft_lstadd_back(t_list **lst, t_list *new)
+{
+    t_list  *aux;
+
+    if (*lst)
+    {
+        aux = ft_lstlast(*lst);
+        aux->next = new;
+    }
+    else
+            *lst = new;
+}
+
+void	del(void *a)
+{
+	a = 0;
+}
+
+void *f(void *x)
+{
+  int *a = (int *)x;
+  *a = *a + 1;
+  return (x);
+}
+
+void	g(void *x)
+{
+		int	*a = (int *)x;
+		printf("%d\n", *a);
+}*/
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_list;
-	t_list	*new_node;
-	void	*content;
+	t_list	*newlst;
+	t_list	*newnode;
+	t_list	*tmp;
 
-	if (!lst || !f)
-		return (NULL);
-	new_list = NULL;
+	if (!lst)
+		return (0);
+	newlst = 0;
 	while (lst)
 	{
-		content = f(lst->content);
-		new_node = ft_lstnew(content);
-		if (!new_node)
+		tmp = f(lst->content);
+		newnode = ft_lstnew(tmp);
+		if (!newnode)
 		{
-			ft_lstclear(&new_list, del);
-			del(content);
+			free(tmp);
+			ft_lstclear(&newlst, del);
 			return (NULL);
 		}
-		ft_lstadd_back(&new_list, new_node);
+		ft_lstadd_back(&newlst, newnode);
 		lst = lst->next;
 	}
-	return (new_list);
+	return (newlst);
 }
-
 /*
-//------------------------funcion extra de prueba la cual suma 2 a cada elemento
-void	*ft_sum(void *content)
-{
-	int *data = (int *)content;
-
-	*data += 2;
-
-	return (content);
-}
-
-
-//------------------------funcion que imprime la lista------------------------
-static void	ft_print_list(t_list *lst)
-{
-	int	*data;
-
-	while (lst != NULL)
-	{
-		data = (int *)lst->content; //se obtiene el contenido del nodo actual
-		printf("%d ", *data);// Imprime el contenido del nodo actual
-		lst = lst->next;// Avanza al siguiente nodo de la lista
-	}
-	printf("\n");
-}
-
-//------------------------funcion main------------------------
 int	main(void)
 {
-	int *data1 = (int *)malloc(sizeof(int));
-	int *data2 = (int *)malloc(sizeof(int));
-	int *data3 = (int *)malloc(sizeof(int));
-	*data1 = 42;
-	*data2 = 75;
-	*data3 = 100;
+	int	a = 5;
+	int	b = 11;
+	int	c = 300;
 
-	t_list *node1 = ft_lstnew(data1);
-	t_list *node2 = ft_lstnew(data2);
-	t_list *node3 = ft_lstnew(data3);
+	t_list	*nodo1;
+	t_list	*nodo2;
+	t_list	*nodo3;
+	t_list	*lst;
+	t_list	*newlst;
 
-	ft_lstadd_back(&node1, node2);
-	ft_lstadd_back(&node1, node3);
+//	int	*content_a = &a;
+//	int	*content_b = &b;
+//	int	*content_c = &c;
 
-	printf("Contenido de la lista antes de aplicar la funcion a los nodos: ");
-	ft_print_list(node1);
+	nodo1 = ft_lstnew(&a);
+	nodo2 = ft_lstnew(&b);
+	nodo3 = ft_lstnew(&c);
 
-	//llamada a la funcion ft_lstmap
-	t_list *new_list = ft_lstmap(node1, ft_sum, free);
-	if (new_list == NULL)
-	{
-		printf("Error: la función ft_lstmap falló\n");
-		return (1);
-	}
-
-	printf("Contenido de la lista después de aplicar la función a los nodos: ");
-	ft_print_list(new_list);
-
-	// Liberar memoria
-	ft_lstclear(&new_list, free);
-
-	return (0);
-}
-*/
-
-/*
-castorga@cbr2s1 project01 % ./a.out
-Contenido de la lista antes de aplicar la funcion a los nodos: 42 75 100
-Contenido de la lista después de aplicar la función a los nodos: 44 77 102
-*/
+	ft_lstadd_front(&lst, nodo1);
+	ft_lstadd_back(&lst, nodo2);
+	ft_lstadd_back(&lst, nodo3);
+	ft_lstiter(lst, g);
+	printf("\n");
+	newlst = ft_lstmap(lst, f, del);
+	ft_lstiter(newlst, g);
+	free(nodo1);
+	free(nodo2);
+	free(nodo3);
+//	free(lst); no se libera porque no fue alojado en ningun momento
+	free(newlst);
+}*/

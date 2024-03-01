@@ -3,61 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 14:47:39 by castorga          #+#    #+#             */
-/*   Updated: 2023/06/14 12:34:23 by castorga         ###   ########.fr       */
+/*   Created: 2023/05/18 09:56:52 by jocuni-p          #+#    #+#             */
+/*   Updated: 2023/05/31 11:36:14 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-DESCRIPTION
-     The memcmp() function compares byte string s1 against byte string s2.
+/*The memcmp() function compares byte string s1 against byte string s2.
      Both strings are assumed to be n bytes long.
-
-RETURN VALUES
-     The memcmp() function returns zero if the two strings are identical, oth-
+	 Returns zero if the two strings are identical, oth-
      erwise returns the difference between the first two differing bytes
-*/
+     (treated as unsigned char values, so that `\200' is greater than `\0',
+     for example).  Zero-length strings are always identical.*/
+
+//#include<stdio.h>
+//#include<string.h>
 #include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char	*str1;
-	const unsigned char	*str2;
-	unsigned int		i;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
 	i = 0;
-	str1 = (const unsigned char *)s1;
-	str2 = (const unsigned char *)s2;
-	while (i < n)
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *) s2;
+	while (n > 0)
 	{
 		if (str1[i] != str2[i])
 			return (str1[i] - str2[i]);
 		i++;
+		n--;
 	}
 	return (0);
 }
-
 /*
-
 int	main(void)
 {
-	printf("\n--------- memcmp ---------\n");
-	printf("%d\n", memcmp("test", "testss", 7));
-	printf("%d\n", memcmp("testss", "test", 7));
-	printf("%d\n", memcmp("", "test", 4));
-	printf("%d\n", memcmp("test", "", 4));
-	printf("%d\n", memcmp("abcdefgh", "abcdwxyz", 4));
-	printf("%d\n", memcmp("zyxbcdefgh", "abcdwxyz", 0));
-	printf("%d\n", memcmp("test\200", "test\0", 6));
-	
-	printf("\n--------- ft_memcmp ---------\n");
-	printf("%d\n", ft_memcmp("test", "testss", 7));
-	printf("%d\n", ft_memcmp("testss", "test", 7));
-	printf("%d\n", ft_memcmp("", "test", 4));
-	printf("%d\n", ft_memcmp("test", "", 4));
-	printf("%d\n", ft_memcmp("abcdefgh", "abcdwxyz", 4));
-	printf("%d\n", ft_memcmp("zyxbcdefgh", "abcdwxyz", 0));
-	printf("%d\n", ft_memcmp("test\200", "test\0", 6));
+	char	s1[] = "\0los ";
+	char	s2[] = "";
+	size_t	n = 2;
+
+	printf("ft_memcmp >%i<\n", ft_memcmp(s1, s2, n));
+	printf("   memcmp >%i<\n", memcmp(s1, s2, n));
+	return (0);
 }*/

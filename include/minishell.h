@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: castorga <castorga@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:22:25 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/02/28 18:09:17 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:32:04 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <stdlib.h>
+# include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 /*
 typedef struct s_env
