@@ -2,3 +2,7 @@
 a.out
 *.swp
 minishell
+*.dSYM
+objs
+*.o
+README.md

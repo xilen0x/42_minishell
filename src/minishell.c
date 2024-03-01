@@ -6,13 +6,14 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:31:05 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/01 10:27:10 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/01 16:07:34 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+//#include "libft/libft.h"
 
-/*-----------Makes an allocated char ** copy-------------*/
+/*-----------Makes an allocated copy of env-------------*/
 char	**env_cpy(char *e[])
 {
 	char	**env;
@@ -25,7 +26,7 @@ char	**env_cpy(char *e[])
 		len++;
 	env = (char **)malloc((len + 1) * sizeof(char *));
 	if (env == NULL)
-		exit (EXIT_FAILURE);//definirlo en el .h
+		exit (EXIT_FAILURE);//definirlo en el .h  ???
 	while (i < len)
 	{
 		env[i] = ft_strdup(e[i]);
@@ -50,6 +51,8 @@ int	main(int ac, char *av[], char *e[])
 	while ((int)1)//en teoria, loop infinito hasta que se presione Ctrl + C
 	{
 		line = readline("minishell$ ");
+		if (line != NULL)
+//			tokenizer(line);
 
 		add_history(line);//agrega line al historial
 		free(line);
