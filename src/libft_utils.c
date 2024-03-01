@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 12:00:09 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/02/27 12:04:35 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:30:37 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "minishell.h"
+
 
 size_t	ft_strlen(const char *s)
 {
