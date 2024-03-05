@@ -52,10 +52,10 @@ int	main(int ac, char *av[], char *e[])
 	{
 		line = readline("minishell$ ");
 		if (line != NULL)
-//			tokenizer(line);
-
 		add_history(line);//agrega line al historial
+		//			tokenizer(line);
 		free(line);
+
 	}
 	return (0);
 }

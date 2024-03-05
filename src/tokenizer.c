@@ -11,41 +11,66 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*------CREAMOS UN NODO PARA CADA TOKEN + INFO---------*/
-t_token	*my_lstnew(void *content, int keyword, int position)
-{
-	t_token	*token;
 
-	token = (t_token *)malloc(sizeof(t_token));
+/*------CREAMOS UN NODO PARA CADA TOKEN---------*/
+t_list	*my_lstnew(void *content, int keyword)
+{
+	t_list	*token;
+
+	token = (t_list *)malloc(sizeof(t_list));
 	if (!token)
 		return (NULL);
-	token->value = content;
+	token->value = *value;
 	token->keyword = keyword;
-	token->position = position;
-	token->next = NULL;
-	return (token);
+    token->next = NULL;
 }
 
-t_token    **tokenizer(char *line)
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*aux;
+
+	if (*lst)
+	{
+		aux = ft_lstlast(*lst);
+		aux->next = new;
+	}
+	else
+		*lst = new;
+}
+
+t_list    **tokenizer(char *line)
 {
 /*crear una lista de nodos **token
 cada nodo contiene: 
     valor
     definicion o tipo 
-    orden de aparicion en la CLI 
     
 trimar spaces y tabs, delante y detras (hace falta ????)
 */
     char    *content = NULL;
     int     position = 0;
     int     keyword = 0;
-    
+}
+
 if (*line)
 {
-    while (*line == ' ' || *line == '\t' || *line == '\t')
+    while (*line == ' ' || *line == '\t' || *line == '\n')
         line++;
     while (*line && *line != ???????????????????????????????)
+    {
+        
+    }
 
+}
     
 } 
 
