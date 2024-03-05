@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-crear una lista de nodos **token
+/*crear una lista de nodos **token
 cada nodo contiene: 
     valor
     definicion o tipo 
@@ -33,3 +33,4 @@ $ = si va solo, se tokeniza como una __WORD
 $seguido_de_caracteres = se tokeniza como una __WORD
 |, <, >, <<, >>, 
         echo             hilo       = 2 tokens (los espacios se eliminan)
+*/

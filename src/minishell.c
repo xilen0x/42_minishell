@@ -12,24 +12,38 @@
 
 #include "minishell.h"
 
-int	main(int ac, char *av[], char *e[])
-{
-    char	*line;//string que contendra lo que se ingrese por stdin
-//	t_env	env_cpy;
-	char	**env;//contendra una copia del env del sistema
+// void	print_env(char **env)
+// {
+// 	int	i = 0;
 
-	if (ac != 1 || av[1])//proteje y usa 'ac' y 'av' para que el compilador no de error
+// 	while (env[i])
+// 	{
+// 		printf("%s\n", env[i]);
+// 		i++;
+// 	}
+// }
+
+int	main(int ac, char *av[], char *envp[])
+{
+    char	*line;
+	(void)ac;
+	t_env	env;
+	t_data	cmds;
+	/*if (ac != 1 || av[1])
 	{
 		printf("minishell do not accept arguments\n");
 		return (0);
-	}
-	env = env_cpy(e);//hacemos nuestra propia copia del env del sistema
-	while (1)//en teoria, loop infinito hasta que se presione Ctrl + C
+	}*/
+	env.env_cpy = env_cpy(envp);
+	cmds.cmd1 = av[1];
+	while (1)
 	{
-    	line = readline("minishell$ ");// Muestra prompt y lee la línea de entrada
-
+		//set_signals(INTER);
+		line = readline("minishell$ ");
 		add_history(line);//agrega line al historial
+		builtings(&cmds);
 		free(line);
 	}
-    return (0);
+	free(env.env_cpy);
+	return (0);
 }
