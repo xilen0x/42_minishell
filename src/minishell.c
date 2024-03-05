@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:31:05 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/01 16:07:34 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:23:27 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int ac, char *av[], char *e[])
 	char	*line;//string que contendra lo que se ingrese por stdin
 	char	**env;//contendra una copia del env del sistema
 
-	if (ac != 1 || av[1])
+	if (ac != 1 || av[1])//si hay algun argumento
 	{
 		printf("minishell do not accept arguments\n");
 		return (0);

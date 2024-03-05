@@ -1,3 +1,7 @@
+#  =======OJO: NO OLVIDAR PONER TODOS LOS HEADERS A NOMBRE DE CARLOS=======
+
+
+
 # Nombre del programa
 TARGET = minishell
 
