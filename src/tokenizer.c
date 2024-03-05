@@ -6,26 +6,27 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:29:27 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/01 16:27:46 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:44:25 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*------CREAMOS UN NODO PARA CADA TOKEN---------*/
-t_list	*my_lstnew(void *content, int keyword)
+/*------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------*/t_lst	*my_lstnew(void *value, int keyword)
 {
-	t_list	*token;
+	t_lst	*token;
 
-	token = (t_list *)malloc(sizeof(t_list));
+	token = (t_lst *)malloc(sizeof(t_lst));
 	if (!token)
 		return (NULL);
 	token->value = *value;
 	token->keyword = keyword;
     token->next = NULL;
+	return (token);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+/*----RETURNS A POINTER TO THE LAST NODE OF A LIST----*/
+t_lst	*ft_lstlast(t_lst *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -34,9 +35,10 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+/*----ADDS A NODE TO THE END OF A LIST. NOTHING IS RETURNED---*/
+void	ft_lstadd_back(t_lst **lst,t_lst *new)
 {
-	t_list	*aux;
+	t_lst	*aux;
 
 	if (*lst)
 	{
@@ -47,35 +49,30 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 }
 
-t_list    **tokenizer(char *line)
+/*------------TOKENIZADOR------------*/
+t_lst    **tokenizer(const char *line)//hace falta el const ??
 {
-/*crear una lista de nodos **token
-cada nodo contiene: 
-    valor
-    definicion o tipo 
-    
-trimar spaces y tabs, delante y detras (hace falta ????)
-*/
-    char    *content = NULL;
-    int     position = 0;
-    int     keyword = 0;
-}
-
-if (*line)
-{
-    while (*line == ' ' || *line == '\t' || *line == '\n')
+	t_lst	*tokens;//La lista con todos los tokens
+	t_lst	*tok;//El nodo de cada token
+	
+	tokens = NULL;
+	tok = NULL;
+	
+//	buscamos el len del token
+//	buscamos el str del token y el keyword
+//	creamos un malloc tipo char* y se lo asignamos
+	
+    while (*line && (*line == ' ' || *line == '\t'))
         line++;
-    while (*line && *line != ???????????????????????????????)
+    while  (*line && *line != ???????????????????????????????)
     {
         
     }
-
-}
+	if (*line == '\0')
+	
+	}
     
 } 
-
-
-
 
  
 split con delimitadores (space, tab, "", '', < , >, <<, >>, |)

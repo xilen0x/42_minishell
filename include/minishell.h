@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:22:25 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/01 15:33:45 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:17:29 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
-typedef struct s_list
+typedef struct s_lst
 {
 	char			*value;
 	int				keyword;//no se si el enum deberia ser un int o un char 
 	struct	s_list	*next;
-}					t_list;
+}					t_lst;
 
-DEFINIR LOS ENUMS QUE SERAN LOS DIFERENTES TIPOS DE KEYWORDS (no se si char o int)
+//DEFINIR LOS ENUMS QUE SERAN LOS DIFERENTES TIPOS DE KEYWORDS (no se si char o int)
 
-char	**env_cpy(char *e[]);
+char	**env_dup(char *e[]);
 
 //char	*ft_strdup(const char *s1);
 //void	*ft_memcpy(void *dst, const void *src, size_t n);
