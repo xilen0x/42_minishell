@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:31:05 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/05 15:17:06 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:22:14 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,17 @@ int	main(int ac, char *av[], char *e[])
 	}
 	env = env_dup(e);//nos duplicamos el env del sistema
 
-	while (1)//en teoria, loop infinito hasta que se presione Ctrl + C
+	while (1)//loop infinito hasta que se presione Ctrl+D o se cierre el programa
 	{
-//		poner las señales en escucha i gestionarlas		
+//		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
 		line = readline("___minishell$ ");
 		if (line != NULL)
 			add_history(line);//agregamos 'line' al historial, lo gestiona biblioteca readline
-//		gestionar Ctrl+C (para que interrumpa el proceso, invoque a SIGINT y presente el prompt de nuevo)
+//		gestionar Ctrl+C (para que interrumpa el proceso actual, invocando a SIGINT y presente el prompt de nuevo)
 //		tokenizer(line);
 		free(line);//libero la linia que retorno readline seguramente mallocada
+//		parser(la struct/list con los tokens);
 	}
-	return (0, write(1, "the_end\n", 8));
+	write(1, "the_end\n", 8);
+	return (0);
 }

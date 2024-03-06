@@ -6,12 +6,12 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:29:27 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/05 16:44:25 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:12:17 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*====TODO LO QUE CONTIENE ESTE ARCHIVO AUN NO ESTA PROVADO=======*/
 /*------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------*/t_lst	*my_lstnew(void *value, int keyword)
 {
 	t_lst	*token;
