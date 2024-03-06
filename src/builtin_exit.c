@@ -12,15 +12,26 @@
 
 #include "minishell.h"
 
-int	builtings(t_data	*cmd)
+int	builtings(t_built	*cmd)
 {
 	int	i;
 
 	i = 0;
-	cmd->cmd1 = av[1];
-	if (ft_strcmp(cmd->cmd1,"exit") == 0)
+	
+	//printf("comando: %s\n", cmds.cmd1);
+	if (cmd->exit)
 	{
 		printf("saliendo\n");
+		exit(1);
+	}
+	else if (cmd->pwd)
+	{
+		printf("pwd\n");
+		exit(1);
+	}
+	else if (cmd->env)
+	{
+		printf("env\n");
 		exit(1);
 	}
 	else

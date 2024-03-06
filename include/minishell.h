@@ -11,10 +11,18 @@
 # include <readline/history.h>
 # include "builtins.h"
 
-typedef struct s_data
+typedef struct s_builtings
 {
+	char	*echo;
+	char	*cd;
+	char	*pwd;
+	char	*export;
+	char	*unset;
+	char	*env;
+	char	*exit;
 	char	*cmd1;
-}	t_data;
+
+}	t_built;
 
 typedef struct s_env
 {
@@ -23,7 +31,7 @@ typedef struct s_env
 	char	*value;
 }			t_env;
 
-int		builtings(t_data	*cmd);
+int		builtings(t_built	*cmd);
 char	**env_cpy(char *e[]);
 
 #endif

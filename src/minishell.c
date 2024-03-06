@@ -28,23 +28,23 @@ int	main(int ac, char *av[], char *envp[])
     char	*line;
 	(void)ac;
 	t_env	env;
-	t_data	cmds;
+	t_built	cmds;
 	if (ac != 1 || av[1])
 	{
 		printf("Arguments are not accepted!\n");
 		return (0);
 	}
 	env.env_cpy = env_cpy(envp);
-	//printf("comando: %s\n", cmds.cmd1);
+	cmds.exit = av[1];//cambiar luego
 	while (1)
 	{
 		//set_signals(INTER);
 		line = readline("minishell$ ");
-		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(1);
-		}
+		// if (line == NULL)
+		// {
+		// 	write(1, "exit\n", 5);
+		// 	exit(1);
+		// }
 		add_history(line);//agrega line al historial
 		builtings(&cmds);
 		free(line);

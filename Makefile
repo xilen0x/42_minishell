@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-#  =======OJO: NO OLVIDAR PONER TODOS LOS HEADERS A NOMBRE DE CARLOS=======
-
-
-
->>>>>>> origin/joan
 # Nombre del programa
 TARGET = minishell
 
@@ -21,11 +14,7 @@ OBJ_DIR = ./objs
 SRC_DIR = ./src
 
 # Opciones de compilación
-<<<<<<< HEAD
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
-=======
 CFLAGS = -g -Wall -Wextra -Werror
->>>>>>> origin/joan
 
 # Incluir bibliotecas
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -35,12 +24,8 @@ READLINE = $(READLINE_DIR)/libreadline.a $(READLINE_DIR)/libhistory.a
 LIBS = -lreadline -ltermcap
 
 # Archivos fuente
-<<<<<<< HEAD
 SOURCES = $(addprefix $(SRC_DIR)/, minishell.c libft_utils.c builtin_exit.c \
 									tokenizer.c)
-=======
-SOURCES = $(addprefix $(SRC_DIR)/, minishell.c)
->>>>>>> origin/joan
 
 # Archivos objeto generados por el compilador
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -90,8 +75,4 @@ $(OBJ_DIR):
 -include $(DEPS)
 
 # Reglas PHONY
-<<<<<<< HEAD
 .PHONY: all clean fclean re
-=======
-.PHONY: all clean fclean re
->>>>>>> origin/joan
