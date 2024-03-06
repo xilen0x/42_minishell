@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
+# define WORD
 typedef struct s_lst
 {
 	char			*value;
@@ -27,7 +28,7 @@ typedef struct s_lst
 }					t_lst;
 
 //DEFINIR LOS ENUMS QUE SERAN LOS DIFERENTES TIPOS DE KEYWORDS (no se si char o int)
-
+//ENUMS: REDIRECTION, PIPE, WORD, INVALID
 char	**env_dup(char *e[]);
 
 //char	*ft_strdup(const char *s1);
