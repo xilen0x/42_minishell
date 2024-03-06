@@ -14,7 +14,7 @@ OBJ_DIR = ./objs
 SRC_DIR = ./src
 
 # Opciones de compilación
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 
 # Incluir bibliotecas
 LIBFT = $(LIBFT_DIR)/libft.a

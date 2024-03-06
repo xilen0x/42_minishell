@@ -29,17 +29,22 @@ int	main(int ac, char *av[], char *envp[])
 	(void)ac;
 	t_env	env;
 	t_data	cmds;
-	/*if (ac != 1 || av[1])
+	if (ac != 1 || av[1])
 	{
-		printf("minishell do not accept arguments\n");
+		printf("Arguments are not accepted!\n");
 		return (0);
-	}*/
+	}
 	env.env_cpy = env_cpy(envp);
-	cmds.cmd1 = av[1];
+	//printf("comando: %s\n", cmds.cmd1);
 	while (1)
 	{
 		//set_signals(INTER);
 		line = readline("minishell$ ");
+		if (line == NULL)
+		{
+			write(1, "exit\n", 5);
+			exit(1);
+		}
 		add_history(line);//agrega line al historial
 		builtings(&cmds);
 		free(line);

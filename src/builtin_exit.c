@@ -17,10 +17,15 @@ int	builtings(t_data	*cmd)
 	int	i;
 
 	i = 0;
-	if (ft_strncmp(cmd->cmd1,"exit", 4))
+	cmd->cmd1 = av[1];
+	if (ft_strcmp(cmd->cmd1,"exit") == 0)
 	{
 		printf("saliendo\n");
 		exit(1);
+	}
+	else
+	{
+		printf("no soy el cmd exit\n");
 	}
 	return (0);
 }
