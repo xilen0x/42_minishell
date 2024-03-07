@@ -1,16 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 10:29:27 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/06 19:12:17 by jocuni-p         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
+
 /*====TODO LO QUE CONTIENE ESTE ARCHIVO AUN NO ESTA PROVADO=======*/
 /*------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------*/t_lst	*my_lstnew(void *value, int keyword)
 {
@@ -69,12 +59,12 @@ t_lst    **tokenizer(const char *line)//hace falta el const ??
         
     }
 	if (*line == '\0')
-	
+	{
 	}
     
 } 
 
- 
+/* 
 split con delimitadores (space, tab, "", '', < , >, <<, >>, |)
 ' ' , \t, son delimitadores que se eliminan, no se usan  
 "hola>cat" = 1 token (se considera 1 solo argumento)
@@ -83,4 +73,4 @@ echo pedro>fili = 4 tokens
 $ = si va solo, se tokeniza como una __WORD
 $seguido_de_caracteres = se tokeniza como una __WORD
 |, <, >, <<, >>, 
-        echo             hilo       = 2 tokens (los espacios se eliminan)
+        echo             hilo       = 2 tokens (los espacios se eliminan)*/

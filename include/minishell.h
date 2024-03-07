@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 15:22:25 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/05 16:17:29 by jocuni-p         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -19,17 +8,21 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
+
+# define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
+
 # define WORD
+// definir: REDIRECTION, PIPE, WORD, INVALID
+
 typedef struct s_lst
 {
 	char			*value;
-	int				keyword;//no se si el enum deberia ser un int o un char 
+	int				keyword;//deberia ser un int?? 
 	struct	s_list	*next;
 }					t_lst;
 
-//DEFINIR LOS ENUMS QUE SERAN LOS DIFERENTES TIPOS DE KEYWORDS (no se si char o int)
-//ENUMS: REDIRECTION, PIPE, WORD, INVALID
-char	**env_dup(char *e[]);
+char	**dup_array_2d(char *e[]);
 
 //char	*ft_strdup(const char *s1);
 //void	*ft_memcpy(void *dst, const void *src, size_t n);
