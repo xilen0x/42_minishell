@@ -31,7 +31,7 @@ typedef struct s_env
 	char	*value;
 }			t_env;
 
-int		builtings(t_built	*cmd);
+int	builtings(t_built	*cmd, t_env	env);
 char	**env_cpy(char *e[]);
 
 #endif
