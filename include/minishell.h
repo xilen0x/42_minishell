@@ -10,6 +10,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "builtins.h"
+# include "arr_2d.h"
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -21,12 +22,12 @@ typedef struct s_lst
 {
 	char			*value;
 	int				keyword;//deberia ser un int?? 
-	struct	s_list	*next;
+	struct s_list	*next;
 }					t_lst;
 
 typedef struct s_env
 {
-	//char	**env_cpy;
+	char	**env_cpy;
 	char	*key;
 	char	*value;
 }			t_env;
@@ -57,8 +58,8 @@ typedef struct s_shell
 	char	*cmd;
 }	t_shell;
 
-//int		builtings(t_built	*cmd, t_env	env, int ac);
-int		builtings(t_built	*cmd, char **env, int ac);
+int		builtings(t_built	*cmd, t_env	env, int ac);
+//int		builtings(t_built	*cmd, char **env, int ac);
 char	**env_cpy(char *e[]);
 int		change_directory(t_built	*cmd, int ac);
 int		get_pwd(void);

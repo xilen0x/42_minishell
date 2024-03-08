@@ -2,7 +2,7 @@
 #include "../include/minishell.h"
 
 /*Makes a new copy allocated and NULL terminated of **arr_2d adding *str at the end. The old **arr_2d is freed.*/
-char    **add_one_2d_arr(char **arr_2d, char *str)
+/*char    **add_one_2d_arr(char **arr_2d, char *str)
 {
     char    **new_arr_2d;
     size_t  size;
@@ -19,4 +19,4 @@ char    **add_one_2d_arr(char **arr_2d, char *str)
     new_arr_2d[i + 1] = NULL;
     free_2d_arr(arr_2d);
     return (new_arr_2d);
-}
+}*/

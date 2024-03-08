@@ -15,7 +15,7 @@ char	**dup_2d_arr(char **arr_2d)
 		exit (EXIT_FAILURE);//definir en el .h  ???
 	while (i < size)
 	{
-		env[i] = ft_strdup(*arr_2d[i]);
+		env[i] = ft_strdup(arr_2d[i]);
 		i++;
 	}
 	env[i] = NULL;

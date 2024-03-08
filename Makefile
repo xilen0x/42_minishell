@@ -24,8 +24,18 @@ READLINE = $(READLINE_DIR)/libreadline.a $(READLINE_DIR)/libhistory.a
 LIBS = -lreadline -ltermcap
 
 # Archivos fuente
-SOURCES = $(addprefix $(SRC_DIR)/, minishell.c libft_utils.c builtings.c builtin_pwd.c \
-									builtin_cd.c tokenizer.c utils0.c)
+SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
+									add_one_2d_arr.c \
+									builtin_cd.c \
+									builtin_pwd.c \
+									builtings.c \
+									dup_2d_arr.c \
+									free_2d_arr.c \
+									libft_utils.c \
+									rm_one_2d_arr.c \
+									size_2d_arr.c \
+									tokenizer.c \
+									utils0.c)
 
 # Archivos objeto generados por el compilador
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

@@ -1,9 +1,9 @@
 
 #include "minishell.h"
 
-/*====TODO LO QUE CONTIENE ESTE ARCHIVO AUN NO ESTA PROVADO=======*/
-/*------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------*/
-t_lst	*my_lstnew(void *value, int keyword)
+//====TODO LO QUE CONTIENE ESTE ARCHIVO AUN NO ESTA PROVADO=======/
+//------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------/
+/*t_lst	*my_lstnew(void *value, int keyword)
 {
 	t_lst	*token;
 
@@ -16,7 +16,7 @@ t_lst	*my_lstnew(void *value, int keyword)
 	return (token);
 }
 
-/*----RETURNS A POINTER TO THE LAST NODE OF A LIST----*/
+//----RETURNS A POINTER TO THE LAST NODE OF A LIST----/
 t_lst	*ft_lstlast(t_lst *lst)
 {
 	if (lst == NULL)
@@ -26,7 +26,7 @@ t_lst	*ft_lstlast(t_lst *lst)
 	return (lst);
 }
 
-/*----ADDS A NODE TO THE END OF A LIST. NOTHING IS RETURNED---*/
+//----ADDS A NODE TO THE END OF A LIST. NOTHING IS RETURNED---/
 void	ft_lstadd_back(t_lst **lst,t_lst *new)
 {
 	t_lst	*aux;
@@ -40,7 +40,7 @@ void	ft_lstadd_back(t_lst **lst,t_lst *new)
 		*lst = new;
 }
 
-/*------------TOKENIZADOR------------*/
+//------------TOKENIZADOR------------//
 t_lst    **tokenizer(const char *line)//hace falta el const ??
 {
 	t_lst	*tokens;//La lista con todos los tokens
@@ -62,7 +62,7 @@ t_lst    **tokenizer(const char *line)//hace falta el const ??
 	if (*line == '\0')
 	{
 	}
-}
+}*/
 
 /* 
 split con delimitadores (space, tab, "", '', < , >, <<, >>, |)
