@@ -13,9 +13,9 @@ int	main(int ac, char *av[], char *envp[])
 		printf("minishell do not accept arguments\n");
 		return (EXIT_FAILURE);//quizas deberia retornar 0 ???
 	}
-	env = dup_array_2d(envp);//duplica el env del sistema
+	env = dup_2d_arr(envp);//duplica el env del sistema
 
-	while (1)//loop infinito hasta que se presione Ctrl+D, 'exit' o se cierre el programa
+	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
 		line = readline(">>>>minishell$ ");
