@@ -10,7 +10,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "builtins.h"
-# include "arr_2d.h"
+# include "arr2d.h"
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
