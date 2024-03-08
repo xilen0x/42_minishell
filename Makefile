@@ -14,7 +14,7 @@ OBJ_DIR = ./objs
 SRC_DIR = ./src
 
 # Opciones de compilación
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 
 # Incluir bibliotecas
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -24,8 +24,8 @@ READLINE = $(READLINE_DIR)/libreadline.a $(READLINE_DIR)/libhistory.a
 LIBS = -lreadline -ltermcap
 
 # Archivos fuente
-SOURCES = $(addprefix $(SRC_DIR)/, minishell.c libft_utils.c builtin_pwd.c \
-									tokenizer.c utils0.c)
+SOURCES = $(addprefix $(SRC_DIR)/, minishell.c libft_utils.c builtings.c builtin_pwd.c \
+									builtin_cd.c tokenizer.c utils0.c)
 
 # Archivos objeto generados por el compilador
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

@@ -21,6 +21,7 @@ typedef struct s_builtings
 	char	*env;
 	char	*exit;
 	char	*cmd1;
+	char	*path;//borrar luego
 
 }	t_built;
 
@@ -31,7 +32,20 @@ typedef struct s_env
 	char	*value;
 }			t_env;
 
-int	builtings(t_built	*cmd, t_env	env);
+typedef struct s_shell
+{
+	char	**tokens;
+	char	**pipes;
+	int		pipex;
+	int		exit;
+	//t_pipe	*p;
+	char	**args;
+	char	*cmd;
+}	t_shell;
+
+int		builtings(t_built	*cmd, t_env	env, int ac);
 char	**env_cpy(char *e[]);
+int		change_directory(t_built	*cmd, int ac);
+int		get_pwd(void);
 
 #endif

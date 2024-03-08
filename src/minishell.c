@@ -11,12 +11,12 @@ void	init(t_built *cmd, char *av[])
 	cmd->env = 0;
 	cmd->exit = 0;
 	cmd->cmd1 = av[1];
+	cmd->path = av[2];
 }
 
 int	main(int ac, char *av[], char *envp[])
 {
     char	*line;
-	(void)ac;
 	t_env	env;
 	t_built	cmds;
 	/*if (ac != 1 || av[1])
@@ -27,7 +27,6 @@ int	main(int ac, char *av[], char *envp[])
 	env.env_cpy = env_cpy(envp);
 	while (1)
 	{
-		//set_signals(INTER);
 		line = readline("minishell$ ");
 		if (line == NULL)
 		{
@@ -36,7 +35,7 @@ int	main(int ac, char *av[], char *envp[])
 		}
 		add_history(line);//agrega line al historial
 		init(&cmds, av);
-		builtings(&cmds, env);
+		builtings(&cmds, env, ac);
 		free(line);
 	}
 	free(env.env_cpy);
