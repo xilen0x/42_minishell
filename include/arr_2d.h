@@ -2,7 +2,7 @@
 #ifndef ARR_2D_H
 # define ARR_2D_H
 
-# include "minishell.h"
+# include <stdlib.h>
 
 char	**dup_2d_arr(char **arr_2d);
 size_t  size_2d_arr(char **arr_2d);

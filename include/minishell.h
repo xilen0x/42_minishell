@@ -10,6 +10,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "builtins.h"
+# include "arr_2d.h"
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -36,7 +37,7 @@ typedef struct s_builtings
 	char	*echo;
 	char	*cd;
 	char	*pwd;
-	char	*export;
+//	char	*export;
 	char	*unset;
 	char	*env;
 	char	*exit;

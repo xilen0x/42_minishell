@@ -1,5 +1,6 @@
 
 #include "minishell.h"
+
 //#include "libft/libft.h"
 /*funcion temporal de inicializacion de estructura t_built*/
 void	init(t_built *cmd, char *av[])
@@ -7,7 +8,7 @@ void	init(t_built *cmd, char *av[])
 	cmd->echo = 0;
 	cmd->cd = 0;
 	cmd->pwd = 0;
-	cmd->export = 0;
+//	cmd->export = 0;
 	cmd->unset = 0;
 	cmd->env = 0;
 	cmd->exit = 0;
