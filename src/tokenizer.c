@@ -2,7 +2,8 @@
 #include "minishell.h"
 
 /*====TODO LO QUE CONTIENE ESTE ARCHIVO AUN NO ESTA PROVADO=======*/
-/*------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------*/t_lst	*my_lstnew(void *value, int keyword)
+/*------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------*/
+t_lst	*my_lstnew(void *value, int keyword)
 {
 	t_lst	*token;
 
@@ -56,13 +57,12 @@ t_lst    **tokenizer(const char *line)//hace falta el const ??
         line++;
     while  (*line && *line != ???????????????????????????????)
     {
-        
+        //
     }
 	if (*line == '\0')
 	{
 	}
-    
-} 
+}
 
 /* 
 split con delimitadores (space, tab, "", '', < , >, <<, >>, |)

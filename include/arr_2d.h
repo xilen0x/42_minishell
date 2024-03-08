@@ -5,7 +5,7 @@
 # include "minishell.h"
 
 char	**dup_2d_arr(char **arr_2d);
-size_t  size_2d_arr(char **arr_2d);    
+size_t  size_2d_arr(char **arr_2d);
 void    free_2d_arr(char **arr_2d);
 char    **add_one_2d_arr(char **arr_2d, char *str);
 char    **rm_one_2d_arr(char **arr_2d, char *str);//creo es mejor/mas facil remover por nombre de variable y no por indice

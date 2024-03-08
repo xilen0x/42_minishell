@@ -1,8 +1,17 @@
+.vscode/
+libft/obj/*.o
+libft/obj/*.d
+objs/main.o.*
 .DS_Store
 a.out
 *.swp
 minishell
+<<<<<<< HEAD
+libft/libft.a
+objs/
+=======
 *.dSYM
 objs
 *.o
 README.md
+>>>>>>> origin/joan
