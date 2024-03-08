@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*funcion temporal de inicializacion*/
+/*funcion temporal de inicializacion de estructura t_built*/
 void	init(t_built *cmd, char *av[])
 {
 	cmd->echo = 0;
@@ -10,7 +10,7 @@ void	init(t_built *cmd, char *av[])
 	cmd->unset = 0;
 	cmd->env = 0;
 	cmd->exit = 0;
-	cmd->cmd1 = av[1];//cambiar luego
+	cmd->cmd1 = av[1];
 }
 
 int	main(int ac, char *av[], char *envp[])

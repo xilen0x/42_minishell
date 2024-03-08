@@ -1,44 +1,66 @@
 #include "minishell.h"
 
-char	*get_pwd(char *cmd, t_env	env)
-{
-	int	i;
-
-	(void)cmd;
-	i = 0;
-	while (ft_strnstr(env.env_cpy[i], "PWD=", 4) == NULL)
-		i++;
-	printf("%s\n", env.env_cpy[i] + 4);
-	return (0);
-}
-// int	set_pwd(char *cmd, t_env	env)
+// int	update_pwd(t_env *env)
 // {
-// 	int	i;
+// 	int		i;
+// 	char	*cwd;
 
-// 	(void)cmd;
 // 	i = 0;
-// 	while (ft_strnstr(env.env_cpy[i], "PWD=", 4) == NULL)
+// 	cwd = getcwd(NULL, 0); // obtener el directorio de trabajo actual
+// 	if (chdir(cwd) != 0)// cambiar el directorio de trabajo actual
+// 	{
+// 		perror("chdir");
+// 		free(cwd);
+// 		return -1;
+// 	}
+// 	while (env->env_cpy[i])
+// 	{
+// 		if (ft_strnstr(env->env_cpy[i], "PWD=", 4) != NULL)
+// 		{
+// 			free(env->env_cpy[i]); // Liberar la memoria asignada a la cadena anterior de PWD
+// 			env->env_cpy[i] = ft_strjoin("PWD=", cwd); // Actualizar la variable de entorno PWD
+// 			free(cwd);
+// 			if (env->env_cpy[i] == NULL)
+// 			{
+// 				perror("ft_strjoin");
+// 				return (-1);
+// 			}
+// 			break ;
+// 		}
 // 		i++;
-// 	printf("%s\n", env.env_cpy[i] + 4);
+// 	}
 // 	return (0);
 // }
 
+int	get_pwd(void)
+{
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("getcwd");
+		return (-1);
+	}
+	printf("%s\n", cwd);
+	free(cwd);
+	return (0);
+}
+
 int	builtings(t_built	*cmd, t_env	env)
 {
-	int	i;
+	int		i;
 
+	(void)env;
 	i = 0;
-	if ((ft_strcmp(cmd->cmd1, "pwd")) == 0)
-	{
-		get_pwd(cmd->cmd1, env);
-		return (0);
-	}
-	// else if ((ft_strcmp(cmd->cmd1, "cd")) == 0)
+	if (ft_strcmp(cmd->cmd1, "pwd") == 0)
+		get_pwd();
+	// else if (ft_strcmp(cmd->cmd1, "cd") == 0)
 	// {
 	// 	printf("cd\n");
 	// 	return (0);
 	// }
-	// else if ((ft_strcmp(cmd->cmd1, "echo")) == 0)
+	// else if (ft_strcmp(cmd->cmd1, "echo") == 0)
 	// {
 	// 	printf("echo\n");
 	// 	return (0);
