@@ -2,11 +2,10 @@
 
 /*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
 o a una ruta absoluta o relativa*/
-int	ft_cd(t_built	*cmd, int ac)
+int	builtin_cd(t_built	*cmd, int ac)
 {
 	char	*home_dir;
 
-	(void)cmd;
 	if (ac == 2)//cambiar luego!!!
 	{
 		home_dir = getenv("HOME");
@@ -20,7 +19,7 @@ int	ft_cd(t_built	*cmd, int ac)
 			perror("chdir() error");
 			return (1);
 		}
-		get_pwd();// solo para visualizar el pwd actual - borrar luego!!!
+		builtin_pwd();// solo para visualizar el pwd actual - borrar luego!!!
 	}
 	else//relative or absolute path
 	{
@@ -29,7 +28,7 @@ int	ft_cd(t_built	*cmd, int ac)
 			perror("chdir() error");
 			return (1);
 		}
-		get_pwd();// solo para visualizar el pwd actual - borrar luego!!!
+		builtin_pwd();// solo para visualizar el pwd actual - borrar luego!!!
 	}
 	return (0);
 }

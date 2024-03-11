@@ -6,18 +6,27 @@ int	builtings(t_built	*cmd, t_env	env, int ac)
 {
 	int		i;
 
-	(void)env;
 	i = 0;
 	if (ft_strcmp(cmd->cmd1, "pwd") == 0)
-		get_pwd();
+		builtin_pwd();
 	else if (ft_strcmp(cmd->cmd1, "cd") == 0)
 	{
-		ft_cd(cmd, ac);
+		builtin_cd(cmd, ac);
 		return (0);
 	}
 	else if (ft_strcmp(cmd->cmd1, "echo") == 0)
 	{
-		ft_echo(cmd, ac);
+		builtin_echo(cmd, ac);
+		return (0);
+	}
+	else if (ft_strcmp(cmd->cmd1, "env") == 0)
+	{
+		builtin_env(env);
+		return (0);
+	}
+	else if (ft_strcmp(cmd->cmd1, "export") == 0)
+	{
+		builtin_export(env, ac);
 		return (0);
 	}
 	else

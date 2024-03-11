@@ -16,6 +16,7 @@ int	main(int ac, char *av[], char *envp[])
 	//env = dup_2d_arr(envp);//duplica el env del sistema
 	//env.env_cpy = env_cpy(envp);
 	env.env_cpy = dup_2d_arr(envp);
+	env.export_cpy = dup_2d_arr(envp);
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	

@@ -14,7 +14,7 @@ OBJ_DIR = ./objs
 SRC_DIR = ./src
 
 # Opciones de compilación
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
 
 # Incluir bibliotecas
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -26,10 +26,12 @@ LIBS = -lreadline -ltermcap
 # Archivos fuente
 SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 									add_one_2d_arr.c \
+									builtings.c \
 									builtin_cd.c \
 									builtin_pwd.c \
 									builtin_echo.c \
-									builtings.c \
+									builtin_env.c \
+									builtin_export.c \
 									dup_2d_arr.c \
 									free_2d_arr.c \
 									libft_utils.c \

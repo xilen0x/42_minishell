@@ -28,6 +28,7 @@ typedef struct s_lst
 typedef struct s_env
 {
 	char	**env_cpy;
+	char	**export_cpy;
 	char	*key;
 	char	*value;
 }			t_env;
@@ -58,13 +59,15 @@ typedef struct s_shell
 	char	*cmd;
 }	t_shell;
 
-int		builtings(t_built	*cmd, t_env	env, int ac);
 //int		builtings(t_built	*cmd, char **env, int ac);
-int		init(t_built *cmd, char *av[]);
 //char	**env_cpy(char *e[]);
-int		ft_cd(t_built	*cmd, int ac);
-int		get_pwd(void);
 //char	**dup_array_2d(char *envp[]);
-int	ft_echo(t_built	*cmd, int ac);
+int		init(t_built *cmd, char *av[]);
+int		builtings(t_built *cmd, t_env env, int ac);
+int		builtin_cd(t_built *cmd, int ac);
+int		builtin_pwd(void);
+int		builtin_echo(t_built *cmd, int ac);
+int		builtin_env(t_env env);
+int		builtin_export(t_env env, int ac);
 
 #endif
