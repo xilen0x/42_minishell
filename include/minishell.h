@@ -60,9 +60,11 @@ typedef struct s_shell
 
 int		builtings(t_built	*cmd, t_env	env, int ac);
 //int		builtings(t_built	*cmd, char **env, int ac);
-char	**env_cpy(char *e[]);
-int		change_directory(t_built	*cmd, int ac);
+int		init(t_built *cmd, char *av[]);
+//char	**env_cpy(char *e[]);
+int		ft_cd(t_built	*cmd, int ac);
 int		get_pwd(void);
 //char	**dup_array_2d(char *envp[]);
+int	ft_echo(t_built	*cmd, int ac);
 
 #endif

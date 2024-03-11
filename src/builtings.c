@@ -12,17 +12,17 @@ int	builtings(t_built	*cmd, t_env	env, int ac)
 		get_pwd();
 	else if (ft_strcmp(cmd->cmd1, "cd") == 0)
 	{
-		change_directory(cmd, ac);
+		ft_cd(cmd, ac);
 		return (0);
 	}
-	// else if (ft_strcmp(cmd->cmd1, "echo") == 0)
-	// {
-	// 	printf("echo\n");
-	// 	return (0);
-	// }
+	else if (ft_strcmp(cmd->cmd1, "echo") == 0)
+	{
+		ft_echo(cmd, ac);
+		return (0);
+	}
 	else
 	{
-		printf("no soy un comando\n");
+		printf("bash: %s: command not found\n", cmd->cmd1);
 	}
 	return (0);
 }

@@ -28,6 +28,7 @@ SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 									add_one_2d_arr.c \
 									builtin_cd.c \
 									builtin_pwd.c \
+									builtin_echo.c \
 									builtings.c \
 									dup_2d_arr.c \
 									free_2d_arr.c \

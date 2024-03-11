@@ -2,7 +2,7 @@
 
 /*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
 o a una ruta absoluta o relativa*/
-int	change_directory(t_built	*cmd, int ac)
+int	ft_cd(t_built	*cmd, int ac)
 {
 	char	*home_dir;
 

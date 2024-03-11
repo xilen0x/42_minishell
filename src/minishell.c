@@ -20,7 +20,7 @@ int	main(int ac, char *av[], char *envp[])
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
 		line = readline(">>>>minishell$ ");
-		if (line != NULL)
+		if (line == NULL)
 		{
 			write(1, "exit\n", 5);
 			exit(1);
