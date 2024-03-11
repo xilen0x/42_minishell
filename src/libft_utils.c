@@ -1,6 +1,8 @@
 
 #include "minishell.h"
 
+//COPIADAS DE LIBFT
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;

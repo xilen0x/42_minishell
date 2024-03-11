@@ -1,5 +1,5 @@
 
-#include "../include/minishell.h"
+#include "minishell.h"
 
 /*Returns an allocated and NULL terminated copy of **arr_2d*/
 char	**dup_arr2d(char **arr2d)

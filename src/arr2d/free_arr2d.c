@@ -1,7 +1,7 @@
 
 #include "arr2d.h"
 
-/*Frees all elements of  **arr2d included the main pointer as well.*/
+/*Frees all elements of an **arr2d included the main pointer as well.*/
 void    free_arr2d(char **arr2d)
 {
     char    **tmp;

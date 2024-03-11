@@ -15,19 +15,29 @@
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
-# define WORD
-// definir: REDIRECTION, PIPE, WORD, INVALID
+//# define WORD  definir: REDIRECTION, PIPE, WORD, INVALID
+
+/*---joan---*/
+
+enum e_keytok
+{
+	WORD,
+	PIPE,
+	OPERATOR,
+	INVALID
+};
 
 typedef struct s_lst
 {
 	char			*value;
-	int				keyword;//deberia ser un int?? 
+	int				keyword;//ADMITIRA LOS ENUMS?? HAY QUE PONER QUE ES DE TIPO e_keytok ??
 	struct	s_list	*next;
 }					t_lst;
 
+/*-----carlos------------------
 typedef struct s_env
 {
-	//char	**env_cpy;
+	char	**env_cpy;
 	char	*key;
 	char	*value;
 }			t_env;
@@ -37,19 +47,19 @@ typedef struct s_builtings
 	char	*echo;
 	char	*cd;
 	char	*pwd;
-//	char	*export;
+	char	*export;
 	char	*unset;
 	char	*env;
 	char	*exit;
 	char	*cmd1;
 	char	*path;//borrar luego
-
 }	t_built;
+  ---------------------*/
 
 
 typedef struct s_shell
 {
-	char	**tokens;
+	t_lst	**tokens;
 	char	**pipes;
 	int		pipex;
 	int		exit;
