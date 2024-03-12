@@ -44,3 +44,22 @@ char	*ft_strdup(const char *s1)
 	ft_memcpy(dup, s1, len);
 	return (dup);
 }
+
+int ft_strlcpy(char *dst, char *src, int dstsize)
+{
+	int i;
+	int srcsize;
+
+	i = 0;
+	srcsize = ft_strlen(src);
+	if (dstsize > 0)
+	{
+		while (i < srcsize && i < dstsize -1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (srcsize);
+}

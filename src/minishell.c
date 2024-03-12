@@ -34,8 +34,10 @@ int	main(int ac, char *av[], char *envp[])
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
-		line = readline(">>>>minishell$ ");
-		if (line != NULL)//hablar con Carlos, que pretende conseguir con esto?????????
+		line = readline(">>>>minishell$ ");//ojo retorna un *str mallocado
+		if (!line)
+			return (exit_status)//gestionar que hacemos exactamente si pasa esto
+		if (line != NULL)//hablar con Carlos, no entiendo que hace esto?????????
 		{
 			write(1, "exit\n", 5);
 			exit(1);//carlos, es el codigo de error?

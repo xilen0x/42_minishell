@@ -2,6 +2,7 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include "utils_libft.h"//joan .decidir si esta o la anterior
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -10,15 +11,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "builtins.h"
-# include "arr2d.h"
+# include "arr2d.h"//joan
+# include "lst.h"//joan
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
-//# define WORD  definir: REDIRECTION, PIPE, WORD, INVALID
-
 /*---joan---*/
-
 enum e_keytok
 {
 	WORD,
@@ -30,7 +29,7 @@ enum e_keytok
 typedef struct s_lst
 {
 	char			*value;
-	int				keyword;//ADMITIRA LOS ENUMS?? HAY QUE PONER QUE ES DE TIPO e_keytok ??
+	int				keyword;//ADMITIRA LOS ENUMS???
 	struct	s_list	*next;
 }					t_lst;
 

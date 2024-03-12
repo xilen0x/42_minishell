@@ -3,101 +3,80 @@
 
 /*====TODO LO QUE CONTIENE ESTE ARCHIVO AUN NO ESTA PROVADO=======*/
 
-/*------RETORNA UN NUEVO NODO CREADO CON LOS ARGUMENTOS---------*/
-t_lst	*my_lstnew(void *value, int keyword)
+/*-----Returns the len of the first token found in 'line' */
+int	tok_len(char *line)
 {
-	t_lst	*token;
+	int		len;
+	char	c;
 
-	token = (t_lst *)malloc(sizeof(t_lst));
-	if (!token)
-		return (NULL);
-	token->value = *value;
-	token->keyword = keyword;
-    token->next = NULL;
-	return (token);
-}
-
-/*----RETURNS A POINTER TO THE LAST NODE OF A LIST----*/
-t_lst	*ft_lstlast(t_lst *lst)
-{
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
-}
-
-/*----ADDS A NODE TO THE END OF A LIST. NOTHING IS RETURNED---*/
-void	ft_lstadd_back(t_lst **lst,t_lst *new)
-{
-	t_lst	*aux;
-
-	if (*lst)
+	len = 0;
+	if (*line == '>' || *line == '<' || *line == '|')//verifica si es: <, >, |
 	{
-		aux = ft_lstlast(*lst);
-		aux->next = new;
+		if (*line == *(line + 1) && *line != '|')//verifica si es: <<, >>
+			return (2);
+		return (1);
 	}
-	else
-		*lst = new;
+	while (*line && (*line != ' ' || *line != '\t' || *line != '|' \
+	|| *line != '<' || *line != '>'))//mientras exista y no sea: espacio, tab, |, <, >
+	{
+		if (*(line + len) == '\'' || *(line + len) == '"')//verifico si contiene comilla
+		{
+			c = *(line + len);//inicializo 'c' con el carcter comilla encontrado
+			while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla
+				len++;//cuentalo
+		}
+		len++;
+	}
+	return (len);
 }
 
 /*------------TOKENIZADOR------------*/
 t_lst    **tokenizer(const char *line)//hace falta el const ??
 {
-	t_lst	**tokens;//La lista con todos los tokens
-	t_lst	*tok;//El nodo de cada token
-	char	*str;
-	int		len;
-	int		i;
+	t_lst	**tokens;//lista con todos los tokens
+	t_lst	*new_tok;//nodo con cada token
+	char	*str;//el str que contendrá el token antes de meterlo en el nodo
+	int		len;//la len del str del token
+	int		i;//guardará el indice donde estamos en el recorrido por 'line'
 
 	i = 0;
+	len = 0;//hace falta inicializarlo???
 	tokens = NULL;
-	tok = NULL;
+	new_tok = NULL;
 	
-	while (*line)//RECORRE TODO EL LINE con logica de punteros
+	//----OBTENDRA UN STRING DE CADA TOKEN HASTA LLEGAR AL FINAL DE 'line'--------
+	while (line[i])//recorremos todo 'line'
 	{
-	//--------FUNCION-get_tok_str(line, &i)-------------
-    	while (*line && (*line == ' ' || *line == '\t'))
-        line++;
-		//-------FUNCION tok_len----------
-		len = tok_len(*line);//calcula la len del proximo token
-			if (*line == '>' || *line == '<' || *line == '|')
-			{
-				if (*line == *(line + 1) && *line != '|')
-					return (2);
-				return (1);
-			}
-			while (*line && (*line != ' ' || *line != '\t' || *line != '|' \
-			|| *line != '<' || *line != '>')
-			{
-				if (*(line + len) == '\'' || *(line + len) == '"')
---ME HE QUEDAT AQUI EL DILLUNS TARDA------------------------------------------------
-			}
+    	while (line[i] && (line[i] == ' ' || line[i] == '\t'))//salta espacios y tabs
+        i++;
 
+		len = tok_len(line + i);//calcula la len del token que encuentre en 'line' desde donde empieza
+
+		//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
 		str = (char *)malloc(sizeof(char) * len + 1);
 		if (!str)
-			return (devolver el error y liberar);
-//		rellenamos str con strlcpy(*str, *line + *i, len + 1)
-//		init/crea nodo
-//		ft_lstadd_back
-	
-    while  (*line && *line != ???????????????????????????????)
-    {
-        //
-    }
-	if (*line == '\0')
-	{
+			return (EXIT_FAILURE);//gestionar error, liberar y cerrar programa
+
+		ft_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
+
+		i += len;//actualizo el indice para que sepa que tramo de 'line' ya hemos recorrido
+
+		//---CREA/INICIALIZA UN NODO Y LO PONE AL FINAL DE LA LISTA
+
+---------CONTINUAR AQUI, a la funcio tok_len shauria de definir el keyword a traves dun punter
+
+		new_tok = lstnew_tok(str, OJO pasarle el key *str);//init/crea nodo
+		//POTSER PUC POSAR LA CREACIO DINS DEL ADDBACK ??
+		ft_lstadd_back(tokens, new_tok);
+		//he de liberar str ????
 	}
 }
 
 /* 
-split con delimitadores (space, tab, "", '', < , >, <<, >>, |)
-' ' , \t, son delimitadores que se eliminan, no se usan  
+delimitadores (space, tab, "", '', < , >, <<, >>, |)
 "hola>cat" = 1 token (se considera 1 solo argumento)
 'hola>cat' = 1 token (se considera 1 solo argumento)
 echo pedro>fili = 4 tokens
-WORD = 
 $ = si va solo, se tokeniza como una __WORD
 $seguido_de_caracteres = se tokeniza como una __WORD
-|, <, >, <<, >>, 
-        echo             hilo       = 2 tokens (los espacios se eliminan)*/
+*/
