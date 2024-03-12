@@ -27,6 +27,7 @@ int	builtins(t_built	*cmd, t_env	env, int ac)
 	else if (ft_strcmp(cmd->cmd1, "export") == 0)
 	{
 		builtin_export(env, ac);
+		builtin_env(env);
 		return (0);
 	}
 	else

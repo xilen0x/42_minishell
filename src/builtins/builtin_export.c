@@ -14,21 +14,36 @@ int	print_builtin_export(t_env env)
 	return (0);
 }
 
-/*int	builtin_export_with_arg(t_env env)
+int	builtin_export_with_arg(t_env env)//aki voy!!!...viendo como agregar una linea a la copia del env?????????
 {
-	int	i;
+	int		i;
+	char	*new_env_var;
 
 	i = 0;
 	while (env.env_to_build->path[i])
 	{
-		if (ft_strcmp(env.env_to_build->path[i], '='))
+		if (ft_strcmp(&env.env_to_build->path[i], "="))
 		{
+			// while (env.env_cpy)
+			// 	i++;
+			//i++;
+			new_env_var = malloc(sizeof(char) * (ft_strlen(env.env_to_build->path)) + 1);
+			if (!new_env_var)
+				return (0);
 			i = 0;
-			env.env_cpy[i] = 
+			while (env.env_to_build->path[i])
+			{
+				new_env_var[i] = env.env_to_build->path[i];
+				i++;
+			}
+			//(env.env_cpy[i], new_env_var);
+			//env.env_to_build->path;
+			//env.env_cpy[i] = env.env_to_build->path//aqui agrego la linea a mi lista
 		}
 		i++;
 	}
-}*/
+	return (0);
+}
 
 /*builtin que agrega el string "declare -x " al output del export, al ejecutar 
 export sin argumentos*/
@@ -53,9 +68,9 @@ int	builtin_export(t_env env, int ac)
 			env.export_cpy[i] = new_env_var;
 			i++;
 		}
-		print_builtin_export(env);
 	}
-	/*else
-		builtin_export_with_arg(env);*/
+	else
+		builtin_export_with_arg(env);
+	print_builtin_export(env);
 	return (0);
 }
