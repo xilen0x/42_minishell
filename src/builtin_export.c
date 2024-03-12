@@ -26,7 +26,7 @@ int	builtin_export(t_env env, int ac)
 		while (env.export_cpy[i])
 		{
 			len = ft_strlen(env.export_cpy[i]);
-			new_env_var = (char *)malloc((len + 11) * sizeof(char));
+			new_env_var = (char *)malloc((len + 12) * sizeof(char));
 			if (!new_env_var)
 			{
 				perror("Error al asignar memoria");

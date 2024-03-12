@@ -39,5 +39,5 @@ int	main(int ac, char *av[], char *envp[])
 }
 
 /*
-Note: verificar pq no funciona build pwd y cd luego del merge
+Note: 
 */
