@@ -25,14 +25,6 @@ typedef struct s_lst
 	struct s_list	*next;
 }					t_lst;
 
-typedef struct s_env
-{
-	char	**env_cpy;
-	char	**export_cpy;
-	char	*key;
-	char	*value;
-}			t_env;
-
 typedef struct s_builtings
 {
 	char	*echo;
@@ -47,8 +39,16 @@ typedef struct s_builtings
 
 }	t_built;
 
+typedef struct s_env
+{
+	char	**env_cpy;
+	char	**export_cpy;
+	char	*key;
+	char	*value;
+	t_built	*env_to_build;
+}			t_env;
 
-typedef struct s_shell
+/*typedef struct s_shell
 {
 	char	**tokens;
 	char	**pipes;
@@ -57,13 +57,13 @@ typedef struct s_shell
 	//t_pipe	*p;
 	char	**args;
 	char	*cmd;
-}	t_shell;
+}	t_shell;*/
 
 //int		builtings(t_built	*cmd, char **env, int ac);
 //char	**env_cpy(char *e[]);
 //char	**dup_array_2d(char *envp[]);
 int		init(t_built *cmd, char *av[]);
-int		builtings(t_built *cmd, t_env env, int ac);
+int		builtins(t_built *cmd, t_env env, int ac);
 int		builtin_cd(t_built *cmd, int ac);
 int		builtin_pwd(void);
 int		builtin_echo(t_built *cmd, int ac);

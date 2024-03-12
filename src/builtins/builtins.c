@@ -2,7 +2,7 @@
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtings(t_built	*cmd, t_env	env, int ac)
+int	builtins(t_built	*cmd, t_env	env, int ac)
 {
 	int		i;
 

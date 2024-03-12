@@ -30,7 +30,7 @@ int	main(int ac, char *av[], char *envp[])
 //		gestionar Ctrl+C (para que interrumpa el proceso actual, invocando a SIGINT y presente el prompt de nuevo)
 //		tokenizer(line);
 		init(&cmds, av);
-		builtings(&cmds, env, ac);
+		builtins(&cmds, env, ac);
 		free(line);//libero la linia que retorno readline seguramente mallocada
 //		parser(la struct/list con los tokens);
 	}

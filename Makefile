@@ -26,12 +26,12 @@ LIBS = -lreadline -ltermcap
 # Archivos fuente
 SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 									add_one_2d_arr.c \
-									builtings.c \
-									builtin_cd.c \
-									builtin_pwd.c \
-									builtin_echo.c \
-									builtin_env.c \
-									builtin_export.c \
+									builtins/builtins.c \
+									builtins/builtin_cd.c \
+									builtins/builtin_pwd.c \
+									builtins/builtin_echo.c \
+									builtins/builtin_env.c \
+									builtins/builtin_export.c \
 									dup_2d_arr.c \
 									free_2d_arr.c \
 									libft_utils.c \
@@ -44,6 +44,9 @@ SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEPS = $(OBJECTS:.o=.d)
 
+# Directorios de los archivos de dependencias
+DEPDIRS = $(OBJ_DIR)/builtins
+
 # Incluir archivos de encabezado
 INCLUDES = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(READLINE_DIR)
 
@@ -55,8 +58,12 @@ $(TARGET): $(LIBFT) $(READLINE) $(OBJECTS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $^ -o $@ $(LIBFT) $(READLINE) $(LIBS)
 
 # Regla para compilar cada archivo fuente
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(DEPDIRS)
 	@$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
+
+# Regla para crear los directorios de dependencias si no existen
+$(DEPDIRS):
+	@mkdir -p $(DEPDIRS)
 
 # Regla para construir la biblioteca libft
 $(LIBFT):
