@@ -18,18 +18,21 @@
 # define EXIT_FAILURE 1
 
 /*---joan---*/
-enum e_keytok
+typedef enum e_keytok
 {
-	WORD,
+	WORD = 0,
 	PIPE,
-	OPERATOR,
-	INVALID
-};
+	GREATER,
+	SMALLER,
+	DOUBLE_GREATER,
+	DOUBLE_SMALLER,
+	INVALID //(de moment al tokenizer no usar)
+} 	t_keytok;
 
 typedef struct s_lst
 {
 	char			*value;
-	int				keyword;//ADMITIRA LOS ENUMS???
+	t_keytok		keyword;//ADMITIRA LOS ENUMS???
 	struct	s_list	*next;
 }					t_lst;
 
