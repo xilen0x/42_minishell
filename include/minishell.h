@@ -20,19 +20,20 @@
 /*---joan---*/
 typedef enum e_keytok
 {
-	WORD = 0,
+	NULL_KEY = 0,//para poder inicializarlo con algo cuando aun no vaya a necesitarlo 
+	WORD,
 	PIPE,
 	GREATER,
 	SMALLER,
 	DOUBLE_GREATER,
 	DOUBLE_SMALLER,
-	INVALID //(de moment al tokenizer no usar)
+	INVALID //(de momento no lo usare)
 } 	t_keytok;
 
 typedef struct s_lst
 {
 	char			*value;
-	t_keytok		keyword;//ADMITIRA LOS ENUMS???
+	t_keytok		keyword;//CONTENDRÁ LOS ENUM
 	struct	s_list	*next;
 }					t_lst;
 
