@@ -35,6 +35,7 @@ SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 									builtins/builtin_echo.c \
 									builtins/builtin_env.c \
 									builtins/builtin_export.c \
+									builtins/builtin_exit.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
