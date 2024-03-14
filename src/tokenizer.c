@@ -41,22 +41,21 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 
 /*------------TOKENIZADOR------------*/
 //EL 'value' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE keyword=WORD
-t_lst	**tokenizer(char *line)//hace falta que sea const ??
+void	tokenizer(t_lst *tokens, char *line)
 {
-	t_lst	**tokens;//lista de nodos con todos los tokens
 	t_lst	*new_tok;//nodo con cada token
 	char	*str;//el str que contendrá el token antes de meterlo en el nodo
 	size_t	len;//la len del str del token
 	int		i;//guardará el indice donde estamos en el recorrido por 'line'
 
 	i = 0;
-	len = 0;//hace falta inicializarlo???
-	tokens = NULL;
+	len = 0;
 	new_tok = NULL;
-
+	printf("antes de entrar al primer while de tokenizer");
 	//----OBTENDRA EL STRING DE CADA TOKEN HASTA LLEGAR AL FINAL DE 'line'--------
 	while (line[i])//recorremos todo 'line'
 	{
+		printf("entro al primer while de tokenizer");
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))//salta espacios y tabs
         i++;
 		if (line[i])
@@ -65,22 +64,21 @@ t_lst	**tokenizer(char *line)//hace falta que sea const ??
 
 			len = tok_len(line + i, &new_tok);//ESTA FUNCION INICIALIZA EL keyword y retorna un len > 0 si es WORD
 
-			if (len > 0)//SOLO HABRA QUE MALLOCAR E INICIALIZAR 'value' si es un WORD
+			if (len > 0)//si len tiene algo INICIALIZARLO en 'value' porque es un WORD
 			{
 				//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
 				str = (char *)malloc(sizeof(char) * len + 1);
 				if (!str)
-					return (EXIT_FAILURE);//gestionar error, liberar y cerrar programa
-				ft_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
+					return ;//gestionar error, liberar y cerrar programa
+				jc_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
 				new_tok->value = str;//INICIALIZA el 'value' del NODO si es una WORD
 			}
-			ft_lstadd_back(tokens, new_tok);
+			jc_lstadd_back(&tokens, new_tok);
 		}
 		i += len;//actualizo el indice para que sepa que tramo de 'line' ya hemos recorrido
 		i++;//No estoy seguro si habria que incrementar. Debugar y comprobar si es necesario
 	}
 	lst_print(tokens);
-	return (tokens);
 }
 
 /* 

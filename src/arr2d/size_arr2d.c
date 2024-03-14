@@ -1,5 +1,5 @@
 
-#include "arr2d.h"
+#include "minishell.h"
 
 /*Counts the number of elements contained in a bi-dimensional array*/
 size_t  size_arr2d(char **arr2d)

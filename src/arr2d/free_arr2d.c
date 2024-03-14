@@ -1,5 +1,5 @@
 
-#include "arr2d.h"
+#include "minishell.h"
 
 /*Frees all elements of an **arr2d included the main pointer as well.*/
 void    free_arr2d(char **arr2d)

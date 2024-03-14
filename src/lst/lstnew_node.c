@@ -9,7 +9,7 @@ t_lst	*lstnew_node(char *value, int keyword)
 	 node = (t_lst *)malloc(sizeof(t_lst));
 	if (!node)
 		return (NULL);
-	node->value = *value;
+	node->value = value;
 	node->keyword = keyword;
     node->next = NULL;
 	return (node);

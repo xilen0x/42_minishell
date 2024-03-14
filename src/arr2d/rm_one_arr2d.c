@@ -1,5 +1,5 @@
 
-#include "arr2d.h"
+#include "minishell.h"
 
 /*   Retorna una copia mallocada del array 2d habiendo eliminado el elemento index. Libera el array original */
 //argumentos: el array 2d y el indice del elemento a eliminar. Si hay un fallo en la memoria retorna NULL

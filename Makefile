@@ -18,7 +18,7 @@ LST_OBJ_DIR = $(OBJ_DIR)/lst
 SRC_DIR = ./src
 
 # Opciones de compilación
-CFLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 
 # bibliotecas
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -40,9 +40,11 @@ SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 									arr2d/free_arr2d.c \
 									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
+									arr2d/print_arr2d.c \
 									lst/ft_lstadd_back.c \
 									lst/ft_lstlast.c \
-									lst/ft_lstlast.c \
+									lst/lstnew_node.c \
+									lst/lst_print.c \
 									utils_libft.c \
 									tokenizer.c \
 									utils0.c)

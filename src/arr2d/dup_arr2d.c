@@ -6,7 +6,7 @@ char	**dup_arr2d(char **arr2d)
 {
 	char	**env;
 	int		size;
-	int		i;   
+	int		i;
 
 	i = 0;
 	size = size_arr2d(arr2d);

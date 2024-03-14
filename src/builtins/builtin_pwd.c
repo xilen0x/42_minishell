@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
-int	get_pwd(void)
+int	builtin_pwd(void)
 {
 	char	*cwd;
 
