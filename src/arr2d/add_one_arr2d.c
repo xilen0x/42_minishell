@@ -6,7 +6,7 @@ char    **add_one_arr2d(char **arr2d, char *new)
 {
     char    **new_arr2d;
     size_t  size;
-    int     i;
+    size_t     i;
 
     i = 0;
     size = size_arr2d(arr2d);
@@ -20,6 +20,6 @@ char    **add_one_arr2d(char **arr2d, char *new)
     }
     new_arr2d[i] = ft_strdup(new);
     new_arr2d[i + 1] = NULL;
-    free_2d_arr(arr2d);
+    free_arr2d(arr2d);
     return (new_arr2d);
 }

@@ -2,7 +2,6 @@
 # define MINISHELL_H
 
 # include "libft.h"
-# include "utils_libft.h"//joan .decidir si esta o la anterior
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -10,9 +9,6 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "builtins.h"
-# include "arr2d.h"//joan
-//# include "lst.h"//joan
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -81,5 +77,26 @@ int	builtin_pwd(void);
 int	builtin_echo(t_built *cmd, int ac);
 int	builtin_env(t_env env);
 int	builtin_export(t_env env, int ac);
+
+size_t	ft_strlen(const char *s);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+char	*ft_strdup(const char *s1);
+int     ft_strlcpy(char *dst, char *src, int dstsize);
+
+t_lst	*lstnew_tok(char *value, int keyword);
+t_lst	*ft_lstlast2(t_lst *lst);
+void	ft_lstadd_back2(t_lst **lst, t_lst *new);
+
+char	**dup_arr2d(char **arr2d);
+size_t  size_arr2d(char **arr2d);
+void    free_arr2d(char **arr2d);
+char    **add_one_arr2d(char **arr2d, char *new);
+char    **rm_one_arr2d(char **arr2d, int index);
+char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
+
+
+char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
+// pendiente de hacer una funcion que comprueba si existe o no una variable env (puede retornar TRUE o FALSE, si existe podre reemplazarla, removerla o liberarla, si no existe podre añadirla)
+
 
 #endif

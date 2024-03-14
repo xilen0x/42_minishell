@@ -2,7 +2,7 @@
 #include "minishell.h"
 
 /*----ADDS A NODE TO THE END OF A LIST. NOTHING IS RETURNED---*/
-void	ft_lstadd_back(t_lst **lst,t_lst *new)
+void	ft_lstadd_back2(t_lst **lst,t_lst *new)
 {
 	t_lst	*aux;
 

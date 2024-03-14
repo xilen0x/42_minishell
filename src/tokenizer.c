@@ -78,7 +78,7 @@ t_lst    **tokenizer(const char *line)//hace falta el const ??
 		ft_lstadd_back(tokens, new_tok);
 		//he de liberar str ????
 	}
-}
+}*/
 
 /* 
 delimitadores (space, tab, "", '', < , >, <<, >>, |)
