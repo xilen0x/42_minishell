@@ -12,7 +12,7 @@
 # include <readline/history.h>
 # include "builtins.h"
 # include "arr2d.h"//joan
-# include "lst.h"//joan
+//# include "lst.h"//joan
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -27,23 +27,16 @@ typedef enum e_keytok
 	DOUBLE_GREATER,
 	DOUBLE_SMALLER,
 	INVALID //(de moment al tokenizer no usar)
-} 	t_keytok;
+}	t_keytok;
 
 typedef struct s_lst
 {
 	char			*value;
 	t_keytok		keyword;//ADMITIRA LOS ENUMS???
-	struct	s_list	*next;
+	struct	s_lst	*next;
 }					t_lst;
 
 //-----carlos------------------
-typedef struct s_env
-{
-	char	**env_cpy;
-	char	*key;
-	char	*value;
-}			t_env;
-
 typedef struct s_builtings
 {
 	char	*echo;
@@ -51,7 +44,7 @@ typedef struct s_builtings
 	char	*pwd;
 	char	*export;
 	char	*unset;
-	char	*env;
+	//char	*env;
 	char	*exit;
 	char	*cmd1;
 	char	*path;//borrar luego
@@ -64,7 +57,7 @@ typedef struct s_env
 	char	*key;
 	char	*value;
 	t_built	*env_to_build;
-}			t_env;
+}	t_env;
 
 /*typedef struct s_shell
 {

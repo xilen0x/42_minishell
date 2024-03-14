@@ -16,7 +16,7 @@ SRC_DIR = ./src
 # Opciones de compilación
 CFLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
 
-# Incluir bibliotecas
+# bibliotecas
 LIBFT = $(LIBFT_DIR)/libft.a
 READLINE = $(READLINE_DIR)/libreadline.a $(READLINE_DIR)/libhistory.a
 
@@ -25,18 +25,18 @@ LIBS = -lreadline -ltermcap
 
 # Archivos fuente
 SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
-									add_one_2d_arr.c \
 									builtins/builtins.c \
 									builtins/builtin_cd.c \
 									builtins/builtin_pwd.c \
 									builtins/builtin_echo.c \
 									builtins/builtin_env.c \
 									builtins/builtin_export.c \
-									dup_2d_arr.c \
-									free_2d_arr.c \
+									arr2d/add_one_arr2d.c \
+									arr2d/dup_arr2d.c \
+									arr2d/free_arr2d.c \
+									arr2d/size_arr2d.c \
+									arr2d/rm_one_arr2d.c \
 									libft_utils.c \
-									rm_one_2d_arr.c \
-									size_2d_arr.c \
 									tokenizer.c \
 									utils0.c)
 
