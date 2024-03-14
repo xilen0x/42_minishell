@@ -45,7 +45,7 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }
 
-size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t jc_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t i;
 	size_t srcsize;
