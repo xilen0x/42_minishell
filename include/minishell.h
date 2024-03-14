@@ -2,7 +2,7 @@
 # define MINISHELL_H
 
 # include "libft.h"
-# include "utils_libft.h"//joan .decidir si esta o la anterior
+# include "utils_libft.h"//joan: decidir si va esta o la anterior
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -20,7 +20,7 @@
 /*---joan---*/
 typedef enum e_keytok
 {
-	NULL_KEY = 0,//para poder inicializarlo con algo cuando aun no vaya a necesitarlo 
+	NULL_KEY = 0,//para inicializar con algo cuando aun no vaya a necesitarlo 
 	WORD,
 	PIPE,
 	GREATER,
@@ -59,7 +59,7 @@ typedef struct s_builtings
 }	t_built;
   ---------------------*/
 
-
+/*
 typedef struct s_shell
 {
 	t_lst	**tokens;
@@ -70,12 +70,12 @@ typedef struct s_shell
 	char	**args;
 	char	*cmd;
 }	t_shell;
-
+*/
 //int		builtings(t_built	*cmd, t_env	env, int ac);
-int		builtings(t_built	*cmd, char **env, int ac);
-char	**env_cpy(char *e[]);
-int		change_directory(t_built	*cmd, int ac);
-int		get_pwd(void);
-//char	**dup_array_2d(char *envp[]);
-
+//int		builtings(t_built	*cmd, char **env, int ac);
+//char	**env_cpy(char *e[]);
+//int		change_directory(t_built	*cmd, int ac);
+//int		get_pwd(void);
+//char	**dup_arr2d(char **arr2d);
+void	tokenizer(char *line);
 #endif

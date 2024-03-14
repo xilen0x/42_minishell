@@ -9,7 +9,7 @@ char	**dup_arr2d(char **arr2d)
 	int		i;   
 
 	i = 0;
-	size = size_2d_arr(arr2d);
+	size = size_arr2d(arr2d);
 	env = (char **)malloc((size + 1) * sizeof(char *));
 	if (env == NULL)
 		exit (EXIT_FAILURE);//definir en el .h  ???

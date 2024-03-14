@@ -21,7 +21,6 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 		(*new_tok)->keyword = SMALLER;
 	else if (*line == '|')
 		(*new_tok)->keyword = PIPE;
-
 	else
 	{//si es un WORD, con o sin comillas, busco el len
 		while (*line && (*line != ' ' || *line != '\t' || *line != '|' \
@@ -42,7 +41,7 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 
 /*------------TOKENIZADOR------------*/
 //EL 'value' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE keyword=WORD
-t_lst    **tokenizer(const char *line)//hace falta el const ??
+void	tokenizer(char *line)//hace falta que sea const ??
 {
 	t_lst	**tokens;//lista de nodos con todos los tokens
 	t_lst	*new_tok;//nodo con cada token
@@ -80,6 +79,7 @@ t_lst    **tokenizer(const char *line)//hace falta el const ??
 		i += len;//actualizo el indice para que sepa que tramo de 'line' ya hemos recorrido
 		i++;//No estoy seguro si habria que incrementar. Debugar y comprobar si es necesario
 	}
+	lst_print(tokens);
 }
 
 /* 
