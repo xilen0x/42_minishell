@@ -45,10 +45,10 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }
 
-int ft_strlcpy(char *dst, char *src, int dstsize)
+size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int i;
-	int srcsize;
+	size_t i;
+	size_t srcsize;
 
 	i = 0;
 	srcsize = ft_strlen(src);

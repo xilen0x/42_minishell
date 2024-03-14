@@ -1,7 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+//# include "libft.h"
 # include "utils_libft.h"//joan: decidir si va esta o la anterior
 # include <stdio.h>
 # include <stdlib.h>
@@ -10,9 +10,9 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "builtins.h"
+//# include "builtins.h"
 # include "arr2d.h"//joan
-# include "lst.h"//joan
+//# include "lst.h"//joan
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -34,7 +34,7 @@ typedef struct s_lst
 {
 	char			*value;
 	t_keytok		keyword;//CONTENDRÁ LOS ENUM
-	struct	s_list	*next;
+	struct	s_lst	*next;
 }					t_lst;
 
 /*-----carlos------------------
@@ -77,5 +77,5 @@ typedef struct s_shell
 //int		change_directory(t_built	*cmd, int ac);
 //int		get_pwd(void);
 //char	**dup_arr2d(char **arr2d);
-void	tokenizer(char *line);
+t_lst	**tokenizer(char *line);
 #endif

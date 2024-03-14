@@ -2,6 +2,7 @@
 #ifndef ARR2D_H
 # define ARR2D_H
 
+#include "minishell.h"
 # include <stdlib.h>
 
 char	**dup_arr2d(char **arr2d);

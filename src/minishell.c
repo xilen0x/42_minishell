@@ -1,5 +1,5 @@
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 //#include "libft/libft.h"
 /*funcion temporal de inicializacion de estructura t_built*/
@@ -37,7 +37,7 @@ int	main(int ac, char *av[], char *envp[])
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
 		line = readline(">>>>minishell$ ");//ojo retorna un *str mallocado
 		if (!line)
-			return (exit_status)//gestionar que hacemos exactamente si pasa esto
+			return (write(1, "!line\n", 6), 0);//gestionar que hacemos exactamente si pasa esto
 		if (line != NULL)//hablar con Carlos, no entiendo que hace esto?????????
 		{
 			write(1, "exit\n", 5);

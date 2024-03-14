@@ -31,7 +31,7 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 				c = *(line + len);//inicializo 'c' con el caracter comilla encontrado
 				while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla
 					len++;
-				len - 1;//protector para que la siguiente linia no sobrepase el \0 o del final de la comilla ??
+				len--;//protector para que la siguiente linia no sobrepase el \0 o del final de la comilla ??
 			}
 			len++;
 		}
@@ -41,12 +41,12 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 
 /*------------TOKENIZADOR------------*/
 //EL 'value' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE keyword=WORD
-void	tokenizer(char *line)//hace falta que sea const ??
+t_lst	**tokenizer(char *line)//hace falta que sea const ??
 {
 	t_lst	**tokens;//lista de nodos con todos los tokens
 	t_lst	*new_tok;//nodo con cada token
 	char	*str;//el str que contendrá el token antes de meterlo en el nodo
-	int		len;//la len del str del token
+	size_t	len;//la len del str del token
 	int		i;//guardará el indice donde estamos en el recorrido por 'line'
 
 	i = 0;
@@ -80,6 +80,7 @@ void	tokenizer(char *line)//hace falta que sea const ??
 		i++;//No estoy seguro si habria que incrementar. Debugar y comprobar si es necesario
 	}
 	lst_print(tokens);
+	return (tokens);
 }
 
 /* 
