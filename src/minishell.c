@@ -25,7 +25,7 @@ int	main(int ac, char *av[], char *envp[])
 		line = readline(">>>>minishell$ ");//ojo retorna un *str mallocado
 		// if (!line)
 		// 	return (exit_status)//gestionar que hacemos exactamente si pasa esto
-		if (line != NULL)//hablar con Carlos, no entiendo que hace esto?????????
+		if (line == NULL)//hablar con Carlos, no entiendo que hace esto?????????
 		{
 			write(1, "exit\n", 5);
 			exit(1);//carlos, es el codigo de error?

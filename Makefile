@@ -12,6 +12,8 @@ OBJ_DIR = ./objs
 
 ARR2D_OBJ_DIR = $(OBJ_DIR)/arr2d
 
+LST_OBJ_DIR = $(OBJ_DIR)/lst
+
 # Directorio de los archivos fuente
 SRC_DIR = ./src
 
@@ -38,6 +40,9 @@ SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 									arr2d/free_arr2d.c \
 									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
+									lst/ft_lstadd_back.c \
+									lst/ft_lstlast.c \
+									lst/ft_lstlast.c \
 									utils_libft.c \
 									tokenizer.c \
 									utils0.c)
@@ -47,7 +52,7 @@ OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEPS = $(OBJECTS:.o=.d)
 
 # Directorios de los archivos de dependencias
-DEPDIRS = $(OBJ_DIR)/builtins $(ARR2D_OBJ_DIR)
+DEPDIRS = $(OBJ_DIR)/builtins $(ARR2D_OBJ_DIR) $(LST_OBJ_DIR)
 
 # Incluir archivos de encabezado
 INCLUDES = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(READLINE_DIR)
@@ -60,7 +65,7 @@ $(TARGET): $(LIBFT) $(READLINE) $(OBJECTS)
 	@$(CC) $(CFLAGS) $(INCLUDES) $^ -o $@ $(LIBFT) $(READLINE) $(LIBS)
 
 # Regla para compilar cada archivo fuente
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(ARR2D_OBJ_DIR) $(DEPDIRS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(ARR2D_OBJ_DIR) $(LST_OBJ_DIR) $(DEPDIRS)
 	@$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
 
 # Regla para crear los directorios de dependencias si no existen

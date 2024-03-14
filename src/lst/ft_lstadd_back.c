@@ -8,7 +8,7 @@ void	ft_lstadd_back2(t_lst **lst,t_lst *new)
 
 	if (*lst)
 	{
-		aux = ft_lstlast(*lst);
+		aux = ft_lstlast2(*lst);
 		aux->next = new;
 	}
 	else
