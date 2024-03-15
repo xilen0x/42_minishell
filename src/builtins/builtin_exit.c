@@ -11,10 +11,8 @@ int	ca_isnumber(const char *str)
 	return (1);
 }
 
-int	builtin_exit(t_built *cmd, int ac, char *av[])//trabajando aqui!!!!!!!!! considerar otras opciones de exit
+int	builtin_exit(t_built *cmd, int ac, char *av[])
 {
-	int	exit_status;
-
 	if (ac == 2)
 	{
 		printf("exit\n");
@@ -27,8 +25,7 @@ int	builtin_exit(t_built *cmd, int ac, char *av[])//trabajando aqui!!!!!!!!! con
 			if (ca_isnumber(cmd->path))
 			{
 				printf("exit\n");
-				exit_status = (int)cmd->path;
-				exit(exit_status);
+				exit(ft_atoi(cmd->path));
 			}
 			else
 			{
@@ -36,10 +33,6 @@ int	builtin_exit(t_built *cmd, int ac, char *av[])//trabajando aqui!!!!!!!!! con
 				printf("%s: exit: %s: numeric argument required\n", av[0], cmd->path);
 				exit(255);
 			}
-		}
-		else
-		{
-			printf("La ruta es nula.\n");
 		}
 	}
 	return (0);
