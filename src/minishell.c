@@ -29,7 +29,7 @@ int	main(int ac, char *av[], char *envp[])
 
 		//tokens = tokenizer(line);//DESARROLLAR ESTO ASAP (retorna un t_lst **)
 
-		init(&cmds, av);//de carlos
+		init(&cmds, ac, av);//de carlos
 		builtins(&cmds, env, ac, av);//de carlos
 		free(line);//libero la linia que retorno readline seguramente mallocada
 //		parser(la struct/list con los tokens);

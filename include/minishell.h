@@ -35,7 +35,7 @@ typedef struct s_lst
 //-----carlos------------------
 typedef struct s_builtings
 {
-	char	*echo;
+	//char	*echo_n;
 	char	*cd;
 	char	*pwd;
 	char	*export;
@@ -43,7 +43,8 @@ typedef struct s_builtings
 	//char	*env;
 	char	*exit;
 	char	*cmd1;
-	char	*path;//borrar luego
+	char	*path;//borrar luego(posiblemente)
+	//char	*the_string;
 }	t_built;
 
 typedef struct s_env
@@ -70,7 +71,7 @@ typedef struct s_env
 //char	**env_cpy(char *e[]);
 //char	**dup_array_2d(char *envp[]);
 
-int	init (t_built *cmd, char *av[]);
+int	init (t_built *cmd, int ac, char *av[]);
 int	builtins(t_built *cmd, t_env env, int ac, char *av[]);
 int	builtin_cd(t_built *cmd, int ac);
 int	builtin_pwd(void);
