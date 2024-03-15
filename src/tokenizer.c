@@ -1,8 +1,6 @@
 
 #include "minishell.h"
 
-/*====TODO LO QUE CONTIENE ESTE ARCHIVO AUN NO ESTA PROVADO=======*/
-
 /*-----Returns the len of the first token found in 'line' */
 /*INICIALIZA valor de 'keyword' del nodo y retorna un len > 0 si 'keyword' = WORD*/
 int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'line', un doble puntero al nodo
@@ -11,7 +9,8 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 	char	c;
 
 	len = 0;
-	if (*line == '>' && *line == *(line + 1))//verifica si es doble
+//	c = '\0';
+	if (*line == '>' && *line == *(line + 1))
 		(*new_tok)->keyword = DOUBLE_GREATER;
 	else if (*line == '<' && *line == *(line + 1))
 		(*new_tok)->keyword = DOUBLE_SMALLER;		
@@ -23,17 +22,19 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 		(*new_tok)->keyword = PIPE;
 	else
 	{//si es un WORD, con o sin comillas, busco el len
-		while (*line && (*line != ' ' || *line != '\t' || *line != '|' \
-		|| *line != '<' || *line != '>'))
+		while (*(line + len) && (*(line + len) != ' ' && *(line + len)!= '\t' \
+		&& *(line + len) != '|' && *(line + len) != '<' \
+		&& *(line + len) != '>' && *(line + len) != '\0'))
 		{
-			if (*(line + len) == '\'' || *(line + len) == '"')//verifico si contiene comilla
+			if (*(line + len) == '\'' || *(line + len) == '"')
 			{
 				c = *(line + len);//inicializo 'c' con el caracter comilla encontrado
+				len++;
 				while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla
 					len++;
-				len--;//protector para que la siguiente linia no sobrepase el \0 o del final de la comilla ??
 			}
-			len++;
+			if (*(line + len))
+				len++;
 		}
 	}
 	return (len);
@@ -51,19 +52,15 @@ void	tokenizer(t_lst *tokens, char *line)
 	i = 0;
 	len = 0;
 	new_tok = NULL;
-	printf("antes de entrar al primer while de tokenizer");
 	//----OBTENDRA EL STRING DE CADA TOKEN HASTA LLEGAR AL FINAL DE 'line'--------
 	while (line[i])//recorremos todo 'line'
 	{
-		printf("entro al primer while de tokenizer");
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))//salta espacios y tabs
-        i++;
+        	i++;
 		if (line[i])
 		{
 			new_tok = lstnew_node(NULL, NULL_KEY);//creo un nodo y lo inicializo todo a 0 
-
 			len = tok_len(line + i, &new_tok);//ESTA FUNCION INICIALIZA EL keyword y retorna un len > 0 si es WORD
-
 			if (len > 0)//si len tiene algo INICIALIZARLO en 'value' porque es un WORD
 			{
 				//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
@@ -72,20 +69,20 @@ void	tokenizer(t_lst *tokens, char *line)
 					return ;//gestionar error, liberar y cerrar programa
 				jc_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
 				new_tok->value = str;//INICIALIZA el 'value' del NODO si es una WORD
+				new_tok->keyword = WORD;
 			}
+			else
+				len++;
 			jc_lstadd_back(&tokens, new_tok);
 		}
-		i += len;//actualizo el indice para que sepa que tramo de 'line' ya hemos recorrido
-		i++;//No estoy seguro si habria que incrementar. Debugar y comprobar si es necesario
+		i += len;
 	}
-	lst_print(tokens);
+	lst_print(tokens);//ELIMINAR AL ENTREGAR
 }
 
 /* 
 delimitadores (space, tab, "", '', < , >, <<, >>, |)
-"hola>cat" = 1 token (se considera 1 solo argumento)
-'hola>cat' = 1 token (se considera 1 solo argumento)
+"hola>cat" = 1 token (se considera 1 solo argumento por las comillas)
+'hola>cat' = 1 token (se considera 1 solo argumento por las comillas)
 echo pedro>fili = 4 tokens
-$ = si va solo, se tokeniza como una __WORD
-$seguido_de_caracteres = se tokeniza como una __WORD
 */

@@ -44,6 +44,7 @@ SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
 									lst/ft_lstadd_back.c \
 									lst/ft_lstlast.c \
 									lst/lstnew_node.c \
+									lst/jc_lstsize.c \
 									lst/lst_print.c \
 									utils_libft.c \
 									tokenizer.c \

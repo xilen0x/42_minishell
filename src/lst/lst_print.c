@@ -10,12 +10,12 @@ void	lst_print(t_lst *list)
 	t_lst	*aux;
 
 	aux = list;
-	printf("===La_lista_contiene===\n");
+	printf("---- %i NODOS ----\n", jc_lstsize(list));
 	while (aux)
 	{
 		printf("value: >%s<\n", aux->value);
-        printf("keyword: %u", aux->keyword);
-        printf("----------\n");
+        printf("keyword: %u\n", aux->keyword);
+        printf("----------\n\n");
 		aux = aux->next;
 	}
 }
