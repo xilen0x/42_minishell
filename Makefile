@@ -85,9 +85,9 @@ $(READLINE):
 
 # Regla para limpiar archivos temporales y el programa compilado
 clean:
-	@rm -rf $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
-	@make -C $(READLINE_DIR) clean
+	rm -rf $(OBJ_DIR)
+	make -C $(LIBFT_DIR) clean
+	make -C $(READLINE_DIR) clean
 
 # Regla para limpiar archivos temporales y el programa compilado
 fclean: clean
