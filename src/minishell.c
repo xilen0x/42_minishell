@@ -31,4 +31,3 @@ int	main(int ac, char *av[], char *envp[])
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
 }
-//TO DO: arreglar cuando le llega doble operador que lo cuenta dos veces

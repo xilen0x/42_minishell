@@ -72,6 +72,8 @@ void	tokenizer(t_lst *tokens, char *line)
 				new_tok->keyword = WORD;
 			}
 			else
+				if (new_tok->keyword == DOUBLE_GREATER || new_tok->keyword == DOUBLE_SMALLER)
+					len += 1;//por el doble operador
 				len++;
 			jc_lstadd_back(&tokens, new_tok);
 		}

@@ -18,7 +18,7 @@ LST_OBJ_DIR = $(OBJ_DIR)/lst
 SRC_DIR = ./src
 
 # Opciones de compilación
-CFLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g #-fsanitize=address
 
 # bibliotecas
 LIBFT = $(LIBFT_DIR)/libft.a
