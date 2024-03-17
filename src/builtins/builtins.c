@@ -4,9 +4,6 @@
 //int	builtings(t_built	*cmd, char	**env, int ac)
 int	builtins(t_built	*cmd, t_env	env, int ac, char *av[])
 {
-	int		i;
-
-	i = 0;
 	if (ft_strcmp(cmd->cmd1, "exit") == 0)
 	{
 		builtin_exit(cmd, ac, av);
