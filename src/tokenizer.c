@@ -88,3 +88,8 @@ delimitadores (space, tab, "", '', < , >, <<, >>, |)
 'hola>cat' = 1 token (se considera 1 solo argumento por las comillas)
 echo pedro>fili = 4 tokens
 */
+/*
+PROXIMA TAREA: 
+-probar varios casos el tokenizer
+-preparar el exit_status con los printers de los errores de bash
+*/

@@ -14,7 +14,7 @@ int	main(int ac, char *av[], char *envp[])
 		return (EXIT_FAILURE);
 	}
 	env = dup_arr2d(envp);
-//	print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
+	print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
