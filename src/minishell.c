@@ -8,7 +8,7 @@ int	main(int ac, char *av[], char *envp[])
 	t_lst	*tokens;//la lista de los tokens
 
 	tokens = NULL;
-	if (ac != 1 || av[1])//proteccion por si lo ejecutan con argumentos
+	if (ac != 1 || av[1])
 	{
 		printf("'minishell' do not accept arguments\n");
 		return (EXIT_FAILURE);
