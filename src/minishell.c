@@ -9,15 +9,14 @@ int	main(int ac, char *av[], char *envp[])
 	//t_lst	*tokens;//la lista de los tokens
 	t_built	cmds;
 
-	//tokens = NULL;
-	/*if (ac != 1 || av[1])//proteccion por si lo ejecutan con argumentos
+	tokens = NULL;
+	if (ac != 1 || av[1])
 	{
 		printf("'minishell' do not accept arguments\n");
 		return (EXIT_FAILURE);
-	}*/
-	env.env_cpy = dup_arr2d(envp);//duplica el env del sistema
-	//env = dup_arr2d(envp);
-	//env.export_cpy = dup_arr2d(envp);
+	}
+	env = dup_arr2d(envp);
+	print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	

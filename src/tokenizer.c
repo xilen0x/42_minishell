@@ -33,8 +33,8 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 				while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla
 					len++;
 			}
-			if (*(line + len))
-				len++;
+//			if (*(line + len))
+			len++;
 		}
 	}
 	return (len);
@@ -53,15 +53,15 @@ void	tokenizer(t_lst *tokens, char *line)
 	len = 0;
 	new_tok = NULL;
 	//----OBTENDRA EL STRING DE CADA TOKEN HASTA LLEGAR AL FINAL DE 'line'--------
-	while (line[i])//recorremos todo 'line'
+	while (line[i])
 	{
-    	while (line[i] && (line[i] == ' ' || line[i] == '\t'))//salta espacios y tabs
+    	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
         	i++;
 		if (line[i])
 		{
 			new_tok = lstnew_node(NULL, NULL_KEY);//creo un nodo y lo inicializo todo a 0 
 			len = tok_len(line + i, &new_tok);//ESTA FUNCION INICIALIZA EL keyword y retorna un len > 0 si es WORD
-			if (len > 0)//si len tiene algo INICIALIZARLO en 'value' porque es un WORD
+			if (len > 0)//si len tiene algo, INICIALIZARLO en 'value' porque es un WORD
 			{
 				//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
 				str = (char *)malloc(sizeof(char) * len + 1);
@@ -81,10 +81,21 @@ void	tokenizer(t_lst *tokens, char *line)
 	}
 	lst_print(tokens);//ELIMINAR AL ENTREGAR
 }
-
-/* 
+/* NOTAS
 delimitadores (space, tab, "", '', < , >, <<, >>, |)
-"hola>cat" = 1 token (se considera 1 solo argumento por las comillas)
-'hola>cat' = 1 token (se considera 1 solo argumento por las comillas)
+COMMAND: SIEMPRE va el primero de la linea y va el primero despues de un '|'
+	Despues de comando  va siempre un argumento o una opcion.
+OPERATOR (<, >, >>, <<): despues de un operador de estos, va siempre una WORD.
+'|': NO puede NUNCA iniciar una linea. Si puede acabarla, no estoy seguro ...
 echo pedro>fili = 4 tokens
+=============================
+PROXIMA TAREA: 
+echo>>pedro  NO ve el doble operador, ve un simple >
+echo>pedro   No ve para nada el operador
+echo > pedro Si ve los 3
+echo >> pedro Si ve los 3
+
+
+-corregir este fallo (deberian ser 4 tokens y no 3): echo pedro>fili
+-preparar el exit_status con los printers de los errores de bash
 */
