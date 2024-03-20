@@ -13,3 +13,4 @@ objs
 *.o
 README.md
 .dep/*
+*.d

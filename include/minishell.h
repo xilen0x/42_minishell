@@ -1,14 +1,19 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# ifndef READLINE_LIBRARY
+#  define READLINE_LIBRARY
+# endif
+
 # include "../lib/libft/libft.h"
+# include <readline.h>
+# include <history.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -102,7 +107,7 @@ void	init_msg(void);
 void	tokenizer(t_lst *tokens, char *line);
 void	set_signals(void);
 //-------------------readline-----------------------
-void	rl_replace_line (const char *text, int clear_undo);
+//void	rl_replace_line (const char *text, int clear_undo);
 
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
 //char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)

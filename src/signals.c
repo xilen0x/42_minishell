@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include <signal.h>
 
 void	signal_handler(int sig)
 {
@@ -7,9 +6,9 @@ void	signal_handler(int sig)
 	{
 		//printf("\nCtrl-C recibido.\n");
 		printf("\n");
-		rl_replace_line("", 1);
-		rl_on_new_line();
-		rl_redisplay();
+		rl_replace_line("", 1);//reemplaza la línea actual de entrada con una cadena vacía.
+		rl_on_new_line();// cursor debe moverse a una nueva línea.
+		rl_redisplay();//redibuja la línea actual. Se utiliza después de realizar cambios en la línea de entrada para actualizar la pantalla y mostrar los cambios.
 	}
 	else if (sig == SIGQUIT)
 	{
@@ -28,5 +27,5 @@ void	set_signals(void)
 	signal(SIGQUIT, signal_handler);
 
 	//ctrl-slash
-
+	signal(SIGQUIT, signal_handler);
 }

@@ -8,6 +8,7 @@ int	main(int ac, char *av[], char *envp[])
 	t_env	env;
 	t_lst	*tokens;//la lista de los tokens
 	t_built	cmds;
+	rl_catch_signals = 0;//para eliminar el ^C al hacer ctrl-c
 
 	tokens = NULL;
 	if (ac != 1 || av[1])
@@ -17,11 +18,11 @@ int	main(int ac, char *av[], char *envp[])
 	}
 	env.env_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
+	init_msg();
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
 		set_signals();
 		line = readline(">>>>minishell$ ");//ojo retorna un *str mallocado
-		init_msg();
 		// if (!line)
 		// 	return (exit_status)
 		add_history(line);//agregamos 'line' al historial, lo gestiona biblioteca readline

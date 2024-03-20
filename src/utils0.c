@@ -34,7 +34,7 @@ void	init_msg(void)
 	printf("| | | | | | | | | | \\__ \\ | | |  __/ | |\n");
 	printf("|_| |_| |_|_|_| |_|_|___/_| |_|\\___|_|_|\n");
 
-	printf("by jocuni-p & castorga\n");
+	printf("by jocuni-p & castorga\n\n\n\n");
 }
 
 
