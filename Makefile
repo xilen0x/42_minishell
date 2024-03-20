@@ -1,109 +1,141 @@
-# Nombre del programa
-TARGET = minishell
 
-# Compilador
-CC = clang
+NAME =	minishell
 
-# Directorios de los archivos de encabezado, archivos objeto y bibliotecas
-INCLUDE_DIR = ./include
-LIBFT_DIR = ./libft
-READLINE_DIR = ./readline
-OBJ_DIR = ./objs
+# Compiler
+GCC := gcc
 
-ARR2D_OBJ_DIR = $(OBJ_DIR)/arr2d
+# Compiler flags
+FLAGS := -Werror -Wextra -Wall -MMD -g #-fsanitize=address
 
-LST_OBJ_DIR = $(OBJ_DIR)/lst
+# Remove
+RM 	:=	rm -rf
 
-# Directorio de los archivos fuente
-SRC_DIR = ./src
+# Makefile
+MKF :=	Makefile
 
-# Opciones de compilación
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+# Root Folders
+SRC_ROOT := src/
+DEP_ROOT := .dep/
+OBJ_ROOT := .objs/
+INC_ROOT := include/
+LIB_ROOT := lib/
 
-# bibliotecas
-LIBFT = $(LIBFT_DIR)/libft.a
-READLINE = $(READLINE_DIR)/libreadline.a $(READLINE_DIR)/libhistory.a
+INC_DIRS += ${INC_ROOT}
 
-# Bibliotecas adicionales necesarias
-LIBS = -lreadline -ltermcap
+# Lib readline
+READLINE_MK_ROOT := ${LIB_ROOT}readline/Makefile
+READLINE_ROOT := ${LIB_ROOT}readline/
+READLINE := ${READLINE_ROOT}libreadline.a ${READLINE_ROOT}libhistory.a
 
-# Archivos fuente
-SOURCES = $(addprefix $(SRC_DIR)/, minishell.c \
+# Libft
+LIBFT_ROOT := ${LIB_ROOT}libft/
+LIBFT_INC := $(LIBFT_ROOT)include/
+LIBFT := $(LIBFT_ROOT)libft.a
+
+INC_DIRS += ${LIBFT_INC}
+LIBS += -L${LIBFT_ROOT} -lft
+
+INC_DIRS += ${READLINE_ROOT}
+LIBS += -L${READLINE_ROOT} -ltermcap
+
+# Source Files
+################################################################################
+
+FILES =	minishell.c \
 									builtins/builtins.c \
 									builtins/builtin_cd.c \
 									builtins/builtin_pwd.c \
 									builtins/builtin_echo.c \
 									builtins/builtin_env.c \
 									builtins/builtin_export.c \
+									builtins/builtin_exit.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
 									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
 									arr2d/print_arr2d.c \
+									lst/lstnew_node.c \
 									lst/ft_lstadd_back.c \
 									lst/ft_lstlast.c \
-									lst/lstnew_node.c \
 									lst/jc_lstsize.c \
+									lst/jc_lstclear.c \
 									lst/lst_print.c \
-									utils_libft.c \
 									tokenizer.c \
-									utils0.c)
+									utils_libft.c \
+									utils0.c
 
-# Archivos objeto generados por el compilador
-OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-DEPS = $(OBJECTS:.o=.d)
+SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
+OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))
+DEPS 	:= $(addprefix $(DEP_ROOT), $(FILES:.c=.d))
+INCS 	:= $(addprefix -I, $(INC_DIRS))
 
-# Directorios de los archivos de dependencias
-DEPDIRS = $(OBJ_DIR)/builtins $(ARR2D_OBJ_DIR) $(LST_OBJ_DIR)
 
-# Incluir archivos de encabezado
-INCLUDES = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(READLINE_DIR)
+# Colors
+################################################################################
 
-# Regla por defecto, compilación del programa
-all: $(TARGET)
+DEF_COLOR =		\033[0;39m
+#DEL_LINE =		\033[2K
+#ITALIC =		\033[3m
+#GRAY =			\033[0;90m
+#RED =			\033[0;91m
+#BROWN =		\033[38;2;184;143;29m
+#YELLOW =		\033[33m
+DARK_YELLOW =	\033[38;5;143m
+#DARK_GRAY =	\033[38;5;234m
+DARK_GREEN =	\033[1m\033[38;2;75;179;82m
 
-# Regla para compilar el programa
-$(TARGET): $(LIBFT) $(READLINE) $(OBJECTS)
-	@$(CC) $(CFLAGS) $(INCLUDES) $^ -o $@ $(LIBFT) $(READLINE) $(LIBS)
 
-# Regla para compilar cada archivo fuente
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR) $(ARR2D_OBJ_DIR) $(LST_OBJ_DIR) $(DEPDIRS)
-	@$(CC) $(CFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
+# Rules
+################################################################################
 
-# Regla para crear los directorios de dependencias si no existen
-$(DEPDIRS):
-	@mkdir -p $(DEPDIRS)
 
-# Regla para construir la biblioteca libft
-$(LIBFT):
-	@make -C $(LIBFT_DIR)
+all:	$(READLINE_MK_ROOT)
+		@echo "$(DARK_GREEN)GNU READLINE 8.2 COMPILING... $(DEF_COLOR)"
+		@$(MAKE) -sC $(READLINE_ROOT)
+		@$(MAKE) $(LIBFT)
+		@$(MAKE) $(NAME)
+		@echo "                              $(DEF_COLOR)"
+		@echo "$(DARK_GREEN)▶  MINISHELL BUILD COMPLETED!$(DEF_COLOR)"
+		@echo "                              $(DEF_COLOR)"
+		@echo "$(DARK_GREEN)-->	Now you can run ./minishell$(DEF_COLOR)"
 
-# Regla para construir la biblioteca readline
-$(READLINE):
-	@make -C $(READLINE_DIR)
-
-# Regla para limpiar archivos temporales y el programa compilado
 clean:
-	rm -rf $(OBJ_DIR)
-	make -C $(LIBFT_DIR) clean
-	make -C $(READLINE_DIR) clean
+		@$(RM) $(OBJ_ROOT)
+		@$(RM) $(DEP_ROOT)
+		@$(MAKE) clean -C $(LIBFT_ROOT)
 
-# Regla para limpiar archivos temporales y el programa compilado
-fclean: clean
-	@rm -f $(TARGET)
-	@make -C $(LIBFT_DIR) fclean
+fclean:	clean
+		@$(RM) $(NAME)
+		@$(RM) $(LIBFT)
 
-# Regla para reconstruir el proyecto desde cero
-re: fclean all
+re:
+		@$(MAKE) fclean
+		@$(MAKE) all
 
-# Crea el directorio de objetos si no existe
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+readline:
+		@$(MAKE) $(READLINE_MK_ROOT)
 
-# Incluye las dependencias
+cleanrl:
+		@$(MAKE) clean -sC $(READLINE_ROOT)
+
+$(READLINE_MK_ROOT):
+		pwd ${BLOCK}
+		cd ./${READLINE_ROOT} && ./configure
+		cd ${BLOCK}
+
+$(LIBFT):
+		@$(MAKE) -sC $(LIBFT_ROOT)
+
+$(NAME): $(OBJS)
+		@$(GCC) $(FLAGS) $(OBJS) $(READLINE) $(LIBS) -o $(NAME)
+
+$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(READLINE) $(MKF)
+		@mkdir -p $(dir $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
+		@echo "▶ Compiling minishell file: <$(notdir $<)>"
+		@$(GCC) $(FLAGS) $(INCS) -c $< -o $@
+		@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
+
 -include $(DEPS)
 
-# Reglas PHONY
-.PHONY: all clean fclean re
-
+.PHONY:	all bonus update clean fclean re

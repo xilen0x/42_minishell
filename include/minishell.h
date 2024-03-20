@@ -1,7 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "../lib/libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -23,20 +23,20 @@ typedef enum e_keytok
 	SMALLER,
 	DOUBLE_GREATER,
 	DOUBLE_SMALLER,
-	INVALID //(de momento no lo usare)
+	INVALID //(de momento, no lo usare)
 } 	t_keytok;
 
 typedef struct s_lst
 {
 	char			*value;
-	t_keytok		keyword;//ADMITIRA LOS ENUMS???
+	t_keytok		keyword;
 	struct	s_lst	*next;
 }					t_lst;
 
 //-----carlos------------------
 typedef struct s_builtings
 {
-	char	*echo;
+	//char	*echo_n;
 	char	*cd;
 	char	*pwd;
 	char	*export;
@@ -44,7 +44,8 @@ typedef struct s_builtings
 	//char	*env;
 	char	*exit;
 	char	*cmd1;
-	char	*path;//borrar luego
+	char	*path;//borrar luego(posiblemente)
+	//char	*the_string;
 }	t_built;
 
 typedef struct s_env
@@ -71,13 +72,14 @@ typedef struct s_shell
 //char	**env_cpy(char *e[]);
 //char	**dup_array_2d(char *envp[]);
 
-int	init (t_built *cmd, char *av[]);
-int	builtins(t_built *cmd, t_env env, int ac);
+int	init (t_built *cmd, int ac, char *av[]);
+int	builtins(t_built *cmd, t_env env, int ac, char *av[]);
 int	builtin_cd(t_built *cmd, int ac);
 int	builtin_pwd(void);
 int	builtin_echo(t_built *cmd, int ac);
 int	builtin_env(t_env env);
 int	builtin_export(t_env env, int ac);
+int	builtin_exit(t_built *cmd, int ac, char *av[]);
 
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -88,6 +90,7 @@ t_lst	*lstnew_node(char *value, int keyword);
 t_lst	*ft_lstlast2(t_lst *lst);
 void	jc_lstadd_back(t_lst **lst, t_lst *new);
 int		jc_lstsize(t_lst *lst);
+void	jc_lstclear(t_lst **lst);
 void	lst_print(t_lst *list);
 
 char	**dup_arr2d(char **arr2d);

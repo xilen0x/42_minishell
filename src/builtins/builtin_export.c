@@ -14,7 +14,7 @@ int	print_builtin_export(t_env env)
 	return (0);
 }
 
-int	builtin_export_with_arg(t_env env)//aki voy!!!...viendo como agregar una linea a la copia del env?????????
+/*int	builtin_export_with_arg(t_env env)//aki voy!!!...viendo como agregar una linea a la copia del env?????????
 {
 	int		i;
 	char	*new_env_var;
@@ -43,7 +43,7 @@ int	builtin_export_with_arg(t_env env)//aki voy!!!...viendo como agregar una lin
 		i++;
 	}
 	return (0);
-}
+}*/
 
 /*builtin que agrega el string "declare -x " al output del export, al ejecutar 
 export sin argumentos*/
@@ -69,8 +69,13 @@ int	builtin_export(t_env env, int ac)
 			i++;
 		}
 	}
-	else
-		builtin_export_with_arg(env);
+	// else
+	// 	builtin_export_with_arg(env);
 	print_builtin_export(env);
 	return (0);
 }
+
+/*
+	NOTA: Buildin 'export' la he dejado en pausa hasta tener la estructura 
+		definitiva, al igual que 'unset'
+*/
