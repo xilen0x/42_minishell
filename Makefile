@@ -61,7 +61,8 @@ FILES =	minishell.c \
 		lst/lstnew_node.c \
 		tokenizer.c \
 		utils_libft.c \
-		utils0.c
+		utils0.c \
+		signals.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

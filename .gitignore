@@ -12,3 +12,4 @@ objs/
 objs
 *.o
 README.md
+.dep/*

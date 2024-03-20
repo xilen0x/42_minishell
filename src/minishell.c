@@ -19,7 +19,7 @@ int	main(int ac, char *av[], char *envp[])
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
-//		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
+		set_signals();
 		line = readline(">>>>minishell$ ");//ojo retorna un *str mallocado
 		init_msg();
 		// if (!line)

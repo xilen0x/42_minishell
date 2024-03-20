@@ -99,7 +99,10 @@ char    **add_one_arr2d(char **arr2d, char *new);
 char    **rm_one_arr2d(char **arr2d, int index);
 void	print_arr2d(char **arr2d);
 void	init_msg(void);
-void tokenizer(t_lst *tokens, char *line);
+void	tokenizer(t_lst *tokens, char *line);
+void	set_signals(void);
+//-------------------readline-----------------------
+void	rl_replace_line (const char *text, int clear_undo);
 
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
 //char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
