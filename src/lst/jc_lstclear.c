@@ -10,7 +10,7 @@ void	jc_lstclear(t_lst **lst)
 	while (aux)
 	{
 		aux->value = NULL;//añadido para que se limpie totalmemte. No se si hace falta ???
-		aux->keyword = NULL_KEY;//añadido para que se limpie totalmemte
+		aux->key = NULL_KEY;//añadido para que se limpie totalmemte
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);

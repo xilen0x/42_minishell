@@ -7,8 +7,14 @@ OPERATOR (<, >, >>, <<, |): despues de un operador va siempre una WORD, NUNCA ot
 '|': NO puede iniciar o acabar la linia
 */
 
-void    parser(t_lst *tokens)
+void    parser(t_lst *tokens)//deberia recoger y devolver si hay un fallo de sintactico
 {
+//FUNCION CHECK DE TOKENS BASICOS 
+    if (tokens->key == PIPE || ft_lstlast2(tokens)->key == PIPE)//si el 1ro o el ultimo son un | muestra error
+        return (señal de error "bash: syntax error near unexpected token `|'");
+    if (ft_lstlast2(tokens)->key == '<' || ft_lstlast2(tokens)->key == ' >' || ft_lstlast2(tokens)->key == '<<' || ft_lstlast2(tokens)->key == '>>' || ft_lstlast2(tokens)->key == '|')
+    return (señal de error "bash: syntax error near unexpected token `newline'");
+    
 
 
 }

@@ -14,7 +14,7 @@ void	lst_print(t_lst *list)
 	while (aux)
 	{
 		printf("%s$\n", aux->value);
-        printf("%u\n", aux->keyword);
+        printf("%u\n", aux->key);
         printf("----------\n");
 		aux = aux->next;
 	}

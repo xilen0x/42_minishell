@@ -2,7 +2,7 @@
 #include "minishell.h"
 
 /*-----Returns the token's len pointed by 'line' */
-/*INICIALIZA valor de 'keyword' del nodo y retorna un len > 0 si 'keyword' = WORD*/
+/*INICIALIZA valor de 'key' del nodo y retorna un len > 0 si 'key' = WORD*/
 int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'line', un doble puntero al nodo
 {
 	int		len;
@@ -10,15 +10,15 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 
 	len = 0;
 	if (*line == '>' && *line == *(line + 1))
-		(*new_tok)->keyword = DOUBLE_GREATER;
+		(*new_tok)->key = DOUBLE_GREATER;
 	else if (*line == '<' && *line == *(line + 1))
-		(*new_tok)->keyword = DOUBLE_SMALLER;		
+		(*new_tok)->key = DOUBLE_SMALLER;		
 	else if (*line == '>')
-		(*new_tok)->keyword = GREATER;
+		(*new_tok)->key = GREATER;
 	else if (*line == '<')
-		(*new_tok)->keyword = SMALLER;
+		(*new_tok)->key = SMALLER;
 	else if (*line == '|')
-		(*new_tok)->keyword = PIPE;
+		(*new_tok)->key = PIPE;
 	else
 	{//si es un WORD, con o sin comillas, busco el len
 		while (*(line + len) && (*(line + len) != ' ' && *(line + len)!= '\t' \
@@ -40,7 +40,7 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 }
 
 /*------------TOKENIZADOR------------*/
-//EL 'value' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE keyword=WORD
+//EL 'value' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE key=WORD
 void	tokenizer(t_lst *tokens, char *line)
 {
 	t_lst	*new_tok;//nodo con cada token
@@ -59,7 +59,7 @@ void	tokenizer(t_lst *tokens, char *line)
 		if (line[i])
 		{
 			new_tok = lstnew_node(NULL, NULL_KEY);//creo un nodo y lo inicializo todo a 0 
-			len = tok_len(line + i, &new_tok);//INICIALIZA EL keyword si es operador y retorna el len si es una WORD
+			len = tok_len(line + i, &new_tok);//INICIALIZA EL key si es operador y retorna el len si es una WORD
 			if (len > 0)//si contiene algo, es una WORD y la INICIALIZO su string en 'value'
 			{
 				//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
@@ -68,11 +68,11 @@ void	tokenizer(t_lst *tokens, char *line)
 					return ;//gestionar error, liberar y cerrar programa
 				jc_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
 				new_tok->value = str;//INICIALIZA el 'value' del NODO si es una WORD
-				new_tok->keyword = WORD;
+				new_tok->key = WORD;
 			}
-			if (new_tok->keyword == DOUBLE_GREATER || new_tok->keyword == DOUBLE_SMALLER)
+			if (new_tok->key == DOUBLE_GREATER || new_tok->key == DOUBLE_SMALLER)
 				len += 2;//por el doble operador
-			if (new_tok->keyword == GREATER || new_tok->keyword == SMALLER || new_tok->keyword == PIPE)
+			if (new_tok->key == GREATER || new_tok->key == SMALLER || new_tok->key == PIPE)
 				len += 1;;//por el operador simple
 			jc_lstadd_back(&tokens, new_tok);
 		}

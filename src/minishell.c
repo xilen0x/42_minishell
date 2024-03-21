@@ -23,9 +23,10 @@ int	main(int ac, char *av[], char *envp[])
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
 //		gestionar Ctrl+C (para que interrumpa el proceso actual, invocando a SIGINT y presente el prompt de nuevo)
 		line = readline(">>>>minishell$ ");//ojo retorna un *str mallocado
-		if (!line)
+		if (!line)//ESTO ES UTIL Y NECESARIO???
 		 	return (write(1, "!line\n", 6), 0);//OJO gestionar esto
-		add_history(line);//agregamos 'line' al historial, lo gestiona biblioteca readline
+		if (line && *line)//si no hay nada en la linea no se registra en history y debe mostrar una nueva linea
+			add_history(line);//agregamos 'line' al historial, lo readline
 		tokenizer(tokens, line);
 	//	init(&cmds, ac, av);//de carlos
 	//	builtins(&cmds, env, ac, av);//de carlos

@@ -29,7 +29,7 @@ typedef enum e_keytok
 typedef struct s_lst
 {
 	char			*value;
-	t_keytok		keyword;
+	t_keytok		key;
 	struct	s_lst	*next;
 }					t_lst;
 
@@ -86,7 +86,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
 size_t jc_strlcpy(char *dst, const char *src, size_t dstsize);
 
-t_lst	*lstnew_node(char *value, int keyword);
+t_lst	*lstnew_node(char *value, int key);
 t_lst	*ft_lstlast2(t_lst *lst);
 void	jc_lstadd_back(t_lst **lst, t_lst *new);
 int		jc_lstsize(t_lst *lst);
