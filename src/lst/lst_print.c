@@ -13,7 +13,7 @@ void	lst_print(t_lst *list)
 	printf("=== %i NODOS ===\n", jc_lstsize(list));
 	while (aux)
 	{
-		printf("%s$\n", aux->value);
+		printf("%s$\n", aux->val);
         printf("%u\n", aux->key);
         printf("----------\n");
 		aux = aux->next;

@@ -21,17 +21,27 @@ typedef enum e_keytok
 	PIPE,
 	GREATER,
 	SMALLER,
-	DOUBLE_GREATER,
-	DOUBLE_SMALLER,
+	D_GREATER,
+	D_SMALLER,
 	INVALID //(de momento, no lo usare)
 } 	t_keytok;
 
 typedef struct s_lst
 {
-	char			*value;
+	char			*val;
 	t_keytok		key;
 	struct	s_lst	*next;
 }					t_lst;
+
+typedef struct s_comm
+{
+	unsigned int	index;
+	t_lst			*tokens;
+	char			*command;
+	char			**comm_arg;
+	char			*fd_in;
+	char			*fd_out;
+}					t_comm;
 
 //-----carlos------------------
 typedef struct s_builtings
@@ -53,7 +63,7 @@ typedef struct s_env
 	char	**env_cpy;
 	char	**export_cpy;
 	char	*key;
-	char	*value;
+	char	*val;
 	t_built	*env_to_build;
 }	t_env;
 /*
@@ -86,8 +96,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
 size_t jc_strlcpy(char *dst, const char *src, size_t dstsize);
 
-t_lst	*lstnew_node(char *value, int key);
-t_lst	*ft_lstlast2(t_lst *lst);
+t_lst	*lstnew_node(char *val, int key);
+t_lst	*jc_lstlast(t_lst *lst);
 void	jc_lstadd_back(t_lst **lst, t_lst *new);
 int		jc_lstsize(t_lst *lst);
 void	jc_lstclear(t_lst **lst);

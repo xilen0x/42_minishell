@@ -8,9 +8,11 @@ int	main(int ac, char *av[], char *envp[])
 	char	**env;//la copia del env del zsh
 //	t_env	env;
 	t_lst	*tokens;//la lista de los tokens
+	t_comm	*comm;//la lista de pipelines
 //	t_built	cmds;
 
 	tokens = NULL;
+	comm = NULL;
 	if (ac != 1 || av[1])
 	{
 		printf("'minishell' do not accept arguments\n");
@@ -32,8 +34,13 @@ int	main(int ac, char *av[], char *envp[])
 	//	builtins(&cmds, env, ac, av);//de carlos
 		free(line);//libero la linia que retorna readline, seguramente mallocada
 	//	jc_lstclear(&tokens);
-//		parser(la struct/list con los tokens);
+//		parser(comm, tokens);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
 }
+/*
+NOTAS:
+-Las comillas (quote removal) y los expanders gestionarlos entre el parser y el executor
+-preparar el exit_status con los printers de los errores de bash
+*/

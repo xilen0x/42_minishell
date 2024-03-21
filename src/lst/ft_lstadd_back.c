@@ -8,7 +8,7 @@ void	jc_lstadd_back(t_lst **lst,t_lst *new)
 
 	if (*lst)
 	{
-		aux = ft_lstlast2(*lst);
+		aux = jc_lstlast(*lst);
 		aux->next = new;
 	}
 	else

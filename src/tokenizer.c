@@ -10,9 +10,9 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 
 	len = 0;
 	if (*line == '>' && *line == *(line + 1))
-		(*new_tok)->key = DOUBLE_GREATER;
+		(*new_tok)->key = D_GREATER;
 	else if (*line == '<' && *line == *(line + 1))
-		(*new_tok)->key = DOUBLE_SMALLER;		
+		(*new_tok)->key = D_SMALLER;		
 	else if (*line == '>')
 		(*new_tok)->key = GREATER;
 	else if (*line == '<')
@@ -40,7 +40,7 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 }
 
 /*------------TOKENIZADOR------------*/
-//EL 'value' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE key=WORD
+//EL 'val' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE key=WORD
 void	tokenizer(t_lst *tokens, char *line)
 {
 	t_lst	*new_tok;//nodo con cada token
@@ -60,17 +60,17 @@ void	tokenizer(t_lst *tokens, char *line)
 		{
 			new_tok = lstnew_node(NULL, NULL_KEY);//creo un nodo y lo inicializo todo a 0 
 			len = tok_len(line + i, &new_tok);//INICIALIZA EL key si es operador y retorna el len si es una WORD
-			if (len > 0)//si contiene algo, es una WORD y la INICIALIZO su string en 'value'
+			if (len > 0)//si contiene algo, es una WORD y la INICIALIZO su string en 'val'
 			{
 				//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
 				str = (char *)malloc(sizeof(char) * len + 1);
 				if (!str)
 					return ;//gestionar error, liberar y cerrar programa
 				jc_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
-				new_tok->value = str;//INICIALIZA el 'value' del NODO si es una WORD
+				new_tok->val = str;//INICIALIZA el 'val' del NODO si es una WORD
 				new_tok->key = WORD;
 			}
-			if (new_tok->key == DOUBLE_GREATER || new_tok->key == DOUBLE_SMALLER)
+			if (new_tok->key == D_GREATER || new_tok->key == D_SMALLER)
 				len += 2;//por el doble operador
 			if (new_tok->key == GREATER || new_tok->key == SMALLER || new_tok->key == PIPE)
 				len += 1;;//por el operador simple
@@ -81,14 +81,3 @@ void	tokenizer(t_lst *tokens, char *line)
 	lst_print(tokens);//ELIMINAR AL ENTREGAR
 //	jc_lstclear(&tokens);
 }
-/* NOTAS PARA PARSER:
-COMMAND: SIEMPRE va el primero de la linea y tambien despues de un '|'
-Despues de comando va siempre una WORD (argumento o opcion).
-OPERATOR (<, >, >>, <<, |): despues de un operador va siempre una WORD, NUNCA otro operador.
- La linia No puede acabar en un operador
-'|': NO puede iniciar o acabar la linia
-=============================
-Las comillas (quote removal) y los expanders gestionarlos entre el parser y el executor
-PROXIMAS TAREAS:
--preparar el exit_status con los printers de los errores de bash
-*/
