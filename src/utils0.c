@@ -25,6 +25,17 @@ int	init(t_built *cmd, int ac, char *av[])
 	return (0);
 }
 
+void	init_msg(void)
+{
+	printf("           _       _     _          _ _ \n"); 
+	printf("          (_)     (_)   | |        | | |\n");
+	printf(" _ __ ___  _ _ __  _ ___| |__   ___| | |\n");
+	printf("| '_ ` _ \\| | '_ \\| / __| '_ \\ / _ \\ | |\n");
+	printf("| | | | | | | | | | \\__ \\ | | |  __/ | |\n");
+	printf("|_| |_| |_|_|_| |_|_|___/_| |_|\\___|_|_|\n");
+
+	printf("by jocuni-p & castorga\n\n\n\n");
+}
 
 
 // void	print_env(char **env)
