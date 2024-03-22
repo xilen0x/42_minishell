@@ -8,7 +8,7 @@ int	main(int ac, char *av[], char *envp[])
 	t_env	env;
 	t_lst	*tokens;//la lista de los tokens
 	t_built	cmds;
-	rl_catch_signals = 0;//para eliminar el ^C al hacer ctrl-c
+	
 
 	tokens = NULL;
 	if (ac != 1 || av[1])
@@ -23,11 +23,14 @@ int	main(int ac, char *av[], char *envp[])
 	{
 		set_signals();
 		line = readline(">>>>minishell$ ");//ojo retorna un *str mallocado
-		// if (!line)
-		// 	return (exit_status)
+		if (!line)
+		{
+			//printf("control-D recibido!\n");
+			exit(0);
+		}
 		add_history(line);//agregamos 'line' al historial, lo gestiona biblioteca readline
 //		gestionar Ctrl+C (para que interrumpa el proceso actual, invocando a SIGINT y presente el prompt de nuevo)
-		tokenizer(tokens, line);
+		//tokenizer(tokens, line);
 //		tokens = tokenizer(line);//DESARROLLAR ESTO ASAP (retorna un t_lst **)
 		//init(&cmds, ac, av);//de carlos - eliminiar luego cmds
 		builtins(&cmds, *tokens, env, av);//de carlos

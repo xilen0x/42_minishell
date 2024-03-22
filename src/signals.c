@@ -12,20 +12,18 @@ void	signal_handler(int sig)
 	}
 	else if (sig == SIGQUIT)
 	{
-		printf("\nCtrl-D recibido.\n");
-		exit(127);
+		//printf("\nCtrl-\\ recibido.\n");
+		
 	}
 	return ;
 }
 
 void	set_signals(void)
 {
+	rl_catch_signals = 0;//para eliminar el ^C al hacer ctrl-c
 	//ctrl-C 
 	signal(SIGINT, signal_handler);
 
 	//ctrl-D 
-	signal(SIGQUIT, signal_handler);
-
-	//ctrl-slash
 	signal(SIGQUIT, signal_handler);
 }

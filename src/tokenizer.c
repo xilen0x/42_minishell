@@ -56,7 +56,9 @@ void	tokenizer(t_lst *tokens, char *line)
 	while (line[i])
 	{
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+		{
         	i++;
+		}
 		if (line[i])
 		{
 			new_tok = lstnew_node(NULL, NULL_KEY);//creo un nodo y lo inicializo todo a 0 
@@ -72,8 +74,10 @@ void	tokenizer(t_lst *tokens, char *line)
 				new_tok->keyword = WORD;
 			}
 			else
+			{
 				if (new_tok->keyword == DOUBLE_GREATER || new_tok->keyword == DOUBLE_SMALLER)
 					len += 1;//por el doble operador
+			}
 				len++;
 			jc_lstadd_back(&tokens, new_tok);
 		}

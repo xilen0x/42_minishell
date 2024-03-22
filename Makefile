@@ -73,13 +73,13 @@ INCS 	:= $(addprefix -I, $(INC_DIRS))
 # Colors
 ################################################################################
 
-DEF_COLOR 	=	\033[0;39m
-#DEL_LINE 	=	\033[2K
-#ITALIC 	=	\033[3m
-#GRAY 		=	\033[0;90m
-#RED 		=	\033[0;91m
-#BROWN 		=	\033[38;2;184;143;29m
-YELLOW 		=	\033[33m
+DEF_COLOR =		\033[0;39m
+#DEL_LINE =		\033[2K
+#ITALIC =		\033[3m
+#GRAY =			\033[0;90m
+#RED =			\033[0;91m
+#BROWN =		\033[38;2;184;143;29m
+#YELLOW =		\033[33m
 DARK_YELLOW =	\033[38;5;143m
 #DARK_GRAY 	=	\033[38;5;234m
 DARK_GREEN 	=	\033[1m\033[38;2;75;179;82m
