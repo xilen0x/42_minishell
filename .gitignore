@@ -6,7 +6,7 @@ objs/main.o.*
 a.out
 *.swp
 minishell
-libft/libft.a
+lib/libft/libft.a
 objs/
 *.dSYM
 objs
