@@ -37,6 +37,17 @@ void	init_msg(void)
 	printf("by jocuni-p & castorga\n\n\n\n");
 }
 
+int bg_color()
+{
+    // Imprime la secuencia de escape ANSI para cambiar el fondo a azul
+    printf("\033[44m");
+    // Limpia la pantalla para aplicar el nuevo color de fondo en toda la pantalla
+    printf("\033[2J");
+    // Restaurar color de fondo a su estado original al finalizar
+    //printf("\033[0m");
+
+    return (0);
+}
 
 // void	print_env(char **env)
 // {

@@ -18,6 +18,8 @@
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
+// # define BLUE_BG =	"\033[0;97;44m"
+
 //---joan---
 typedef enum e_keytok
 {
@@ -106,8 +108,7 @@ void	print_arr2d(char **arr2d);
 void	init_msg(void);
 void	tokenizer(t_lst *tokens, char *line);
 void	set_signals(void);
-//-------------------readline-----------------------
-//void	rl_replace_line (const char *text, int clear_undo);
+int bg_color();
 
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
 //char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
