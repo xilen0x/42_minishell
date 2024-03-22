@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+static void init_node(t_comm *node, t_lst *tokens)
+{
+    node->index = 0;
+    node->tokens = tokens;
+    node->command = NULL;
+    node->comm_arg = NULL;
+    node->fd_in = NULL;
+    node->fd_out = NULL;
+    node->is_builtin = 0;
+}
+
 void    parser(t_comm comm, t_lst *tokens)//deberia recoger y devolver si hay un fallo sintactico
 {
     t_comm  *node;
@@ -23,11 +34,12 @@ void    parser(t_comm comm, t_lst *tokens)//deberia recoger y devolver si hay un
 
 
     //recorrer lista 'tokens' para crear nodo 'comm' con cada pipeline.
-    while (tokens && tokens->key != PIPE && tokens->key != NULL_KEY)
+    while (tokens && tokens->key != NULL_KEY && tokens->key != PIPE)
 //        t_lst   aux;//creo que no lo necesito para recorrer la lista
     {
-        crear node, hacer una nueva funcion con los valores (la struct) que quiero que contenga
-        inicializarlo a 0
+        node = (t_comm *)malloc(sizeof(t_comm));//asigno memoria a un nodo
+        init_node(node, tokens);//inicializo el contenido del nodo con tokens y el resto a NULL
+        
         rellenarlo con la info de los tokens
     }
 

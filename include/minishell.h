@@ -28,19 +28,20 @@ typedef enum e_keytok
 
 typedef struct s_lst
 {
-	char			*val;
-	t_keytok		key;
+	char			*val;//solo puede ser NULL(si es un operador) o el string que contenga la WORD
+	t_keytok		key;//alguno de los enums
 	struct	s_lst	*next;
 }					t_lst;
 
-typedef struct s_comm
+typedef struct s_comm//estructura de cada pipeline
 {
-	unsigned int	index;
-	t_lst			*tokens;
-	char			*command;
-	char			**comm_arg;
-	char			*fd_in;
-	char			*fd_out;
+	unsigned int	index;//el numero de nodo
+	t_lst			*tokens;//la lista de los tokens
+	char			*command;//el comando del pipeline
+	char			**comm_arg;//el argumento/s o opcion/es del comando (si no hay sera NULL)
+	char			*fd_in;//redireccion de entrada del pipeline (si no hay sera NULL)
+	char			*fd_out;//redireccion de salida del pipeline (si no hay sera NULL)
+	int				is_builtin;//0 (no es builtin), 1 (si es builtin)
 }					t_comm;
 
 //-----carlos------------------
