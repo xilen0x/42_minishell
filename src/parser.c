@@ -15,8 +15,8 @@ void    parser(t_comm comm, t_lst *tokens)//deberia recoger y devolver si hay un
 {
     t_comm  *node;
 
-    //CHECK DE REGLAS SINTACTICAS BASICAS
-    if (!tokens && *tokens->key == NULL_KEY)//protector, hace falta?
+    //ANTES QUE NADA, CHECK DE REGLAS SINTACTICAS BASICAS
+    if (!tokens && tokens->key == NULL_KEY)//protector, hace falta?
          return (señal de error "minishell: syntax error near unexpected token `newline'");//ARREGLAR
 
     if (tokens->key == PIPE || jc_lstlast(tokens)->key == PIPE)//si el 1ro o el ultimo es un '|'
@@ -36,14 +36,16 @@ void    parser(t_comm comm, t_lst *tokens)//deberia recoger y devolver si hay un
     //recorrer lista 'tokens' para crear nodo 'comm' con cada pipeline.
     while (tokens && tokens->key != NULL_KEY && tokens->key != PIPE)
 //        t_lst   aux;//creo que no lo necesito para recorrer la lista
-    {
+    {//ANTES DE NADA, SEPARAR POR PIPELINES
         node = (t_comm *)malloc(sizeof(t_comm));//asigno memoria a un nodo
         init_node(node, tokens);//inicializo el contenido del nodo con tokens y el resto a NULL
-        
+        //habra una funcion que mirara si WORD es un builtin
         rellenarlo con la info de los tokens
     }
 
 }
 /* NOTAS PARA PARSER:
-Si el operador es > o >>, el siguiente sera un fd_out, si es <, sera un fd_in. Esto << no tengo claro
+Si el operador es > o >>, lo siguiente ha de ser un redireccionador de salida (fd_out).
+si el operador es <, lo siguiente sera un redireccionador de entrada (fd_in).
+si el operador es << (heredoc) lo siguiente sera una marca EOF que esperará un input. Esto supongo lo hemos de gestionar aparte.
 */

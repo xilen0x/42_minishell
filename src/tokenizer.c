@@ -41,6 +41,7 @@ int	tok_len(char *line, t_lst **new_tok)//args: puntero a inicio del token en 'l
 
 /*------------TOKENIZADOR------------*/
 //EL 'val' DE TODOS LOS NODOS SERA NULL, EXCEPTO LOS DE key=WORD
+//las comillas se tratan como una WORD, si no estan cerradas incluyen hasta el final de la linea
 void	tokenizer(t_lst *tokens, char *line)
 {
 	t_lst	*new_tok;//nodo con cada token
@@ -67,7 +68,8 @@ void	tokenizer(t_lst *tokens, char *line)
 				if (!str)
 					return ;//gestionar error, liberar y cerrar programa
 				jc_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
-				new_tok->val = str;//INICIALIZA el 'val' del NODO si es una WORD
+				new_tok->val = ft_strdup(str);//INICIALIZA el 'val' del NODO si es una WORD......deberia hacer new_tok->val = strdup(str) y luego free(str)
+				free(str);//libero para poderlo usar en la siguiente iteracion
 				new_tok->key = WORD;
 			}
 			if (new_tok->key == D_GREATER || new_tok->key == D_SMALLER)

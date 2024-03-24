@@ -30,9 +30,9 @@ int	main(int ac, char *av[], char *envp[])
 		if (line && *line)//si no hay nada en la linea no se registra en history y debe mostrar una nueva linea
 			add_history(line);//agregamos 'line' al historial, lo readline
 		tokenizer(tokens, line);
+		free(line);//libero la linia que retorna readline, seguramente mallocada
 	//	init(&cmds, ac, av);//de carlos
 	//	builtins(&cmds, env, ac, av);//de carlos
-		free(line);//libero la linia que retorna readline, seguramente mallocada
 	//	jc_lstclear(&tokens);
 //		parser(comm, tokens);
 	}
