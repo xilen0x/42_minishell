@@ -38,7 +38,6 @@ int	builtins(t_built *cmd, t_lst token, t_env env, char *av[])
 	else
 	{
 		printf("bash: %s: command not foundeee\n", cmd->cmd1);
-		return (1);
 	}
 	return (0);
 }

@@ -39,12 +39,9 @@ void	init_msg(void)
 
 int bg_color()
 {
-    // Imprime la secuencia de escape ANSI para cambiar el fondo a azul
-    printf("\033[44m");
-    // Limpia la pantalla para aplicar el nuevo color de fondo en toda la pantalla
-    printf("\033[2J");
-    // Restaurar color de fondo a su estado original al finalizar
-    //printf("\033[0m");
+	printf("\033[44m"); // Imprime la secuencia de escape ANSI para cambiar el fondo a azul
+    printf("\033[2J");// Limpia la pantalla para aplicar el nuevo color de fondo en toda la pantalla
+    //printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
     return (0);
 }
 

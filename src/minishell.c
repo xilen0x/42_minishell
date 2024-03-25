@@ -1,6 +1,7 @@
 
 #include "minishell.h"
 
+
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;//la linia que se ingrese por stdin
@@ -10,6 +11,7 @@ int	main(int ac, char *av[], char *envp[])
 	t_built	cmds;
 
 	tokens = NULL;
+//	comm = NULL;
 	if (ac != 1 || av[1])
 	{
 		printf("No such file or directory\n");
@@ -40,3 +42,8 @@ int	main(int ac, char *av[], char *envp[])
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34); 
 	return (0);
 }
+/*
+NOTAS:
+-Las comillas (quote removal) y los expanders gestionarlos entre el parser y el executor
+-preparar el exit_status con los printers de los errores de bash
+*/

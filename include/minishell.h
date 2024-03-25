@@ -28,17 +28,28 @@ typedef enum e_keytok
 	PIPE,
 	GREATER,
 	SMALLER,
-	DOUBLE_GREATER,
-	DOUBLE_SMALLER,
-	INVALID //(de momento no lo usare)
+	D_GREATER,
+	D_SMALLER,
+	INVALID //(de momento, no lo usare)
 } 	t_keytok;
 
 typedef struct s_lst
 {
-	char			*value;
-	t_keytok		keyword;//ADMITIRA LOS ENUMS???
+	char			*val;//solo puede ser NULL(si es un operador) o el string que contenga la WORD
+	t_keytok		key;//alguno de los enums
 	struct	s_lst	*next;
 }					t_lst;
+
+typedef struct s_comm//estructura de cada pipeline
+{
+	unsigned int	index;//el numero de nodo
+	t_lst			*tokens;//la lista de los tokens
+	char			*command;//el comando del pipeline
+	char			**comm_arg;//el argumento/s o opcion/es del comando (si no hay sera NULL)
+	char			*fd_in;//redireccion de entrada del pipeline (si no hay sera NULL)
+	char			*fd_out;//redireccion de salida del pipeline (si no hay sera NULL)
+	int				is_builtin;//0 (no es builtin), 1 (si es builtin)
+}					t_comm;
 
 //-----carlos------------------
 typedef struct s_builtings
@@ -60,7 +71,7 @@ typedef struct s_env
 	char	**env_cpy;
 	char	**export_cpy;
 	char	*key;
-	char	*value;
+	char	*val;
 	t_built	*env_to_build;
 }	t_env;
 /*
@@ -80,24 +91,24 @@ typedef struct s_shell
 //char	**dup_array_2d(char *envp[]);
 
 int	init (t_built *cmd, int ac, char *av[]);
-//int	builtins(t_built *cmd, t_env env, int ac, char *av[]);
-int	builtins(t_built *cmd, t_lst token, t_env env, char *av[]);
+int	builtins(t_built *cmd, t_env env, int ac, char *av[]);
 int	builtin_cd(t_built *cmd, int ac);
 int	builtin_pwd(void);
 int	builtin_echo(t_built *cmd, int ac);
 int	builtin_env(t_env env);
 int	builtin_export(t_env env, int ac);
-//int	builtin_exit(t_built *cmd, int ac, char *av[]);
-int	builtin_exit(t_built *cmd, t_lst token, char *av[]);
+int	builtin_exit(t_built *cmd, int ac, char *av[]);
 
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
-size_t 	jc_strlcpy(char *dst, const char *src, size_t dstsize);
-t_lst	*lstnew_node(char *value, int keyword);
-t_lst	*ft_lstlast2(t_lst *lst);
+size_t jc_strlcpy(char *dst, const char *src, size_t dstsize);
+
+t_lst	*lstnew_node(char *val, int key);
+t_lst	*jc_lstlast(t_lst *lst);
 void	jc_lstadd_back(t_lst **lst, t_lst *new);
 int		jc_lstsize(t_lst *lst);
+void	jc_lstclear(t_lst **lst);
 void	lst_print(t_lst *list);
 char	**dup_arr2d(char **arr2d);
 size_t  size_arr2d(char **arr2d);
