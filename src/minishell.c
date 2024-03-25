@@ -12,15 +12,15 @@ int	main(int ac, char *av[], char *envp[])
 
 	tokens = NULL;
 //	comm = NULL;
-	if (ac != 1 || av[1])
-	{
-		printf("No such file or directory\n");
-		return (EXIT_FAILURE);
-	}
+	// if (ac != 1 || av[1])
+	// {
+	// 	printf("No such file or directory\n");
+	// 	return (EXIT_FAILURE);
+	// }
 	env.env_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	bg_color();
-	init_msg();
+	//init_msg();
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
 		set_signals();
