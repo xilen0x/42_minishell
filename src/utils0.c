@@ -45,7 +45,6 @@ int bg_color()
     printf("\033[2J");
     // Restaurar color de fondo a su estado original al finalizar
     //printf("\033[0m");
-
     return (0);
 }
 

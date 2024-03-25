@@ -13,7 +13,6 @@ void	signal_handler(int sig)
 	else if (sig == SIGQUIT)
 	{
 		//printf("\nCtrl-\\ recibido.\n");
-		
 	}
 	return ;
 }
