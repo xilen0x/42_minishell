@@ -18,6 +18,7 @@
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
+typedef struct s_builtings t_built;
 // # define BLUE_BG =	"\033[0;97;44m"
 
 //---joan---
@@ -44,6 +45,7 @@ typedef struct s_comm//estructura de cada pipeline
 {
 	unsigned int	index;//el numero de nodo
 	t_lst			*tokens;//la lista de los tokens
+	char			**paths;
 	char			*command;//el comando del pipeline
 	char			**comm_arg;//el argumento/s o opcion/es del comando (si no hay sera NULL)
 	char			*fd_in;//redireccion de entrada del pipeline (si no hay sera NULL)
@@ -52,6 +54,15 @@ typedef struct s_comm//estructura de cada pipeline
 }					t_comm;
 
 //-----carlos------------------
+typedef struct s_env
+{
+	char	**env_cpy;
+	char	**export_cpy;
+	char	*key;
+	char	*val;
+	t_built	*to_built;
+}	t_env;
+
 typedef struct s_builtings
 {
 	//char	*echo_n;
@@ -64,16 +75,9 @@ typedef struct s_builtings
 	char	*cmd1;
 	char	*path;//borrar luego(posiblemente)
 	//char	*the_string;
+	t_env	*to_env;
 }	t_built;
 
-typedef struct s_env
-{
-	char	**env_cpy;
-	char	**export_cpy;
-	char	*key;
-	char	*val;
-	t_built	*env_to_build;
-}	t_env;
 /*
 typedef struct s_shell
 {
@@ -91,11 +95,12 @@ typedef struct s_shell
 //char	**dup_array_2d(char *envp[]);
 
 int	init (t_built *cmd, int ac, char *av[]);
-int	builtins(t_built *cmd, t_env env, int ac, char *av[]);
+int	builtins(t_built *cmd, int ac, char *av[], t_comm comm);
+int	is_builtin(t_built *cmd, int ac, char *av[], t_comm comm);
 int	builtin_cd(t_built *cmd, int ac);
 int	builtin_pwd(void);
 int	builtin_echo(t_built *cmd, int ac);
-int	builtin_env(t_env env);
+int	builtin_env(void);
 int	builtin_export(t_env env, int ac);
 int	builtin_exit(t_built *cmd, int ac, char *av[]);
 
@@ -124,5 +129,4 @@ int		ca_strcmp(char *s1, char *s2);
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
 //char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
 // pendiente de hacer una funcion que comprueba si existe o no una variable env (puede retornar TRUE o FALSE, si existe podre reemplazarla, removerla o liberarla, si no existe podre añadirla)
-
 #endif

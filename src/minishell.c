@@ -9,9 +9,10 @@ int	main(int ac, char *av[], char *envp[])
 	t_env	env;
 	t_lst	*tokens;//la lista de los tokens
 	t_built	cmds;
+	t_comm	comm;
 
 	tokens = NULL;
-//	comm = NULL;
+	comm.is_builtin = 0;
 	// if (ac != 1 || av[1])
 	// {
 	// 	printf("No such file or directory\n");
@@ -36,7 +37,7 @@ int	main(int ac, char *av[], char *envp[])
 		//tokenizer(tokens, line);
 //		tokens = tokenizer(line);//DESARROLLAR ESTO ASAP (retorna un t_lst **)
 		init(&cmds, ac, av);//de carlos - eliminiar luego cmds
-		builtins(&cmds, env, ac, av);//de carlos
+		is_builtin(&cmds, ac, av, comm);
 		free(line);//libero la linia que retorno readline seguramente mallocada
 //		parser(la struct/list con los tokens);
 	}
