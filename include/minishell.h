@@ -102,7 +102,7 @@ int	builtin_exit(t_built *cmd, int ac, char *av[]);
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
-size_t jc_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	jc_strlcpy(char *dst, const char *src, size_t dstsize);
 
 t_lst	*lstnew_node(char *val, int key);
 t_lst	*jc_lstlast(t_lst *lst);
@@ -119,8 +119,8 @@ void	print_arr2d(char **arr2d);
 void	init_msg(void);
 void	tokenizer(t_lst *tokens, char *line);
 void	set_signals(void);
-int bg_color();
-
+int 	bg_color();
+int		ca_strcmp(char *s1, char *s2);
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
 //char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
 // pendiente de hacer una funcion que comprueba si existe o no una variable env (puede retornar TRUE o FALSE, si existe podre reemplazarla, removerla o liberarla, si no existe podre añadirla)

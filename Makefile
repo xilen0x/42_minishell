@@ -55,7 +55,7 @@ FILES =	minishell.c \
 		arr2d/size_arr2d.c \
 		arr2d/rm_one_arr2d.c \
 		lst/ft_lstadd_back.c \
-		lst/ft_lstlast.c \
+		lst/jc_lstlast.c \
 		lst/lst_print.c \
 		lst/jc_lstsize.c \
 		lst/lstnew_node.c \

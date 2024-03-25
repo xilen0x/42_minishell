@@ -28,14 +28,15 @@ int	main(int ac, char *av[], char *envp[])
 		if (!line)
 		{
 			//printf("control-D recibido!\n");
+			printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
 		add_history(line);//agregamos 'line' al historial, lo gestiona biblioteca readline
 //		gestionar Ctrl+C (para que interrumpa el proceso actual, invocando a SIGINT y presente el prompt de nuevo)
 		//tokenizer(tokens, line);
 //		tokens = tokenizer(line);//DESARROLLAR ESTO ASAP (retorna un t_lst **)
-		//init(&cmds, ac, av);//de carlos - eliminiar luego cmds
-		builtins(&cmds, *tokens, env, av);//de carlos
+		init(&cmds, ac, av);//de carlos - eliminiar luego cmds
+		builtins(&cmds, env, ac, av);//de carlos
 		free(line);//libero la linia que retorno readline seguramente mallocada
 //		parser(la struct/list con los tokens);
 	}

@@ -2,13 +2,13 @@
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtins(t_built *cmd, t_lst token, t_env env, char *av[])
+int	builtins(t_built *cmd, t_env env, int ac, char *av[])
 {
-	printf("testeeeee\n");
 	(void)env;
-	if (ft_strcmp(token.value, "exit") == 0)
+	if (ca_strcmp(cmd->cmd1, "exit"))
 	{
-		builtin_exit(cmd, token, av);
+		//printf("testeeeee\n");
+		builtin_exit(cmd, ac, av);
 		return (0);
 	}
 	/*else if (ft_strcmp(token.value, "pwd") == 0)

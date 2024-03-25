@@ -11,9 +11,10 @@ int	ca_isnumber(const char *str)
 	return (1);
 }
 
-int	builtin_exit(t_built *cmd, t_lst token, char *av[])
+int	builtin_exit(t_built *cmd, int ac, char *av[])
 {
-	(void)token;
+	(void)ac;
+	(void)av;
 	if (cmd->path)
 	{
 		if (ca_isnumber(cmd->path))
@@ -24,8 +25,8 @@ int	builtin_exit(t_built *cmd, t_lst token, char *av[])
 		else
 		{
 			printf("exit\n");
-			printf("%s: exit: %s: numeric argument required\n", av[0], cmd->path);
-			exit(255);
+			//printf("%s: exit: %s: numeric argument required\n", av[0], cmd->path);
+			exit(0);
 		}
 	}
 	return (0);
