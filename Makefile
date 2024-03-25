@@ -55,12 +55,13 @@ FILES =	minishell.c \
 									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
 									arr2d/print_arr2d.c \
-									lst/lstnew_node.c \
-									lst/ft_lstadd_back.c \
-									lst/jc_lstlast.c \
-									lst/jc_lstsize.c \
-									lst/jc_lstclear.c \
-									lst/lst_print.c \
+									lst_tokens/lst_new_node.c \
+									lst_tokens/lst_add_back.c \
+									lst_tokens/lst_last.c \
+									lst_tokens/lst_size.c \
+									lst_tokens/lst_clear.c \
+									lst_tokens/lst_print.c \
+									lst_commands/cmd_new_node.c \
 									tokenizer.c \
 									utils_libft.c \
 									utils0.c

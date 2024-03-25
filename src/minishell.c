@@ -8,11 +8,11 @@ int	main(int ac, char *av[], char *envp[])
 	char	**env;//la copia del env del zsh
 //	t_env	env;
 	t_lst	*tokens;//la lista de tokens
-//	t_comm	*comm;//la lista de pipelines/comandos
+//	t_cmd	*cmd;//la lista de pipelines/comandos
 //	t_built	cmds;
 
 	tokens = NULL;
-//	comm = NULL;
+//	cmd = NULL;
 	if (ac != 1 || av[1])
 	{
 		printf("'minishell' do not accept arguments\n");
@@ -33,8 +33,8 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);//libero la linia que retorna readline, seguramente mallocada
 	//	init(&cmds, ac, av);//de carlos
 	//	builtins(&cmds, env, ac, av);//de carlos
-	//	jc_lstclear(&tokens);
-//		parser(comm, tokens);
+	//	lst_clear(&tokens);
+	  //parser(cmd, tokens);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
