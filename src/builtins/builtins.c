@@ -73,11 +73,11 @@ int	builtins(t_built *cmd, int ac, char *av[], t_env env)
 		builtin_export(cmd, env, ac);
 		return (0);
 	}
-	// else if (ca_strcmp(cmd->cmd1, "unset") == 0)
-	// {
-	// 	builtin_unset(env, ac);
-	// 	return (0);
-	// }
+	else if (ca_strcmp(cmd->cmd1, "unset") == 0)
+	{
+		builtin_unset(cmd, env, ac);
+		return (0);
+	}
 	else
 	{
 		printf("bash: %s: command not foundeee\n", cmd->cmd1);

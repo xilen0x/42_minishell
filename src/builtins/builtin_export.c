@@ -28,6 +28,26 @@ int	print_builtin_export_with_arg(char	**new_env)
 	return (0);
 }
 
+int	if_exist_builtin_export(t_built *cmd, t_env *env)
+{
+	int		i;
+	size_t	len;
+
+	len = ft_strlen(cmd->path) + 1;
+	i = 0;
+	while (env->env_cpy[i])
+	{
+		if (ca_strcmp(env->env_cpy[i], cmd->path) == 0)
+		{
+			ft_memcpy(env->env_cpy, cmd->path, len);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+
 /*Funcion que agrega una nueva variable de entorno*/
 int	builtin_export_with_arg(t_built *cmd, t_env *env)
 {
@@ -35,27 +55,30 @@ int	builtin_export_with_arg(t_built *cmd, t_env *env)
 	char	**new_env;
 	int		len;
 
-	i = 0;
-	while (env->env_cpy[i])
-		i++;
-	len = i + 2;
-	new_env = malloc(sizeof(char *) * (len + 1));
-	if (!new_env)
-		return (0);
-	i = 0;
-	while (env->env_cpy[i])
+	if (if_exist_builtin_export(cmd, env))//CORREGIR : esta agregando a la variable pero no sobreescribiendola si es q existe!
 	{
-		new_env[i] = ft_strdup(env->env_cpy[i]);
+		i = 0;
+		while (env->env_cpy[i])
+			i++;
+		len = i + 2;
+		new_env = malloc(sizeof(char *) * (len + 1));
+		if (!new_env)
+			return (0);
+		i = 0;
+		while (env->env_cpy[i])
+		{
+			new_env[i] = ft_strdup(env->env_cpy[i]);
+			if (!new_env[i])
+				return (0);
+			i++;
+		}
+		new_env[i] = ft_strdup(cmd->path);
 		if (!new_env[i])
 			return (0);
-		i++;
+		new_env[i + 1] = NULL;
+		free(env->env_cpy);
+		env->env_cpy = new_env;
 	}
-	new_env[i] = ft_strdup(cmd->path);
-	if (!new_env[i])
-		return (0);
-	new_env[i + 1] = NULL;
-	free(env->env_cpy);
-	env->env_cpy = new_env;
 	print_builtin_export_with_arg(env->env_cpy);
 	return (0);
 }

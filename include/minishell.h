@@ -88,16 +88,17 @@ typedef struct s_shell
 //int		builtings(t_built	*cmd, char **env, int ac);
 //char	**env_cpy(char *e[]);
 //char	**dup_array_2d(char *envp[]);
-
-int	init (t_built *cmd, int ac, char *av[]);
-int	builtins(t_built *cmd, int ac, char *av[], t_env env);
+/* ------------------------ builtins ------------------------ */
+int		init (t_built *cmd, int ac, char *av[]);
+int		builtins(t_built *cmd, int ac, char *av[], t_env env);
 //int	is_builtin(t_built *cmd, int ac, char *av[]);
-int	builtin_cd(t_built *cmd, int ac);
-int	builtin_pwd(void);
-int	builtin_echo(t_built *cmd, int ac);
-int	builtin_env(t_env env);
-int	builtin_export(t_built *cmd, t_env env, int ac);
-int	builtin_exit(t_built *cmd, int ac, char *av[]);
+int		builtin_cd(t_built *cmd, int ac);
+int		builtin_pwd(void);
+int		builtin_echo(t_built *cmd, int ac);
+int		builtin_env(t_env env);
+int		builtin_export(t_built *cmd, t_env env, int ac);
+int		builtin_exit(t_built *cmd, int ac, char *av[]);
+int		builtin_unset(t_built *cmd, t_env env, int ac);
 
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
