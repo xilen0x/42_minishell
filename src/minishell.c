@@ -17,8 +17,9 @@ int	main(int ac, char *av[], char *envp[])
 	// 	return (EXIT_FAILURE);
 	// }
 	env.env_cpy = dup_arr2d(envp);
+	env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
-	bg_color();
+	//bg_color();
 	//init_msg();
 	while (1)//loop infinito hasta que se presione Ctrl+D(printa exit y sale), 'exit'(printa exit\n y sale)o se cierre el programa
 	{
@@ -31,12 +32,12 @@ int	main(int ac, char *av[], char *envp[])
 			exit(0);
 		}
 		init(&cmds, ac, av);//de carlos - eliminiar luego cmds
-		free(line);//libero la linia que retorno readline seguramente mallocada
 //		parser(la struct/list con los tokens);
 		if (line && *line)//si no hay nada en la linea no se registra en history y debe mostrar una nueva linea
 			add_history(line);//agregamos 'line' al historial, lo readline
 		tokenizer(tokens, line);
-		is_builtin(&cmds, ac, av);
+		builtins(&cmds, ac, av, env);
+		//is_builtin(&cmds, ac, av);
 		free(line);//libero la linia que retorna readline, seguramente mallocada
 	//	lst_clear(&tokens);
 	  //parser(cmd, tokens);

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*Función que obtiene y guarda los envp path*/
+/*Función que obtiene y guarda los envp path
 void	ft_get_paths(char **envp)
 {
 	printf("llega\n");
@@ -36,10 +36,11 @@ int	is_builtin(t_built *cmd, int ac, char *av[])
 	}
 	return (0);
 }
+*/
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtins(t_built *cmd, int ac, char *av[])
+int	builtins(t_built *cmd, int ac, char *av[], t_env env)
 {
 	if (ca_strcmp(cmd->cmd1, "exit") == 0)
 	{
@@ -64,14 +65,14 @@ int	builtins(t_built *cmd, int ac, char *av[])
 	}
 	else if (ca_strcmp(cmd->cmd1, "env") == 0)
 	{
-		builtin_env();
+		builtin_env(env);
 		return (0);
 	}
-	// else if (ca_strcmp(cmd->cmd1, "export") == 0)
-	// {
-	// 	builtin_export(env, ac);
-	// 	return (0);
-	// }
+	else if (ca_strcmp(cmd->cmd1, "export") == 0)
+	{
+		builtin_export(cmd, env, ac);
+		return (0);
+	}
 	// else if (ca_strcmp(cmd->cmd1, "unset") == 0)
 	// {
 	// 	builtin_unset(env, ac);

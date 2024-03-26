@@ -29,5 +29,7 @@ int	builtin_exit(t_built *cmd, int ac, char *av[])
 			exit(0);
 		}
 	}
+	else
+		printf("exit\n");
 	return (0);
 }

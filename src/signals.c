@@ -23,6 +23,6 @@ void	set_signals(void)
 	//ctrl-C 
 	signal(SIGINT, signal_handler);
 
-	//ctrl-D 
+	//ctrl-backslash 
 	signal(SIGQUIT, signal_handler);
 }

@@ -90,13 +90,13 @@ typedef struct s_shell
 //char	**dup_array_2d(char *envp[]);
 
 int	init (t_built *cmd, int ac, char *av[]);
-int	builtins(t_built *cmd, int ac, char *av[]);
-int	is_builtin(t_built *cmd, int ac, char *av[]);
+int	builtins(t_built *cmd, int ac, char *av[], t_env env);
+//int	is_builtin(t_built *cmd, int ac, char *av[]);
 int	builtin_cd(t_built *cmd, int ac);
 int	builtin_pwd(void);
 int	builtin_echo(t_built *cmd, int ac);
-int	builtin_env(void);
-int	builtin_export(t_env env, int ac);
+int	builtin_env(t_env env);
+int	builtin_export(t_built *cmd, t_env env, int ac);
 int	builtin_exit(t_built *cmd, int ac, char *av[]);
 
 size_t	ft_strlen(const char *s);

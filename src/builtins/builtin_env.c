@@ -1,9 +1,8 @@
 # include "minishell.h"
 
 /*builtin que imprime el environment(la copia)*/
-int	builtin_env(void)
+int	builtin_env(t_env env)
 {
-	t_env	env;
 	int		i;
 
 	i = 0;
