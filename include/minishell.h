@@ -10,20 +10,30 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+/*------------------------Defines-----------------------*/
+
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+
+# define TRUE 1
+# define FALSE 0
+
+/*--------------------Error messages-------------------*/
+
+# define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
+# define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
+
 
 //---joan---
 typedef enum e_keytok
 {
-	NULL_KEY = 0,//para inicializar con algo cuando aun no vaya a necesitarlo 
+	NULL_KEY = 0,//para saber que se ha inicializado ya 
 	WORD,
 	PIPE,
 	GREATER,
 	SMALLER,
 	D_GREATER,
 	D_SMALLER,
-//	INVALID //(de momento, no lo usare)
 } 	t_keytok;
 
 typedef struct s_lst
@@ -35,8 +45,8 @@ typedef struct s_lst
 
 typedef struct s_cmd//estructura de cada pipeline
 {
-	char			**cmd_arg;//COMANDO + TODOS LOS ARGS/OPCIONES(si no hay, NULL)
-//	LISTA			*fd_io;//redireccion de entrada del pipeline (si no hay, NULL)
+	char			**cmd_arg;//COMANDO + TODOS LOS ARGS/OPCIONES(si no existe = NULL)
+	t_lst			*fd_io;//operador de redirec. + file (si no existe = NULL)
 	struct s_cmd	*next;
 }					t_cmd;
 

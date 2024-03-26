@@ -8,7 +8,7 @@ int	main(int ac, char *av[], char *envp[])
 	char	**env;//la copia del env del zsh
 //	t_env	env;
 	t_lst	*tokens;//la lista de tokens
-//	t_cmd	*cmd;//la lista de pipelines/comandos
+	t_cmd	*cmd;//la lista de pipelines/comandos
 //	t_built	cmds;
 
 	tokens = NULL;
@@ -34,7 +34,7 @@ int	main(int ac, char *av[], char *envp[])
 	//	init(&cmds, ac, av);//de carlos
 	//	builtins(&cmds, env, ac, av);//de carlos
 	//	lst_clear(&tokens);
-	  //parser(cmd, tokens);
+	  	parser(&cmd, tokens);//si parser devuelve error deberia entrar de nuevo en el while
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
