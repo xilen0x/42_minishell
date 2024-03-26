@@ -2,7 +2,7 @@
 
 #include "minishell.h"
 
-void	jc_lstclear(t_lst **lst)
+void	lst_clear(t_lst **lst)
 {
 	t_lst	*aux;
 
@@ -10,7 +10,7 @@ void	jc_lstclear(t_lst **lst)
 	while (aux)
 	{
 		aux->val = NULL;//añadido para que se limpie totalmemte. No se si hace falta ???
-		aux->key = NULL_KEY;//añadido para que se limpie totalmemte
+		aux->key = NULL;//añadido para que se limpie totalmemte
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);

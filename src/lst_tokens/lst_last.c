@@ -2,7 +2,7 @@
 #include "minishell.h"
 
 /*----RETURNS A POINTER TO THE LAST NODE OF A LIST----*/
-t_lst	*jc_lstlast(t_lst *lst)
+t_lst	*lst_last(t_lst *lst)
 {
 	if (lst == NULL)
 		return (NULL);

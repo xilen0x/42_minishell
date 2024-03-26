@@ -1,7 +1,7 @@
 /*cuenta el numero de nodos en una lista. Retorna un entero.*/
 #include "minishell.h"
 
-int	jc_lstsize(t_lst *lst)
+int	lst_size(t_lst *lst)
 {
 	int	size;
 

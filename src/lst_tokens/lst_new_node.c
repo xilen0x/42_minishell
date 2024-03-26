@@ -2,7 +2,7 @@
 #include "minishell.h"
 
 /*------RETORNA UN NUEVO NODO INICIALIZADO CON LOS ARGUMENTOS---------*/
-t_lst	*lstnew_node(char *val, int key)
+t_lst	*lst_new_node(char *val, int key)
 {
 	t_lst	*node;
 

@@ -1,50 +1,46 @@
 #include "minishell.h"
 
 /*Función que obtiene y guarda los envp path*/
-void	ft_get_paths(char **envp, t_comm *comm)
+void	ft_get_paths(char **envp)
 {
 	printf("llega\n");
 	int	i;
-(void)envp;
-(void)comm;
+	(void)envp;
+
 	i = 0;
 	// while (ft_strnstr(envp[i], "PATH=", 5) == NULL)
 	// 	i++;
 	//comm->paths = ft_split(&envp[i][5], ':');
 }
 
-int	is_builtin(t_built *cmd, int ac, char *av[], t_comm comm)
+int	is_builtin(t_built *cmd, int ac, char *av[])
 {
 	pid_t	child_pid;
 	int		stat_loc;
 
-	if (comm.is_builtin)
-		builtins(cmd, ac, av, comm);
-	else//inicio del executor
+	(void)ac;
+	(void)av;
+	ft_get_paths(cmd->to_env->env_cpy);
+	//printf("no soy un buildin\n");
+	//char *argv[] = {"ls", "-l", "-h", "-a", NULL};
+	char *argv[] = {"ls", "-lha", NULL};
+    child_pid = fork();
+	if (child_pid == 0)
 	{
-		ft_get_paths(cmd->to_env->env_cpy, &comm);
-		//printf("no soy un buildin\n");
-		//char *argv[] = {"ls", "-l", "-h", "-a", NULL};
-		char *argv[] = {"ls", "-lha", NULL};
-    	child_pid = fork();
-		if (child_pid == 0)
-		{
-			execve(argv[0], argv, NULL);
-			printf("This won't be printed if execvp is successul\n");
-		}
-		else
-		{
-			waitpid(child_pid, &stat_loc, WUNTRACED);
-		}
+		execve(argv[0], argv, NULL);
+		printf("This won't be printed if execvp is successul\n");
+	}
+	else
+	{
+		waitpid(child_pid, &stat_loc, WUNTRACED);
 	}
 	return (0);
 }
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtins(t_built *cmd, int ac, char *av[], t_comm comm)
+int	builtins(t_built *cmd, int ac, char *av[])
 {
-	(void)comm;
 	if (ca_strcmp(cmd->cmd1, "exit") == 0)
 	{
 		//printf("exit_teste\n");

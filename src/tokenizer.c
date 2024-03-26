@@ -61,7 +61,7 @@ void	tokenizer(t_lst *tokens, char *line)
 		}
 		if (line[i])
 		{
-			new_tok = lstnew_node(NULL, NULL_KEY);//creo un nodo y lo inicializo todo a 0 
+			new_tok = lst_new_node(NULL, NULL_KEY);//creo un nodo y lo inicializo todo a 0 
 			len = tok_len(line + i, &new_tok);//INICIALIZA EL key si es operador y retorna el len si es una WORD
 			if (len > 0)//si contiene algo, es una WORD y la INICIALIZO su string en 'val'
 			{
@@ -69,7 +69,7 @@ void	tokenizer(t_lst *tokens, char *line)
 				str = (char *)malloc(sizeof(char) * len + 1);
 				if (!str)
 					return ;//gestionar error, liberar y cerrar programa
-				jc_strlcpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
+				str_l_cpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
 				new_tok->val = ft_strdup(str);//INICIALIZA el 'val' del NODO si es una WORD......deberia hacer new_tok->val = strdup(str) y luego free(str)
 				free(str);//libero para poderlo usar en la siguiente iteracion
 				new_tok->key = WORD;
@@ -78,7 +78,7 @@ void	tokenizer(t_lst *tokens, char *line)
 				len += 2;//por el doble operador
 			if (new_tok->key == GREATER || new_tok->key == SMALLER || new_tok->key == PIPE)
 				len += 1;;//por el operador simple
-			jc_lstadd_back(&tokens, new_tok);
+			lst_add_back(&tokens, new_tok);
 		}
 		i += len;
 	}

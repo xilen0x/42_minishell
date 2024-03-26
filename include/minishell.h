@@ -31,7 +31,7 @@ typedef enum e_keytok
 	SMALLER,
 	D_GREATER,
 	D_SMALLER,
-	INVALID //(de momento, no lo usare)
+//	INVALID //(de momento, no lo usare)
 } 	t_keytok;
 
 typedef struct s_lst
@@ -41,17 +41,12 @@ typedef struct s_lst
 	struct	s_lst	*next;
 }					t_lst;
 
-typedef struct s_comm//estructura de cada pipeline
+typedef struct s_cmd//estructura de cada pipeline
 {
-	unsigned int	index;//el numero de nodo
-	t_lst			*tokens;//la lista de los tokens
-	char			**paths;
-	char			*command;//el comando del pipeline
-	char			**comm_arg;//el argumento/s o opcion/es del comando (si no hay sera NULL)
-	char			*fd_in;//redireccion de entrada del pipeline (si no hay sera NULL)
-	char			*fd_out;//redireccion de salida del pipeline (si no hay sera NULL)
-	int				is_builtin;//0 (no es builtin), 1 (si es builtin)
-}					t_comm;
+	char			**cmd_arg;//COMANDO + TODOS LOS ARGS/OPCIONES(si no hay, NULL)
+//	LISTA			*fd_io;//redireccion de entrada del pipeline (si no hay, NULL)
+	struct s_cmd	*next;
+}					t_cmd;
 
 //-----carlos------------------
 typedef struct s_env
@@ -95,8 +90,8 @@ typedef struct s_shell
 //char	**dup_array_2d(char *envp[]);
 
 int	init (t_built *cmd, int ac, char *av[]);
-int	builtins(t_built *cmd, int ac, char *av[], t_comm comm);
-int	is_builtin(t_built *cmd, int ac, char *av[], t_comm comm);
+int	builtins(t_built *cmd, int ac, char *av[]);
+int	is_builtin(t_built *cmd, int ac, char *av[]);
 int	builtin_cd(t_built *cmd, int ac);
 int	builtin_pwd(void);
 int	builtin_echo(t_built *cmd, int ac);
@@ -107,13 +102,13 @@ int	builtin_exit(t_built *cmd, int ac, char *av[]);
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
-size_t	jc_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
 
-t_lst	*lstnew_node(char *val, int key);
-t_lst	*jc_lstlast(t_lst *lst);
-void	jc_lstadd_back(t_lst **lst, t_lst *new);
-int		jc_lstsize(t_lst *lst);
-void	jc_lstclear(t_lst **lst);
+t_lst	*lst_new_node(char *val, int key);
+t_lst	*lst_last(t_lst *lst);
+void	lst_add_back(t_lst **lst, t_lst *new);
+int		lst_size(t_lst *lst);
+void	lst_clear(t_lst **lst);
 void	lst_print(t_lst *list);
 char	**dup_arr2d(char **arr2d);
 size_t  size_arr2d(char **arr2d);
@@ -122,11 +117,16 @@ char    **add_one_arr2d(char **arr2d, char *new);
 char    **rm_one_arr2d(char **arr2d, int index);
 void	print_arr2d(char **arr2d);
 void	init_msg(void);
-void	tokenizer(t_lst *tokens, char *line);
+
 void	set_signals(void);
 int 	bg_color();
 int		ca_strcmp(char *s1, char *s2);
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
+
+t_cmd	*cmd_new_node(unsigned int index);
+
+void 	tokenizer(t_lst *tokens, char *line);
+void    parser(t_cmd *cmd, t_lst *tokens);
 //char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
 // pendiente de hacer una funcion que comprueba si existe o no una variable env (puede retornar TRUE o FALSE, si existe podre reemplazarla, removerla o liberarla, si no existe podre añadirla)
 #endif
