@@ -81,5 +81,5 @@ void	tokenizer(t_lst *tokens, char *line)
 		i += len;
 	}
 	lst_print(tokens);//ELIMINAR AL ENTREGAR
-//	jc_lstclear(&tokens);
+//	lstclear(&tokens);
 }

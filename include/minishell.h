@@ -22,7 +22,7 @@
 
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
-
+# define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 //---joan---
 typedef enum e_keytok
@@ -33,20 +33,35 @@ typedef enum e_keytok
 	GREATER,
 	SMALLER,
 	D_GREATER,
-	D_SMALLER,
+	D_SMALLER
 } 	t_keytok;
 
 typedef struct s_lst
 {
 	char			*val;//solo puede ser NULL(si es un operador) o el string que contenga la WORD
 	t_keytok		key;//alguno de los enums
-	struct	s_lst	*next;
+	struct s_lst	*next;
 }					t_lst;
+
+typedef enum e_redir
+{
+	INFILE = 0,//<
+	OUTFILE,//>
+	APPEND,//>>
+	HEREDOC//<<
+} 	t_redir_type;
+
+typedef struct s_redir
+{
+	char			*f_name;//
+	t_redir_type	type;//tipo de redireccionador
+	struct s_redir	*next;
+}					t_redir;
 
 typedef struct s_cmd//estructura de cada pipeline
 {
-	char			**cmd_arg;//COMANDO + TODOS LOS ARGS/OPCIONES(si no existe = NULL)
-	t_lst			*fd_io;//operador de redirec. + file (si no existe = NULL)
+	char			**cmd_arg;//COMANDO + TODOS LOS ARGS/OPCIONES
+	t_redir			**fd_io;//operador de redireccion + file
 	struct s_cmd	*next;
 }					t_cmd;
 
@@ -108,7 +123,7 @@ t_lst	*lst_last(t_lst *lst);
 void	lst_add_back(t_lst **lst, t_lst *new);
 int		lst_size(t_lst *lst);
 void	lst_clear(t_lst **lst);
-void	lst_print(t_lst *list);
+void	t_lst_print(t_lst *list);
 
 char	**dup_arr2d(char **arr2d);
 size_t  size_arr2d(char **arr2d);
@@ -118,7 +133,7 @@ char    **rm_one_arr2d(char **arr2d, int index);
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
 void	print_arr2d(char **arr2d);
 
-t_cmd	*cmd_new_node(unsigned int index);
+t_cmd	*cmd_new_node(void);
 
 void 	tokenizer(t_lst *tokens, char *line);
 void    parser(t_cmd *cmd, t_lst *tokens);

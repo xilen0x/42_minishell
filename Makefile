@@ -60,7 +60,7 @@ FILES =	minishell.c \
 									lst_tokens/lst_last.c \
 									lst_tokens/lst_size.c \
 									lst_tokens/lst_clear.c \
-									lst_tokens/lst_print.c \
+									lst_tokens/t_lst_print.c \
 									lst_commands/cmd_new_node.c \
 									tokenizer.c \
 									utils_libft.c \
