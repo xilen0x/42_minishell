@@ -1,19 +1,6 @@
 #include "minishell.h"
 
-/*Función que obtiene y guarda los envp path
-void	ft_get_paths(char **envp)
-{
-	printf("llega\n");
-	int	i;
-	(void)envp;
-
-	i = 0;
-	// while (ft_strnstr(envp[i], "PATH=", 5) == NULL)
-	// 	i++;
-	//comm->paths = ft_split(&envp[i][5], ':');
-}
-
-int	is_builtin(t_built *cmd, int ac, char *av[])
+/*int	is_builtin(t_built *cmd, int ac, char *av[])
 {
 	pid_t	child_pid;
 	int		stat_loc;

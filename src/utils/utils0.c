@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*funcion temporal de inicializacion de estructura t_built*/
-int	init(t_built *cmd, int ac, char *av[])
+/*int	init(t_built *cmd, int ac, char *av[])
 {
 	//!!!queda pendiente implementar la opcion -n!!!
 	(void)ac;
@@ -23,7 +23,7 @@ int	init(t_built *cmd, int ac, char *av[])
 	// 		cmd->the_string = av[2];
 	// }
 	return (0);
-}
+}*/
 
 void	init_msg(void)
 {
@@ -54,3 +54,31 @@ int bg_color()
 // 		i++;
 // 	}
 // }
+
+/*Funcion que muestra mensaje de error y uso correcto*/
+int	ft_errors(int n)
+{
+	if (n == 1)
+	{
+		write (2, "por definir...\n", 53);
+		return (1);
+	}
+	else if (n == 2)
+	{
+		write (2, "bash: infile: No such file or directory\n", 40);
+		exit(1);
+	}
+	else if (n == 3)
+	{
+		write (2, "bash: outfile: Permission denied\n", 33);
+		exit(1);
+	}
+	else if (n == 4)
+	{
+		write (2, "Command not found!\n", 19);
+		exit(1);
+	}
+	else
+		write (2, "error", 5);
+	return (1);
+}

@@ -46,6 +46,7 @@ typedef struct s_cmd//estructura de cada pipeline
 	char			**cmd_arg;//COMANDO + TODOS LOS ARGS/OPCIONES(si no hay, NULL)
 //	LISTA			*fd_io;//redireccion de entrada del pipeline (si no hay, NULL)
 	struct s_cmd	*next;
+	char			*pipe_test;
 }					t_cmd;
 
 //-----carlos------------------
@@ -53,9 +54,12 @@ typedef struct s_env
 {
 	char	**env_cpy;
 	char	**export_cpy;
+	char	**paths;
+	char	*cmd_fullpath;
 	char	*key;
 	char	*val;
 	t_built	*to_built;
+	t_cmd	*to_cmd;
 }	t_env;
 
 typedef struct s_builtings
@@ -123,11 +127,17 @@ void	set_signals(void);
 int 	bg_color();
 int		ca_strcmp(char *s1, char *s2);
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
-
 t_cmd	*cmd_new_node(unsigned int index);
 
 void 	tokenizer(t_lst *tokens, char *line);
 void    parser(t_cmd *cmd, t_lst *tokens);
 //char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
 // pendiente de hacer una funcion que comprueba si existe o no una variable env (puede retornar TRUE o FALSE, si existe podre reemplazarla, removerla o liberarla, si no existe podre añadirla)
+
+int		init_momentaneo(char *av[], t_env *data);
+void	ft_get_paths(char **envp, t_env *data);
+int		search_cmds(t_env *data);
+void	executor(t_env *data);
+int		ft_errors(int n);
+
 #endif

@@ -50,6 +50,9 @@ FILES =	minishell.c \
 									builtins/builtin_export.c \
 									builtins/builtin_unset.c \
 									builtins/builtin_exit.c \
+									executor/executor.c \
+									utils/utils_libft.c \
+									utils/utils0.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
@@ -60,10 +63,9 @@ FILES =	minishell.c \
 									lst_tokens/lst_add_back.c \
 									lst_tokens/lst_last.c \
 									lst_tokens/lst_size.c \
-									tokenizer.c \
-									utils_libft.c \
-									utils0.c \
+									tokenizer/tokenizer.c \
 									signals.c \
+									#parser/parser.c \
 									#lst_commands/cmd_new_node.c \
 									#lst_tokens/lst_print.c \
 									#lst_tokens/lst_clear.c
