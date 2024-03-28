@@ -12,9 +12,6 @@ jobs:
     - name: Checkout repo
     - uses: actions/checkout@v4
     
-    - name: Configure project
-      run: ./configure
-    
     - name: Build project
       run: make
     
