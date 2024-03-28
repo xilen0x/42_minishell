@@ -118,27 +118,30 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
 size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
 
+/*---------------------t_lst------------------*/
 t_lst	*lst_new_node(char *val, int key);
 t_lst	*lst_last(t_lst *lst);
 void	lst_add_back(t_lst **lst, t_lst *new);
 int		lst_size(t_lst *lst);
-void	lst_clear(t_lst **lst);
-void	t_lst_print(t_lst *list);
+void	lst_free(t_lst **lst);
+void	lst_print(t_lst *list);
 
+/*-----------------------t_cmd----------------*/
+t_cmd	*cmd_new_node(void);
+void	lst_cmd_print(t_cmd *list);//ELIMIINAR ANTES DE ENTREGA
+
+/*---------------------array 2d----------------*/
 char	**dup_arr2d(char **arr2d);
 size_t  size_arr2d(char **arr2d);
 void    free_arr2d(char **arr2d);
 char    **add_one_arr2d(char **arr2d, char *new);
 char    **rm_one_arr2d(char **arr2d, int index);
+void	print_arr2d(char **arr2d);//ELIMIINAR ANTES DE ENTREGA
 //char    **set_one_arr2d(char **arr2d, char *new_str, int index);//esta pendiente de hacer (si hace falta)
-void	print_arr2d(char **arr2d);
-
-t_cmd	*cmd_new_node(void);
 
 void 	tokenizer(t_lst *tokens, char *line);
-void    parser(t_cmd *cmd, t_lst *tokens);
-//char    *get_value_arr(char **arr, char *name);//pendiente de hacer(si hace falta)
-// pendiente de hacer una funcion que comprueba si existe o no una variable env (puede retornar TRUE o FALSE, si existe podre reemplazarla, removerla o liberarla, si no existe podre añadirla)
+void    parser(t_cmd **cmd, t_lst *tokens);
 
+void	handle_error(char *str, t_lst **tokens);
 
 #endif

@@ -1,16 +1,16 @@
 #include "minishell.h"
 
-/*------FREES MEMORY AND PRINTS AN ERROR MESSAGE-----*/
+/*------FREES t_lst AND PRINTS AN ERROR MESSAGE-----*/
 
-void	handle_error(char *str, t_cmd *cmd)//aqui sera t_global
+void	handle_error(char *str, t_lst **tokens)//aqui sera t_global
 {
-    write(2, "minishell: ", 11);
+    write(2, ">>>>minishell: ", 11);
 	write(2, str, ft_strlen(str));
-//	if (tokens != NULL)
-//		free_token(global->tokens);//crear esta funcion
-    if (cmd != NULL)
-		free_cmd(cmd->cmd);//liberar listas, nodos, *char, **char
-//    if (global != NULL)
-//		free_array_2d(global);
-    
+	if (tokens != NULL)
+		lst_free(tokens);
 }
+//Hacer una funcion para:
+//free t_cmd cmd y free de sus elementos internos y ponerlos a 0.
+//free t_lst tokens "  "       "   "
+//free t_redir "                    "
+/*

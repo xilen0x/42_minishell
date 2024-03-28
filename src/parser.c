@@ -6,8 +6,8 @@ void    parser(t_cmd **cmd, t_lst *tokens)//afegir un int *exit per recollir l'e
     t_lst   *tmp;
     size_t  i;
     size_t  size;
-    t_lst   *node_fd_io;
-//    t_lst   **fd_io; //sobra
+    t_redir   *node_fd_io;
+
 
     tmp = lst_last(tokens);//puntero al ultimo token de la lista
 

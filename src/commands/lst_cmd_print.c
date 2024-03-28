@@ -11,22 +11,26 @@ void	lst_cmd_print(t_cmd *list)
 	int		i;
 
 	aux = list;
-	i = 0;
 	printf("=== %i NODOS t_cmd ===\n", lst_cmd_size(list));
 	while (aux)
 	{
+		i = 0;
 		printf("--**cmd_arg--\n");
 		while (aux->cmd_arg[i] != NULL)
 		{
-			printf("%s$", aux->cmd_arg[i]);
+			printf("%s$\n", aux->cmd_arg[i]);
 			i++;
 		}
-		printf("-------------\n");
-        printf("%u\n", aux->key);
-
-
-
-        printf("----------\n");
+		printf("--- %i NODOS t_redir ---\n", lst_cmd_size(list->fd_io));
+		i = 0;
+		while (aux->fd_io[i])
+		{
+			printf("%s$\n", aux->fd_io[i]->f_name);
+        	printf("%u\n", aux->fd_io[i]->type);
+//			printf("%s\n", *(cmd)->f_name);
+        	printf("----------\n");
+			i++;
+		}
 		aux = aux->next;
 	}
 	printf("\n");

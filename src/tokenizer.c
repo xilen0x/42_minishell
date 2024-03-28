@@ -66,7 +66,7 @@ void	tokenizer(t_lst *tokens, char *line)
 				//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
 				str = (char *)malloc(sizeof(char) * len + 1);
 				if (!str)
-					return ;//gestionar error, liberar y cerrar programa
+					return ;//gestionar error, liberar y cerrar programa, quizas con 'exit'
 				str_l_cpy(str, line + i, len + 1);//rellenamos str con strlcpy(*src, *dst, dst_size)
 				new_tok->val = ft_strdup(str);//INICIALIZA el 'val' del NODO si es una WORD......deberia hacer new_tok->val = strdup(str) y luego free(str)
 				free(str);//libero para poderlo usar en la siguiente iteracion
