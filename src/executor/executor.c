@@ -2,7 +2,8 @@
 
 int init_momentaneo(char *av[], t_env *data) {
 	(void)av;
-	char *comando[] = {"ls", "-l", "-h", "-a", NULL};
+	//char *comando[] = {"ls", "-l", "-h", "-a", NULL};
+	char *comando[] = {"cat", "teste", NULL};
 
 	int count = 0;
 	while (comando[count] != NULL)
@@ -24,7 +25,7 @@ int init_momentaneo(char *av[], t_env *data) {
 		current_cmd->cmd_arg[i] = comando[i];
 		i++;
 	}
-	current_cmd->cmd_arg[count] = NULL; // Marcar el final del array de argumentos
+	current_cmd->cmd_arg[count] = NULL; // final del array de argumentos
 	current_cmd->pipe_test = comando[0];
 	// Establecer next a NULL ya que solo hay un elemento en este ejemplo
 	current_cmd->next = NULL;
@@ -93,7 +94,7 @@ int	search_cmds(t_env *data)
 	return (0);
 }
 
-void	executor(t_env *data)
+int	executor(t_env *data)
 {
 	//int		fd[2];
 	pid_t	pid;
@@ -105,13 +106,14 @@ void	executor(t_env *data)
 	{
 		execve(data->cmd_fullpath, data->to_cmd->cmd_arg, data->env_cpy);//Se ejecuta el primer comando
 		// close(fd[1]);
-		exit(1);
+		return(0);
 	}
 	else
 	{
 		wait(NULL);
 		//execve(data->cmd2_fullpath, data->args_2, NULL);
 		//close(fd[0]);
-		exit(1);
+		return(0);
 	}
+	return(0);
 }

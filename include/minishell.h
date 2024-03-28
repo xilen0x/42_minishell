@@ -137,7 +137,7 @@ void    parser(t_cmd *cmd, t_lst *tokens);
 int		init_momentaneo(char *av[], t_env *data);
 void	ft_get_paths(char **envp, t_env *data);
 int		search_cmds(t_env *data);
-void	executor(t_env *data);
+int		executor(t_env *data);
 int		ft_errors(int n);
 
 #endif
