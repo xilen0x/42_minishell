@@ -1,0 +1,26 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "carlos" ]
+ # pull_request:
+ #   branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout repo
+    - uses: actions/checkout@v4
+    #- name: configure
+    #  run: ./configure
+    - name: make
+      run: make
+    - name: run minishell
+      run: ./minishell
+ #   - name: Commit and pushchanges
+#      uses: stefanzweifel/git-auto-commit-action@v5
