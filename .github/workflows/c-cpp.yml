@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build the minishell C project
 
 on:
   push:
@@ -8,17 +8,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     
-    permissions:
-      contents: write
-
     steps:
     - name: Checkout repo
     - uses: actions/checkout@v4
-    #- name: configure
-    #  run: ./configure
-    - name: make
+    
+    - name: Configure project
+      run: ./configure
+    
+    - name: Build project
       run: make
-    - name: run minishell
-      run: ./minishell
+    
+   # - name: run minishell
+    #  run: ./minishell
  #   - name: Commit and pushchanges
 #      uses: stefanzweifel/git-auto-commit-action@v5
