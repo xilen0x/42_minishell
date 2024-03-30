@@ -9,7 +9,7 @@ void	cmd_free(t_cmd **lst)
 	aux = (*lst);
 	while (aux)
 	{
-        free_arr2d(aux->command);//libera y limpia toda la matriz
+        free_arr2d(aux->command_and_arguments);//libera y limpia toda la matriz
         liberar y borrar lista 
 
 		(*lst) = aux->next;

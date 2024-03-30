@@ -8,8 +8,8 @@ void	tok_free(t_tok **lst)
 	aux = (*lst);
 	while (aux)
 	{
-		aux->val = NULL;
-		aux->key = NULL;
+		aux->str = NULL;
+		aux->type = NULL;
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);

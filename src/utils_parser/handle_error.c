@@ -13,4 +13,3 @@ void	handle_error(char *str, t_tok **tokens)//aqui sera t_global
 //free t_cmd cmd y free de sus elementos internos y ponerlos a 0.
 //free t_lst tokens "  "       "   "
 //free t_redir "                    "
-/*

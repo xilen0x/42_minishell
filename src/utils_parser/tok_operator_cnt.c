@@ -9,10 +9,10 @@ size_t tok_operator_cnt(t_tok *tokens)
 
     aux = tokens;
     cnt = 0;
-    while (aux && aux->key != PIPE)
+    while (aux && aux->type != PIPE)
     {
-        if (aux->key == GREATER || aux->key == SMALLER \
-        || aux->key == D_GREATER || aux->key == D_SMALLER)
+        if (aux->type == GREATER || aux->type == SMALLER \
+        || aux->type == DOUBLE_GREATER || aux->type == DOUBLE_SMALLER)
             cnt++;
         aux = aux->next;
     }

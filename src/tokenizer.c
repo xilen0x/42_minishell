@@ -9,15 +9,15 @@ int	tok_len(char *line, t_tok **new_tok)
 
 	len = 0;
 	if (*line == '>' && *line == *(line + 1))
-		(*new_tok)->key = D_GREATER;
+		(*new_tok)->type = DOUBLE_GREATER;
 	else if (*line == '<' && *line == *(line + 1))
-		(*new_tok)->key = D_SMALLER;		
+		(*new_tok)->type = DOUBLE_SMALLER;		
 	else if (*line == '>')
-		(*new_tok)->key = GREATER;
+		(*new_tok)->type = GREATER;
 	else if (*line == '<')
-		(*new_tok)->key = SMALLER;
+		(*new_tok)->type = SMALLER;
 	else if (*line == '|')
-		(*new_tok)->key = PIPE;
+		(*new_tok)->type = PIPE;
 	else
 	{
 		while (*(line + len) && (*(line + len) != ' ' && *(line + len)!= '\t' \
@@ -39,19 +39,19 @@ int	tok_len(char *line, t_tok **new_tok)
 }
 
 /*------------TOKENIZADOR------------*/
-//'val' siempre sera NULL excepto si es una WORD que contendra su string
+//'str' siempre sera NULL excepto si es una WORD que contendra su string
 //las comillas se tratan como WORD, si no estan cerradas incluyen hasta el final de la linea
 void	tokenizer(t_tok *tok, char *line)
 {
 	t_tok	*new_tok;
-	char	*str;
+	char	*str_aux;
 	size_t	len;
 	int		i;
 
 	i = 0;
 	len = 0;
 	new_tok = NULL;
-	//----OBTENDRA EL STRING PARA CADA TOKEN HASTA LLEGAR AL FINAL DE 'line'--------
+//----OBTENDRA EL STRING PARA CADA TOKEN HASTA LLEGAR AL FINAL DE 'line'--------
 	while (line[i])
 	{
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
@@ -62,18 +62,18 @@ void	tokenizer(t_tok *tok, char *line)
 			len = tok_len(line + i, &new_tok);//inicializa 'key' si es operador y retorna 'len' si es WORD
 			if (len > 0)
 			{
-				//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
-				str = (char *)malloc(sizeof(char) * len + 1);
-				if (!str)
+//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
+				str_aux = (char *)malloc(sizeof(char) * len + 1);
+				if (!str_aux)
 					return ;//gestionar error ???
-				str_l_cpy(str, line + i, len + 1);
-				new_tok->val = ft_strdup(str);
-				free(str);
-				new_tok->key = WORD;
+				str_l_cpy(str_aux, line + i, len + 1);
+				new_tok->str = ft_strdup(str_aux);
+				free(str_aux);
+				new_tok->type = WORD;
 			}
-			if (new_tok->key == D_GREATER || new_tok->key == D_SMALLER)
+			if (new_tok->type == DOUBLE_GREATER || new_tok->type == DOUBLE_SMALLER)
 				len += 2;//por el doble operador
-			if (new_tok->key == GREATER || new_tok->key == SMALLER || new_tok->key == PIPE)
+			if (new_tok->type == GREATER || new_tok->type == SMALLER || new_tok->type == PIPE)
 				len += 1;//por el operador simple
 			tok_add_back(&tok, new_tok);
 		}

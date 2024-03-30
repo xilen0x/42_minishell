@@ -9,12 +9,12 @@ void	tok_print(t_tok *lst)
 {
 	t_tok	*aux;
 
-	aux = list;
-	printf("=== %i NODOS t_tok ===\n", tok_size(list));
+	aux = lst;
+	printf("=== %i NODOS t_tok ===\n", tok_size(lst));
 	while (aux)
 	{
-		printf("%s$\n", aux->val);
-        printf("%u\n", aux->key);
+		printf("%s$\n", aux->str);
+        printf("%u\n", aux->type);
         printf("----------\n");
 		aux = aux->next;
 	}

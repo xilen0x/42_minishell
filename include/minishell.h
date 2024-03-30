@@ -25,30 +25,30 @@
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 //---joan---
-typedef enum e_key
+typedef enum e_type
 {
 	NULL_KEY = 0,//para saber que se ha inicializado ya 
 	WORD,
 	PIPE,
 	GREATER,
 	SMALLER,
-	D_GREATER,
-	D_SMALLER
-} 	t_key;
+	DOUBLE_GREATER,
+	DOUBLE_SMALLER
+} 	t_type;
 
-typedef struct s_lst
+typedef struct s_tok
 {
-	char			*val;//sera NULL si es un operador o un string si es una WORD
-	t_key			key;
-	struct s_lst	*next;
+	char			*str;//sera NULL si es un operador o un string si es una WORD
+	t_type			type;
+	struct s_tok	*next;
 }					t_tok;
 
 typedef enum e_redir
 {
-	INFILE = 0,//<
-	OUTFILE,//>
-	APPEND,//>>
-	HEREDOC//<<
+	REDIRECT_INPUT = 0,//<
+	REDIRECT_OUTPUT,//>
+	REDIRECT_OUTPUT_APPEND,//>>
+	HEREDOC_INPUT//<<
 } 	t_redir;
 
 typedef struct s_redir
@@ -58,12 +58,12 @@ typedef struct s_redir
 	struct s_redir	*next;
 }					t_redir;
 
-typedef struct s_cmd//estructura de cada pipeline
+typedef struct s_cmd
 {
-	char			**command;//comando + argumentos/opciones
-	t_redir			**file_io;//operador de redireccion y su filename
+	char			**command_and_arguments;//comando + argumentos/opciones
+	t_redir			**io_redirect_list;//operador de redireccion y su filename
 	struct s_cmd	*next;
-}					t_cmd;
+}					t_cmd;//contiene los  0datos de un pipe
 /*
 //-----carlos------------------
 typedef struct s_builtings
@@ -84,8 +84,8 @@ typedef struct s_env
 {
 	char	**env_cpy;
 	char	**export_cpy;
-	char	*key;
-	char	*val;
+	char	*type;
+	char	*str;
 	t_built	*env_to_build;
 }	t_env;
 
@@ -121,7 +121,7 @@ char	*ft_strdup(const char *s1);
 size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
 
 /*---------------------t_tok------------------*/
-t_tok	*tok_new_node(char *val, int key);
+t_tok	*tok_new_node(char *str, int type);
 t_tok	*tok_last(t_tok *lst);
 void	tok_add_back(t_tok **lst, t_tok *new);
 int		tok_size(t_tok *lst);
@@ -142,7 +142,7 @@ void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 
 /*-------------------utils_parser-----------------*/
 int		is_operator(t_tok *node);
-size_t 	cmd_arg_size(t_tok *tok);
+size_t 	command_size(t_tok *tok);
 
 /*----------------minishell----------------*/
 void 	tokenizer(t_tok *tok, char *line);
