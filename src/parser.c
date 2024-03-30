@@ -1,65 +1,64 @@
 #include "minishell.h"
 
-void    parser(t_cmd **cmd, t_lst *tokens)//afegir un int *exit per recollir l'exit_status de la funcio
+void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit_status de la funcio
 {
     t_cmd   *node;
-    t_lst   *tmp;
+    t_tok   *tmp;
     size_t  i;
     size_t  size;
-    t_redir   *node_fd_io;
+    t_redir *node_file_io;
 
 
-    tmp = lst_last(tokens);//puntero al ultimo token de la lista
+    tmp = tok_last(tok);//puntero al ultimo token de la lista
 
 //-----PROTECTORES PARA DESCARTAR ERRORES GRAMATICALES BASICOS EN LA LINEA---------
  
-    if (tokens->key == PIPE || tmp->key == PIPE)//si linea comienza o acaba en '|'
+    if (tok->key == PIPE || tmp->key == PIPE)//si linea comienza o acaba en '|'
     {
-        handle_error(PRINT_SYNTAX_ERR_1, &tokens); //h
+        handle_error(PRINT_SYNTAX_ERR_1, &tok); //h
         return;
     }
     if (is_operator(tmp->key))//si linea acaba en operador <,>,<<,>>
     {
-        handle_error(PRINT_SYNTAX_ERR_2, &tokens); //h
+        handle_error(PRINT_SYNTAX_ERR_2, &tok); //h
         return;//ARREGLAR
     }
-    tmp = tokens;//lo reinicializo al inicio de tokens
+    tmp = tok;//lo reinicializo al inicio de tok
     //recorre lista 'tmp' y crea un nodo 'cmd' para cada pipe.
     while (tmp && tmp->key != NULL_KEY)
     {
         node = cmd_new_node(); 
         i = 0;
-        //cuenta WORDS y OPERATORS del pipe actual y crea **cmd_arg con tamaño correspondiente        
-        size = cmd_arg_size(tokens); //h
-        node->cmd_arg = (char **)malloc((size + 1) * sizeof(char *));
+        //cuenta WORDS y OPERATORS del pipe actual y crea **command con tamaño correspondiente        
+        size = cmd_arg_size(tok); //h
+        node->command = (char **)malloc((size + 1) * sizeof(char *));
 //>>>>FALTA INCLUIR FUNCIONES EN .h Y REVISAR QUE NUEVA STRUCTURA t_redir ESTE BIEN IMPLANTADA<<<<<
         //Inicializa las variables del pipe/node actual
         while (tmp && tmp->key != NULL_KEY && tmp->key != PIPE)
         {
-            if (is_operator(tokens->key) && tokens->next->key != WORD)//si es operador y siguiente no es WORD
+            if (is_operator(tok->key) && tok->next->key != WORD)//si es operador y siguiente no es WORD
             {
-                handle_error(PRINT_SYNTAX_ERR_3, &tokens); //h
+                handle_error(PRINT_SYNTAX_ERR_3, &tok); //h
                 return;//ARREGLAR
             }
             if (tmp->key == WORD)
             {
-                node->cmd_arg[i] = ft_strdup(tmp->val);//rellena matriz
+                node->command[i] = ft_strdup(tmp->val);//rellena matriz
                 i++;
                 if (i == size)
-                    node->cmd_arg[i] = '\0';
+                    node->command[i] = '\0';
                 tmp = tmp->next;
             }
             else if (is_operator(tmp->key) /* h */&& tmp->next->key == WORD)
             {
-                node_fd_io = lst_new_node(ft_strdup(tmp->next->val), tmp->key);
-                lst_add_back(node->fd_io, node_fd_io);
-                tmp = tmp->next->next;//salto dos nodos de tokens (operador + key)
+                node_file_io = tok_new_node(ft_strdup(tmp->next->val), tmp->key);
+                tok_add_back(node->file_io, node_file_io);
+                tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
             }
         }
-        lst_add_back(cmd, node);
+        tok_add_back(cmd, node);
     }
-    //LIBERAR t_lst *tokens UNA VEZ PASADOS TODOS A t_cmd *cmd
-    lst_clear(tokens);
+    tok_free(tok);
 }
 /* NOTAS PARA PARSER:
 Si el operador es > o >>, lo siguiente ha de ser un file de salida (fd_out).

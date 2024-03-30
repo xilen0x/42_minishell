@@ -2,12 +2,12 @@
 
 /*------FREES t_lst AND PRINTS AN ERROR MESSAGE-----*/
 
-void	handle_error(char *str, t_lst **tokens)//aqui sera t_global
+void	handle_error(char *str, t_tok **tokens)//aqui sera t_global
 {
     write(2, ">>>>minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	if (tokens != NULL)
-		lst_free(tokens);
+		tok_free(tokens);
 }
 //Hacer una funcion para:
 //free t_cmd cmd y free de sus elementos internos y ponerlos a 0.

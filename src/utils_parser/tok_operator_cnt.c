@@ -1,9 +1,10 @@
 #include "minishell.h"
 
 /* OJO, DE MOMENTO NO SE USA*/
-size_t tok_oper_cnt(t_lst *tokens)
+/*----Counts the num of redirection operators in a t_lst list---*/
+size_t tok_operator_cnt(t_tok *tokens)
 {
-    t_lst   *aux;
+    t_tok   *aux;
     size_t  cnt;
 
     aux = tokens;

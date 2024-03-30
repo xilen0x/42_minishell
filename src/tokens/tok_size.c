@@ -1,7 +1,7 @@
-/*cuenta el numero de nodos en una lista. Retorna un entero.*/
+/*Counts the number of nodes of a t_lst list*/
 #include "minishell.h"
 
-int	lst_size(t_lst *lst)
+int	tok_size(t_tok *lst)
 {
 	int	size;
 

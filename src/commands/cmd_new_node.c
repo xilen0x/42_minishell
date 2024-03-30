@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*------RETORNA UN NUEVO NODO t_comm MALLOCADO E INICIALIZADO A NULL---------*/
+/*------Returns a new NULL initialized t_cmd node-----*/
 t_cmd	*cmd_new_node(void)
 {
 	t_cmd	*node;
@@ -8,8 +8,8 @@ t_cmd	*cmd_new_node(void)
 	node = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!node)
 		return (NULL);
-    node->cmd_arg = NULL;
-    node->fd_io = NULL;
+    node->command = NULL;
+    node->file_io = NULL;
     node->next = NULL;
 	return (node);
 }

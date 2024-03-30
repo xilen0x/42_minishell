@@ -1,9 +1,9 @@
 #include "minishell.h"
 
-/* cuenta los cmd_arg (num de WORD - num de OPERATORS) de la lista tokens*/
-size_t cmd_arg_size(t_lst *tokens)
+/* cuenta los command (num de WORD - num de OPERATORS) de la lista tokens*/
+size_t cmd_arg_size(t_tok *tokens)
 {
-    t_lst   *aux;
+    t_tok   *aux;
     size_t  cnt1;
     size_t  cnt2;
 

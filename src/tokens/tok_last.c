@@ -1,8 +1,8 @@
 
 #include "minishell.h"
 
-/*----RETURNS A POINTER TO THE LAST NODE OF A LIST----*/
-t_lst	*lst_last(t_lst *lst)
+/*----Returns a pointer to the last node of a t_tok list---*/
+t_tok	*tok_last(t_tok *lst)
 {
 	if (lst == NULL)
 		return (NULL);

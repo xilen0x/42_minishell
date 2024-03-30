@@ -1,14 +1,14 @@
 #include "minishell.h"
 
-/*------LIBERA TODA LA LISTA t_redir Y PONE LOS VALORES A NULL------*/
-void	lst_free(t_redir **lst)
+/*-----Frees and clears a 't_tok' list-----*/
+void	tok_free(t_tok **lst)
 {
-	t_lst	*aux;
+	t_tok	*aux;
 
 	aux = (*lst);
 	while (aux)
 	{
-		aux->f_name = NULL;
+		aux->val = NULL;
 		aux->key = NULL;
 		(*lst) = aux->next;
 		free(aux);

@@ -1,7 +1,7 @@
-/*cuenta el numero de nodos en una lista. Retorna un entero.*/
+/*cuenta el numero de nodos en una lista t_cmd*/
 #include "minishell.h"
 
-int	lst_cmd_size(t_cmd *lst)
+int	cmd_size(t_cmd *lst)
 {
 	int	size;
 
