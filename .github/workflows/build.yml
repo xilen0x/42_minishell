@@ -2,18 +2,21 @@ name: Build the minishell C project
 
 on:
   push:
-    branches: [ "carlos" ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
+    - name: "My message"
+      run: echo "Holamundo github actions"
+
+    #- name: Checkout repo
+     # uses: actions/checkout@v4
     
-    - name: Build project
-      run: make
+    #- name: Build project
+     # run: make
     
    # - name: run minishell
     #  run: ./minishell
