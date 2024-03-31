@@ -43,27 +43,27 @@ typedef struct s_tok
 	struct s_tok	*next;
 }					t_tok;
 
-typedef enum e_redir
+typedef enum e_red_io
 {
-	REDIRECT_INPUT = 0,//<
-	REDIRECT_OUTPUT,//>
-	REDIRECT_OUTPUT_APPEND,//>>
+	REDIR_INPUT = 0,//<
+	REDIR_OUTPUT,//>
+	REDIR_OUTPUT_APPEND,//>>
 	HEREDOC_INPUT//<<
-} 	t_redir;
+} 	t_red_io;
 
 typedef struct s_redir
 {
 	char			*filename;
-	t_redir			redir;
-	struct s_redir	*next;
+	t_red_io		red_io;
+	struct s_red_io	*next;
 }					t_redir;
 
 typedef struct s_cmd
 {
-	char			**command_and_arguments;//comando + argumentos/opciones
-	t_redir			**io_redirect_list;//operador de redireccion y su filename
+	char			**command_and_arg;//comando + argumentos/opciones
+	t_redir			**redir;//lista con operador de redireccion y su filename
 	struct s_cmd	*next;
-}					t_cmd;//contiene los  0datos de un pipe
+}					t_cmd;//contiene los datos de un pipe
 /*
 //-----carlos------------------
 typedef struct s_builtings
@@ -142,7 +142,7 @@ void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 
 /*-------------------utils_parser-----------------*/
 int		is_operator(t_tok *node);
-size_t 	command_size(t_tok *tok);
+size_t 	command_and_arg_size(t_tok *tok);
 
 /*----------------minishell----------------*/
 void 	tokenizer(t_tok *tok, char *line);

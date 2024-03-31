@@ -13,17 +13,17 @@ void	cmd_print(t_cmd *list)
 	{
 		i = 0;
 		printf("--**command--\n");
-		while (aux->command_and_arguments[i] != NULL)
+		while (aux->command_and_arg[i] != NULL)
 		{
-			printf("%s$\n", aux->command_and_arguments[i]);
+			printf("%s$\n", aux->command_and_arg[i]);
 			i++;
 		}
-		printf("--- %i NODOS t_redir ---\n", cmd_size(list->io_redirect_list));
+		printf("--- %i NODOS t_redir ---\n", cmd_size(list->red_io));
 		i = 0;
-		while (aux->io_redirect_list[i])
+		while (aux->red_io[i])
 		{
-			printf("%s$\n", aux->io_redirect_list[i]->filename);
-        	printf("%u\n", aux->io_redirect_list[i]->type);
+			printf("%s$\n", aux->red_io[i]->filename);
+        	printf("%u\n", aux->red_io[i]->type);
 //			printf("%s\n", *(cmd)->filename);
         	printf("----------\n");
 			i++;

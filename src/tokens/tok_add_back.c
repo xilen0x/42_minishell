@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 /*----Adds a node to the end of a list t_tok----*/
