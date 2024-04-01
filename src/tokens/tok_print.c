@@ -1,10 +1,7 @@
 #include "minishell.h"
-
 /*===============ELIMINAR ESTE FILE ANTES DE ENTREGA=============== */
 
-/*------------------IMPRIME UNA LISTA t_tok------------------*/
-
-//Recibe *simple porque NO hara cambios en la lista
+/*----Imprime una lista t_tok----*/
 void	tok_print(t_tok *lst)
 {
 	t_tok	*aux;

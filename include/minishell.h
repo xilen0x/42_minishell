@@ -27,7 +27,7 @@
 //---joan---
 typedef enum e_type
 {
-	NULL_KEY = 0,//para saber que se ha inicializado ya 
+	NULL_TYPE = 0,//para saber que se ha inicializado ya 
 	WORD,
 	PIPE,
 	GREATER,
@@ -45,10 +45,11 @@ typedef struct s_tok
 
 typedef enum e_red_io
 {
-	REDIR_INPUT = 0,//<
-	REDIR_OUTPUT,//>
-	REDIR_OUTPUT_APPEND,//>>
-	HEREDOC_INPUT//<<
+	NULL_REDIR = 0,
+	REDIR_OUTPUT = 3,//>
+	REDIR_INPUT = 4,//<
+	REDIR_OUTPUT_APPEND = 5,//>>
+	HEREDOC_INPUT = 6//<<
 } 	t_red_io;
 
 typedef struct s_redir
@@ -114,40 +115,53 @@ int	builtin_export(t_env env, int ac);
 int	builtin_exit(t_built *cmd, int ac, char *av[]);
 */
 
+/*----------------minishell----------------*/
+void 	tokenizer(t_tok *tok, char *line);
+void    parser(t_cmd **cmd, t_tok *tok);
+
+void	handle_error(char *str, t_tok **tok);
+
+/*---------------------array 2d----------------*/
+size_t  size_arr2d(char **arr2d);
+char	**dup_arr2d(char **arr2d);
+char    **add_one_arr2d(char **arr2d, char *new);
+char    **rm_one_arr2d(char **arr2d, int index);
+void    free_arr2d(char **arr2d);
+void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
+
+/*-----------------t_tok------------------*/
+t_tok	*tok_new_node(char *str, int type);
+t_tok	*tok_last(t_tok *lst);
+void	tok_add_back(t_tok **lst, t_tok *new);
+void	tok_free(t_tok **lst);
+int		tok_size(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
+void	tok_print(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
+
+/*-------------------t_cmd----------------*/
+t_cmd	*cmd_new_node(void);
+t_cmd	*cmd_last(t_cmd *lst);
+void	cmd_add_back(t_cmd **lst,t_cmd *new);
+void	cmd_free(t_cmd **lst);
+int		cmd_size(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
+void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
+
+/*-----------------t_redir-----------------*/
+t_redir	*redir_new_node(char *str, int red_io);
+t_redir	*redir_last(t_redir *lst);
+void	redir_add_back(t_redir **lst,t_redir *new);
+void	redir_free(t_redir **lst);
+int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
+void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
+
+/*--------------utils_parser---------------*/
+int		is_operator(t_tok *node);
+size_t 	command_and_arg_size(t_tok *tok);
+
 /*---------------utils_libft-----------------*/
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
 size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
 
-/*---------------------t_tok------------------*/
-t_tok	*tok_new_node(char *str, int type);
-t_tok	*tok_last(t_tok *lst);
-void	tok_add_back(t_tok **lst, t_tok *new);
-int		tok_size(t_tok *lst);
-void	tok_free(t_tok **lst);
-void	tok_print(t_tok *lst);
-
-/*-----------------------t_cmd----------------*/
-t_cmd	*cmd_new_node(void);
-void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
-
-/*---------------------array 2d----------------*/
-char	**dup_arr2d(char **arr2d);
-size_t  size_arr2d(char **arr2d);
-void    free_arr2d(char **arr2d);
-char    **add_one_arr2d(char **arr2d, char *new);
-char    **rm_one_arr2d(char **arr2d, int index);
-void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
-
-/*-------------------utils_parser-----------------*/
-int		is_operator(t_tok *node);
-size_t 	command_and_arg_size(t_tok *tok);
-
-/*----------------minishell----------------*/
-void 	tokenizer(t_tok *tok, char *line);
-void    parser(t_cmd **cmd, t_tok *tok);
-
-void	handle_error(char *str, t_tok **tok);
 
 #endif

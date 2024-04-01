@@ -25,17 +25,15 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
         return;//ARREGLAR
     }
     tmp = tok;//lo reinicializo al inicio de tok
-    //recorre lista 'tmp' y crea un nodo 'cmd' para cada pipe.
-    while (tmp && tmp->type != NULL_KEY)
+    //recorre lista de tokens 't_tok tmp' y crea un nodo 't_cmd cmd' para cada pipe.
+    while (tmp && tmp->type != NULL_TYPE)
     {
-        node = cmd_new_node(); 
-        i = 0;
-        //cuenta WORDS y OPERATORS del pipe actual y crea **command_and_arg con el tamaño correspondiente        
-        size = command_and_arg_size(tok);
+        node = cmd_new_node();//crea nodo t_cmd
+        i = 0;        
+        size = command_and_arg_size(tok);//averigua el size que debera tener la matriz
         node->command_and_arg = (char **)malloc((size + 1) * sizeof(char *));
-//>>>>FALTA REVISAR QUE NUEVA STRUCTURA t_redir ESTE BIEN IMPLANTADA<<<<<
-        //Inicializa las variables del pipe/node actual
-        while (tmp && tmp->type != NULL_KEY && tmp->type != PIPE)
+        //Inicializa un nodo t_cmd con el pipe actual
+        while (tmp && tmp->type != NULL_TYPE && tmp->type != PIPE)
         {
             if (is_operator(tok->type) && tok->next->type != WORD)//si es operador y siguiente no es WORD
             {
@@ -50,21 +48,20 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
                     node->command_and_arg[i] = '\0';
                 tmp = tmp->next;
             }
-            else if (is_operator(tmp->type) && tmp->next->type == WORD)//si es operador + WORD, lo mete en un nodo redir
+            else if (is_operator(tmp->type) && tmp->next->type == WORD)//si es operador y next es WORD
             {
-                node_redir = redir_new_node(ft_strdup(tmp->next->str), tmp->type);//cambiar GREATER por REDIR_OUTPUT ??
-                free(LIBERAR EL STR >>>>>>>>>>>>>>>>>>>>>>>>)
+                node_redir = redir_new_node(ft_strdup(tmp->next->str), tmp->type);//crea e inicializa node t_redir
                 redir_add_back(redir, node_redir);
                 tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
             }
         }
-        tok_add_back(cmd, node);
+        cmd_add_back(cmd, node);
     }
-    tok_free(tok);
+    tok_free(tok);//liberar TODO t_tok una vez acabado el parser
+    cmd_print(*cmd);
+    cmd_free(cmd);
 }
-/* NOTAS PARA PARSER:
-Si el operador es > o >>, lo siguiente ha de ser un file de salida (fd_out).
-si el operador es <, lo siguiente sera un file de entrada (fd_in).
-si el operador es << (heredoc) lo siguiente sera una WORD (marca EOF) que esperará un input. Esto supongo lo hemos de gestionar aparte.
+/* NOTAS PARA MAS ADELANTE:
+si t_redir contiene un << (heredoc) su WORD sera una marca EOF que esperará un input. Lo hemos de gestionar despues del parser.
 HACER UN FREE_GLOBAL QUE LIBERE Y LIMPIE CADA LISTA SI EXISTE
 */

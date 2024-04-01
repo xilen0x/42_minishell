@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*------Returns a new NULL initialized t_redir node-----*/
+/*------Returns a new initialized t_redir node-----*/
 t_redir	*redir_new_node(char *str, int red_io)
 {
 	t_redir	*node;

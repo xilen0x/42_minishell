@@ -58,7 +58,7 @@ void	tokenizer(t_tok *tok, char *line)
         	i++;
 		if (line[i])
 		{
-			new_tok = tok_new_node(NULL, NULL_KEY); 
+			new_tok = tok_new_node(NULL, NULL_TYPE); 
 			len = tok_len(line + i, &new_tok);//inicializa 'key' si es operador y retorna 'len' si es WORD
 			if (len > 0)
 			{
@@ -80,5 +80,4 @@ void	tokenizer(t_tok *tok, char *line)
 		i += len;
 	}
 	tok_print(tok);//ELIMINAR AL ENTREGAR
-//	lstclear(&tok);
 }
