@@ -10,7 +10,7 @@ jobs:
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       
     - name: Compile with Makefile
       run: make
@@ -19,4 +19,4 @@ jobs:
 #      run: ./minishell --test  # Suponiendo que tienes pruebas automatizadas
     
     - name: Display success message
-      run: echo "El programa compilado exitosamente."
+      run: echo "El programa ha compilado exitosamente."
