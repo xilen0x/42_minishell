@@ -60,7 +60,7 @@ int	ft_errors(int n)
 {
 	if (n == 1)
 	{
-		write (2, "por definir...\n", 53);
+		write (2, "por definir...\n", 16);
 		return (1);
 	}
 	else if (n == 2)

@@ -8,11 +8,11 @@ int	main(int ac, char *av[], char *envp[])
 	char	*line;//la linia que se ingrese por stdin
 	//char	**env;//la copia del env del zsh
 	t_env	env;
-	t_lst	*tokens;//la lista de los tokens
+	//t_lst	*tokens;//la lista de los tokens
 	//t_built	cmds;
 	t_env	data;
 
-	tokens = NULL;
+	//tokens = NULL;
 	// if (ac != 1 || av[1])
 	// {
 	// 	printf("No such file or directory\n");

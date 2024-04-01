@@ -14,6 +14,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <sys/wait.h>
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
