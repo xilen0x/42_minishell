@@ -3,7 +3,7 @@
 /*builtin que imprime el environment(la copia)*/
 int	builtin_env(t_env env)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (env.env_cpy[i])

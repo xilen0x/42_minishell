@@ -19,6 +19,6 @@ int	builtin_echo(t_built	*cmd, int ac)
 	if (ac == 2)//cambiar luego******
 		write (1, "\n", 1);
 	else
-		printf ("%s\n", cmd->path);
+		printf ("%s\n", cmd->path);//se debera modif esto y debe  considerar imprimir el echo y todo lo q se le pase.
 	return (0);
 }

@@ -5,7 +5,7 @@ NAME =	minishell
 GCC := gcc
 
 # Compiler flags
-FLAGS := -Werror -Wextra -Wall -MMD -g -fsanitize=address
+FLAGS := -g -Werror -Wextra -Wall -MMD -fsanitize=address
 
 # Remove
 RM 	:=	rm -rf
@@ -48,22 +48,27 @@ FILES =	minishell.c \
 									builtins/builtin_echo.c \
 									builtins/builtin_env.c \
 									builtins/builtin_export.c \
+									builtins/builtin_unset.c \
 									builtins/builtin_exit.c \
+									executor/executor.c \
+									utils/utils_libft.c \
+									utils/utils0.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
 									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
 									arr2d/print_arr2d.c \
-									lst/lstnew_node.c \
-									lst/ft_lstadd_back.c \
-									lst/jc_lstlast.c \
-									lst/jc_lstsize.c \
-									lst/jc_lstclear.c \
-									lst/lst_print.c \
-									tokenizer.c \
-									utils_libft.c \
-									utils0.c
+									lst_tokens/lst_new_node.c \
+									lst_tokens/lst_add_back.c \
+									lst_tokens/lst_last.c \
+									lst_tokens/lst_size.c \
+									tokenizer/tokenizer.c \
+									signals.c \
+									#parser/parser.c \
+									#lst_commands/cmd_new_node.c \
+									#lst_tokens/lst_print.c \
+									#lst_tokens/lst_clear.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))
@@ -82,21 +87,22 @@ DEF_COLOR =		\033[0;39m
 #BROWN =		\033[38;2;184;143;29m
 #YELLOW =		\033[33m
 DARK_YELLOW =	\033[38;5;143m
-#DARK_GRAY =	\033[38;5;234m
-DARK_GREEN =	\033[1m\033[38;2;75;179;82m
-
+#DARK_GRAY 	=	\033[38;5;234m
+DARK_GREEN 	=	\033[1m\033[38;2;75;179;82m
+GREEN 		=	\033[0;32m
 
 # Rules
 ################################################################################
 
-
 all:	$(READLINE_MK_ROOT)
 		@echo "$(DARK_GREEN)GNU READLINE 8.2 COMPILING... $(DEF_COLOR)"
 		@$(MAKE) -sC $(READLINE_ROOT)
+		@echo "$(DARK_GREEN)LIBFT COMPILING... $(DEF_COLOR)"
 		@$(MAKE) $(LIBFT)
+		@echo "$(DARK_GREEN)MINISHELL COMPILING... $(DEF_COLOR)"
 		@$(MAKE) $(NAME)
 		@echo "                              $(DEF_COLOR)"
-		@echo "$(DARK_GREEN)▶  MINISHELL BUILD COMPLETED!$(DEF_COLOR)"
+		@echo "$(GREEN)▶  MINISHELL BUILD COMPLETED!$(DEF_COLOR)"
 		@echo "                              $(DEF_COLOR)"
 		@echo "$(DARK_GREEN)-->	Now you can run ./minishell$(DEF_COLOR)"
 
