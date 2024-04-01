@@ -10,7 +10,7 @@ void	cmd_free(t_cmd **lst)
 	while (aux)
 	{
         free_arr2d(aux->command_and_arg);
-        redir_free((*lst)->redir);
+        redir_free(&(*lst)->redir);
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);

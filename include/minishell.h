@@ -56,13 +56,13 @@ typedef struct s_redir
 {
 	char			*filename;
 	t_red_io		red_io;
-	struct s_red_io	*next;
+	struct s_redir	*next;
 }					t_redir;
 
 typedef struct s_cmd
 {
 	char			**command_and_arg;//comando + argumentos/opciones
-	t_redir			**redir;//lista con operador de redireccion y su filename
+	t_redir			*redir;//lista con operador de redireccion y su filename
 	struct s_cmd	*next;
 }					t_cmd;//contiene los datos de un pipe
 /*
@@ -116,7 +116,7 @@ int	builtin_exit(t_built *cmd, int ac, char *av[]);
 */
 
 /*----------------minishell----------------*/
-void 	tokenizer(t_tok *tok, char *line);
+void 	tokenizer(t_tok **tok, char *line);
 void    parser(t_cmd **cmd, t_tok *tok);
 
 void	handle_error(char *str, t_tok **tok);

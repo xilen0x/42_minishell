@@ -9,7 +9,7 @@ void	redir_free(t_redir **lst)
 	while (aux)
 	{
 		aux->filename = NULL;
-		aux->red_io = NULL;
+		aux->red_io = NULL_REDIR;
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);

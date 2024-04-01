@@ -23,15 +23,14 @@ int	main(int ac, char *av[], char *envp[])
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
 		line = readline(">>>>minishell$ ");
-		if (!line)//ESTO ES UTIL Y NECESARIO???
+		if (!line)
 		 	return (write(1, "!line\n", 6), 0);//OJO ????
 		if (line && *line)
 			add_history(line);//si tiene contenido, agregamos 'line' al historial
-		tokenizer(tok, line);
+		tokenizer(&tok, line);
 		free(line);
 	//	init(&cmds, ac, av);//de carlos
 	//	builtins(&cmds, env, ac, av);//de carlos
-	//	lst_clear(&tok);
 	  	parser(&cmd, tok);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);

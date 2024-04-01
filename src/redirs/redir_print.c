@@ -7,7 +7,7 @@ void	redir_print(t_redir *lst)
 	t_redir	*aux;
 
 	aux = lst;
-	printf("=== %i NODOS t_redir ===\n", redir_size(lst));
+	printf("--- %i NODOS t_redir ---\n", redir_size(lst));
 	while (aux)
 	{
 		printf("%s$\n", aux->filename);

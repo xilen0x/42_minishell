@@ -4,7 +4,7 @@
 
 void	cmd_print(t_cmd *list)
 {
-	t_cmd	*aux;
+	t_cmd	*aux;//CREO NO HARIA FALTA EL AUX
 	int		i;
 
 	aux = list;
@@ -12,14 +12,14 @@ void	cmd_print(t_cmd *list)
 	while (aux)
 	{
 		i = 0;
-		printf("--**command--\n");
+		printf("-- char **command_and_arg --\n");
 		while (aux->command_and_arg[i] != NULL)
 		{
 			printf("%s$\n", aux->command_and_arg[i]);
 			i++;
 		}
-		printf("--- %i NODOS t_redir ---\n", cmd_size(list->red_io));
-		i = 0;
+//		printf("--- %i NODOS t_redir ---\n", redir_size(list->redir));
+//		i = 0;
 		redir_print(aux->redir);//printa la lista t_redir
 /*		while (aux->red_io[i])
 		{

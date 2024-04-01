@@ -41,7 +41,7 @@ int	tok_len(char *line, t_tok **new_tok)
 /*------------TOKENIZADOR------------*/
 //'str' siempre sera NULL excepto si es una WORD que contendra su string
 //las comillas se tratan como WORD, si no estan cerradas incluyen hasta el final de la linea
-void	tokenizer(t_tok *tok, char *line)
+void	tokenizer(t_tok **tok, char *line)
 {
 	t_tok	*new_tok;
 	char	*str_aux;
@@ -59,7 +59,7 @@ void	tokenizer(t_tok *tok, char *line)
 		if (line[i])
 		{
 			new_tok = tok_new_node(NULL, NULL_TYPE); 
-			len = tok_len(line + i, &new_tok);//inicializa 'key' si es operador y retorna 'len' si es WORD
+			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna 'len' si es WORD
 			if (len > 0)
 			{
 //-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
@@ -75,9 +75,9 @@ void	tokenizer(t_tok *tok, char *line)
 				len += 2;//por el doble operador
 			if (new_tok->type == GREATER || new_tok->type == SMALLER || new_tok->type == PIPE)
 				len += 1;//por el operador simple
-			tok_add_back(&tok, new_tok);
+			tok_add_back(tok, new_tok);
 		}
 		i += len;
 	}
-	tok_print(tok);//ELIMINAR AL ENTREGAR
+	tok_print(*tok);//ELIMINAR AL ENTREGAR
 }

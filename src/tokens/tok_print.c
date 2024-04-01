@@ -4,7 +4,7 @@
 /*----Imprime una lista t_tok----*/
 void	tok_print(t_tok *lst)
 {
-	t_tok	*aux;
+	t_tok	*aux;//creo que no haria falta este auxiliar, porque entra un puntero simple
 
 	aux = lst;
 	printf("=== %i NODOS t_tok ===\n", tok_size(lst));
