@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*------Returns a new initialized t_redir node-----*/
-t_redir	*redir_new_node(char *str, int red_io)
+t_redir	*redir_new_node(char *str, int redir_type)
 {
 	t_redir	*node;
 
@@ -9,7 +9,7 @@ t_redir	*redir_new_node(char *str, int red_io)
 	if (!node)
 		return (NULL);
     node->filename = str;
-    node->red_io = red_io;
+    node->redir_type = redir_type;
     node->next = NULL;
 	return (node);
 }

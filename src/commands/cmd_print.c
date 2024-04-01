@@ -21,10 +21,10 @@ void	cmd_print(t_cmd *list)
 //		printf("--- %i NODOS t_redir ---\n", redir_size(list->redir));
 //		i = 0;
 		redir_print(aux->redir);//printa la lista t_redir
-/*		while (aux->red_io[i])
+/*		while (aux->redir_type[i])
 		{
-			printf("%s$\n", aux->red_io[i]->filename);
-        	printf("%u\n", aux->red_io[i]->type);
+			printf("%s$\n", aux->redir_type[i]->filename);
+        	printf("%u\n", aux->redir_type[i]->type);
 //			printf("%s\n", *(cmd)->filename);
         	printf("----------\n");
 			i++;

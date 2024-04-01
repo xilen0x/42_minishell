@@ -62,6 +62,7 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
     cmd_free(cmd);
 }
 /* NOTAS PARA MAS ADELANTE:
-si t_redir contiene un << (heredoc) su WORD sera una marca EOF que esperará un input. Lo hemos de gestionar despues del parser.
+si t_redir contiene un << (heredoc) su WORD sera una marca EOF que esperará un input. 
+Lo hemos de gestionar despues del parser.
 HACER UN FREE_GLOBAL QUE LIBERE Y LIMPIE CADA LISTA SI EXISTE
 */

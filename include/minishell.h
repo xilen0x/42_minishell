@@ -38,33 +38,33 @@ typedef enum e_type
 
 typedef struct s_tok
 {
-	char			*str;//sera NULL si es un operador o un string si es una WORD
+	char			*str;//contendrá string solo si es WORD, sino será NULLL.
 	t_type			type;
 	struct s_tok	*next;
-}					t_tok;
+}					t_tok;//contiene los datos de cada token
 
-typedef enum e_red_io
+typedef enum e_redir_type
 {
-	NULL_REDIR = 0,
+	NULL_REDIR = 0,//Creo que no es necesario
 	REDIR_OUTPUT = 3,//>
 	REDIR_INPUT = 4,//<
 	REDIR_OUTPUT_APPEND = 5,//>>
 	HEREDOC_INPUT = 6//<<
-} 	t_red_io;
+} 	t_redir_type;
 
 typedef struct s_redir
 {
-	char			*filename;
-	t_red_io		red_io;
+	char			*filename;//nombre del archivo
+	t_redir_type	redir_type;//tipo de redireccionador
 	struct s_redir	*next;
-}					t_redir;
+}					t_redir;//contiene los datos de cada redirección
 
 typedef struct s_cmd
 {
 	char			**command_and_arg;//comando + argumentos/opciones
-	t_redir			*redir;//lista con operador de redireccion y su filename
+	t_redir			*redir;
 	struct s_cmd	*next;
-}					t_cmd;//contiene los datos de un pipe
+}					t_cmd;//contiene los datos de cada pipe
 /*
 //-----carlos------------------
 typedef struct s_builtings
@@ -118,7 +118,6 @@ int	builtin_exit(t_built *cmd, int ac, char *av[]);
 /*----------------minishell----------------*/
 void 	tokenizer(t_tok **tok, char *line);
 void    parser(t_cmd **cmd, t_tok *tok);
-
 void	handle_error(char *str, t_tok **tok);
 
 /*---------------------array 2d----------------*/
@@ -146,7 +145,7 @@ int		cmd_size(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
 
 /*-----------------t_redir-----------------*/
-t_redir	*redir_new_node(char *str, int red_io);
+t_redir	*redir_new_node(char *str, int redir_type);
 t_redir	*redir_last(t_redir *lst);
 void	redir_add_back(t_redir **lst,t_redir *new);
 void	redir_free(t_redir **lst);
@@ -162,6 +161,5 @@ size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
 size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
-
 
 #endif
