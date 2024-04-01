@@ -1,24 +1,22 @@
-name: Build the minishell C project
+name: Build and Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
     steps:
-    - name: "My message"
-      run: echo "Holamundo github actions"
-
-    #- name: Checkout repo
-     # uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Compile with Makefile
+      run: make
+      
+#    - name: Run tests
+#      run: ./minishell --test  # Suponiendo que tienes pruebas automatizadas
     
-    #- name: Build project
-     # run: make
-    
-   # - name: run minishell
-    #  run: ./minishell
- #   - name: Commit and pushchanges
-#      uses: stefanzweifel/git-auto-commit-action@v5
+    - name: Display success message
+      run: echo "El programa compilado exitosamente."
