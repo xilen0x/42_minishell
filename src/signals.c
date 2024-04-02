@@ -11,9 +11,7 @@ void	signal_handler(int sig)
 		rl_redisplay();//redibuja la línea actual. Se utiliza después de realizar cambios en la línea de entrada para actualizar la pantalla y mostrar los cambios.
 	}
 	else if (sig == SIGQUIT)
-	{
 		//printf("\nCtrl-\\ recibido.\n");
-	}
 	return ;
 }
 

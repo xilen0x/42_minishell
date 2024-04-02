@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*funcion temporal de inicializacion de estructura t_built*/
-/*int	init(t_built *cmd, int ac, char *av[])
+int	init(t_built *cmd, int ac, char *av[])
 {
 	//!!!queda pendiente implementar la opcion -n!!!
 	(void)ac;
@@ -23,7 +23,7 @@
 	// 		cmd->the_string = av[2];
 	// }
 	return (0);
-}*/
+}
 
 void	init_msg(void)
 {
@@ -60,12 +60,12 @@ int	ft_errors(int n)
 {
 	if (n == 1)
 	{
-		write (2, "por definir...\n", 16);
+		write (2, "cannot execute binary file\n", 27);
 		return (1);
 	}
 	else if (n == 2)
 	{
-		write (2, "bash: infile: No such file or directory\n", 40);
+		write (2, "No such file or directory\n", 26);
 		exit(1);
 	}
 	else if (n == 3)
@@ -79,6 +79,6 @@ int	ft_errors(int n)
 		exit(1);
 	}
 	else
-		write (2, "error", 5);
+		write (2, "Run minishell without arguments!\n", 33);
 	return (1);
 }

@@ -137,7 +137,8 @@ int	builtin_unset(t_built *cmd, t_env env, int ac);
 void 	tokenizer(t_tok **tok, char *line);
 void    parser(t_cmd **cmd, t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
-
+int bg_color();
+void	init_msg(void);
 /*---------------------array 2d----------------*/
 size_t  size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
@@ -193,4 +194,6 @@ int		executor(t_env *data);
 /*-------------------------utils0.c--------------------------*/
 int	ft_errors(int n);
 
+/*-------------------------int	builtins.c-------------------*/
+int	is_builtin(t_built *cmd, int ac, char *av[], t_env env);
 #endif

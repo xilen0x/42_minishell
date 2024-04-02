@@ -6,6 +6,8 @@ int init_momentaneo(char *av[], t_env *data)
 	char *comando[] = {"ls", "-l", "-h", "-a", NULL};
 	//char *comando[] = {"cat", "teste", NULL};
 	//char *comando[] = {"mkdir", "carpeta", NULL};
+	//char *comando[] = {"top", NULL};
+	//char *comando[] = {"cd", NULL};
 
 	int count = 0;
 	while (comando[count] != NULL)
@@ -101,12 +103,19 @@ int	executor(t_env *data)
 	//int		fd[2];
 	pid_t	pid;
 
-	// if (pipe(fd) == -1)
-	// 	exit(1);
 	pid = fork();
-	if (pid == 0)
+	if (pid < 0)
 	{
-		execve(data->cmd_fullpath, data->to_cmd->cmd_arg, data->env_cpy);//Se ejecuta el primer comando
+		perror("Fork failed");
+		exit(1);
+	}
+	else if (pid == 0)
+	{
+		if (execve(data->cmd_fullpath, data->to_cmd->cmd_arg, data->env_cpy) < 0)//Se ejecuta el primer comando
+		{
+			perror(data->cmd_fullpath);
+			exit(1);
+		}
 		// close(fd[1]);
 		return(0);
 	}

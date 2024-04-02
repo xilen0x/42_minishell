@@ -1,29 +1,21 @@
 #include "minishell.h"
 
-/*int	is_builtin(t_built *cmd, int ac, char *av[])
+int	is_builtin(t_built *cmd, int ac, char *av[], t_env env)
 {
-	pid_t	child_pid;
-	int		stat_loc;
-
-	(void)ac;
-	(void)av;
-	ft_get_paths(cmd->to_env->env_cpy);
-	//printf("no soy un buildin\n");
-	//char *argv[] = {"ls", "-l", "-h", "-a", NULL};
-	char *argv[] = {"ls", "-lha", NULL};
-    child_pid = fork();
-	if (child_pid == 0)
-	{
-		execve(argv[0], argv, NULL);
-		printf("This won't be printed if execvp is successul\n");
-	}
-	else
-	{
-		waitpid(child_pid, &stat_loc, WUNTRACED);
-	}
+	init(cmd, ac, av);
+	if ((ca_strcmp(cmd->cmd1, "exit") == 0) || \
+		(ca_strcmp(cmd->cmd1, "pwd") == 0) || \
+		(ca_strcmp(cmd->cmd1, "cd") == 0) || \
+		(ca_strcmp(cmd->cmd1, "echo") == 0) || \
+		(ca_strcmp(cmd->cmd1, "env") == 0) || \
+		(ca_strcmp(cmd->cmd1, "export") == 0) || \
+		(ca_strcmp(cmd->cmd1, "unset") == 0))
+		{
+			builtins(cmd, ac, av, env);
+			return (1);
+		}
 	return (0);
 }
-*/
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
