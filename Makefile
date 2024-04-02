@@ -5,7 +5,7 @@ NAME =	minishell
 GCC := gcc
 
 # Compiler flags
-FLAGS := -g -Werror -Wextra -Wall -MMD -fsanitize=address
+FLAGS := -Werror -Wextra -Wall -MMD -g #-fsanitize=address
 
 # Remove
 RM 	:=	rm -rf
@@ -59,16 +59,30 @@ FILES =	minishell.c \
 									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
 									arr2d/print_arr2d.c \
-									lst_tokens/lst_new_node.c \
-									lst_tokens/lst_add_back.c \
-									lst_tokens/lst_last.c \
-									lst_tokens/lst_size.c \
+									tokens/tok_new_node.c \
+									tokens/tok_add_back.c \
+									tokens/tok_last.c \
+									tokens/tok_size.c \
+									tokens/tok_free.c \
+									tokens/tok_print.c \
+									commands/cmd_new_node.c \
+									commands/cmd_add_back.c \
+									commands/cmd_free.c \
+									commands/cmd_last.c \
+									commands/cmd_print.c \
+									commands/cmd_size.c \
+									utils_parser/is_operator.c \
+									utils_parser/command_and_arg_size.c \
+									utils_parser/handle_error.c \
 									tokenizer/tokenizer.c \
-									signals.c \
-									#parser/parser.c \
-									#lst_commands/cmd_new_node.c \
-									#lst_tokens/lst_print.c \
-									#lst_tokens/lst_clear.c
+									redirs/redir_add_back.c \
+									redirs/redir_free.c \
+									redirs/redir_last.c \
+									redirs/redir_new_node.c \
+									redirs/redir_print.c \
+									redirs/redir_size.c \
+									parser/parser.c \
+									signals.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

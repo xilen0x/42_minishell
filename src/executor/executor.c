@@ -1,9 +1,10 @@
 # include "minishell.h"
 
-int init_momentaneo(char *av[], t_env *data) {
+int init_momentaneo(char *av[], t_env *data)
+{
 	(void)av;
-	//char *comando[] = {"ls", "-l", "-h", "-a", NULL};
-	char *comando[] = {"cat", "teste", NULL};
+	char *comando[] = {"ls", "-l", "-h", "-a", NULL};
+	//char *comando[] = {"cat", "teste", NULL};
 	//char *comando[] = {"mkdir", "carpeta", NULL};
 
 	int count = 0;

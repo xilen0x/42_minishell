@@ -1,8 +1,7 @@
-
 #include "minishell.h"
 
-/*----RETURNS A POINTER TO THE LAST NODE OF A LIST----*/
-t_lst	*lst_last(t_lst *lst)
+/*----Returns a pointer to the last node of a t_redir list---*/
+t_redir	*redir_last(t_redir *lst)
 {
 	if (lst == NULL)
 		return (NULL);

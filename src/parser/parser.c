@@ -1,70 +1,68 @@
 #include "minishell.h"
 
-void    parser(t_cmd *cmd, t_lst *tokens)
+void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit_status de la funcio
 {
-    t_cmd           *node;
-    t_lst           *tmp;//puntero al ultimo token de la lista
-    unsigned int    i;
+    t_cmd   *node;
+    t_tok   *tmp;
+    size_t  i;
+    size_t  size;
+    t_redir *node_redir;
+//    t_redir **redir = NULL;//NO SE SI ES NECESARIO
 
-    tmp = lst_last(tokens);
-    //CHECK PARA DESCARTAR ERRORES GRAMATICALES INICIALES
-    if (!tokens && tokens->key == NULL_KEY)//protector, hace falta?
-         return (perror "minishell: syntax error near unexpected token `newline'");//ARREGLAR
 
-    if (tokens->key == PIPE || tmp->key == PIPE)//si 1ro o ultimo es un '|'
-        return (perror "minishell: syntax error near unexpected token `|'");//ARREGLAR
+    tmp = tok_last(tok);//puntero al ultimo token de la lista
 
-    if (tmp->key == GREATER || tmp->key == SMALLER \
-    || tmp->key == D_GREATER || tmp->key == D_SMALLER)//si linea acaba en operador
-        return (perror "minishell: syntax error near unexpected token `newline'");//ARREGLAR
-
-    if ((tokens->key == GREATER || tokens->key == SMALLER \
-    || tokens->key == D_GREATER || tokens->key == D_SMALLER \
-    || tokens->key == PIPE) && tokens->next->key != WORD)//si despues de operador NO hay una WORD
-            return (perror "minishell: syntax error near unexpected token `newline'");//ARREGLAR
-
-    tmp = tokens;//ahora lo inicializo al inicio de tokens
-//recorre toda la lista 'tmp' para crear un nodo 'comm' con cada pipeline.
-    while (tmp && tmp->key != NULL_KEY)
+//-----PROTECTORES PARA DESCARTAR ERRORES GRAMATICALES BASICOS EN LA LINEA---------
+ 
+    if (tok->type == PIPE || tmp->type == PIPE)//si linea comienza o acaba en '|'
     {
-        node = new_cmd_node(); 
-        i = 0;
-
-//recorre hasta encontrar un pipeline, que sera un nodo, y va inicializando todas sus variables
-        while (tmp && tmp->key != NULL_KEY && tmp->key != PIPE)
-        {
-            if (tmp->key == WORD)
-            {
->>>>>>>>>>>>>>> contador de elementos para la matriz
-                aqui malloc de la matriz
-                node->cmd_arg[i] = ft_strdup(tmp->val);//
-                i++;
-                tmp = tmp->next;
-
-            }
-            else if ()
-            {
-
-            }
-            else if ()
-            {
-
-            }
-            else//para el caso en que sea un heredoc
-            {
-
-            }
-//            rellenarlo con la info de los tmp
-            //anyadir el nodo a la lista comm lstadd_back
-            //liberar la lista de los tokens
-            tmp = tmp->next;
-            
-        }
+        handle_error(PRINT_SYNTAX_ERR_1, &tok);
+        return;
     }
-    //FUNCION QUE LIBERA TODOS LOS TOKENS UNA VEZ QUE YA LOS TENEMOS EN LA LISTA comm
+    if (is_operator(tmp))//si linea acaba en operador <,>,<<,>>
+    {
+        handle_error(PRINT_SYNTAX_ERR_2, &tok); //h
+        return;//ARREGLAR
+    }
+    tmp = tok;//lo reinicializo al inicio de tok
+    //recorre lista de tokens 't_tok tmp' y crea un nodo 't_cmd cmd' para cada pipe.
+    while (tmp && tmp->type != NULL_TYPE)
+    {
+        node = cmd_new_node();//crea nodo t_cmd
+        i = 0;        
+        size = command_and_arg_size(tok);//averigua el size que debera tener la matriz
+        node->command_and_arg = (char **)malloc((size + 1) * sizeof(char *));
+        //Inicializa un nodo t_cmd con el pipe actual
+        while (tmp && tmp->type != NULL_TYPE && tmp->type != PIPE)
+        {
+            if (is_operator(tok) && tok->next->type != WORD)//si es operador y siguiente no es WORD
+            {
+                handle_error(PRINT_SYNTAX_ERR_3, &tok);
+                return;//ARREGLAR
+            }
+            if (tmp->type == WORD)
+            {
+                node->command_and_arg[i] = ft_strdup(tmp->str);//rellena matriz
+                i++;
+                if (i == size)
+                    node->command_and_arg[i] = NULL;
+                tmp = tmp->next;
+            }
+            else if (is_operator(tmp) && tmp->next->type == WORD)//si es operador y next es WORD
+            {
+                node_redir = redir_new_node(ft_strdup(tmp->next->str), tmp->type);//crea e inicializa node t_redir
+                redir_add_back(&node->redir, node_redir);
+                tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
+            }
+        }
+        cmd_add_back(cmd, node);
+    }
+    tok_free(&tok);//liberar TODO t_tok una vez acabado el parser
+    cmd_print(*cmd);
+    cmd_free(cmd);
 }
-/* NOTAS PARA PARSER:
-Si el operador es > o >>, lo siguiente ha de ser un redireccionador de salida (fd_out).
-si el operador es <, lo siguiente sera un redireccionador de entrada (fd_in).
-si el operador es << (heredoc) lo siguiente sera una marca EOF que esperará un input. Esto supongo lo hemos de gestionar aparte.
+/* NOTAS PARA MAS ADELANTE:
+si t_redir contiene un << (heredoc) su WORD sera una marca EOF que esperará un input. 
+Lo hemos de gestionar despues del parser.
+HACER UN FREE_GLOBAL QUE LIBERE Y LIMPIE CADA LISTA SI EXISTE
 */
