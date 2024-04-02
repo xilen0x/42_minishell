@@ -4,16 +4,17 @@
 /*----Imprime una lista t_tok----*/
 void	tok_print(t_tok *lst)
 {
-	t_tok	*aux;//creo que no haria falta este auxiliar, porque entra un puntero simple
+//	t_tok	*aux;//creo que no haria falta este auxiliar, porque entra un puntero simple
 
-	aux = lst;
-	printf("\n=== %i nodos t_tok ===\n", tok_size(lst));
-	while (aux)
+//	aux = lst;
+//	printf("\n=== %i nodos t_tok ===\n", tok_size(lst));
+	printf("\n=== t_tok list ===\n");
+	while (lst)
 	{
-		printf("%s$\n", aux->str);
-        printf("%u\n", aux->type);
-        printf("----------\n");
-		aux = aux->next;
+		printf("%s\n", lst->str);
+        printf("%u\n", lst->type);
+        printf("----\n");
+		lst = lst->next;
 	}
 	printf("\n");
 }

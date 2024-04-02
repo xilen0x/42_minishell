@@ -55,11 +55,13 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
                 tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
             }
         }
+        if (tmp->type == PIPE)
+            tmp = tmp->next;
         cmd_add_back(cmd, node);
     }
-    tok_free(&tok);//liberar TODO t_tok una vez acabado el parser
     cmd_print(*cmd);
     cmd_free(cmd);
+    tok_free(&tok);//liberar TODO t_tok una vez acabado el parser
 }
 /* NOTAS PARA MAS ADELANTE:
 si t_redir contiene un << (heredoc) su WORD sera una marca EOF que esperará un input. 

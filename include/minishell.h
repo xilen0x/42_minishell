@@ -48,7 +48,7 @@ typedef enum e_redir_type
 	NULL_REDIR = 0,//Creo que no es necesario
 	REDIR_OUTPUT = 3,//>
 	REDIR_INPUT = 4,//<
-	REDIR_OUTPUT_APPEND = 5,//>>
+	REDIR_OUTPUT_APPEND = 5,//>> 
 	HEREDOC_INPUT = 6//<<
 } 	t_redir_type;
 

@@ -11,7 +11,7 @@ int	main(int ac, char *av[], char *envp[])
 //	t_built	cmds;
 
 	tok = NULL;
-//	cmd = NULL;
+	cmd = NULL;
 	if (ac != 1 || av[1])
 	{
 		printf("'minishell' do not accept arguments\n");
