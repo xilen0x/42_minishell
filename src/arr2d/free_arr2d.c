@@ -12,5 +12,5 @@ void    free_arr2d(char **arr2d)
         free(*tmp);
         tmp++;
     }
-    free(tmp);
+    free(arr2d);
 }

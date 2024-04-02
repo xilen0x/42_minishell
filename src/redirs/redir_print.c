@@ -9,6 +9,11 @@ void	redir_print(t_redir *lst)
 //	aux = lst;
 //	printf("--- %i NODOS t_redir ---\n", redir_size(lst));
 	printf("= t_redir list =\n");
+	if (!lst)
+	{
+		printf("NULL");
+		return;
+	}
 	while (lst)
 	{
 		printf("%s\n", lst->filename);

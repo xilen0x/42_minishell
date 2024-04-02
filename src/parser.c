@@ -24,16 +24,16 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
         handle_error(PRINT_SYNTAX_ERR_2, &tok); //h
         return;//ARREGLAR
     }
-    tmp = tok;//lo reinicializo al inicio de tok
-    //recorre lista de tokens 't_tok tmp' y crea un nodo 't_cmd cmd' para cada pipe.
+    tmp = tok;//lo reinicializo al inicio de lista tok
+    //recorre lista de tokens y crea un nodo 't_cmd' para cada pipe.
     while (tmp && tmp->type != NULL_TYPE)
     {
         node = cmd_new_node();//crea nodo t_cmd
         i = 0;        
         size = command_and_arg_size(tok);//averigua el size que debera tener la matriz
         node->command_and_arg = (char **)malloc((size + 1) * sizeof(char *));
-        //Inicializa un nodo t_cmd con el pipe actual
-        while (tmp && tmp->type != NULL_TYPE && tmp->type != PIPE)
+//        while (tmp && tmp->type != NULL_TYPE && tmp->type != PIPE)//Inicializa el nodo t_cmd con el pipe actual
+        while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
         {
             if (is_operator(tok) && tok->next->type != WORD)//si es operador y siguiente no es WORD
             {
@@ -54,14 +54,17 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
                 redir_add_back(&node->redir, node_redir);
                 tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
             }
+            else if (tmp->type == PIPE)
+            {
+                tmp = tmp->next;
+                break;
+            }
         }
-        if (tmp->type == PIPE)
-            tmp = tmp->next;
         cmd_add_back(cmd, node);
     }
     cmd_print(*cmd);
-    cmd_free(cmd);
-    tok_free(&tok);//liberar TODO t_tok una vez acabado el parser
+//    cmd_free(cmd);
+//    tok_free(&tok);//liberar TODO t_tok una vez acabado el parser
 }
 /* NOTAS PARA MAS ADELANTE:
 si t_redir contiene un << (heredoc) su WORD sera una marca EOF que esperará un input. 

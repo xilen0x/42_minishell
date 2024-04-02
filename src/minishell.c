@@ -1,7 +1,6 @@
 
 #include "minishell.h"
 
-
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
@@ -18,7 +17,7 @@ int	main(int ac, char *av[], char *envp[])
 		return (EXIT_FAILURE);
 	}
 	env = dup_arr2d(envp);
-	print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
+//	print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	while (1)
 	{
 //		poner las señales en escucha y hacer funcion para gestionarlas(handler ??)	
@@ -32,6 +31,8 @@ int	main(int ac, char *av[], char *envp[])
 	//	init(&cmds, ac, av);//de carlos
 	//	builtins(&cmds, env, ac, av);//de carlos
 	  	parser(&cmd, tok);
+		tok_free(&tok);
+		cmd_free(&cmd);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
