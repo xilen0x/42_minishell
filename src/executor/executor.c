@@ -85,7 +85,7 @@ static int	search_command_path(char **cmd, t_env *data)
 /*Función puente que envia los comandos 1 a search_command_path */
 int	search_cmds(t_env *data)
 {
-	if (search_command_path(data->to_cmd->command_and_arg, data) != 0)
+	if (search_command_path(data->to_cmd->command_and_arg, data) != 0)//Exception has occurred: Exception - EXC_BAD_ACCESS (code=1, address=0x0)
 	{
 		ft_errors(4);
 		return (1);

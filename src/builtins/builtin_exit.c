@@ -11,16 +11,16 @@ int	ca_isnumber(const char *str)
 	return (1);
 }
 
-int	builtin_exit(t_built *cmd, int ac, char *av[])
+int	builtin_exit(t_cmd *cmd, int ac, char *av[])
 {
 	(void)ac;
 	(void)av;
-	if (cmd->path)
+	if ((size_arr2d(cmd->command_and_arg)) > 1)
 	{
-		if (ca_isnumber(cmd->path))
+		if (ca_isnumber(cmd->command_and_arg[1]))
 		{
 			printf("exit\n");
-			exit(ft_atoi(cmd->path));
+			exit(ft_atoi(cmd->command_and_arg[1]));
 		}
 		else
 		{

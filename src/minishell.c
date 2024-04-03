@@ -20,7 +20,7 @@ int	main(int ac, char *av[], char *envp[])
 	env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	//init_msg();
-	//bg_color();
+	bg_color();
 	while (1)
 	{
 		set_signals();
@@ -33,14 +33,16 @@ int	main(int ac, char *av[], char *envp[])
 		}
 		if (line && *line)
 			add_history(line);//si tiene contenido, agregamos 'line' al historial
+		else
+			continue;
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		//	builtins(&cmds, env, ac, av);//de carlos
-		ft_get_paths(env.env_cpy, &env);
+		builtins(cmd, ac, av, env);
+		//ft_get_paths(env.env_cpy, &env);
 		//ft_open_files(av, &data);
-		search_cmds(&env);
-		executor(&env);
+		//search_cmds(&env);
+		//executor(&env);
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}

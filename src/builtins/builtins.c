@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	is_builtin(t_built *cmd, int ac, char *av[], t_env env)
+/*int	is_builtin(t_built *cmd, int ac, char *av[], t_env env)
 {
 	init(cmd, ac, av);
 	if ((ca_strcmp(cmd->cmd1, "exit") == 0) || \
@@ -15,19 +15,20 @@ int	is_builtin(t_built *cmd, int ac, char *av[], t_env env)
 			return (1);
 		}
 	return (0);
-}
+}*/
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtins(t_built *cmd, int ac, char *av[], t_env env)
+int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 {
-	if (ca_strcmp(cmd->cmd1, "exit") == 0)
+	(void)env;
+	if (ca_strcmp(*cmd->command_and_arg, "exit") == 0)
 	{
 		//printf("exit_teste\n");
 		builtin_exit(cmd, ac, av);
 		exit (0);
 	}
-	else if (ca_strcmp(cmd->cmd1, "pwd") == 0)
+	/*else if (ca_strcmp(cmd->cmd1, "pwd") == 0)
 	{
 		//printf("pwd_teste\n");
 	 	builtin_pwd();
@@ -56,10 +57,10 @@ int	builtins(t_built *cmd, int ac, char *av[], t_env env)
 	{
 		builtin_unset(cmd, env, ac);
 		return (0);
-	}
+	}*/
 	else
 	{
-		printf("bash: %s: command not foundeee\n", cmd->cmd1);
+		printf("bash: %s: command not foundeee\n", cmd->command_and_arg[1]);
 	}
 	return (0);
 }
