@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit_status de la funcio
+void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit_status per recollir l'exit_status de la funcio
 {
     t_cmd   *node;
     t_tok   *tmp;

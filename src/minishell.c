@@ -33,6 +33,11 @@ int	main(int ac, char *av[], char *envp[])
 		}
 		if (line && *line)
 			add_history(line);//si tiene contenido, agregamos 'line' al historial
+		if (!*line)//else
+		{
+			free(line);
+			continue;
+		}
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
