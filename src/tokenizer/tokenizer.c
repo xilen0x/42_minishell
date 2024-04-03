@@ -39,7 +39,7 @@ int	tok_len(char *line, t_tok **new_tok)
 }
 
 /*------------TOKENIZADOR------------*/
-//'str' siempre sera NULL excepto si es una WORD que contendra su string
+//'str' siempre sera NULL, excepto si es una WORD que contendra su string
 //las comillas se tratan como WORD, si no estan cerradas incluyen hasta el final de la linea
 void	tokenizer(t_tok **tok, char *line)
 {

@@ -27,7 +27,7 @@ int	main(int ac, char *av[], char *envp[])
 		line = readline(">>>>minishell$ ");
 		if (!line)
 		{
-			printf("exit\n");//en el cado del ctrl-D
+			printf("exit\n");//en el caso del ctrl-D
 			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
