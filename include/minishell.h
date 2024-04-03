@@ -67,6 +67,7 @@ typedef struct s_redir
 	struct s_redir	*next;
 }					t_redir;//contiene los datos de cada redirección
 
+
 typedef struct s_cmd
 {
 	char			**command_and_arg;
@@ -87,12 +88,26 @@ typedef struct s_env
 	char	*val;
 	char	*type;
 	char	*str;
-	t_built	*env_to_build;
-	t_built	*to_built;
+	//t_built	*env_to_build;
+	//t_built	*to_built;
 	t_cmd	*to_cmd;
 }	t_env;
 
-typedef struct s_builtings
+typedef struct s_shell
+{
+	int				exit_status;
+	t_cmd			*link_cmd;
+	t_env			*link_env;
+	t_redir			*link_redir;
+	t_redir_type	*link_redir_t;
+	t_tok			*link_tok;
+	// char	**pipes;
+	// int		pipex;
+	//t_pipe	*p;
+	// char	**args;
+}	t_shell;
+
+/*typedef struct s_builtings
 {
 	//char	*echo_n;
 	// char	*cd;
@@ -105,48 +120,27 @@ typedef struct s_builtings
 	char	*path;//borrar luego(posiblemente)
 	//char	*the_string;
 	t_env	*to_env;
-}	t_built;
+}	t_built;*/
 
-/*typedef struct s_shell
-{
-	t_tok	**tok;
-	char	**pipes;
-	int		pipex;
-	int		exit;
-	//t_pipe	*p;
-	char	**args;
-	char	*cmd;
-}	t_shell;*/
-
-//int		builtings(t_built	*cmd, char **env, int ac);
 //char	**env_cpy(char *e[]);
 //char	**dup_array_2d(char *envp[]);
 
-int	init (t_built *cmd, int ac, char *av[]);
-int	builtins(t_cmd *cmd, int ac, char *av[], t_env env);
-int	builtin_cd(t_built *cmd, int ac);
-int	builtin_pwd(void);
-int	builtin_echo(t_built *cmd, int ac);
-int	builtin_env(t_env env);
-int	builtin_export(t_built *cmd, t_env env, int ac);
-int	builtin_exit(t_cmd *cmd, int ac, char *av[]);
-int	builtin_unset(t_built *cmd, t_env env, int ac);
 
-/*----------------minishell----------------*/
-void 	tokenizer(t_tok **tok, char *line);
-void    parser(t_cmd **cmd, t_tok *tok);
-void	handle_error(char *str, t_tok **tok);
-int bg_color();
+/*---------------------------minishell -------------------------*/
+int		bg_color(void);
 void	init_msg(void);
-/*---------------------array 2d----------------*/
-size_t  size_arr2d(char **arr2d);
+void	tokenizer(t_tok **tok, char *line);
+void	parser(t_cmd **cmd, t_tok *tok);
+void	handle_error(char *str, t_tok **tok);
+/*---------------------------array 2d -------------------------*/
+size_t	size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
-char    **add_one_arr2d(char **arr2d, char *new);
-char    **rm_one_arr2d(char **arr2d, int index);
-void    free_arr2d(char **arr2d);
+char	**add_one_arr2d(char **arr2d, char *new);
+char	**rm_one_arr2d(char **arr2d, int index);
+void	free_arr2d(char **arr2d);
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------------t_tok------------------*/
+/*---------------------------t_tok -------------------------*/
 t_tok	*tok_new_node(char *str, int type);
 t_tok	*tok_last(t_tok *lst);
 void	tok_add_back(t_tok **lst, t_tok *new);
@@ -154,45 +148,54 @@ void	tok_free(t_tok **lst);
 int		tok_size(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
 void	tok_print(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*-------------------t_cmd----------------*/
+/*---------------------------t_cmd -------------------------*/
 t_cmd	*cmd_new_node(void);
 t_cmd	*cmd_last(t_cmd *lst);
-void	cmd_add_back(t_cmd **lst,t_cmd *new);
+void	cmd_add_back(t_cmd **lst, t_cmd *new);
 void	cmd_free(t_cmd **lst);
 int		cmd_size(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------------t_redir-----------------*/
+/*---------------------------t_redir -------------------------*/
 t_redir	*redir_new_node(char *str, int redir_type);
 t_redir	*redir_last(t_redir *lst);
-void	redir_add_back(t_redir **lst,t_redir *new);
+void	redir_add_back(t_redir **lst, t_redir *new);
 void	redir_free(t_redir **lst);
 int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*--------------utils_parser---------------*/
+/*---------------------------utils_parser -------------------------*/
 int		is_operator(t_tok *node);
-size_t 	command_and_arg_size(t_tok *tok);
+size_t	command_and_arg_size(t_tok *tok);
 
-/*---------------utils_libft-----------------*/
+/*---------------------------utils_libft -------------------------*/
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
-size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
+size_t	str_l_cpy(char *dst, const char *src, size_t dstsize);
 int		ca_strcmp(char *s1, char *s2);
 
-/*-------------------------signals.c--------------------------*/
+/*---------------------------signals.c -------------------------*/
 void	set_signals(void);
 
-/*-------------------------executor.c--------------------------*/
+/*---------------------------executor.c -------------------------*/
 //int		init_momentaneo(char *av[], t_env *data);
 void	ft_get_paths(char **envp, t_env *data);
 int		search_cmds(t_env *data);
 int		executor(t_env *data);
 
-/*-------------------------utils0.c--------------------------*/
-int	ft_errors(int n);
+/*---------------------------utils0.c -------------------------*/
+int		ft_msgs(int n);
+int		exit_status(void);
 
-/*-------------------------int	builtins.c-------------------*/
-int	is_builtin(t_built *cmd, int ac, char *av[], t_env env);
+/*--------------------------- builtins -------------------------*/
+int		builtins(t_cmd *cmd, int ac, char *av[], t_env env);
+int		builtin_exit(t_cmd *cmd, int ac, char *av[]);
+int		builtin_pwd(void);
+int	builtin_cd(t_cmd *cmd, int ac);
+//int	builtin_echo(t_cmd *cmd, int ac);
+//int	builtin_env(t_env env);
+//int	builtin_export(t_cmd *cmd, t_env env, int ac);
+//int	builtin_unset(t_cmd *cmd, t_env env, int ac);
+
 #endif

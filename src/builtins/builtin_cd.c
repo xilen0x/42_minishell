@@ -2,11 +2,13 @@
 
 /*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
 o a una ruta absoluta o relativa*/
-int	builtin_cd(t_built	*cmd, int ac)
+int	builtin_cd(t_cmd	*cmd, int ac)
 {
+	(void)cmd;
+	(void)ac;
 	char	*home_dir;
 
-	if (ac == 2)//cambiar luego!!!
+	if ((size_arr2d(cmd->command_and_arg)) == 1)
 	{
 		home_dir = getenv("HOME");
 		if (home_dir == NULL)
@@ -19,16 +21,22 @@ int	builtin_cd(t_built	*cmd, int ac)
 			perror("chdir() error");
 			return (1);
 		}
-		builtin_pwd();// solo para visualizar el pwd actual - borrar luego!!!
+		//builtin_pwd();// solo para visualizar el pwd actual - borrar luego!!!
 	}
 	else//relative or absolute path
 	{
-		if (chdir(cmd->path) != 0)
-		{
-			perror("chdir() error");
-			return (1);
-		}
-		builtin_pwd();// solo para visualizar el pwd actual - borrar luego!!!
+		// if (chdir(cmd->path) != 0)
+		// {
+		// 	perror("chdir() error");
+		// 	return (1);
+		// }
+		//builtin_pwd();// solo para visualizar el pwd actual - borrar luego!!!
 	}
 	return (0);
 }
+
+/*
+
+FALTA AGREGAR FUNCIONALIDAD AL HACER 'cd libft/' por ej!!!!!!!!
+
+*/

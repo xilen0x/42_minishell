@@ -6,16 +6,17 @@ int	main(int ac, char *av[], char *envp[])
 	char	*line;
 	t_env	env;
 	t_tok	*tok;
-	//t_built	cmds;
+	t_shell	main_struct;
 	t_cmd	*cmd;
 
 	tok = NULL;
 	cmd = NULL;
 	if (ac != 1 || av[1])
 	{
-		ft_errors(5);
+		ft_msgs(5);
 		exit(0);
 	}
+	main_struct.exit_status = 0;
 	env.env_cpy = dup_arr2d(envp);
 	env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA

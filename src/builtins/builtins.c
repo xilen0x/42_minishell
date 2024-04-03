@@ -22,23 +22,28 @@
 int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 {
 	(void)env;
+	/*if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)
+	{
+		exit_status();
+		return (0);
+	}
+	else*/
 	if (ca_strcmp(*cmd->command_and_arg, "exit") == 0)
 	{
-		//printf("exit_teste\n");
 		builtin_exit(cmd, ac, av);
 		exit (0);
 	}
-	/*else if (ca_strcmp(cmd->cmd1, "pwd") == 0)
+	else if (ca_strcmp(*cmd->command_and_arg, "pwd") == 0)
 	{
-		//printf("pwd_teste\n");
 	 	builtin_pwd();
+		return (0);
 	}
-	else if (ca_strcmp(cmd->cmd1, "cd") == 0)
+	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
 	{
 		builtin_cd(cmd, ac);
 		return (0);
 	}
-	else if (ca_strcmp(cmd->cmd1, "echo") == 0)
+	/*else if (ca_strcmp(cmd->cmd1, "echo") == 0)
 	{
 		builtin_echo(cmd, ac);
 		return (0);
@@ -60,7 +65,7 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 	}*/
 	else
 	{
-		printf("bash: %s: command not foundeee\n", cmd->command_and_arg[1]);
+		printf("bash: %s: command not found+++\n", cmd->command_and_arg[1]);
 	}
 	return (0);
 }

@@ -43,13 +43,8 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 
 FILES =	minishell.c \
 									builtins/builtins.c \
-									builtins/builtin_cd.c \
-									builtins/builtin_pwd.c \
-									builtins/builtin_echo.c \
-									builtins/builtin_env.c \
-									builtins/builtin_export.c \
-									builtins/builtin_unset.c \
 									builtins/builtin_exit.c \
+									builtins/builtin_pwd.c \
 									executor/executor.c \
 									utils/utils_libft.c \
 									utils/utils0.c \
@@ -82,7 +77,12 @@ FILES =	minishell.c \
 									redirs/redir_print.c \
 									redirs/redir_size.c \
 									parser/parser.c \
-									signals.c
+									signals.c \
+									builtins/builtin_cd.c \
+									#builtins/builtin_echo.c \
+									#builtins/builtin_env.c \
+									#builtins/builtin_export.c \
+									#builtins/builtin_unset.c \
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

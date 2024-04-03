@@ -87,7 +87,7 @@ int	search_cmds(t_env *data)
 {
 	if (search_command_path(data->to_cmd->command_and_arg, data) != 0)//Exception has occurred: Exception - EXC_BAD_ACCESS (code=1, address=0x0)
 	{
-		ft_errors(4);
+		ft_msgs(4);
 		return (1);
 	}
 	/*if (search_command_path2(data->args_2[0], data) == 1)
