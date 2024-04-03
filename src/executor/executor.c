@@ -1,6 +1,6 @@
 # include "minishell.h"
 
-int init_momentaneo(char *av[], t_env *data)
+/*int init_momentaneo(char *av[], t_env *data)
 {
 	(void)av;
 	char *comando[] = {"ls", "-l", "-h", "-a", NULL};
@@ -34,7 +34,7 @@ int init_momentaneo(char *av[], t_env *data)
 	// Establecer next a NULL ya que solo hay un elemento en este ejemplo
 	current_cmd->next = NULL;
 	return (0);
-}
+}*/
 
 /*Función que obtiene y guarda los envp path*/
 void	ft_get_paths(char **envp, t_env *data)
@@ -60,7 +60,7 @@ void	ft_get_paths(char **envp, t_env *data)
 
 /*funcion que crea el fullpath del comando y verifica si existe
 para poder guardarlo o no*/
-static int	search_command_path(char *cmd, t_env *data)
+static int	search_command_path(char **cmd, t_env *data)
 {
 	char	*cmd_path;
 	char	*full_path;
@@ -69,7 +69,7 @@ static int	search_command_path(char *cmd, t_env *data)
 	i = 0;
 	while (data->paths[i])
 	{
-		cmd_path = ft_strjoin("/", cmd);
+		cmd_path = ft_strjoin("/", *cmd);
 		full_path = ft_strjoin(data->paths[i], cmd_path);
 		free(cmd_path);
 		if (access(full_path, F_OK) == 0)
@@ -82,10 +82,10 @@ static int	search_command_path(char *cmd, t_env *data)
 	return (1);
 }
 
-/*Función puente que envia los comandos 1 y 2 a search_command_path */
+/*Función puente que envia los comandos 1 a search_command_path */
 int	search_cmds(t_env *data)
 {
-	if (search_command_path(data->to_cmd->pipe_test, data) != 0)
+	if (search_command_path(data->to_cmd->command_and_arg, data) != 0)
 	{
 		ft_errors(4);
 		return (1);
@@ -111,7 +111,7 @@ int	executor(t_env *data)
 	}
 	else if (pid == 0)
 	{
-		if (execve(data->cmd_fullpath, data->to_cmd->cmd_arg, data->env_cpy) < 0)//Se ejecuta el primer comando
+		if (execve(data->cmd_fullpath, data->to_cmd->command_and_arg, data->env_cpy) < 0)//Se ejecuta el primer comando
 		{
 			perror(data->cmd_fullpath);
 			exit(1);

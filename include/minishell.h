@@ -56,24 +56,23 @@ typedef enum e_redir_type
 	NULL_REDIR = 0,//Creo que no es necesario
 	REDIR_OUTPUT = 3,//>
 	REDIR_INPUT = 4,//<
-	REDIR_OUTPUT_APPEND = 5,//>>
+	REDIR_OUTPUT_APPEND = 5,//>> 
 	HEREDOC_INPUT = 6//<<
 } 	t_redir_type;
 
 typedef struct s_redir
 {
-	char			*filename;//nombre del archivo
-	t_redir_type	redir_type;//tipo de redireccionador
+	char			*filename;
+	t_redir_type	redir_type;
 	struct s_redir	*next;
 }					t_redir;//contiene los datos de cada redirección
 
 typedef struct s_cmd
 {
-	char			**cmd_arg;//comando + argumentos/opciones
 	char			**command_and_arg;
 	t_redir			*redir;
 	struct s_cmd	*next;
-	char			*pipe_test;//lo borarre luego(carlos)
+	//char			*pipe_test;//lo borarre luego(carlos)
 }					t_cmd;//contiene los datos de cada pipe
 
 //-----carlos------------------
@@ -186,7 +185,7 @@ int		ca_strcmp(char *s1, char *s2);
 void	set_signals(void);
 
 /*-------------------------executor.c--------------------------*/
-int		init_momentaneo(char *av[], t_env *data);
+//int		init_momentaneo(char *av[], t_env *data);
 void	ft_get_paths(char **envp, t_env *data);
 int		search_cmds(t_env *data);
 int		executor(t_env *data);

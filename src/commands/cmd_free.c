@@ -17,4 +17,3 @@ void	cmd_free(t_cmd **lst)
 	}
 	(*lst) = NULL;
 }
-/*NO ESTOY SEGURO SI ESTA FUNCION ES CORRECTA*/

@@ -4,16 +4,17 @@
 /*----Imprime una lista t_redir----*/
 void	redir_print(t_redir *lst)
 {
-	t_redir	*aux;
-
-	aux = lst;
-	printf("--- %i NODOS t_redir ---\n", redir_size(lst));
-	while (aux)
+	printf("= t_redir list (%i) =\n", redir_size(lst));
+	if (!lst)
 	{
-		printf("%s$\n", aux->filename);
-        //printf("%i\n", aux->red_io);
-        printf("----------\n");
-		aux = aux->next;
+		printf("NULL");
+		return;
 	}
-	printf("\n");
+	while (lst)
+	{
+        printf("----\n");
+		printf("%s\n", lst->filename);
+        printf("%i\n", lst->redir_type);
+		lst = lst->next;
+	}
 }
