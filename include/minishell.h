@@ -54,14 +54,14 @@ typedef enum e_redir_type
 
 typedef struct s_redir
 {
-	char			*filename;//nombre del archivo
-	t_redir_type	redir_type;//tipo de redireccionador
+	char			*filename;
+	t_redir_type	redir_type;
 	struct s_redir	*next;
 }					t_redir;//contiene los datos de cada redirección
 
 typedef struct s_cmd
 {
-	char			**command_and_arg;//comando + argumentos/opciones
+	char			**command_and_arg;
 	t_redir			*redir;
 	struct s_cmd	*next;
 }					t_cmd;//contiene los datos de cada pipe

@@ -5,7 +5,6 @@ void	tok_free(t_tok **lst)
 {
 	t_tok	*aux;
 
-//	if (*lst != NULL && lst != NULL)
 	aux = (*lst);
 	while (aux)
 	{ 

@@ -5,7 +5,6 @@ void	redir_free(t_redir **lst)
 {
 	t_redir	*aux;
 
-//	if (*lst != NULL && lst != NULL)
 	aux = (*lst);
 	while (aux)
 	{

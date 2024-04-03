@@ -6,7 +6,6 @@ void	cmd_free(t_cmd **lst)
 {
 	t_cmd	*aux;
 
-//	if (*lst != NULL && lst != NULL)
 	aux = (*lst);
 	while (aux)
 	{
