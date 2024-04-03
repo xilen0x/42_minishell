@@ -32,7 +32,7 @@ int	main(int ac, char *av[], char *envp[])
 			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
-		    cmd->cmd1 = strdup(input);//aki voy
+		//cmd->cmd1 = strdup(input);//aki voy
 		if ((is_builtin(&cmds, ac, av, env)))
 		{
 			init_momentaneo(av, &env);
