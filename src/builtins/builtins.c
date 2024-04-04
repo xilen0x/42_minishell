@@ -22,7 +22,7 @@
 int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 {
 	(void)env;
-	/*if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)
+	/*if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)//implementar al final de todas las buildins
 	{
 		exit_status();
 		return (0);

@@ -1,48 +1,41 @@
 # include "minishell.h"
 
-int	builtin_echo_n(t_cmd	*cmd)
+void	print_without_quotes(char *str)
 {
-	int	i;
+	int	len;
 
-	i = 1;
-	if (((size_arr2d(cmd->command_and_arg)) > 1) && (ca_strcmp(cmd->command_and_arg[1], "-n") == 0))
-	{
-		while (cmd->command_and_arg[i])
-		{
-			printf ("%s", cmd->command_and_arg[i]);
-			i++;
-		}
-		return (0);
-	}
-	// else
-	// {
-	// 	while (cmd->command_and_arg[i])
-	// 	{
-	// 		printf ("%s\n", cmd->command_and_arg[i]);
-	// 		i++;
-	// 	}
-	// }
-	return (0);
+	len = ft_strlen(str);
+	if (len >= 2 && str[0] == '"' && str[len - 1] == '"')
+		printf("%.*s", len - 2, str + 1);
+	else
+		printf("%s", str);
 }
 
-int	builtin_echo(t_cmd	*cmd)
+int	builtin_echo(t_cmd *cmd)
 {
 	int	i;
+	int	print_newline;
 
 	i = 1;
-	if ((size_arr2d(cmd->command_and_arg)) == 1)
-		write (1, "\n", 1);
-	else if (((size_arr2d(cmd->command_and_arg)) > 1) && (!(ca_strcmp(cmd->command_and_arg[1], "-n") == 0)))
+	print_newline = 1;
+	if (size_arr2d(cmd->command_and_arg) == 1)
 	{
-		while (cmd->command_and_arg[i])
-		{
-			printf ("%s\n", cmd->command_and_arg[i]);
-			i++;
-		}
-		//write (1, "\n", 1);
+		printf("\n");
 		return (0);
 	}
-	// else
-	// 	builtin_echo_n(cmd);
+	else if (ca_strcmp(cmd->command_and_arg[1], "-n") == 0)
+	{
+		print_newline = 0;
+		i++;
+	}
+	while (cmd->command_and_arg[i])
+	{
+		print_without_quotes(cmd->command_and_arg[i]);
+		if (cmd->command_and_arg[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (print_newline)
+		printf("\n");
 	return (0);
 }
