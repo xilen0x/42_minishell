@@ -81,5 +81,5 @@ void	tokenizer(t_tok **tok, char *line)
 		}
 		i += len;
 	}
-//	tok_print(*tok);//ELIMINAR AL ENTREGAR
+	tok_print(*tok);//ELIMINAR AL ENTREGAR
 }

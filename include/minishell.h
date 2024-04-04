@@ -73,7 +73,7 @@ typedef struct s_cmd
 	t_redir			*redir;
 	struct s_cmd	*next;
 	//char			*pipe_test;//lo borarre luego(carlos)
-}					t_cmd;//contiene los datos de cada pipe
+}					t_cmd;//contiene los datos de cada pipe de la line
 
 //-----carlos------------------
 

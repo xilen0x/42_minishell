@@ -42,10 +42,10 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);
 		//	builtins(&cmds, env, ac, av);//de carlos
-		ft_get_paths(env.env_cpy, &env);
+//		ft_get_paths(env.env_cpy, &env);
 		//ft_open_files(av, &data);
-		search_cmds(&env);
-		executor(&env);
+//	search_cmds(&env);
+//		executor(&env);
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}
