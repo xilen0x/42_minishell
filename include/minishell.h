@@ -30,7 +30,7 @@
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
-typedef struct s_builtings t_built;
+//typedef struct s_builtings t_built;
 
 //---joan---
 typedef enum e_type
@@ -42,7 +42,7 @@ typedef enum e_type
 	SMALLER,
 	DOUBLE_GREATER,
 	DOUBLE_SMALLER
-} 	t_type;
+}	t_type;
 
 typedef struct s_tok
 {
@@ -58,7 +58,7 @@ typedef enum e_redir_type
 	REDIR_INPUT = 4,//<
 	REDIR_OUTPUT_APPEND = 5,//>> 
 	HEREDOC_INPUT = 6//<<
-} 	t_redir_type;
+}	t_redir_type;
 
 typedef struct s_redir
 {
@@ -192,9 +192,9 @@ int		exit_status(void);
 int		builtins(t_cmd *cmd, int ac, char *av[], t_env env);
 int		builtin_exit(t_cmd *cmd, int ac, char *av[]);
 int		builtin_pwd(void);
-int	builtin_cd(t_cmd *cmd, int ac);
-int	builtin_env(t_env env);
-//int	builtin_echo(t_cmd *cmd, int ac);
+int		builtin_cd(t_cmd *cmd, int ac);
+int		builtin_env(t_env env);
+int		builtin_echo(t_cmd *cmd);
 //int	builtin_export(t_cmd *cmd, t_env env, int ac);
 //int	builtin_unset(t_cmd *cmd, t_env env, int ac);
 
