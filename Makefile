@@ -78,9 +78,9 @@ FILES =	minishell.c \
 									redirs/redir_size.c \
 									parser/parser.c \
 									signals.c \
+									builtins/builtin_env.c \
 									builtins/builtin_cd.c \
 									#builtins/builtin_echo.c \
-									#builtins/builtin_env.c \
 									#builtins/builtin_export.c \
 									#builtins/builtin_unset.c \
 

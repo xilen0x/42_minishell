@@ -35,7 +35,7 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "pwd") == 0)
 	{
-	 	builtin_pwd();
+		builtin_pwd();
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
@@ -43,14 +43,14 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 		builtin_cd(cmd, ac);
 		return (0);
 	}
+	else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)
+	{
+		builtin_env(env);
+		return (0);
+	}
 	/*else if (ca_strcmp(cmd->cmd1, "echo") == 0)
 	{
 		builtin_echo(cmd, ac);
-		return (0);
-	}
-	else if (ca_strcmp(cmd->cmd1, "env") == 0)
-	{
-		builtin_env(env);
 		return (0);
 	}
 	else if (ca_strcmp(cmd->cmd1, "export") == 0)

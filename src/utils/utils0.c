@@ -67,3 +67,5 @@ int	exit_status(void)
 
 	return (num.exit_status);
 }
+
+/*nota: hacer funcion exit_status tipo getter y setter*/
