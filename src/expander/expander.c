@@ -27,6 +27,15 @@ int	check_for_dollar(nodo o char *str)
 
 
 }
+
+void expander(t_cmd **cmd, int exit)
+{
+	
+
+
+
+
+}
 /*--Funcion que hace el expander--*/
 //Recibira como args (t_cmd **cmd, la copia del env, exit_status???)
 
@@ -48,5 +57,9 @@ Si despues del '$' hay un '?' expande el exit_status del ultimo comando y si hay
 
 echo '$'+otros_caracteres = si los caracteres despues del $ coinciden EXACTAMENTE con una de las
  variables de env hasta antes del '=', lo sustituiremos en el WORD.
- 
+line: echo $USERhola
+ res:  (solo hace un \n)
+line: echo $?hola
+res : 0hola (expande el exit_status y le concatena 'hola')
+
 echo '$USERT' = esto solo nos da un salto de linea y vuelve a mostrar el prompt, porque no encuentra 
