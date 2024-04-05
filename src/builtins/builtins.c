@@ -40,7 +40,7 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
 	{
-		builtin_cd(cmd, ac);
+		builtin_cd(cmd);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)
@@ -64,8 +64,6 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 		return (0);
 	}*/
 	else
-	{
-		printf("bash: %s: command not found+++\n", cmd->command_and_arg[1]);
-	}
+		return (1);
 	return (0);
 }

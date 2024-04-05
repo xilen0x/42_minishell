@@ -6,7 +6,7 @@ int	main(int ac, char *av[], char *envp[])
 	char	*line;
 	t_env	env;
 	t_tok	*tok;
-	t_shell	main_struct;
+	//t_shell	main_struct;
 	t_cmd	*cmd;
 
 	tok = NULL;
@@ -16,7 +16,7 @@ int	main(int ac, char *av[], char *envp[])
 		ft_msgs(5);
 		exit(0);
 	}
-	main_struct.exit_status = 0;
+	//main_struct.exit_status = 0;
 	env.env_cpy = dup_arr2d(envp);
 	env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
@@ -39,11 +39,17 @@ int	main(int ac, char *av[], char *envp[])
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		builtins(cmd, ac, av, env);
-		//ft_get_paths(env.env_cpy, &env);
+		printf("%s\n", cmd->command_and_arg[0]);
+		printf("%s\n", cmd->command_and_arg[1]);
+		if (builtins(cmd, ac, av, env))
+		{
+			printf("no soy buildin\n");
+		}
+		ft_get_paths(env.env_cpy, &env);
 		//ft_open_files(av, &data);
 		//search_cmds(&env);
-		//executor(&env);
+		search_command_path(*cmd->command_and_arg, &env);
+		executor(&env);
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}

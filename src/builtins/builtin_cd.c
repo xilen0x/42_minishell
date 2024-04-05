@@ -2,10 +2,8 @@
 
 /*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
 o a una ruta absoluta o relativa*/
-int	builtin_cd(t_cmd	*cmd, int ac)
+int	builtin_cd(t_cmd	*cmd)
 {
-	(void)cmd;
-	(void)ac;
 	char	*home_dir;
 
 	if ((size_arr2d(cmd->command_and_arg)) == 1)

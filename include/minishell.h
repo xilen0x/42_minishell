@@ -73,7 +73,6 @@ typedef struct s_cmd
 	char			**command_and_arg;
 	t_redir			*redir;
 	struct s_cmd	*next;
-	//char			*pipe_test;//lo borarre luego(carlos)
 }					t_cmd;//contiene los datos de cada pipe
 
 //-----carlos------------------
@@ -88,8 +87,6 @@ typedef struct s_env
 	char	*val;
 	char	*type;
 	char	*str;
-	//t_built	*env_to_build;
-	//t_built	*to_built;
 	t_cmd	*to_cmd;
 }	t_env;
 
@@ -181,8 +178,9 @@ void	set_signals(void);
 /*---------------------------executor.c -------------------------*/
 //int		init_momentaneo(char *av[], t_env *data);
 void	ft_get_paths(char **envp, t_env *data);
-int		search_cmds(t_env *data);
+//int		search_cmds(t_env *data);
 int		executor(t_env *data);
+int	search_command_path(char *cmd, t_env *env);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
@@ -192,7 +190,7 @@ int		exit_status(void);
 int		builtins(t_cmd *cmd, int ac, char *av[], t_env env);
 int		builtin_exit(t_cmd *cmd, int ac, char *av[]);
 int		builtin_pwd(void);
-int		builtin_cd(t_cmd *cmd, int ac);
+int		builtin_cd(t_cmd *cmd);
 int		builtin_env(t_env env);
 int		builtin_echo(t_cmd *cmd);
 //int	builtin_export(t_cmd *cmd, t_env env, int ac);
