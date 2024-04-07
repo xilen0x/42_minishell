@@ -1,44 +1,38 @@
 #include "minishell.h"
 
-/*Función que obtiene y guarda los envp path*/
-void	ft_get_paths(char **envp, t_env *data)
-{
-	int	i;
+/*Verifica si en el comando, los argumentos o los archivos de 
+redireccion hay alguna variable que deba ser expandida*/
 
-	i = 0;
-	while (ft_strnstr(envp[i], "PATH=", 5) == NULL)
-		i++;
-	data->paths = ft_split(&envp[i][5], ':');
-}
-/*-Pre-expansor: verifica si hay algun '$' en 'str' y devuelve TRUE or FALSE*/
-//Si la WORD contiene, en alguna posicion '$' llamaremos a la funcion 'expander'.
-int	check_for_dollar(nodo o char *str)
+void	should_expand_var(t_cmd **cmd)
 {
 	size_t	i;
+	size_t	j;
+	t_cmd	*cmd_aux;
 
-	i = 0;
-	while (str[i])
+	i = 1;//porque el indice 0 es el commando y este no deberia tener '$'(a menos que sea literal' ' y no seria buena practica)
+	j = 0;
+	cmd_aux = *cmd;
+	while (cmd_aux != NULL)//recorre la lista t_cmd
 	{
-
-
-
+		while (cmd_aux->command_and_arg[i] != NULL)//recorre los elementos de la matriz del comando
+		{
+			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL)
+				ves a expander con este puntero (cmd_aux->command_and_arg[i]);//habra que mallocar de nuevo este *char
+			i++;
+		}
+		while (cmd_aux->redir)//recorre la lista redir
+		{
+			if (ft_strchr(cmd_aux->redir->filename, '$') != NULL)
+				ves a expander con este puntero (cmd_aux->redir->filename);
+			cmd_aux = cmd_aux->next;
+		}
+		cmd_aux = cmd_aux->next;
 	}
-
-
-
 }
 
-void expander(t_cmd **cmd, int exit)
-{
-	
-
-
-
-
-}
-/*--Funcion que hace el expander--*/
+/*--Funcion que hace la expansion--*/
 //Recibira como args (t_cmd **cmd, la copia del env, exit_status???)
-
+//contendra al inicio algunos protectores para detectar errores de sintaxis 
 	-verifica si despues de '$' hay un '?'
 
 
@@ -62,4 +56,4 @@ line: echo $USERhola
 line: echo $?hola
 res : 0hola (expande el exit_status y le concatena 'hola')
 
-echo '$USERT' = esto solo nos da un salto de linea y vuelve a mostrar el prompt, porque no encuentra 
+echo '$USERT' = $USER 
