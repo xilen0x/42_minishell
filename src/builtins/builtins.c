@@ -53,12 +53,12 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 		builtin_echo(cmd);
 		return (0);
 	}
-	/*else if (ca_strcmp(cmd->cmd1, "export") == 0)
+	else if (ca_strcmp(*cmd->command_and_arg, "export") == 0)
 	{
-		builtin_export(cmd, env, ac);
+		builtin_export(cmd, env);
 		return (0);
 	}
-	else if (ca_strcmp(cmd->cmd1, "unset") == 0)
+	/*else if (ca_strcmp(cmd->cmd1, "unset") == 0)
 	{
 		builtin_unset(cmd, env, ac);
 		return (0);

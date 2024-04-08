@@ -81,8 +81,8 @@ FILES =	minishell.c \
 									builtins/builtin_env.c \
 									builtins/builtin_cd.c \
 									builtins/builtin_echo.c \
-									#builtins/builtin_export.c \
-									#builtins/builtin_unset.c \
+									builtins/builtin_export.c \
+									#builtins/builtin_unset.c 
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

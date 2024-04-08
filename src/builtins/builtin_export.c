@@ -28,18 +28,18 @@ int	print_builtin_export_with_arg(char	**new_env)
 	return (0);
 }
 
-int	if_exist_builtin_export(t_built *cmd, t_env *env)
+int	if_exist_builtin_export(t_cmd *cmd, t_env *env)
 {
 	int		i;
 	size_t	len;
 
-	len = ft_strlen(cmd->path) + 1;
+	len = ft_strlen(*cmd->command_and_arg) + 1;
 	i = 0;
 	while (env->env_cpy[i])
 	{
-		if (ca_strcmp(env->env_cpy[i], cmd->path) == 0)
+		if (ca_strcmp(env->env_cpy[i], *cmd->command_and_arg) == 0)
 		{
-			ft_memcpy(env->env_cpy, cmd->path, len);
+			ft_memcpy(env->env_cpy, cmd->command_and_arg, len);
 			return (0);
 		}
 		i++;
@@ -49,7 +49,7 @@ int	if_exist_builtin_export(t_built *cmd, t_env *env)
 
 
 /*Funcion que agrega una nueva variable de entorno*/
-int	builtin_export_with_arg(t_built *cmd, t_env *env)
+int	builtin_export_with_arg(t_cmd *cmd, t_env *env)
 {
 	int		i;
 	char	**new_env;
@@ -72,7 +72,7 @@ int	builtin_export_with_arg(t_built *cmd, t_env *env)
 				return (0);
 			i++;
 		}
-		new_env[i] = ft_strdup(cmd->path);
+		new_env[i] = ft_strdup(*cmd->command_and_arg);
 		if (!new_env[i])
 			return (0);
 		new_env[i + 1] = NULL;
@@ -86,31 +86,40 @@ int	builtin_export_with_arg(t_built *cmd, t_env *env)
 
 /*builtin que agrega el string "declare -x " al output del export, al ejecutar 
 export sin argumentos*/
-int	builtin_export(t_built *cmd, t_env env, int ac)
+int	builtin_export(t_cmd *cmd, t_env env)
 {
 	int		i;
-	size_t	len;
-	char	*new_env_var;
+	//size_t	len;
+	//char	*new_env_var;
 
 	i = 0;
-	if (ac == 2)//si solo viene export
+	if (size_arr2d(cmd->command_and_arg) == 1)
 	{
-		while (env.export_cpy[i])
+		while (env.env_cpy[i])
 		{
-			len = ft_strlen(env.export_cpy[i]);
-			new_env_var = (char *)malloc((len + 12) * sizeof(char));
-			if (!new_env_var)
-				return (-1);
-			ft_memcpy(new_env_var, "declare -x ", 11);
-			ft_memcpy(new_env_var + 11, env.export_cpy[i], len + 1);
-			free(env.export_cpy[i]);
-			env.export_cpy[i] = new_env_var;
+			printf("declare -x %s\n", env.env_cpy[i]);
 			i++;
 		}
-		print_builtin_export(env);
+		return (0);
 	}
-	else// si viene por ej. 'export TEST=10'
-	 	builtin_export_with_arg(cmd, &env);
+	// else
+	// {
+	// 	while (env.export_cpy[i])
+	// 	{
+	// 		len = ft_strlen(env.export_cpy[i]);
+	// 		new_env_var = (char *)malloc((len + 12) * sizeof(char));
+	// 		if (!new_env_var)
+	// 			return (-1);
+	// 		ft_memcpy(new_env_var, "declare -x ", 11);
+	// 		ft_memcpy(new_env_var + 11, env.export_cpy[i], len + 1);
+	// 		free(env.export_cpy[i]);
+	// 		env.export_cpy[i] = new_env_var;
+	// 		i++;
+	// 	}
+	// 	print_builtin_export(env);
+	// }
+	// else// si viene por ej. 'export TEST=10'
+	//  	builtin_export_with_arg(cmd, &env);
 	return (0);
 }
 

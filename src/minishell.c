@@ -18,7 +18,7 @@ int	main(int ac, char *av[], char *envp[])
 	}
 	//main_struct.exit_status = 0;
 	env.env_cpy = dup_arr2d(envp);
-	env.export_cpy = dup_arr2d(envp);
+	//env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	//init_msg();
 	bg_color();
