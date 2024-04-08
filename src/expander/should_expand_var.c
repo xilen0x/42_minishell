@@ -5,39 +5,52 @@ redireccion hay algun '$' que mas adelante debara ser expandido*/
 void	should_expand_var(t_cmd **cmd)
 {
 	size_t	i;
-	size_t	j;
+	size_t	j = 0;//ELIMINAR ANTES DE ENTREGA
 	t_cmd	*cmd_aux;
+	t_redir	*redir_aux;
 
-	i = 1;//porque el indice 0 es el commando y este no deberia tener '$'(a menos que sea literal' ' y no seria buena practica)
-	j = 0;
 	cmd_aux = *cmd;
 	while (cmd_aux != NULL)//recorre la lista t_cmd
 	{
-		while (cmd_aux->command_and_arg[i] != NULL)//recorre los elementos de la matriz del comando
+		i = 1;//porque el indice 0 es el commando y este no deberia tener '$'(a menos que sea literal' ' y no seria buena practica)
+		printf("--nodo %zu--\n", j++);
+		while (cmd_aux->command_and_arg[i] != NULL)//recorre la matriz del comando
 		{
 			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL)
-				expansor(cmd_aux->command_and_arg[i]);//mallocarlo de nuevo expandido y liberar el viejo
+				printf("Encontrado $ en el indice %zu de la matriz\n", i);//ELIMINAR ANTES DE ENTREGA
+//				expansor(cmd_aux->command_and_arg[i]);//mallocarlo de nuevo expandido y liberar el viejo
 			i++;
 		}
-		while (cmd_aux->redir)//recorre la lista redir
+		redir_aux = cmd_aux->redir;
+		while (redir_aux != NULL)//recorre la lista redir
 		{
-			if (ft_strchr(cmd_aux->redir->filename, '$') != NULL)
-				expansor(cmd_aux->redir->filename);
-			cmd_aux = cmd_aux->next;
+			if (ft_strchr(redir_aux->filename, '$') != NULL)
+				printf("Encontrado $ en t_redir\n");//ELIMINAR ANTES DE ENTREGA
+//				expansor(redir_aux->filename);
+			redir_aux = redir_aux->next;
 		}
 		cmd_aux = cmd_aux->next;
 	}
+	printf("\n\n");//ELIMINAR ANTES DE ENTREGA
 }
-
 /*--Funcion que hace la expansion--*/
 //Recibira como args (t_cmd **cmd, la copia del env, exit_status???)
 //contendra al inicio algunos protectores para detectar errores de sintaxis 
-
+/*
 void	expansor(char **str)
 {
 
 
 }	-verifica si despues de '$' hay un '?'
+
+--SI NO HAY CIERRE DE COMILLAS lo gestionaré como => syntax error near token 'print_del_token'
+Al inicio: Las comillas le dicen al expansor si la variable se ha de expandir o no.
+gestionar comillas al inicio de expander con una struct (comill single open,
+ comill single closed, comill dob single, comill dob closed) booleana (TRUE = abierta, FALSE = cerrada o al reves)
+con 4 if nos dira si esta abierta la simple o la doble y si esta cerrada la simple o la doble.
+Ej: if ()
+
+
 
 
 Despues del '$' para que sea una variable valida, 
@@ -54,6 +67,7 @@ Si despues del '$' hay un '?' expande el exit_status del ultimo comando y si hay
 '$' = bash: $: command not found
 
 
+
 line: echo $USERhola
  res:  (solo hace un \n)
  ---------------
@@ -62,3 +76,4 @@ res : 0hola (expande el exit_status y le concatena 'hola')
 
 A CONTINUACION RESOLVER EL QUOTE REMOVAL
 echo '$USERT' = $USER 
+*/

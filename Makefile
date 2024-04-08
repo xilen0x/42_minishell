@@ -82,6 +82,7 @@ FILES =	minishell.c \
 									redirs/redir_print.c \
 									redirs/redir_size.c \
 									parser/parser.c \
+									expander/should_expand_var.c\
 									signals.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))

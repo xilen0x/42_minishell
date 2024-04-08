@@ -24,7 +24,7 @@ int	tok_len(char *line, t_tok **new_tok)
 		&& *(line + len) != '|' && *(line + len) != '<' \
 		&& *(line + len) != '>' && *(line + len) != '\0'))//si es una WORD, busco su len
 		{
-			if (*(line + len) == '\'' || *(line + len) == '"')
+			if (*(line + len) == '\'' || *(line + len) == '"')//si hay comillas
 			{
 				c = *(line + len);//inicializo 'c' con el caracter de comilla encontrado
 				len++;
@@ -32,7 +32,7 @@ int	tok_len(char *line, t_tok **new_tok)
 					len++;
 			}
 			if (*(line + len))
-			len++;
+				len++;
 		}
 	}
 	return (len);
