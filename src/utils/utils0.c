@@ -17,6 +17,7 @@ void	init_msg(void)
 int	bg_color(void)
 {
 	printf("\033[44m"); // Imprime la secuencia de escape ANSI para cambiar el fondo a azul
+	//printf("\033[40m");
 	printf("\033[2J");// Limpia la pantalla para aplicar el nuevo color de fondo en toda la pantalla
 	return (0);
 }
@@ -43,17 +44,17 @@ int	ft_msgs(int n)
 	else if (n == 2)
 	{
 		write (2, "No such file or directory\n", 26);
-		exit(1);
+		return (1);
 	}
 	else if (n == 3)
 	{
 		write (2, "bash: outfile: Permission denied\n", 33);
-		exit(1);
+		return (1);
 	}
 	else if (n == 4)
 	{
 		write (2, "Command n*ot found!\n", 19);
-		exit(1);
+		return (1);
 	}
 	else
 		write (2, "Run minishell without arguments!\n", 33);

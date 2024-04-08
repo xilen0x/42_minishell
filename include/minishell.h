@@ -191,7 +191,7 @@ int		builtins(t_cmd *cmd, int ac, char *av[], t_env env);
 int		builtin_exit(t_cmd *cmd, int ac, char *av[]);
 int		builtin_pwd(void);
 int		builtin_cd(t_cmd *cmd, t_env env);
-int		builtin_env(t_env env);
+int		builtin_env(t_cmd *cmd, t_env env);
 int		builtin_echo(t_cmd *cmd);
 //int	builtin_export(t_cmd *cmd, t_env env, int ac);
 //int	builtin_unset(t_cmd *cmd, t_env env, int ac);

@@ -45,7 +45,7 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)
 	{
-		builtin_env(env);
+		builtin_env(cmd, env);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "echo") == 0)

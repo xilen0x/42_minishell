@@ -41,6 +41,7 @@ int	main(int ac, char *av[], char *envp[])
 	  	parser(&cmd, tok);
 		//printf("%s\n", cmd->command_and_arg[0]);
 		//printf("%s\n", cmd->command_and_arg[1]);
+		//redireciones...
 		if (builtins(cmd, ac, av, env))
 		{
 			ft_get_paths(env.env_cpy, &env);
