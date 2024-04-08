@@ -46,38 +46,18 @@ int	search_command_path(char *cmd, t_env *env)
 	return (1);
 }
 
-/*Función puente que envia los comandos 1 a search_command_path */
-// int	search_cmds(t_env *env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (search_command_path(env->to_cmd->command_and_arg, env) == 1)//Exception has occurred: Exception - EXC_BAD_ACCESS (code=1, address=0x0)
-// 	{
-// 		ft_msgs(4);
-// 		return (1);
-// 	}
-// 	/*if (search_command_path2(env->args_2[0], env) == 1)
-// 	{
-// 		ft_errors(4);
-// 		return (1);
-// 	}*/
-// 	return (0);
-// }
-
+/*Funcion que ejecuta un comando dado(no builtin)*/
 int	executor(t_env *env, t_cmd cmd)
 {
 	//int		fd[2];
 	pid_t	pid;
 
-	//printf("%s", cmd.command_and_arg[0]);
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("Fork failed");
 		exit(1);
 	}
-	//execve(env->cmd_fullpath, cmd.command_and_arg, env->env_cpy);
 	else if (pid == 0)
 	{
 		if (execve(env->cmd_fullpath, cmd.command_and_arg, env->env_cpy) < 0)

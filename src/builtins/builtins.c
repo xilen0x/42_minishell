@@ -40,7 +40,7 @@ int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
 	{
-		builtin_cd(cmd);
+		builtin_cd(cmd, env);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)

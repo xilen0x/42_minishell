@@ -41,15 +41,14 @@ int	main(int ac, char *av[], char *envp[])
 	  	parser(&cmd, tok);
 		//printf("%s\n", cmd->command_and_arg[0]);
 		//printf("%s\n", cmd->command_and_arg[1]);
-		// if (builtins(cmd, ac, av, env))
-		// {
-		// 	printf("no soy buildin\n");
-		// }
-		ft_get_paths(env.env_cpy, &env);
-		//ft_open_files(av, &data);
-		//search_cmds(&env);
-		search_command_path(*cmd->command_and_arg, &env);
-		executor(&env, *cmd);
+		if (builtins(cmd, ac, av, env))
+		{
+			ft_get_paths(env.env_cpy, &env);
+			//ft_open_files(av, &data);
+			//search_cmds(&env);
+			search_command_path(*cmd->command_and_arg, &env);
+			executor(&env, *cmd);
+		}
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}
