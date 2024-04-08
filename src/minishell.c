@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARIABLE **ENVIRON
 {
 	char	*line;
 	t_env	env;
@@ -41,7 +41,7 @@ int	main(int ac, char *av[], char *envp[])
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		expander(&cmd, exit);
+//		expander(&cmd, exit);
 		//	builtins(&cmds, env, ac, av);//de carlos
 //		ft_get_paths(env.env_cpy, &env);
 		//ft_open_files(av, &data);
