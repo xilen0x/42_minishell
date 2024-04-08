@@ -179,8 +179,8 @@ void	set_signals(void);
 //int		init_momentaneo(char *av[], t_env *data);
 void	ft_get_paths(char **envp, t_env *data);
 //int		search_cmds(t_env *data);
-int		executor(t_env *data);
-int	search_command_path(char *cmd, t_env *env);
+int		executor(t_env *data, t_cmd cmd);
+int		search_command_path(char *cmd, t_env *env);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);

@@ -65,35 +65,35 @@ int	search_command_path(char *cmd, t_env *env)
 // 	return (0);
 // }
 
-int	executor(t_env *env)
+int	executor(t_env *env, t_cmd cmd)
 {
 	//int		fd[2];
 	pid_t	pid;
 
+	//printf("%s", cmd.command_and_arg[0]);
 	pid = fork();
 	if (pid < 0)
 	{
 		perror("Fork failed");
 		exit(1);
 	}
-	execve(env->cmd_fullpath, &env->to_cmd->command_and_arg[1], env->env_cpy);//aki voy...error segmentation fault!!!
-	// else if (pid == 0)
-	// {
-	// 	printf("hijo\n");
-	// 	// if (execve(env->cmd_fullpath, env->to_cmd->command_and_arg, env->env_cpy) < 0)
-	// 	// {
-	// 	// 	perror(env->cmd_fullpath);
-	// 	// 	exit(1);
-	// 	// }
-	// 	// close(fd[1]);
-	// 	exit(0);
-	// }
-	// else
-	// {
-	// 	wait(NULL);
-	// 	//execve(env->cmd2_fullpath, env->args_2, NULL);
-	// 	//close(fd[0]);
-	// 	return(0);
-	// }
+	//execve(env->cmd_fullpath, cmd.command_and_arg, env->env_cpy);
+	else if (pid == 0)
+	{
+		if (execve(env->cmd_fullpath, cmd.command_and_arg, env->env_cpy) < 0)
+		{
+			perror(env->cmd_fullpath);
+			exit(1);
+		}
+		//close(fd[1]);
+		exit(0);
+	}
+	else
+	{
+		wait(NULL);
+		//execve(env->cmd2_fullpath, env->args_2, NULL);
+		//close(fd[0]);
+		return(0);
+	}
 	return(0);
 }
