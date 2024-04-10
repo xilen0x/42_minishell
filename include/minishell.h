@@ -185,6 +185,8 @@ int		search_command_path(char *cmd, t_env *env);
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
 int		exit_status(void);
+/*---------------------------utils1.c -------------------------*/
+int		ca_strchr(const char *s, int c);
 
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, int ac, char *av[], t_env env);
