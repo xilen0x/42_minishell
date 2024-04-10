@@ -104,24 +104,6 @@ typedef struct s_shell
 	// char	**args;
 }	t_shell;
 
-/*typedef struct s_builtings
-{
-	//char	*echo_n;
-	// char	*cd;
-	// char	*pwd;
-	// char	*export;
-	// char	*unset;
-	//char	*env;
-	// char	*exit;
-	char	*cmd1;
-	char	*path;//borrar luego(posiblemente)
-	//char	*the_string;
-	t_env	*to_env;
-}	t_built;*/
-
-//char	**env_cpy(char *e[]);
-//char	**dup_array_2d(char *envp[]);
-
 
 /*---------------------------minishell -------------------------*/
 int		bg_color(void);
@@ -197,5 +179,8 @@ int		builtin_env(t_cmd *cmd, t_env env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env env);
 //int	builtin_unset(t_cmd *cmd, t_env env, int ac);
+
+/*--------------------------- builtin export -------------------------*/
+unsigned int	check_export(char *arg);
 
 #endif

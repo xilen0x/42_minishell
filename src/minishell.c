@@ -18,7 +18,7 @@ int	main(int ac, char *av[], char *envp[])
 	}
 	//main_struct.exit_status = 0;
 	env.env_cpy = dup_arr2d(envp);
-	//env.export_cpy = dup_arr2d(envp);
+	env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	//init_msg();
 	bg_color();
@@ -29,7 +29,6 @@ int	main(int ac, char *av[], char *envp[])
 		if (!line)
 		{
 			printf("exit\n");//en el cado del ctrl-D
-			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
 		if (line && *line)
@@ -39,8 +38,6 @@ int	main(int ac, char *av[], char *envp[])
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		//printf("%s\n", cmd->command_and_arg[0]);
-		//printf("%s\n", cmd->command_and_arg[1]);
 		//redireciones...
 		if (builtins(cmd, ac, av, env))
 		{
@@ -50,8 +47,11 @@ int	main(int ac, char *av[], char *envp[])
 			search_command_path(*cmd->command_and_arg, &env);
 			executor(&env, *cmd);
 		}
-		tok_free(&tok);
-		cmd_free(&cmd);
+		if (cmd || tok)//verificar si es necesario este if
+		{
+			cmd_free(&cmd);
+			tok_free(&tok);
+		}
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);

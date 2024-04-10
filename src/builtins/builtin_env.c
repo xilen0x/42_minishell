@@ -1,4 +1,5 @@
-# include "minishell.h"
+
+#include "minishell.h"
 
 /*builtin que imprime el environment(la copia)*/
 int	builtin_env(t_cmd *cmd, t_env env)
@@ -7,7 +8,7 @@ int	builtin_env(t_cmd *cmd, t_env env)
 
 	i = 0;
 	if (size_arr2d(cmd->command_and_arg) > 1)
-	{
+	{//casos especiales
 		if ((ca_strcmp(cmd->command_and_arg[1], "test") == 0) || \
 		(ca_strcmp(cmd->command_and_arg[1], "true") == 0) || \
 		(ca_strcmp(cmd->command_and_arg[1], "false") == 0))

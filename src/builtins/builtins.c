@@ -21,7 +21,6 @@
 //int	builtings(t_built	*cmd, char	**env, int ac)
 int	builtins(t_cmd *cmd, int ac, char *av[], t_env env)
 {
-	(void)env;
 	/*if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)//implementar al final de todas las buildins
 	{
 		exit_status();

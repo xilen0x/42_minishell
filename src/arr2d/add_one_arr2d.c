@@ -19,8 +19,9 @@ char	**add_one_arr2d(char **arr2d, char *new)
 		new_arr2d[i] = ft_strdup(arr2d[i]);
 		i++;
 	}
+	i--;//
 	new_arr2d[i] = ft_strdup(new);
 	new_arr2d[i + 1] = NULL;
-	free_arr2d(arr2d);
+	//free_arr2d(arr2d);
 	return (new_arr2d);
 }
