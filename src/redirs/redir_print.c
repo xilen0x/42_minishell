@@ -4,7 +4,7 @@
 /*----Imprime una lista t_redir----*/
 void	redir_print(t_redir *lst)
 {
-	printf("= t_redir list (%i) =\n", redir_size(lst));
+	printf("redirs\n");
 	if (!lst)
 	{
 		printf("NULL");
@@ -12,9 +12,7 @@ void	redir_print(t_redir *lst)
 	}
 	while (lst)
 	{
-        printf("----\n");
-		printf("%s\n", lst->filename);
-        printf("%i\n", lst->redir_type);
+		printf("   %s (%i)\n", lst->filename, lst->redir_type);
 		lst = lst->next;
 	}
 }

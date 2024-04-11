@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-/*Verifica si en el comando, los argumentos o los archivos de 
-redireccion hay algun '$' que mas adelante debara ser expandido*/
+/*Verifica si en el array de comandos o en la lista de 
+redirecciones hay algun '$' que debiera ser expandido*/
 void	should_expand_var(t_cmd **cmd)
 {
 	size_t	i;
@@ -13,20 +13,22 @@ void	should_expand_var(t_cmd **cmd)
 	while (cmd_aux != NULL)//recorre la lista t_cmd
 	{
 		i = 1;//porque el indice 0 es el commando y este no deberia tener '$'(a menos que sea literal' ' y no seria buena practica)
-		printf("--nodo %zu--\n", j++);
+		printf("--scanned $ in command %zu--\n", j++);
 		while (cmd_aux->command_and_arg[i] != NULL)//recorre la matriz del comando
 		{
-			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL)
-				printf("Encontrado $ en el indice %zu de la matriz\n", i);//ELIMINAR ANTES DE ENTREGA
-//				expansor(cmd_aux->command_and_arg[i]);//mallocarlo de nuevo expandido y liberar el viejo
+			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL)//si encuentra un '$'
+				printf("	$ en indice %zu de la matriz\n", i);//ELIMINAR ANTES DE ENTREGA
+//				if (!is_single_quoted(cmd_aux->command_and_arg[i])) return TRUE o FALSE. Si no en te, NO s'ha d'expandir.		
+//					expansor(cmd_aux->command_and_arg[i]);//mallocarlo de nuevo expandido y liberar el viejo
 			i++;
 		}
 		redir_aux = cmd_aux->redir;
 		while (redir_aux != NULL)//recorre la lista redir
 		{
 			if (ft_strchr(redir_aux->filename, '$') != NULL)
-				printf("Encontrado $ en t_redir\n");//ELIMINAR ANTES DE ENTREGA
-//				expansor(redir_aux->filename);
+				printf("	$ en t_redir\n");//ELIMINAR ANTES DE ENTREGA
+//				if (!is_single_quoted(redir_aux->filename)) return TRUE o FALSE. Si no en te, NO s'ha d'expandir.		
+//					expansor(cmd_aux->command_and_arg[i]);//mallocarlo de nuevo expandido y liberar el viejo
 			redir_aux = redir_aux->next;
 		}
 		cmd_aux = cmd_aux->next;

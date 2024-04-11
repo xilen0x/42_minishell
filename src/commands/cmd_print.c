@@ -4,24 +4,28 @@
 
 void	cmd_print(t_cmd *lst)
 {
-	int		i;
+	int	i;
+	int	j;
 
-	printf("=== t_cmd list (%i) ===\n", cmd_size(lst));
+	j = 0;
 	while (lst != NULL)
 	{
-			i = 0;
-			while (lst->command_and_arg[i] != NULL)
+		i = 0;
+		printf("=== command %i ===\n", j);
+		while (lst->command_and_arg[i] != NULL)
 			{
-				printf("	%s\n", lst->command_and_arg[i]);
+				printf("   %s\n", lst->command_and_arg[i]);
 				i++;
 			}
-			printf("\n");
-			if (lst->redir != NULL)
-				redir_print(lst->redir);
-			else
-				printf("t_dir = NULL\n");
-			printf("======================\n");
-			lst = lst->next;
+		printf("\n");
+		if (lst->redir != NULL)
+			redir_print(lst->redir);
+		else
+			printf("redirs = NULL\n");
+
+		printf("\n");
+		j++;
+		lst = lst->next;
 	}
 	printf("\n");
 }
