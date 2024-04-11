@@ -64,6 +64,42 @@ unsigned int	check_export(char *arg)
 	return (0);
 }
 
+// int	var_exist(t_cmd *cmd, t_env *env)
+// {
+// 	int	i;
+// 	size_t	len;
+
+// 	i = 0;
+// 	len = size_arr2d(&cmd->command_and_arg[1]);
+// 	while (ft_strnstr(env->env_cpy[i], cmd->command_and_arg[1], len) == NULL)
+// 		i++;
+// 	i = 1;
+// 	while (env->env_cpy[i])
+// 	{
+// 		if (ca_strcmp(env->env_cpy[i], cmd->command_and_arg[1]) == 0)
+// 		{
+// 			printf("SI existe la variable!\n");
+// 			return (1);
+// 		}
+// 		i++;
+// 	}
+// 	printf("NO existe la variable!\n");
+// 	return (0);
+// }
+
+int variable_exists(t_env env, const char *variable)
+{
+    int i = 0;
+    while (env.env_cpy[i]) {
+        if (ft_strncmp(env.env_cpy[i], variable, 4) == 0)//cambiar este 4 por  el len de la variable
+		{
+            return 1; // La variable existe
+        }
+        i++;
+    }
+    return 0;
+}
+
 /*Funcion que agrega una nueva variable de entorno*/
 int	builtin_export(t_cmd *cmd, t_env *env)
 {
@@ -81,49 +117,34 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 	}
 	else// para el caso tipo 'export TEST=10'
 	{
-		if (check_export(cmd->command_and_arg[1]) == 1)
+		//const char *variable_to_check = "MAIL";
+		//if(var_exist(cmd, &env))//funcion q comprueba si existe la variable aqui...
+		if (variable_exists(*env, cmd->command_and_arg[1]))
 		{
-			env->env_cpy = add_one_arr2d(env->env_cpy, cmd->command_and_arg[1]);
-			i = 0;
-			while (env->env_cpy[i])
-			{
-				printf("%s\n", env->env_cpy[i]);
-				i++;
-			}
-			return (0);
+			printf("SI existe la variable!\n");
 		}
-		else if (check_export(cmd->command_and_arg[1]) == 2)
+		else
 		{
-			//env.env_cpy = add_one_arr2d(cmd->command_and_arg, cmd->command_and_arg[1]);
-			printf("soy un +=\n");
-			return (0);
+			printf("NO existe la variable!\n");
 		}
+		
+		// if (check_export(cmd->command_and_arg[1]) == 1)
+		// {
+		// 	env->env_cpy = add_one_arr2d(env->env_cpy, cmd->command_and_arg[1]);
+		// 	i = 0;
+		// 	// while (env->env_cpy[i])
+		// 	// {
+		// 	// 	printf("%s\n", env->env_cpy[i]);
+		// 	// 	i++;
+		// 	// }
+		// 	return (0);
+		// }
+		// else if (check_export(cmd->command_and_arg[1]) == 2)
+		// {
+		// 	//env.env_cpy = add_one_arr2d(cmd->command_and_arg, cmd->command_and_arg[1]);
+		// 	printf("soy un +=\n");
+		// 	return (0);
+		// }
 	}
 	return (0);
 }
-
-/**********
-int main(int argc, char *argv[]) {
-    char **arr2d = argv; // Capturando la entrada del entorno
-    char *new = "HOLAMUNDO";
-    char **result = add_one_arr2d(arr2d, new);
-
-    if (result == NULL) {
-        printf("Error: Fallo al asignar memoria.\n");
-        return 1;
-    }
-
-    // Imprimiendo el nuevo arreglo
-    printf("Nuevo arreglo:\n");
-    for (int i = 0; result[i] != NULL; i++) {
-        printf("%s\n", result[i]);
-    }
-
-    // Liberando memoria
-    for (int i = 0; result[i] != NULL; i++) {
-        free(result[i]);
-    }
-    free(result);
-
-    return 0;
-}*/
