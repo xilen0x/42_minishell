@@ -18,7 +18,6 @@ int	main(int ac, char *av[], char *envp[])
 	}
 	//main_struct.exit_status = 0;
 	env.env_cpy = dup_arr2d(envp);
-	env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	//init_msg();
 	bg_color();
@@ -39,7 +38,7 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);
 		//redireciones...
-		if (builtins(cmd, ac, av, env))
+		if (builtins(cmd, ac, av, &env))
 		{
 			ft_get_paths(env.env_cpy, &env);
 			//ft_open_files(av, &data);
