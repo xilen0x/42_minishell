@@ -87,13 +87,18 @@ unsigned int	check_export(char *arg)
 // 	return (0);
 // }
 
-int variable_exists(t_env env, const char *variable)
+int variable_exists(t_env env, char *variable)
 {
-    int i = 0;
-    while (env.env_cpy[i]) {
-        if (ft_strncmp(env.env_cpy[i], variable, 4) == 0)//cambiar este 4 por  el len de la variable
+    int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(variable);
+    while (env.env_cpy[i])
+	{
+        if (ft_strncmp(env.env_cpy[i], variable, len) == 0)
 		{
-            return 1; // La variable existe
+            return (1);
         }
         i++;
     }
