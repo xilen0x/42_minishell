@@ -13,7 +13,7 @@ int	main(int ac, char *av[], char *envp[])
 	cmd = NULL;
 	if (ac != 1 || av[1])
 	{
-		ft_msgs(5);
+		ft_msgs(10);
 		exit(0);
 	}
 	//main_struct.exit_status = 0;

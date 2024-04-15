@@ -15,3 +15,10 @@ int	ca_strchr(const char *s, int c)
 		return (0);
 	return (0);
 }
+
+//from builtin_export:
+			// while (env->env_cpy[i])
+			// {
+			// 	printf("%s\n", env->env_cpy[i]);
+			// 	i++;
+			// }

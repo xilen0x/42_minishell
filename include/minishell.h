@@ -80,7 +80,7 @@ typedef struct s_cmd
 typedef struct s_env
 {
 	char	**env_cpy;
-	char	**export_cpy;
+	// char	**export_cpy;
 	char	**paths;
 	char	*cmd_fullpath;
 	char	*key;

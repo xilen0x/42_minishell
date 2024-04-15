@@ -56,6 +56,11 @@ int	ft_msgs(int n)
 		write (2, "Command n*ot found!\n", 19);
 		return (1);
 	}
+	else if (n == 5)
+	{
+		write (2, "not a valid identifier\n", 23);
+		return (1);
+	}
 	else
 		write (2, "Run minishell without arguments!\n", 33);
 	return (1);

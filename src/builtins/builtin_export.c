@@ -87,28 +87,31 @@ unsigned int	check_export(char *arg)
 // 	return (0);
 // }
 
-int variable_exists(t_env env, char *variable)
+int	variable_exists(t_env env, char *variable)
 {
-    int	i;
+	int	i;
 	int	len;
 
 	i = 0;
-	len = ft_strlen(variable);
-    while (env.env_cpy[i])
+	len = 0;
+	while (variable[len] != '=')
+		len++;
+	while (env.env_cpy[i])
 	{
-        if (ft_strncmp(env.env_cpy[i], variable, len) == 0)
+		if (ft_strncmp(env.env_cpy[i], variable, len) == 0)
 		{
-            return (1);
-        }
-        i++;
-    }
-    return 0;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 /*Funcion que agrega una nueva variable de entorno*/
 int	builtin_export(t_cmd *cmd, t_env *env)
 {
 	int		i;
+	int		len;
 
 	i = 0;
 	if (size_arr2d(cmd->command_and_arg) == 1)// para el caso tipo 'export'
@@ -120,36 +123,45 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 		}
 		return (0);
 	}
-	else// para el caso tipo 'export TEST=10'
+	else
 	{
-		//const char *variable_to_check = "MAIL";
-		//if(var_exist(cmd, &env))//funcion q comprueba si existe la variable aqui...
-		if (variable_exists(*env, cmd->command_and_arg[1]))
+		i = 0;
+		if (check_export(cmd->command_and_arg[1]) == 1)
 		{
-			printf("SI existe la variable!\n");
+			if (variable_exists(*env, cmd->command_and_arg[1]))
+			{
+				printf("SI existe la variable!\n");
+				//len = size_arr2d(&cmd->command_and_arg[1]);
+				len = 0;
+				while (cmd->command_and_arg[1][len] != '=')
+					len++;
+				while (ft_strnstr(env->env_cpy[i], cmd->command_and_arg[1], len) != NULL)
+					i++;
+				env->env_cpy[i] = ft_strdup(cmd->command_and_arg[1]);//tiene q sobrescribirla
+			}
+			else
+			{
+				printf("NO existe la variable!\n");
+				env->env_cpy = add_one_arr2d(env->env_cpy, cmd->command_and_arg[1]);
+			}
+			return (0);
 		}
-		else
-		{
-			printf("NO existe la variable!\n");
-		}
-		
-		// if (check_export(cmd->command_and_arg[1]) == 1)
-		// {
-		// 	env->env_cpy = add_one_arr2d(env->env_cpy, cmd->command_and_arg[1]);
-		// 	i = 0;
-		// 	// while (env->env_cpy[i])
-		// 	// {
-		// 	// 	printf("%s\n", env->env_cpy[i]);
-		// 	// 	i++;
-		// 	// }
-		// 	return (0);
-		// }
 		// else if (check_export(cmd->command_and_arg[1]) == 2)
 		// {
-		// 	//env.env_cpy = add_one_arr2d(cmd->command_and_arg, cmd->command_and_arg[1]);
-		// 	printf("soy un +=\n");
+		// 	//printf("soy un +=\n");
+		// 	if (variable_exists(*env, cmd->command_and_arg[1]))
+		// 	{
+		// 		//printf("SI existe la variable!\n");
+		// 	}
+		// 	else
+		// 	{
+		// 		//printf("NO existe la variable!\n");
+		// 		//env.env_cpy = add_one_arr2d(cmd->command_and_arg, cmd->command_and_arg[1]);
+		// 	}
 		// 	return (0);
 		// }
+		else
+			ft_msgs(5);
 	}
 	return (0);
 }
