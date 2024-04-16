@@ -7,10 +7,12 @@ int	main(int ac, char *av[], char *envp[])
 	t_env	*env;
 	t_tok	*tok;
 	t_cmd	*cmd;
+	t_exe	*exe;
 
 	tok = NULL;
 	env = NULL;
 	cmd = NULL;
+	exe = NULL;
 	if (ac != 1 || av[1])
 	{
 		ft_msgs(10);
@@ -38,15 +40,14 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);
 		//redireciones...
-		builtins(cmd, ac, av, env);//borrar luego esta linea
-		// if (builtins(cmd, ac, av, &env))
-		// {
-		// 	ft_get_paths(env.env_cpy, &env);
-		// 	//ft_open_files(av, &data);
-		// 	//search_cmds(&env);
-		// 	search_command_path(*cmd->command_and_arg, &env);
-		// 	executor(&env, *cmd);
-		// }
+		if (builtins(cmd, av, env, exe))//aqui voy!!!
+		{
+			get_paths(env);
+			//ft_open_files(av, &data);
+			//search_cmds(&env);
+			search_command_path(*cmd->command_and_arg, exe);
+			//executor(env, *cmd);
+		}
 		if (cmd || tok)//verificar si es necesario este if
 		{
 			cmd_free(&cmd);
