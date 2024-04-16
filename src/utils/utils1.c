@@ -1,3 +1,5 @@
+#include "minishell.h"
+
 /*funcion que busca un caracter en un string y retorna 1 si lo encuentra*/
 int	ca_strchr(const char *s, int c)
 {

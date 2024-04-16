@@ -49,6 +49,7 @@ FILES =	minishell.c \
 									utils/utils_libft.c \
 									utils/utils0.c \
 									utils/utils1.c \
+									utils/utils2.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \

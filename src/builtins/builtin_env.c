@@ -21,11 +21,12 @@ int	builtin_env(t_cmd *cmd, t_env env)
 	}
 	else
 	{
-		while (env.env_cpy[i])
-		{
-			printf ("%s\n", env.env_cpy[i]);
-			i++;
-		}
+		// while (env.env_cpy[i])
+		// {
+		// 	printf ("%s\n", env.env_cpy[i]);
+		// 	i++;
+		// }
+		ft_printstack(&env);
 	}
 	return (0);
 }

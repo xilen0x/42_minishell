@@ -79,15 +79,15 @@ typedef struct s_cmd
 
 typedef struct s_env
 {
-	char	**env_cpy;
-	// char	**export_cpy;
-	char	**paths;
-	char	*cmd_fullpath;
-	char	*key;
-	char	*val;
-	char	*type;
-	char	*str;
-	t_cmd	*to_cmd;
+	char			**env_cpy;
+	char			**paths;
+	char			*cmd_fullpath;
+	char			*key;
+	char			*val;
+	//char	*type;
+	//char	*str;
+	//t_cmd	*to_cmd;
+	struct s_env	*next;
 }	t_env;
 
 typedef struct s_shell
@@ -167,8 +167,13 @@ int		search_command_path(char *cmd, t_env *env);
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
 int		exit_status(void);
+
 /*---------------------------utils1.c -------------------------*/
 int		ca_strchr(const char *s, int c);
+
+/*---------------------------utils2.c -------------------------*/
+t_env	*init_list(char **envp, t_env *env_struct);
+void	ft_printstack(t_env *env_struct);
 
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, int ac, char *av[], t_env *env);

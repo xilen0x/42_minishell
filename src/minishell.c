@@ -4,12 +4,12 @@
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
-	t_env	env;
+	t_env	*env;
 	t_tok	*tok;
-	//t_shell	main_struct;
 	t_cmd	*cmd;
 
 	tok = NULL;
+	env = NULL;
 	cmd = NULL;
 	if (ac != 1 || av[1])
 	{
@@ -17,8 +17,8 @@ int	main(int ac, char *av[], char *envp[])
 		exit(0);
 	}
 	//main_struct.exit_status = 0;
-	env.env_cpy = dup_arr2d(envp);
-	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
+	//env.env_cpy = dup_arr2d(envp);//copia anterior environment
+	env = init_list(envp, env);
 	//init_msg();
 	bg_color();
 	while (1)
@@ -38,14 +38,15 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);
 		//redireciones...
-		if (builtins(cmd, ac, av, &env))
-		{
-			ft_get_paths(env.env_cpy, &env);
-			//ft_open_files(av, &data);
-			//search_cmds(&env);
-			search_command_path(*cmd->command_and_arg, &env);
-			executor(&env, *cmd);
-		}
+		builtins(cmd, ac, av, env);//borrar luego esta linea
+		// if (builtins(cmd, ac, av, &env))
+		// {
+		// 	ft_get_paths(env.env_cpy, &env);
+		// 	//ft_open_files(av, &data);
+		// 	//search_cmds(&env);
+		// 	search_command_path(*cmd->command_and_arg, &env);
+		// 	executor(&env, *cmd);
+		// }
 		if (cmd || tok)//verificar si es necesario este if
 		{
 			cmd_free(&cmd);
