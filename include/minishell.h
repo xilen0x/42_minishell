@@ -178,10 +178,10 @@ t_env	*init_list(char **envp, t_env *env_struct);
 void	ft_printstack(t_env *env_struct);
 
 /*--------------------------- builtins -------------------------*/
-int	builtins(t_cmd *cmd, char *av[], t_env *env, t_exe exe);
+int		builtins(t_cmd *cmd, char *av[], t_env *env, t_exe *exe);
 int		builtin_exit(t_cmd *cmd, char *av[]);
 int		builtin_pwd(void);
-int	builtin_cd(t_cmd	*cmd, t_env	env, t_exe exe);
+int		builtin_cd(t_cmd	*cmd, t_env *env, t_exe *exe);
 int		builtin_env(t_cmd *cmd, t_env env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env *env);

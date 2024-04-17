@@ -87,65 +87,71 @@ unsigned int	check_export(char *arg)
 // 	return (0);
 // }
 
-int	variable_exists(t_env env, char *variable)
-{
-	int	i;
-	int	len;
+// int	variable_exists(t_env env, char *variable)
+// {
+// 	int	i;
+// 	int	len;
 
-	i = 0;
-	len = 0;
-	while (variable[len] != '=')
-		len++;
-	while (env.env_cpy[i])
-	{
-		if (ft_strncmp(env.env_cpy[i], variable, len) == 0)
-		{
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	len = 0;
+// 	while (variable[len] != '=')
+// 		len++;
+// 	while (env.env_cpy[i])
+// 	{
+// 		if (ft_strncmp(env.env_cpy[i], variable, len) == 0)
+// 		{
+// 			return (1);
+// 		}
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 /*Funcion que agrega una nueva variable de entorno*/
 int	builtin_export(t_cmd *cmd, t_env *env)
 {
 	int		i;
-	int		len;
+	//int		len;
 
 	i = 0;
 	if (size_arr2d(cmd->command_and_arg) == 1)// para el caso tipo 'export'
 	{
-		while (env->env_cpy[i])
+		// while (env->key)
+		// {
+		// 	printf("declare -x %s\n", ft_printstack(env));
+		// 	i++;
+		// }
+		while (env != NULL)
 		{
-			printf("declare -x %s\n", env->env_cpy[i]);
-			i++;
+			printf("declare -x %s=%s\n", env->key, env->val);
+			env = env->next;
 		}
 		return (0);
 	}
 	else
 	{
-		i = 0;
-		if (check_export(cmd->command_and_arg[1]) == 1)
-		{
-			if (variable_exists(*env, cmd->command_and_arg[1]))
-			{
-				printf("SI existe la variable!\n");
-				//len = size_arr2d(&cmd->command_and_arg[1]);
-				len = 0;
-				while (cmd->command_and_arg[1][len] != '=')
-					len++;
-				while (ft_strnstr(env->env_cpy[i], cmd->command_and_arg[1], len) != NULL)
-					i++;
-				env->env_cpy[i] = ft_strdup(cmd->command_and_arg[1]);//tiene q sobrescribirla
-			}
-			else
-			{
-				printf("NO existe la variable!\n");
-				env->env_cpy = add_one_arr2d(env->env_cpy, cmd->command_and_arg[1]);
-			}
-			return (0);
-		}
+		printf("export y algo mas!\n");
+		// i = 0;
+		// if (check_export(cmd->command_and_arg[1]) == 1)
+		// {
+		// 	if (variable_exists(*env, cmd->command_and_arg[1]))
+		// 	{
+		// 		printf("SI existe la variable!\n");
+		// 		//len = size_arr2d(&cmd->command_and_arg[1]);
+		// 		len = 0;
+		// 		while (cmd->command_and_arg[1][len] != '=')
+		// 			len++;
+		// 		while (ft_strnstr(env->env_cpy[i], cmd->command_and_arg[1], len) != NULL)
+		// 			i++;
+		// 		env->env_cpy[i] = ft_strdup(cmd->command_and_arg[1]);//tiene q sobrescribirla
+		// 	}
+		// 	else
+		// 	{
+		// 		printf("NO existe la variable!\n");
+		// 		env->env_cpy = add_one_arr2d(env->env_cpy, cmd->command_and_arg[1]);
+		// 	}
+		// 	return (0);
+		// }
 		// else if (check_export(cmd->command_and_arg[1]) == 2)
 		// {
 		// 	//printf("soy un +=\n");
@@ -160,8 +166,8 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 		// 	}
 		// 	return (0);
 		// }
-		else
-			ft_msgs(5);
+		// else
+		// 	ft_msgs(5);
 	}
 	return (0);
 }

@@ -19,7 +19,7 @@
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtins(t_cmd *cmd, char *av[], t_env *env, t_exe exe)
+int	builtins(t_cmd *cmd, char *av[], t_env *env, t_exe *exe)
 {
 	/*if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)//implementar al final de todas las buildins
 	{
@@ -39,7 +39,7 @@ int	builtins(t_cmd *cmd, char *av[], t_env *env, t_exe exe)
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
 	{
-		builtin_cd(cmd, *env, exe);
+		builtin_cd(cmd, env, exe);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)

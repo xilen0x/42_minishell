@@ -40,6 +40,9 @@ int	search_command_path(char *cmd, t_exe *exe)
 	char	*full_path;
 	int		i;
 
+    if (!exe || !exe->paths) {
+        return 1; // Si exe es NULL o exe->paths es NULL, retorna 1 (error)
+    }
 	i = 0;
 	while (exe->paths[i])
 	{

@@ -40,9 +40,10 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);
 		//redireciones...
-		if (builtins(cmd, av, env, exe))//aqui voy!!!
+		get_paths(env);
+		if (builtins(cmd, av, env, exe))
 		{
-			get_paths(env);
+			//get_paths(env);
 			//ft_open_files(av, &data);
 			//search_cmds(&env);
 			search_command_path(*cmd->command_and_arg, exe);
