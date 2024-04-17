@@ -28,7 +28,7 @@ int	tok_len(char *line, t_tok **new_tok)
 			{
 				c = *(line + len);//inicializo 'c' con el caracter de comilla encontrado
 				len++;
-				while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla
+				while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla igual a 'c'
 					len++;
 			}
 			if (*(line + len))
