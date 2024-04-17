@@ -12,47 +12,42 @@
 }*/
 
 /*Función que obtiene y guarda los envp path*/
-t_exe	*get_paths(t_env *env)
+t_exe	*get_paths(t_shell *shell)
 {
 	int		i;
-	t_exe	*exe;
 
-	exe = NULL;
 	i = 0;
-	//printf("QUE HAY AQUI?%s\n", exe->paths[0]);
-	while (env != NULL)
+	while (shell != NULL)
 	{
-		if (ca_strcmp(env->key, "PATH") == 0)
+		if (ca_strcmp(shell->link_env->key, "PATH") == 0)
 		{
-			exe->paths = ft_split(env->val, ':');
-			//return ;//posiblemente hay que eliminar este ret
+			shell->link_exe->paths = ft_split(shell->link_env->val, ':');
 		}
-		env = env->next;
+		shell->link_env = shell->link_env->next;
 	}
-	// while (ft_strnstr(&env->key[i], "PATH", 4) == NULL)
-	// 	i++;
-	return (exe);
+	return (shell->link_exe);
 }
 
 /*funcion que crea el fullpath del comando y verifica si existe
 para poder guardarlo o no*/
-int	search_command_path(char *cmd)
+int	search_command_path(t_shell *shell)
 {
 	char	*cmd_path;
 	char	*full_path;
 	int		i;
 
-	// if (!exe || !exe->paths)//exe es null...averiguar pq??????
-	// 	return (1);
 	i = 0;
-	while (exe->paths[i])
+	while (shell->link_exe->paths[i])
 	{
-		cmd_path = ft_strjoin("/", cmd);
-		full_path = ft_strjoin(exe->paths[i], cmd_path);
+		// cmd_path = ft_strjoin("/", cmd);
+		cmd_path = ft_strjoin("/", *shell->link_cmd->command_and_arg);
+		// full_path = ft_strjoin(exe->paths[i], cmd_path);
+		full_path = ft_strjoin(shell->link_exe->paths[i], cmd_path);
 		free(cmd_path);
 		if (access(full_path, F_OK) == 0)
 		{
-			exe->cmd_fullpath = full_path;
+			// exe->cmd_fullpath = full_path;
+			shell->link_exe->cmd_fullpath = full_path;
 			return (0);
 		}
 		i++;

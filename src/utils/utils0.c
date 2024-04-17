@@ -62,7 +62,10 @@ int	ft_msgs(int n)
 		return (1);
 	}
 	else
+	{
 		write (2, "Run minishell without arguments!\n", 33);
+		exit(0);
+	}
 	return (1);
 }
 

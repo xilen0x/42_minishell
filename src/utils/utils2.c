@@ -88,7 +88,7 @@ t_env	*lstnew(char *key, char *value)
 }
 
 /*funcion que inicialista la lista creando un nodo(newnode) y agregandolo a la lista(ft_stack_add_back)*/
-t_env	*init_list(char **envp, t_env *env_struct)
+int	*init_list(char **envp, t_shell *shell)
 {
 	int		i;
 	char	**tokens;
@@ -104,10 +104,10 @@ t_env	*init_list(char **envp, t_env *env_struct)
 		{
 			key = tokens[0];
 			value = tokens[1];
-			lstadd_back(&env_struct, lstnew(key, value));
+			lstadd_back(&shell->link_env, lstnew(key, value));
 		}
 		ft_free_split(tokens);
 		i++;
 	}
-	return (env_struct);
+	return (0);
 }

@@ -100,6 +100,7 @@ typedef struct s_shell
 	t_redir			*link_redir;
 	t_redir_type	*link_redir_t;
 	t_tok			*link_tok;
+	t_exe			*link_exe;
 	// char	**pipes;
 	// int		pipex;
 	//t_pipe	*p;
@@ -162,10 +163,10 @@ void	set_signals(void);
 /*---------------------------executor.c -------------------------*/
 //int		init_momentaneo(char *av[], t_env *data);
 //void	get_paths(t_env *env);
-t_exe	*get_paths(t_env *env);
+t_exe	*get_paths(t_shell *shell);
 //int		search_cmds(t_env *data);
 //int		executor(t_env *data, t_cmd cmd);
-int	search_command_path(char *cmd);
+int		search_command_path(t_shell *shell);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
@@ -175,14 +176,14 @@ int		exit_status(void);
 int		ca_strchr(const char *s, int c);
 
 /*---------------------------utils2.c -------------------------*/
-t_env	*init_list(char **envp, t_env *env_struct);
+int	*init_list(char **envp, t_shell *shell);
 void	ft_printstack(t_env *env_struct);
 
 /*--------------------------- builtins -------------------------*/
-int		builtins(t_cmd *cmd, char *av[], t_env *env);
+int		builtins(t_cmd *cmd, char *av[], t_shell *shell);
 int		builtin_exit(t_cmd *cmd, char *av[]);
 int		builtin_pwd(void);
-int		builtin_cd(t_cmd	*cmd, t_env *env);
+int		builtin_cd(t_cmd	*cmd, t_shell *shell);
 int		builtin_env(t_cmd *cmd, t_env env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env *env);

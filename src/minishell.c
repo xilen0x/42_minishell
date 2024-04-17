@@ -4,21 +4,20 @@
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
-	t_env	*env;
+	// t_env	*env;
 	t_tok	*tok;
 	t_cmd	*cmd;
+	t_shell	shell;
 
 	tok = NULL;
-	env = NULL;
+	// env = NULL;
 	cmd = NULL;
 	if (ac != 1 || av[1])
-	{
 		ft_msgs(10);
-		exit(0);
-	}
 	//main_struct.exit_status = 0;
 	//env.env_cpy = dup_arr2d(envp);//copia anterior environment
-	env = init_list(envp, env);
+	// shell.link_env = init_list(envp, &shell);
+	init_list(envp, &shell);
 	//exe = get_paths(env, exe);
 	//init_msg();
 	bg_color();
@@ -39,12 +38,12 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);
 		//redireciones...
-		if (builtins(cmd, av, env))
+		if (builtins(cmd, av, &shell))
 		{
-			get_paths(env);
+			get_paths(&shell);
 			//ft_open_files(av, &data);
 			//search_cmds(&env);
-			search_command_path(*cmd->command_and_arg);
+			search_command_path(&shell);
 			//executor(env, *cmd);
 		}
 		if (cmd || tok)//verificar si es necesario este if

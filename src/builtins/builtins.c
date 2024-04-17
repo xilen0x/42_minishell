@@ -19,7 +19,7 @@
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtins(t_cmd *cmd, char *av[], t_env *env)
+int	builtins(t_cmd *cmd, char *av[], t_shell *shell)
 {
 	/*if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)//implementar al final de todas las buildins
 	{
@@ -39,24 +39,24 @@ int	builtins(t_cmd *cmd, char *av[], t_env *env)
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
 	{
-		builtin_cd(cmd, env);
+		builtin_cd(cmd, shell);
 		return (0);
 	}
-	else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)
-	{
-		builtin_env(cmd, *env);
-		return (0);
-	}
-	else if (ca_strcmp(*cmd->command_and_arg, "echo") == 0)
-	{
-		builtin_echo(cmd);
-		return (0);
-	}
-	else if (ca_strcmp(*cmd->command_and_arg, "export") == 0)
-	{
-		builtin_export(cmd, env);
-		return (0);
-	}
+	// else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)
+	// {
+	// 	builtin_env(cmd, *env);
+	// 	return (0);
+	// }
+	// else if (ca_strcmp(*cmd->command_and_arg, "echo") == 0)
+	// {
+	// 	builtin_echo(cmd);
+	// 	return (0);
+	// }
+	// else if (ca_strcmp(*cmd->command_and_arg, "export") == 0)
+	// {
+	// 	builtin_export(cmd, env);
+	// 	return (0);
+	// }
 	/*else if (ca_strcmp(cmd->cmd1, "unset") == 0)
 	{
 		builtin_unset(cmd, env, ac);
