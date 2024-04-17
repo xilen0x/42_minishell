@@ -30,7 +30,7 @@ int	builtin_cd(t_cmd	*cmd, t_env	*env, t_exe *exe)
 		go_home();
 	else//cd with relative or absolute path
 	{
-		get_paths(env);
+		get_paths(env, exe);
 		if (search_command_path(*cmd->command_and_arg, exe) == 0)
 		{
 			if (chdir(cmd->command_and_arg[1]) != 0)

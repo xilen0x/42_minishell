@@ -12,37 +12,38 @@
 }*/
 
 /*Función que obtiene y guarda los envp path*/
-void	get_paths(t_env *env)
+t_exe	*get_paths(t_env *env)
 {
 	int		i;
-	t_exe	exe;
+	t_exe	*exe;
 
+	exe = NULL;
 	i = 0;
+	//printf("QUE HAY AQUI?%s\n", exe->paths[0]);
 	while (env != NULL)
 	{
 		if (ca_strcmp(env->key, "PATH") == 0)
 		{
-			exe.paths = ft_split(env->val, ':');
-			return ;
+			exe->paths = ft_split(env->val, ':');
+			//return ;//posiblemente hay que eliminar este ret
 		}
 		env = env->next;
 	}
 	// while (ft_strnstr(&env->key[i], "PATH", 4) == NULL)
 	// 	i++;
+	return (exe);
 }
-
 
 /*funcion que crea el fullpath del comando y verifica si existe
 para poder guardarlo o no*/
-int	search_command_path(char *cmd, t_exe *exe)
+int	search_command_path(char *cmd)
 {
 	char	*cmd_path;
 	char	*full_path;
 	int		i;
 
-    if (!exe || !exe->paths) {
-        return 1; // Si exe es NULL o exe->paths es NULL, retorna 1 (error)
-    }
+	// if (!exe || !exe->paths)//exe es null...averiguar pq??????
+	// 	return (1);
 	i = 0;
 	while (exe->paths[i])
 	{
