@@ -27,13 +27,13 @@ int	main(int ac, char *av[], char *envp[])
 		line = readline(">>>>minishell$ ");
 		if (!line)
 		{
-			printf("exit\n");//en el cado del ctrl-D
+			printf("exit\n");//en el caso del ctrl-D
 			exit(0);
 		}
 		if (line && *line)
-			add_history(line);//si tiene contenido, agregamos 'line' al historial
+			add_history(line);
 		else
-			continue;
+			continue ;
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
@@ -42,7 +42,6 @@ int	main(int ac, char *av[], char *envp[])
 		{
 			get_paths(&shell);
 			//ft_open_files(av, &data);
-			//search_cmds(&env);
 			search_command_path(&shell);
 			//executor(env, *cmd);
 		}

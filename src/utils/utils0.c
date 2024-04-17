@@ -16,9 +16,9 @@ void	init_msg(void)
 /*Function that changes the color of the terminal*/
 int	bg_color(void)
 {
-	printf("\033[44m"); // Imprime la secuencia de escape ANSI para cambiar el fondo a azul
+	printf("\033[44m"); //fondo a azul
 	//printf("\033[40m");
-	printf("\033[2J");// Limpia la pantalla para aplicar el nuevo color de fondo en toda la pantalla
+	printf("\033[2J");// Limpia la pantalla
 	return (0);
 }
 
