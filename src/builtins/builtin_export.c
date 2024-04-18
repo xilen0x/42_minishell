@@ -118,6 +118,9 @@ static int	just_export(t_env *env)
 int	builtin_export(t_cmd *cmd, t_env *env)
 {
 	int		i;
+	char	**tokens;
+	char	*key;
+	char	*value;
 
 	i = 0;
 	if (size_arr2d(cmd->command_and_arg) == 1)
@@ -127,7 +130,6 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 		i = 0;
 		if (check_export(cmd->command_and_arg[1]) == 1)
 		{
-			//variable_exists(env, cmd->command_and_arg[1] == 0);
 			if (variable_exists(env, cmd->command_and_arg[1]))
 			{
 				printf("SI existe la variable!\n");
@@ -139,10 +141,16 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 				// 	i++;
 				// env->env_cpy[i] = ft_strdup(cmd->command_and_arg[1]);//tiene q sobrescribirla
 			}
-			else
+			else//si no existe la var en el env -> se crea y agrega
 			{
-				printf("NO existe la variable!\n");
-				env = 
+				tokens = ft_split(cmd->command_and_arg[1], '=');// Dividir: clave y valor
+				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
+				{
+					key = tokens[0];
+					value = tokens[1];
+					lstadd_back(&env, lstnew(key, value));
+				}
+				ft_free_split(tokens);
 			}
 			return (0);
 		}

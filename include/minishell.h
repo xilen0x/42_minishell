@@ -177,9 +177,12 @@ int		exit_status(void);
 int		ca_strchr(const char *s, int c);
 
 /*---------------------------utils2.c -------------------------*/
-int	*init_list(char **envp, t_shell *shell);
+int		*init_list(char **envp, t_shell *shell);
 void	init_main_struct(t_shell *shell);
 void	ft_printstack(t_env *env_struct);
+void	lstadd_back(t_env **lst, t_env *new);
+t_env	*lstnew(char *key, char *value);
+void	ft_free_split(char **array_strings);
 
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, char *av[], t_shell *shell);

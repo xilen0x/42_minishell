@@ -41,7 +41,7 @@ void	ft_printstack(t_env *env_struct)
 	}
 }
 
-static void	ft_free_split(char **array_strings)
+void	ft_free_split(char **array_strings)
 {
 	size_t	i;
 
@@ -112,8 +112,7 @@ int	*init_list(char **envp, t_shell *shell)
 	i = 0;
 	while (envp[i])
 	{
-		// Dividir la cadena en clave y valor
-		tokens = ft_split(envp[i], '=');
+		tokens = ft_split(envp[i], '=');// Dividir: clave y valor
 		if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
 		{
 			key = tokens[0];
