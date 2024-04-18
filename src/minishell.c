@@ -4,22 +4,17 @@
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
-	// t_env	*env;
 	t_tok	*tok;
 	t_cmd	*cmd;
 	t_shell	shell;
 
 	tok = NULL;
-	// env = NULL;
 	cmd = NULL;
 	if (ac != 1 || av[1])
 		ft_msgs(10);
-	//main_struct.exit_status = 0;
-	//env.env_cpy = dup_arr2d(envp);//copia anterior environment
-	// shell.link_env = init_list(envp, &shell);
-	init_list(envp, &shell);
-	//exe = get_paths(env, exe);
 	//init_msg();
+	init_main_struct(&shell);
+	init_list(envp, &shell);
 	bg_color();
 	while (1)
 	{
@@ -28,6 +23,7 @@ int	main(int ac, char *av[], char *envp[])
 		if (!line)
 		{
 			printf("exit\n");//en el caso del ctrl-D
+			printf("\033[40m");
 			exit(0);
 		}
 		if (line && *line)

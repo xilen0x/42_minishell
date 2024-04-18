@@ -1,6 +1,17 @@
 #include "minishell.h"
 
-/* Función para imprimir solo las claves (keys) */
+void	init_main_struct(t_shell *shell)
+{
+	shell->exit_status = 0;
+	//shell->link_cmd = NULL;
+	shell->link_env = NULL;
+	//shell->link_redir = NULL;
+	//shell->link_redir_t = NULL;
+	//shell->link_tok = NULL;
+	shell->link_exe = NULL;
+}
+
+/* Función para imprimir solo las claves (keys) del environment*/
 void	ft_print_keys(t_env *env_struct)
 {
 	while (env_struct != NULL)
@@ -10,7 +21,7 @@ void	ft_print_keys(t_env *env_struct)
 	}
 }
 
-/* Función para imprimir solo los valores (values) */
+/* Función para imprimir solo los valores (val) del environment*/
 void	ft_print_values(t_env *env_struct)
 {
 	while (env_struct != NULL)
@@ -20,7 +31,7 @@ void	ft_print_values(t_env *env_struct)
 	}
 }
 
-/*funcion que imprime la lista completa*/
+/*funcion que imprime todo el environment(lista)*/
 void	ft_printstack(t_env *env_struct)
 {
 	while (env_struct != NULL)
@@ -46,6 +57,7 @@ static void	ft_free_split(char **array_strings)
 	}
 }
 
+/*Devuelve el último nodo de la lista.*/
 t_env	*lstlast(t_env *lst)
 {
 	if (lst == NULL)
@@ -57,6 +69,7 @@ t_env	*lstlast(t_env *lst)
 	return (lst);
 }
 
+/*Añade el nodo ’new’ al final de la lista ’lst’.*/
 void	lstadd_back(t_env **lst, t_env *new)
 {
 	t_env	*lastnode;
@@ -71,6 +84,7 @@ void	lstadd_back(t_env **lst, t_env *new)
 	}
 }
 
+/*Crea un nuevo nodo.*/
 t_env	*lstnew(char *key, char *value)
 {
 	t_env	*new_node;

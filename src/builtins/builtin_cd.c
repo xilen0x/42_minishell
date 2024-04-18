@@ -44,22 +44,19 @@ static int	go_parent(void)
 /*cambia a un directorio especifico */
 static int	go_path(t_shell *shell)
 {
-	if (chdir(shell->link_exe->cmd_fullpath) != 0)
+	if (chdir(shell->link_cmd->command_and_arg[1]) != 0)
 	{
-		printf("jjhjhjhjhh\n");
 		perror("chdir() error");
 		return (1);
 	}
 	return (0);
 }
-//shell->link_exe->cmd_fullpath
 
 /*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
 o a una ruta absoluta o relativa*/
 int	builtin_cd(t_cmd	*cmd, t_shell *shell)
 {
-	(void)shell;
-
+	shell->link_cmd = cmd;
 	if ((size_arr2d(cmd->command_and_arg)) == 1)// cd only
 		go_home();
 	else if (ca_strcmp(cmd->command_and_arg[1], "~") == 0)
@@ -71,22 +68,6 @@ int	builtin_cd(t_cmd	*cmd, t_shell *shell)
 	else if (ca_strcmp(cmd->command_and_arg[1], "..") == 0)
 		go_parent();
 	else if (ft_isalpha(cmd->command_and_arg[1][0]))
-	{
-		// if (search_command_path(shell) == 0)
-		// {
-			go_path(shell);
-		// }
-	}
-	
-	// {
-		// if (search_command_path(shell) == 0)
-		// {
-		// 	if (chdir(cmd->command_and_arg[1]) != 0)
-		// 	{
-		// 		perror("chdir() error");
-		// 		return (1);
-		// 	}
-		// }
-	// }
+		go_path(shell);
 	return (0);
 }

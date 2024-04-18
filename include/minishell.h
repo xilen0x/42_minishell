@@ -89,6 +89,7 @@ typedef struct s_exe
 {
 	//char			**env_cpy;//creo que no sera necesario ahora q existe esto en una lista
 	char			**paths;
+	int				index;
 	char			*cmd_fullpath;
 }	t_exe;
 
@@ -163,7 +164,7 @@ void	set_signals(void);
 /*---------------------------executor.c -------------------------*/
 //int		init_momentaneo(char *av[], t_env *data);
 //void	get_paths(t_env *env);
-t_exe	*get_paths(t_shell *shell);
+int	get_paths(t_shell *shell);
 //int		search_cmds(t_env *data);
 //int		executor(t_env *data, t_cmd cmd);
 int		search_command_path(t_shell *shell);
@@ -177,6 +178,7 @@ int		ca_strchr(const char *s, int c);
 
 /*---------------------------utils2.c -------------------------*/
 int	*init_list(char **envp, t_shell *shell);
+void	init_main_struct(t_shell *shell);
 void	ft_printstack(t_env *env_struct);
 
 /*--------------------------- builtins -------------------------*/
@@ -184,7 +186,7 @@ int		builtins(t_cmd *cmd, char *av[], t_shell *shell);
 int		builtin_exit(t_cmd *cmd, char *av[]);
 int		builtin_pwd(void);
 int		builtin_cd(t_cmd	*cmd, t_shell *shell);
-int		builtin_env(t_cmd *cmd, t_env env);
+int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env *env);
 //int	builtin_unset(t_cmd *cmd, t_env env, int ac);

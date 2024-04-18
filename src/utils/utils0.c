@@ -17,7 +17,6 @@ void	init_msg(void)
 int	bg_color(void)
 {
 	printf("\033[44m"); //fondo a azul
-	//printf("\033[40m");
 	printf("\033[2J");// Limpia la pantalla
 	return (0);
 }
@@ -61,11 +60,17 @@ int	ft_msgs(int n)
 		write (2, "not a valid identifier\n", 23);
 		return (1);
 	}
+	else if (n == 6)
+	{
+		write (2, "make: *** No targets specified and no makefile found.  Stop.\n", 61);
+		return (1);
+	}
 	else
 	{
 		write (2, "Run minishell without arguments!\n", 33);
 		exit(0);
 	}
+
 	return (1);
 }
 

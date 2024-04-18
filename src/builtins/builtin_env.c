@@ -2,7 +2,7 @@
 #include "minishell.h"
 
 /*builtin que imprime el environment(la copia)*/
-int	builtin_env(t_cmd *cmd, t_env env)
+int	builtin_env(t_cmd *cmd, t_env *env)
 {
 	int		i;
 
@@ -21,12 +21,12 @@ int	builtin_env(t_cmd *cmd, t_env env)
 	}
 	else
 	{
-		// while (env.env_cpy[i])
-		// {
-		// 	printf ("%s\n", env.env_cpy[i]);
-		// 	i++;
-		// }
-		ft_printstack(&env);
+		while (env != NULL)
+		{
+			printf("%s=%s\n", env->key, env->val);
+			env = env->next;
+		}
 	}
+		//ft_printstack(&env);
 	return (0);
 }

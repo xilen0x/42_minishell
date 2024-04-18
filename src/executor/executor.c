@@ -12,7 +12,7 @@
 }*/
 
 /*Función que obtiene y guarda los envp path*/
-t_exe	*get_paths(t_shell *shell)
+int	get_paths(t_shell *shell)
 {
 	int		i;
 
@@ -22,10 +22,12 @@ t_exe	*get_paths(t_shell *shell)
 		if (ca_strcmp(shell->link_env->key, "PATH") == 0)
 		{
 			shell->link_exe->paths = ft_split(shell->link_env->val, ':');
+			shell->link_exe->index = i;
 		}
+		i++;
 		shell->link_env = shell->link_env->next;
 	}
-	return (shell->link_exe);
+	return (0);
 }
 
 /*funcion que crea el fullpath del comando y verifica si existe
@@ -35,12 +37,13 @@ int	search_command_path(t_shell *shell)
 	char	*cmd_path;
 	char	*full_path;
 	int		i;
+	int		flag = 0;
 
 	i = 0;
-	while (shell->link_exe->paths[i])
+	while (flag != 1)
 	{
 		// cmd_path = ft_strjoin("/", cmd);
-		cmd_path = ft_strjoin("/", *shell->link_cmd->command_and_arg);
+		cmd_path = ft_strjoin("/", shell->link_cmd->command_and_arg[1]);
 		// full_path = ft_strjoin(exe->paths[i], cmd_path);
 		full_path = ft_strjoin(shell->link_exe->paths[i], cmd_path);
 		free(cmd_path);
@@ -48,6 +51,7 @@ int	search_command_path(t_shell *shell)
 		{
 			// exe->cmd_fullpath = full_path;
 			shell->link_exe->cmd_fullpath = full_path;
+			flag = 1;
 			return (0);
 		}
 		i++;
