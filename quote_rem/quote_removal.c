@@ -25,13 +25,15 @@ int	tok_len(char *str)
 			s_quote = 1;
 		else if (str[i] == '\'' && s_quote == 1)
 			s_quote = 0;
+		else if (str[i] == '$' && s_quote == 0 && ft_isdigit(str[i + 1]))
+			
 		else if (str[i] == '$' && s_quote == 0 && str[i + 1])//si es candidato a expandir (en principio)
 		{
 			i++;//lo salto y me coloco en el siguiente caracter
 //			var_name = get_var_name(str, i);//retorna el nombre de la variable despues del '$'
 			var_name = get_var_name(str + i);//le paso de arg un puntero al inicio del nombre despues del '$'
-			printf("El var_name encontrado es <%s>\n", var_name);//TEST TEMP
-//			i += ft_strlen(var_name);
+			printf("var_name: <%s>\n", var_name);//TEST TEMP
+			i += ft_strlen(var_name);
 //			len += ft_strlen(env_var_find(var_name, env_t lst));//recorre la lista env buscando la var_name
 			//y retorna el *content de la var o NUL, si no existe. Calculamos su len.
 
@@ -50,7 +52,8 @@ char	*quote_removal(char *str, char **environ)
 	int	len;//TEST TEMP
 
 	len = 0;//TEST TEMP
-	printf("test:%s\n", environ[10]);//solo para que se use environ y no de problem al compilar
+	printf("entra a quote_removal\n");
+	printf("pos 1 del environ:%s\n", environ[1]);//solo para que se use environ y no de problem al compilar
 	len = tok_len(str);
 	printf("len de quote_removal: %i\n", len);
 //	dst = (char *)malloc(sizeof(char) * (len + 1));//creamos el malloc con el len
