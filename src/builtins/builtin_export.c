@@ -85,24 +85,26 @@ int	ca_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (0);
 }
-
 int	variable_exists(t_env *env, char *variable)
 {
 	int		i;
-	char	**tmp;
-	int		ret;
+	char	**var_ent;
+	int		flag;
 
 	i = 0;
-	ret = 0;
-	tmp = ft_split(variable, '=');
+	flag = 0;
+	var_ent = ft_split(variable, '=');
 	while (env != NULL)
 	{
-		if (ca_strcmp(tmp[0], env->key) == 0)
-			ret = 1;
+		if (ca_strcmp(var_ent[0], env->key) == 0)
+		{
+			env->val = var_ent[1];
+			flag = 1;
+		}
 		i++;
 		env = env->next;
 	}
-	return (ret);
+	return (flag);
 }
 
 static int	just_export(t_env *env)
@@ -130,20 +132,9 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 		i = 0;
 		if (check_export(cmd->command_and_arg[1]) == 1)
 		{
-			if (variable_exists(env, cmd->command_and_arg[1]))
+			if (!(variable_exists(env, cmd->command_and_arg[1])))//si no existe la var en el env -> se crea y agrega
 			{
-				printf("SI existe la variable!\n");
-				// //len = size_arr2d(&cmd->command_and_arg[1]);
-				// len = 0;
-				// while (cmd->command_and_arg[1][len] != '=')
-				// 	len++;
-				// while (ft_strnstr(env->env_cpy[i], cmd->command_and_arg[1], len) != NULL)
-				// 	i++;
-				// env->env_cpy[i] = ft_strdup(cmd->command_and_arg[1]);//tiene q sobrescribirla
-			}
-			else//si no existe la var en el env -> se crea y agrega
-			{
-				tokens = ft_split(cmd->command_and_arg[1], '=');// Dividir: clave y valor
+				tokens = ft_split(cmd->command_and_arg[1], '=');
 				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
 				{
 					key = tokens[0];
@@ -173,3 +164,8 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 	}
 	return (0);
 }
+
+
+/*falta corregir :
+$ export test
+*/
