@@ -30,6 +30,7 @@ int	main(int ac, char *av[], char *envp[])
 			add_history(line);
 		else
 			continue ;
+		//line = ft_strtrim(line, " ");//esto no soluciona el problema del(los) espacio(s) despues del comando(export       )
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);

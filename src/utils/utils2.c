@@ -124,3 +124,75 @@ int	*init_list(char **envp, t_shell *shell)
 	}
 	return (0);
 }
+
+/*Funcion que imprime el export(la copia)*/
+// int	print_builtin_export(t_env env)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (env.export_cpy[i])
+// 	{
+// 		printf ("%s\n", env.export_cpy[i]);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+// /*Funcion que imprime el nuevo env*/
+// int	print_builtin_export_with_arg(char	**new_env)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (new_env[i])
+// 	{
+// 		printf ("%s\n", new_env[i]);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+// int	if_exist_builtin_export(t_cmd *cmd, t_env *env)
+// {
+// 	int		i;
+// 	size_t	len;
+
+// 	len = ft_strlen(*cmd->command_and_arg) + 1;
+// 	i = 0;
+// 	while (env->env_cpy[i])
+// 	{
+// 		if (ca_strcmp(env->env_cpy[i], *cmd->command_and_arg) == 0)
+// 		{
+// 			ft_memcpy(env->env_cpy, cmd->command_and_arg, len);
+// 			return (0);
+// 		}
+// 		i++;
+// 	}
+// 	return (1);
+// }
+
+// int	ca_strnstr(const char *haystack, const char *needle, size_t len)
+// {
+// 	size_t	i;
+// 	size_t	j;
+// 	char	*str;
+
+// 	i = 0;
+// 	str = (char *)haystack;
+// 	if (needle[0] == '\0')
+// 		return (1);
+// 	while (str[i] && i < len)
+// 	{
+// 		j = 0;
+// 		while (str[i] && str[i] == needle[j] && needle[j] && i < len)
+// 		{
+// 			i++;
+// 			j++;
+// 		}
+// 		if (needle[j] == '\0')
+// 			return (1);
+// 		i = i + 1 - j;
+// 	}
+// 	return (0);
+// }

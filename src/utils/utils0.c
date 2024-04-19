@@ -57,7 +57,7 @@ int	ft_msgs(int n)
 	}
 	else if (n == 5)
 	{
-		write (2, "not a valid identifier\n", 23);
+		write (2, "xnot a valid identifier\n", 24);
 		return (1);
 	}
 	else if (n == 6)
