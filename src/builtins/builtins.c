@@ -64,6 +64,7 @@ int	builtins(t_cmd *cmd, char *av[], t_shell *shell)
 		return (0);
 	}*/
 	else
-		ft_msgs(6);
+		//ft_msgs(6);
+		return (1);
 	return (0);
 }
