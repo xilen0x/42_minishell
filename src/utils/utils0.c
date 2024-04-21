@@ -65,7 +65,7 @@ int	ft_msgs(int n)
 		write (2, "make: *** No targets specified and no makefile found.  Stop.\n", 61);
 		return (1);
 	}
-	else
+	else if (n == 10)
 	{
 		write (2, "Run minishell without arguments!\n", 33);
 		exit(0);

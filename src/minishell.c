@@ -12,10 +12,10 @@ int	main(int ac, char *av[], char *envp[])
 	cmd = NULL;
 	if (ac != 1 || av[1])
 		ft_msgs(10);
-	//init_msg();
 	init_main_struct(&shell);
 	init_list(envp, &shell);
 	bg_color();
+	//init_msg();
 	while (1)
 	{
 		set_signals();

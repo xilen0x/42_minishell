@@ -125,6 +125,19 @@ int	*init_list(char **envp, t_shell *shell)
 	return (0);
 }
 
+void	ca_lstdelone(t_env *lst, void (*del)(void*))
+{
+	t_env	*tmp;
+
+	tmp = lst;
+	if (lst)
+	{
+		del(tmp->val);
+		del(tmp->key);
+		lst = tmp->next;
+		free(tmp);
+	}
+}
 /*Funcion que imprime el export(la copia)*/
 // int	print_builtin_export(t_env env)
 // {

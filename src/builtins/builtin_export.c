@@ -15,12 +15,46 @@ unsigned int	check_export(char *arg)
 	}
 	else if (arg[i] == '=')
 		return (1);
-	else
-	{
-		printf("test\n");
-		
-	}
 	return (0);
+}
+
+void	update_env(t_env *env, char *var, char *val)
+{
+	(void)var;
+	t_env		*aux;
+
+	aux = env;
+	if (aux->val)
+		free (aux->val);
+	if (val)
+		aux->val = ft_strdup(val);
+	else
+		aux->val = ft_strdup("");
+	return ;
+}
+
+/*verifica si la variable ya existe en el env. y la elimina de ser así*/
+int	variable_exists_op3(t_env *env, char *variable)
+{
+	int		i;
+	char	**var_ent;
+	int		flag;
+
+	i = 0;
+	flag = 0;
+	var_ent = ft_split(variable, '=');
+	while (env != NULL)
+	{
+		if (ca_strcmp(var_ent[0], env->key) == 0)
+		{
+			ca_lstdelone(env, &free);
+			flag = 1;
+			break ;
+		}
+		i++;
+		env = env->next;
+	}
+	return (flag);
 }
 
 /*verifica si la variable ya existe en el env y la actualiza de ser así(caso +=)*/
@@ -46,8 +80,6 @@ int	variable_exists_op2(t_env *env, char *variable)
 		i++;
 		env = env->next;
 	}
-	// ft_free_split(var_ent1);
-	// ft_free_split(var_ent2);
 	return (flag);
 }
 
@@ -102,10 +134,10 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 		chk_exp = check_export(cmd->command_and_arg[1]);
 		if (chk_exp == 1)
 		{
-			printf("soy un =\n");
+			//printf("soy un =\n");
 			if (!(variable_exists(env, cmd->command_and_arg[1])))
 			{
-				printf("= NO existe la variable!\n");
+				//printf("= NO existe la variable!\n");
 				tokens = ft_split(cmd->command_and_arg[1], '=');
 				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
 				{
@@ -119,10 +151,10 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 		}
 		else if (chk_exp == 2)
 		{
-			printf("soy un +=\n");
+			//printf("soy un +=\n");
 			if (!(variable_exists_op2(env, cmd->command_and_arg[1])))
 			{
-				printf("+= NO existe la variable!\n");
+				//printf("+= NO existe la variable!\n");
 				tokens = ft_split(cmd->command_and_arg[1], '+');
 				tokens2 = ft_split(tokens[1], '=');
 				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)

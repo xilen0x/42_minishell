@@ -1,22 +1,5 @@
 #include "minishell.h"
 
-/*int	is_builtin(t_built *cmd, int ac, char *av[], t_env env)
-{
-	init(cmd, ac, av);
-	if ((ca_strcmp(cmd->cmd1, "exit") == 0) || \
-		(ca_strcmp(cmd->cmd1, "pwd") == 0) || \
-		(ca_strcmp(cmd->cmd1, "cd") == 0) || \
-		(ca_strcmp(cmd->cmd1, "echo") == 0) || \
-		(ca_strcmp(cmd->cmd1, "env") == 0) || \
-		(ca_strcmp(cmd->cmd1, "export") == 0) || \
-		(ca_strcmp(cmd->cmd1, "unset") == 0))
-		{
-			builtins(cmd, ac, av, env);
-			return (1);
-		}
-	return (0);
-}*/
-
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
 int	builtins(t_cmd *cmd, char *av[], t_shell *shell)
@@ -58,11 +41,11 @@ int	builtins(t_cmd *cmd, char *av[], t_shell *shell)
 		builtin_export(cmd, shell->link_env);
 		return (0);
 	}
-	/*else if (ca_strcmp(cmd->cmd1, "unset") == 0)
+	else if (ca_strcmp(*cmd->command_and_arg, "unset") == 0)
 	{
-		builtin_unset(cmd, env, ac);
+		builtin_unset(cmd, shell->link_env);
 		return (0);
-	}*/
+	}
 	else
 		//ft_msgs(6);
 		return (1);

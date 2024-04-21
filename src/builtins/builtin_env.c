@@ -1,12 +1,22 @@
 
 #include "minishell.h"
 
+void	print_env(t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->val)
+			printf("%s=%s\n", tmp->key, tmp->val);
+		tmp = tmp->next;
+	}
+}
+
 /*builtin que imprime el environment(la copia)*/
 int	builtin_env(t_cmd *cmd, t_env *env)
 {
-	int		i;
-
-	i = 0;
 	if (size_arr2d(cmd->command_and_arg) > 1)
 	{//casos especiales
 		if ((ca_strcmp(cmd->command_and_arg[1], "test") == 0) || \
@@ -20,13 +30,6 @@ int	builtin_env(t_cmd *cmd, t_env *env)
 		return (0);
 	}
 	else
-	{
-		while (env != NULL)
-		{
-			printf("%s=%s\n", env->key, env->val);
-			env = env->next;
-		}
-	}
-		//ft_printstack(&env);
+		print_env(env);
 	return (0);
 }

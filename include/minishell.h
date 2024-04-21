@@ -183,6 +183,7 @@ void	ft_printstack(t_env *env_struct);
 void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
 void	ft_free_split(char **array_strings);
+void	ca_lstdelone(t_env *lst, void (*del)(void*));
 
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, char *av[], t_shell *shell);
@@ -192,9 +193,13 @@ int		builtin_cd(t_cmd	*cmd, t_shell *shell);
 int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env *env);
-//int	builtin_unset(t_cmd *cmd, t_env env, int ac);
+int		builtin_unset(t_cmd *cmd, t_env *env);
 
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
+int	variable_exists_op2(t_env *env, char *variable);
+int	variable_exists_op3(t_env *env, char *variable);
+
+void	update_env(t_env *env, char *var, char *val);
 
 #endif
