@@ -20,19 +20,14 @@ int	builtin_unset(t_cmd *cmd, t_env *env)
 		else
 		{
 			if (!(variable_exists_op3(env, cmd->command_and_arg[1])))
- 			{
-				printf("+= NO existe la variable!\n");
-				/* tokens = ft_split(cmd->command_and_arg[1], '+');
-				tokens2 = ft_split(tokens[1], '=');
-				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
-				{
-					key = tokens[0];
-					value = tokens2[0];
-					lstadd_back(&env, lstnew(key, value));
-				}
-				ft_free_split(tokens); */
-			} 
-			update_env(env, env->key, env->val);
+				printf("NO existe la variable!\n");//cambiar luego por printf("\n")
+			//update_env(env, env->key, env->val);
+			else
+			{
+				printf("variable elimninada!\n");
+				env_delone(&env, env, &free);
+			}
+			
 			return (0);
 		}
 	}

@@ -33,7 +33,7 @@ void	update_env(t_env *env, char *var, char *val)
 	return ;
 }
 
-/*verifica si la variable ya existe en el env. y la elimina de ser así*/
+/*verifica si la variable ya existe en el env.*/
 int	variable_exists_op3(t_env *env, char *variable)
 {
 	int		i;
@@ -47,7 +47,7 @@ int	variable_exists_op3(t_env *env, char *variable)
 	{
 		if (ca_strcmp(var_ent[0], env->key) == 0)
 		{
-			ca_lstdelone(env, &free);
+			//env_delone(&env, env, &free); //y la elimina de ser así
 			flag = 1;
 			break ;
 		}

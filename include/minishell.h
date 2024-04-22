@@ -179,11 +179,12 @@ int		ca_strchr(const char *s, int c);
 /*---------------------------utils2.c -------------------------*/
 int		*init_list(char **envp, t_shell *shell);
 void	init_main_struct(t_shell *shell);
-void	ft_printstack(t_env *env_struct);
+void	ft_print_env(t_env *env_struct);
 void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
 void	ft_free_split(char **array_strings);
-void	ca_lstdelone(t_env *lst, void (*del)(void*));
+//void	ca_lstdelone(t_env *lst, void (*del)(void*));
+void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
 
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, char *av[], t_shell *shell);

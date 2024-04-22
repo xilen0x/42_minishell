@@ -31,15 +31,6 @@ void	ft_print_values(t_env *env_struct)
 	}
 }
 
-/*funcion que imprime todo el environment(lista)*/
-void	ft_printstack(t_env *env_struct)
-{
-	while (env_struct != NULL)
-	{
-		printf("%s=%s\n", env_struct->key, env_struct->val);
-		env_struct = env_struct->next;
-	}
-}
 
 void	ft_free_split(char **array_strings)
 {
@@ -125,87 +116,26 @@ int	*init_list(char **envp, t_shell *shell)
 	return (0);
 }
 
-void	ca_lstdelone(t_env *lst, void (*del)(void*))
+void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*))
 {
-	t_env	*tmp;
+    t_env *current = *env;
+    t_env *prev = NULL;
 
-	tmp = lst;
-	if (lst)
+    // Buscar el nodo a eliminar y su nodo anterior
+    while (current && ca_strcmp(current->key, node_to_del->key) != 0)
 	{
-		del(tmp->val);
-		del(tmp->key);
-		lst = tmp->next;
-		free(tmp);
-	}
+        prev = current;
+        current = current->next;
+    }
+    // Si no se encontró el nodo, sale
+    if (!current)
+        return ;
+    // Ajustar los enlaces de los nodos
+    if (prev)
+        prev->next = current->next;
+    else
+        *env = current->next;
+    del(current->key);
+    del(current->val);
+    free(current);
 }
-/*Funcion que imprime el export(la copia)*/
-// int	print_builtin_export(t_env env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (env.export_cpy[i])
-// 	{
-// 		printf ("%s\n", env.export_cpy[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-// /*Funcion que imprime el nuevo env*/
-// int	print_builtin_export_with_arg(char	**new_env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (new_env[i])
-// 	{
-// 		printf ("%s\n", new_env[i]);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-// int	if_exist_builtin_export(t_cmd *cmd, t_env *env)
-// {
-// 	int		i;
-// 	size_t	len;
-
-// 	len = ft_strlen(*cmd->command_and_arg) + 1;
-// 	i = 0;
-// 	while (env->env_cpy[i])
-// 	{
-// 		if (ca_strcmp(env->env_cpy[i], *cmd->command_and_arg) == 0)
-// 		{
-// 			ft_memcpy(env->env_cpy, cmd->command_and_arg, len);
-// 			return (0);
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
-
-// int	ca_strnstr(const char *haystack, const char *needle, size_t len)
-// {
-// 	size_t	i;
-// 	size_t	j;
-// 	char	*str;
-
-// 	i = 0;
-// 	str = (char *)haystack;
-// 	if (needle[0] == '\0')
-// 		return (1);
-// 	while (str[i] && i < len)
-// 	{
-// 		j = 0;
-// 		while (str[i] && str[i] == needle[j] && needle[j] && i < len)
-// 		{
-// 			i++;
-// 			j++;
-// 		}
-// 		if (needle[j] == '\0')
-// 			return (1);
-// 		i = i + 1 - j;
-// 	}
-// 	return (0);
-// }
