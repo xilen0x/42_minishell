@@ -17,20 +17,40 @@
 // 	return (1);
 // }
 
+int	variable_exists_pwd(t_env *env, char *path)
+{
+	int		i;
+	int		flag;
+
+	i = 0;
+	flag = 0;
+	while (env != NULL)
+	{
+		if (ca_strcmp(path, env->key) == 0)
+		{
+			env->val = path;//aki voy!!!!
+			flag = 1;
+		}
+		i++;
+		env = env->next;
+	}
+	return (flag);
+}
 
 /*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
-int	builtin_pwd(void)
+int	builtin_pwd(t_env *env)
 {
-	char	*cwd;
+	char	*current_wd;
 
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
+	current_wd = getcwd(NULL, 0);
+	if (!current_wd)
 	{
 		perror("getcwd");
-		return (1);
+		free(current_wd);
 	}
-	printf("%s\n", cwd);
-	free(cwd);
+	variable_exists_pwd(env, current_wd);
+	printf("%s\n", current_wd);
+	free(current_wd);
 	return (0);
 }
 

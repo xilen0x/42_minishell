@@ -190,9 +190,10 @@ void	ft_free_split(char **array_strings);
 //void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
 void	env_delone(t_env **env, char *node_to_del, void (*del)(void*));
 /*--------------------------- builtins -------------------------*/
-int		builtins(t_cmd *cmd, char *av[], t_shell *shell);
-int		builtin_exit(t_cmd *cmd, char *av[]);
-int		builtin_pwd(void);
+int		builtins(t_cmd *cmd, t_shell *shell);
+int		builtin_exit(t_cmd *cmd);
+//int		builtin_pwd(void);
+int	builtin_pwd(t_env *env);
 int		builtin_cd(t_cmd	*cmd, t_shell *shell);
 int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_echo(t_cmd *cmd);

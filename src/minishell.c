@@ -36,7 +36,7 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		if (builtins(cmd, av, &shell))
+		if (builtins(cmd, &shell))
 		{
 			get_paths(&shell);
 			//ft_open_files(av, &data);

@@ -11,9 +11,8 @@ int	ca_isnumber(const char *str)
 	return (1);
 }
 
-int	builtin_exit(t_cmd *cmd, char *av[])
+int	builtin_exit(t_cmd *cmd)
 {
-	(void)av;
 	if ((size_arr2d(cmd->command_and_arg)) > 1)
 	{
 		if (ca_isnumber(cmd->command_and_arg[1]))

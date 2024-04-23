@@ -116,6 +116,7 @@ int	*init_list(char **envp, t_shell *shell)
 	return (0);
 }
 
+/*Funcion que elimina una variable del entorno*/
 void	env_delone(t_env **env, char *node_to_del, void (*del)(void*))
 {
 	t_env	*current;

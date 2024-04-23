@@ -75,11 +75,11 @@ int	ft_msgs(int n)
 }
 
 /*Function that return the exit status number*/
-// int	exit_status(void)
-// {
-// 	t_shell	num;
+int	exit_status(void)
+{
+	t_shell	num;
 
-// 	return (num.exit_status);
-// }
+	return (num.exit_status);
+}
 
 /*nota: hacer funcion exit_status tipo getter y setter*/
