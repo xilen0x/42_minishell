@@ -8,6 +8,7 @@
 		"program": "${workspaceFolder}/minishell",
 		"args": [],
 		"cwd": "${workspaceFolder}",
+		"externalConsole": true,
 		"preLaunchTask": "C/C++: clang build active file"
 	  }
 	]

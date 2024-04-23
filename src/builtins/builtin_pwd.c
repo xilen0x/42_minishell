@@ -1,40 +1,26 @@
 #include "minishell.h"
 
-// int	update_pwd(t_shell *shell, char	*cwd)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	while (shell != NULL)
-// 	{
-// 		if (ca_strcmp(shell->link_env->key, "PWD") == 0)
-// 		{
-// 			shell->link_env->val = cwd;
-// 			return (0);
-// 		}
-// 		shell->link_env = shell->link_env->next;
-// 	}
-// 	return (1);
-// }
-
-int	variable_exists_pwd(t_env *env, char *path)
+/*Update env after moving to new location with cd*/
+static t_env	*update_env(t_env *env, char *key, char *val)
 {
-	int		i;
-	int		flag;
+	t_env	*current;
+	t_env	*new_env;
 
-	i = 0;
-	flag = 0;
-	while (env != NULL)
+	current = env;
+	while (current != NULL)
 	{
-		if (ca_strcmp(path, env->key) == 0)
+		if (ca_strcmp(key, current->key) == 0)
 		{
-			env->val = path;//aki voy!!!!
-			flag = 1;
+			free(current->val);
+			current->val = ft_strdup(val);
+			return (env);
 		}
-		i++;
-		env = env->next;
+		current = current->next;
 	}
-	return (flag);
+	// Si no se encontró la variable de entorno, agregarla al final de la lista
+	new_env = lstnew(key, val);
+	lstadd_back(&env, new_env);
+	return (env);
 }
 
 /*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
@@ -48,29 +34,8 @@ int	builtin_pwd(t_env *env)
 		perror("getcwd");
 		free(current_wd);
 	}
-	variable_exists_pwd(env, current_wd);
+	*env = *update_env(env, "PWD", current_wd);
 	printf("%s\n", current_wd);
 	free(current_wd);
 	return (0);
 }
-
-/*
-// 	t_env	*env;
-	int		i;
-	
-	update_pwd(shell, cwd);
-	//shell->link_env->val = cwd;
-	env = shell->link_env;
-	i = 0;
-	while (env != NULL)
-	{
-		if (ca_strcmp(env->key, "PWD") == 0)
-		{
-			//printf("PATH=%s\n", env->val);
-			shell->link_env->val = env->val;
-			break ;
-		}
-		i++;
-		env = env->next;
-	}
-*/

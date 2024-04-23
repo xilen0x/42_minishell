@@ -205,6 +205,6 @@ unsigned int	check_export(char *arg);
 int	variable_exists_op2(t_env *env, char *variable);
 int	variable_exists_op3(t_env *env, char *variable);
 
-void	update_env(t_env *env, char *var, char *val);
+//void	update_env(t_env *env, char *var, char *val);
 
 #endif

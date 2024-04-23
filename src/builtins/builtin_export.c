@@ -18,20 +18,20 @@ unsigned int	check_export(char *arg)
 	return (0);
 }
 
-void	update_env(t_env *env, char *key, char *val)
-{
-	(void)key;
-	t_env		*aux;
+// void	update_env(t_env *env, char *key, char *val)
+// {
+// 	(void)key;
+// 	t_env		*aux;
 
-	aux = env;
-	if (aux->val)
-		free (aux->val);
-	if (val)
-		aux->val = ft_strdup(val);
-	else
-		aux->val = ft_strdup("");
-	return ;
-}
+// 	aux = env;
+// 	if (aux->val)
+// 		free (aux->val);
+// 	if (val)
+// 		aux->val = ft_strdup(val);
+// 	else
+// 		aux->val = ft_strdup("");
+// 	return ;
+// }
 
 /*verifica si la variable ya existe en el env.*/
 int	variable_exists_op3(t_env *env, char *variable)

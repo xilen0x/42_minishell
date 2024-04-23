@@ -23,7 +23,7 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		if (!line)
 		{
 			printf("exit\n");//en el caso del ctrl-D
-			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
+			printf("\033[0m");// Restaurar black
 			exit(0);
 		}
 		if (line && *line)
@@ -35,7 +35,7 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		}
 		tokenizer(&tok, line);
 		free(line);
-	  	parser(&cmd, tok);
+		parser(&cmd, tok);
 		if (builtins(cmd, &shell))
 		{
 			get_paths(&shell);

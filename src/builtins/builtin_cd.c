@@ -65,6 +65,9 @@ int	builtin_cd(t_cmd	*cmd, t_shell *shell)
 		go_root();
 	else if (ca_strcmp(cmd->command_and_arg[1], ".") == 0)
 		return (0);
+	else if ((ca_strcmp(cmd->command_and_arg[1], ".") && \
+			(ft_isalpha(cmd->command_and_arg[1][1]) == 1)))
+		go_path(shell);
 	else if (ca_strcmp(cmd->command_and_arg[1], "..") == 0)
 		go_parent();
 	else if (ft_isalpha(cmd->command_and_arg[1][0]))
