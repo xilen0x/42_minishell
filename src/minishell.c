@@ -36,13 +36,15 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
+		if (builtins(cmd, av, &shell))
+		{
+			get_paths(&shell);
+			//ft_open_files(av, &data);
+			search_command_path(&shell);
+			//executor(env, *cmd);
+		}
 //		should_expand_var(&cmd);
 //		expander(&cmd, exit);
-		//	builtins(&cmds, env, ac, av);//de carlos
-//		ft_get_paths(env.env_cpy, &env);
-		//ft_open_files(av, &data);
-//	search_cmds(&env);
-//		executor(&env);
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}
