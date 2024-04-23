@@ -21,65 +21,61 @@ int	bg_color(void)
 	return (0);
 }
 
-// void	print_env(char **env)
-// {
-// 	int	i = 0;
-
-// 	while (env[i])
-// 	{
-// 		printf("%s\n", env[i]);
-// 		i++;
-// 	}
-// }
-
 /*Funcion que muestra mensaje de error y uso correcto*/
 int	ft_msgs(int n)
 {
-	if (n == 1)
+	if (n == 0)
 	{
-		write (2, "cannot execute binary file\n", 27);
+		write (2, "xCommand not found!\n", 20);
+		return (1);
+	}
+	else if (n == 1)
+	{
+		write (2, "xcannot execute binary file\n", 28);
 		return (1);
 	}
 	else if (n == 2)
 	{
-		write (2, "No such file or directory\n", 26);
+		write (2, "xNo such file or directory\n", 27);
 		return (1);
 	}
 	else if (n == 3)
 	{
-		write (2, "bash: outfile: Permission denied\n", 33);
+		write (2, "xbash: outfile: Permission denied\n", 34);
 		return (1);
 	}
-	else if (n == 4)
-	{
-		write (2, "Command n*ot found!\n", 19);
-		return (1);
-	}
+	// else if (n == 4)
+	// {
+	// 	write (2, "xCommand not found!\n", 19);
+	// 	return (1);
+	// }
 	else if (n == 5)
 	{
-		write (2, "xnot a valid identifier\n", 24);
+		write (2, "xnot a valid identifier\n", 25);
 		return (1);
 	}
 	else if (n == 6)
 	{
-		write (2, "make: *** No targets specified and no makefile found.  Stop.\n", 61);
+		write (2, "xinvalid option\n", 16);
 		return (1);
 	}
 	else if (n == 10)
 	{
-		write (2, "Run minishell without arguments!\n", 33);
+		write (2, "xRun minishell without arguments!\n", 34);
 		exit(0);
 	}
-
 	return (1);
 }
 
-/*Function that return the exit status number*/
-int	exit_status(void)
+/*Function that get the exit status number*/
+int	get_exit_status(void)
 {
-	t_shell	num;
-
-	return (num.exit_status);
+	printf("%d: %s", g_exit_stat, "command not found\n");
+	return (0);
 }
 
-/*nota: hacer funcion exit_status tipo getter y setter*/
+/*Function that set the exit status number*/
+void	set_exit_status(int num)
+{
+	g_exit_stat = num;
+}

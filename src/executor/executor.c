@@ -14,20 +14,20 @@
 /*Función que obtiene y guarda los envp path*/
 int	get_paths(t_shell *shell)
 {
-	int		i;
+	int	i;
+	int	exit_status;
 
 	i = 0;
-	while (shell != NULL)
-	{
-		if (ca_strcmp(shell->link_env->key, "PATH") == 0)
-		{
-			shell->link_exe->paths = ft_split(shell->link_env->val, ':');
-			shell->link_exe->index = i;
-		}
+	while (shell->link_env && ca_strcmp(shell->link_env->key, "PATH") != 0)
 		i++;
-		shell->link_env = shell->link_env->next;
+	exit_status = 0;
+	{
+		shell->link_exe->cmd_fullpath = *ft_split(shell->link_env->val, ':');
+		shell->link_exe->index = i;
 	}
-	return (0);
+	//shell->link_env = shell->link_env->next;
+	//}
+	return (exit_status);
 }
 
 /*funcion que crea el fullpath del comando y verifica si existe

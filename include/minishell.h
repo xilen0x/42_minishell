@@ -20,7 +20,6 @@
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
-
 # define TRUE 1
 # define FALSE 0
 
@@ -31,6 +30,9 @@
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 //typedef struct s_builtings t_built;
+
+//Global Variable allowed
+int	g_exit_stat;
 
 //---joan---
 typedef enum e_type
@@ -96,7 +98,6 @@ typedef struct s_exe
 
 typedef struct s_shell
 {
-	int				exit_status;
 	t_cmd			*link_cmd;
 	t_env			*link_env;
 	t_redir			*link_redir;
@@ -169,12 +170,15 @@ void	set_signals(void);
 //void	get_paths(t_env *env);
 int	get_paths(t_shell *shell);
 //int		search_cmds(t_env *data);
-//int		executor(t_env *data, t_cmd cmd);
+//int		executor(t_env *env, t_cmd cmd);
+int	executor(t_env *env, t_cmd cmd, t_exe *exe);
 int		search_command_path(t_shell *shell);
 
 /*---------------------------utils0.c -------------------------*/
+// int		ft_msgs(int n);
 int		ft_msgs(int n);
-int		exit_status(void);
+int		get_exit_status(void);
+void	set_exit_status(int num);
 
 /*---------------------------utils1.c -------------------------*/
 int		ca_strchr(const char *s, int c);
@@ -182,18 +186,19 @@ int		ca_strchr(const char *s, int c);
 /*---------------------------utils2.c -------------------------*/
 int		*init_list(char **envp, t_shell *shell);
 void	init_main_struct(t_shell *shell);
-void	ft_print_env(t_env *env_struct);
+//void	ft_print_env(t_env *env_struct);
 void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
 void	ft_free_split(char **array_strings);
 //void	ca_lstdelone(t_env *lst, void (*del)(void*));
 //void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
 void	env_delone(t_env **env, char *node_to_del, void (*del)(void*));
+
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, t_shell *shell);
 int		builtin_exit(t_cmd *cmd);
-//int		builtin_pwd(void);
-int	builtin_pwd(t_env *env);
+//int		builtin_pwd(t_env *env);
+int		builtin_pwd(t_shell *shell);
 int		builtin_cd(t_cmd	*cmd, t_shell *shell);
 int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_echo(t_cmd *cmd);
@@ -202,9 +207,10 @@ int		builtin_unset(t_cmd *cmd, t_env *env);
 
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
-int	variable_exists_op2(t_env *env, char *variable);
-int	variable_exists_op3(t_env *env, char *variable);
+int				variable_exists_op2(t_env *env, char *variable);
+int				variable_exists_op3(t_env *env, char *variable);
 
 //void	update_env(t_env *env, char *var, char *val);
-
+t_env	*update_env(t_env *env, char *key, char *val);
+int	get_pwd(t_shell *shell);
 #endif

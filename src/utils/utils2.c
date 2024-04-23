@@ -2,13 +2,13 @@
 
 void	init_main_struct(t_shell *shell)
 {
-	shell->exit_status = 0;
-	//shell->link_cmd = NULL;
 	shell->link_env = NULL;
+	shell->link_exe = NULL;
+	//shell->link_cmd = NULL;
 	//shell->link_redir = NULL;
 	//shell->link_redir_t = NULL;
 	//shell->link_tok = NULL;
-	shell->link_exe = NULL;
+	g_exit_stat = 0;
 }
 
 /* Función para imprimir solo las claves (keys) del environment*/

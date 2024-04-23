@@ -41,7 +41,7 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 			get_paths(&shell);
 			//ft_open_files(av, &data);
 			search_command_path(&shell);
-			//executor(env, *cmd);
+			//executor(env, *cmd);// antes de entrar en executor, crear funcion list to array
 		}
 //		should_expand_var(&cmd);
 //		expander(&cmd, exit);

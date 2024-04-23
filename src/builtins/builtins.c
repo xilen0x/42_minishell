@@ -6,7 +6,7 @@ int	builtins(t_cmd *cmd, t_shell *shell)
 {
 	if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)
 	{
-		exit_status();
+		get_exit_status();
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "exit") == 0)
@@ -17,7 +17,7 @@ int	builtins(t_cmd *cmd, t_shell *shell)
 	}
 	else if ((ca_strcmp(*cmd->command_and_arg, "pwd") == 0) || (ca_strcmp(*cmd->command_and_arg, "PWD") == 0))
 	{
-		builtin_pwd(shell->link_env);
+		builtin_pwd(shell);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
@@ -46,7 +46,9 @@ int	builtins(t_cmd *cmd, t_shell *shell)
 		return (0);
 	}
 	else
-		//ft_msgs(6);
+	{
+		ft_msgs(4);
 		return (1);
+	}
 	return (0);
 }
