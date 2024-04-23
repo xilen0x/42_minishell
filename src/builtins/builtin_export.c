@@ -18,9 +18,9 @@ unsigned int	check_export(char *arg)
 	return (0);
 }
 
-void	update_env(t_env *env, char *var, char *val)
+void	update_env(t_env *env, char *key, char *val)
 {
-	(void)var;
+	(void)key;
 	t_env		*aux;
 
 	aux = env;
@@ -132,9 +132,8 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 	else
 	{
 		chk_exp = check_export(cmd->command_and_arg[1]);
-		if (chk_exp == 1)
+		if (chk_exp == 1)// =
 		{
-			//printf("soy un =\n");
 			if (!(variable_exists(env, cmd->command_and_arg[1])))
 			{
 				//printf("= NO existe la variable!\n");
@@ -149,9 +148,8 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 			}
 			return (0);
 		}
-		else if (chk_exp == 2)
+		else if (chk_exp == 2)// +=
 		{
-			//printf("soy un +=\n");
 			if (!(variable_exists_op2(env, cmd->command_and_arg[1])))
 			{
 				//printf("+= NO existe la variable!\n");

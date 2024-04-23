@@ -184,8 +184,8 @@ void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
 void	ft_free_split(char **array_strings);
 //void	ca_lstdelone(t_env *lst, void (*del)(void*));
-void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
-
+//void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
+void	env_delone(t_env **env, char *node_to_del, void (*del)(void*));
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, char *av[], t_shell *shell);
 int		builtin_exit(t_cmd *cmd, char *av[]);

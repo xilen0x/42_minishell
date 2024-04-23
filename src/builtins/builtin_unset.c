@@ -7,7 +7,7 @@ int	builtin_unset(t_cmd *cmd, t_env *env)
 	char	*key;
 	char	*value; */
 	int		chk_exp;
-	(void)env;
+
 	//---------------UNSET SIN ARGUMENTOS
 	if (size_arr2d(cmd->command_and_arg) == 1)
 		return (0);
@@ -21,13 +21,12 @@ int	builtin_unset(t_cmd *cmd, t_env *env)
 		{
 			if (!(variable_exists_op3(env, cmd->command_and_arg[1])))
 				printf("NO existe la variable!\n");//cambiar luego por printf("\n")
-			//update_env(env, env->key, env->val);
 			else
 			{
+				//update_env(env, env->key, env->val);
+				env_delone(&env, cmd->command_and_arg[1], &free);
 				printf("variable elimninada!\n");
-				env_delone(&env, env, &free);
 			}
-			
 			return (0);
 		}
 	}

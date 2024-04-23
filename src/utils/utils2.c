@@ -116,26 +116,28 @@ int	*init_list(char **envp, t_shell *shell)
 	return (0);
 }
 
-void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*))
+void	env_delone(t_env **env, char *node_to_del, void (*del)(void*))
 {
-    t_env *current = *env;
-    t_env *prev = NULL;
+	t_env	*current;
+	t_env	*prev;
 
-    // Buscar el nodo a eliminar y su nodo anterior
-    while (current && ca_strcmp(current->key, node_to_del->key) != 0)
+	current = *env;
+	prev = NULL;
+	while (current)
 	{
-        prev = current;
-        current = current->next;
-    }
-    // Si no se encontró el nodo, sale
-    if (!current)
-        return ;
-    // Ajustar los enlaces de los nodos
-    if (prev)
-        prev->next = current->next;
-    else
-        *env = current->next;
-    del(current->key);
-    del(current->val);
-    free(current);
+		if (ca_strcmp(current->key, node_to_del) == 0)
+		{
+			// Ajustar los enlaces de los nodos
+			if (prev)
+				prev->next = current->next;
+			else
+				*env = current->next;
+			del(current->key);
+			del(current->val);
+			free(current);
+			return ;
+		}
+		prev = current;
+		current = current->next;
+	}
 }
