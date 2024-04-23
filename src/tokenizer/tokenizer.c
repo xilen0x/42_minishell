@@ -24,22 +24,22 @@ int	tok_len(char *line, t_tok **new_tok)
 		&& *(line + len) != '|' && *(line + len) != '<' \
 		&& *(line + len) != '>' && *(line + len) != '\0'))//si es una WORD, busco su len
 		{
-			if (*(line + len) == '\'' || *(line + len) == '"')
+			if (*(line + len) == '\'' || *(line + len) == '"')//si hay comillas
 			{
 				c = *(line + len);//inicializo 'c' con el caracter de comilla encontrado
 				len++;
-				while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla
+				while (*(line + len) && *(line + len) != c)//mientras exista y no sea otra comilla igual a 'c'
 					len++;
 			}
 			if (*(line + len))
-			len++;
+				len++;
 		}
 	}
 	return (len);
 }
 
 /*------------TOKENIZADOR------------*/
-//'str' siempre sera NULL excepto si es una WORD que contendra su string
+//'str' siempre sera NULL, excepto si es una WORD que contendra su string
 //las comillas se tratan como WORD, si no estan cerradas incluyen hasta el final de la linea
 void	tokenizer(t_tok **tok, char *line)
 {

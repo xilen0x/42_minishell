@@ -73,7 +73,8 @@ typedef struct s_cmd
 	char			**command_and_arg;
 	t_redir			*redir;
 	struct s_cmd	*next;
-}					t_cmd;//contiene los datos de cada pipe
+	//char			*pipe_test;//lo borarre luego(carlos)
+}					t_cmd;//contiene los datos de cada pipe de la line
 
 //-----carlos------------------
 
@@ -151,7 +152,13 @@ void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 int		is_operator(t_tok *node);
 size_t	command_and_arg_size(t_tok *tok);
 
+<<<<<<< HEAD
 /*---------------------------utils_libft -------------------------*/
+=======
+void	should_expand_var(t_cmd **cmd);
+
+/*---------------utils_libft-----------------*/
+>>>>>>> origin/joan
 size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);

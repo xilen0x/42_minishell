@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARIABLE **ENVIRON
 {
 	char	*line;
 	t_tok	*tok;
@@ -23,30 +23,28 @@ int	main(int ac, char *av[], char *envp[])
 		if (!line)
 		{
 			printf("exit\n");//en el caso del ctrl-D
-			printf("\033[40m");
+			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
 		if (line && *line)
 			add_history(line);
-		else
+		if (!*line)//else
+		{
+			free(line);
 			continue ;
-		//line = ft_strtrim(line, " ");//esto no soluciona el problema del(los) espacio(s) despues del comando(export       )
+		}
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		//redireciones...
-		if (builtins(cmd, av, &shell))
-		{
-			get_paths(&shell);
-			//ft_open_files(av, &data);
-			search_command_path(&shell);
-			//executor(env, *cmd);
-		}
-		if (cmd || tok)//verificar si es necesario este if
-		{
-			cmd_free(&cmd);
-			tok_free(&tok);
-		}
+//		should_expand_var(&cmd);
+//		expander(&cmd, exit);
+		//	builtins(&cmds, env, ac, av);//de carlos
+//		ft_get_paths(env.env_cpy, &env);
+		//ft_open_files(av, &data);
+//	search_cmds(&env);
+//		executor(&env);
+		tok_free(&tok);
+		cmd_free(&cmd);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);

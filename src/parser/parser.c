@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit_status de la funcio
+void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit_status per recollir l'exit_status de la funcio
 {
     t_cmd   *node;
     t_tok   *tmp;
@@ -40,7 +40,7 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
                 handle_error(PRINT_SYNTAX_ERR_3, &tok);
                 return;//ARREGLAR
             }
-            if (tmp->type == WORD)
+            if (tmp->type == WORD)//si es palabra
             {
                 node->command_and_arg[i] = ft_strdup(tmp->str);//rellena matriz
                 i++;
@@ -54,7 +54,7 @@ void    parser(t_cmd **cmd, t_tok *tok)//afegir un int *exit per recollir l'exit
                 redir_add_back(&node->redir, node_redir);
                 tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
             }
-            else if (tmp->type == PIPE)
+            else if (tmp->type == PIPE)//si es pipe
             {
                 tmp = tmp->next;
                 break;
