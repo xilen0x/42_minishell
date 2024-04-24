@@ -4,7 +4,7 @@
 //int	builtings(t_built	*cmd, char	**env, int ac)
 int	builtins(t_cmd *cmd, t_shell *shell)
 {
-	if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)
+	if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)//este if se irá(se tratará en expansor)
 	{
 		get_exit_status();
 		return (0);

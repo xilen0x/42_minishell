@@ -207,10 +207,17 @@ int		builtin_unset(t_cmd *cmd, t_env *env);
 
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
+int				variable_exists(t_env *env, char *variable);
 int				variable_exists_op2(t_env *env, char *variable);
 int				variable_exists_op3(t_env *env, char *variable);
+int				var_exists_oldpwd(t_env *env, char *variable);
 
 //void	update_env(t_env *env, char *var, char *val);
 t_env	*update_env(t_env *env, char *key, char *val);
 int	get_pwd(t_shell *shell);
+int	old_pwd(t_shell *shell, t_env *env);
+// int	old_pwd(t_shell *shell);
+// int	old_pwd(void);
+int	go_path(char *path);
+
 #endif

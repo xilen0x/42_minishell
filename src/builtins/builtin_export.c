@@ -107,6 +107,26 @@ int	variable_exists(t_env *env, char *variable)
 	return (flag);
 }
 
+int	var_exists_oldpwd(t_env *env, char *variable)
+{
+	int		i;
+	char	**var_ent;
+	int		flag;
+
+	i = 0;
+	flag = 0;
+	var_ent = ft_split(variable, '=');
+	while (env != NULL)
+	{
+		if (ca_strcmp(var_ent[0], env->key) == 0)
+			flag = 1;
+		i++;
+		env = env->next;
+	}
+	// ft_free_split(var_ent);
+	return (flag);
+}
+
 /*print the export output(without argument)*/
 static int	just_export(t_env *env)
 {

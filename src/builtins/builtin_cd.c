@@ -22,35 +22,47 @@ static int	go_home(void)
 }
 
 /*cambia al directorio raiz */
-static int	go_root(void)
-{
-	if (chdir("/") != 0)
-	{
-		perror("chdir() error");
-		return (1);
-	}
-	return (0);
-}
+// static int	go_root(void)
+// {
+// 	if (chdir("/") != 0)
+// 	{
+// 		perror("chdir() error");
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
-/*cambia al directorio padre */
-static int	go_parent(void)
-{
-	if (chdir("..") != 0)
-	{
-		perror("chdir() error");
-		set_exit_status(1);
-		return (1);
-	}
-	return (0);
-}
+// /*cambia al directorio padre */
+// static int	go_parent(void)
+// {
+// 	if (chdir("..") != 0)
+// 	{
+// 		perror("chdir() error");
+// 		set_exit_status(1);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
+
+// /*cambia al directorio anterior(si existe) */
+// static int	go_old_pwd(void)
+// {
+
+// 	if (chdir("OLDPWD") != 0)
+// 	{
+// 		perror("cd: OLDPWD not set");
+// 		set_exit_status(1);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
 
 /*cambia a un directorio especifico */
-static int	go_path(t_shell *shell)
+int	go_path(char *path)
 {
-	if (chdir(shell->link_cmd->command_and_arg[1]) != 0)
+	if (chdir(path) != 0)
 	{
-		//perror("chdir() error");
-		ft_msgs(6);
+		ft_msgs(2);
 		set_exit_status(1);
 		return (1);
 	}
@@ -62,31 +74,15 @@ o a una ruta absoluta o relativa*/
 int	builtin_cd(t_cmd	*cmd, t_shell *shell)
 {
 	shell->link_cmd = cmd;
-	if (size_arr2d(cmd->command_and_arg) == argumento valido)//aki voy
-	//if (size_arr2d(cmd->command_and_arg) >= 1)
-	{
-		if ((size_arr2d(cmd->command_and_arg)) == 1)// cd only
-			go_home();
-		else if (ca_strcmp(cmd->command_and_arg[1], "~") == 0)
-			go_home();
-		else if (ca_strcmp(cmd->command_and_arg[1], "/") == 0)
-			go_root();
-		else if (ca_strcmp(cmd->command_and_arg[1], ".") == 0)
-			return (0);
-		else if ((ca_strcmp(cmd->command_and_arg[1], ".") && \
-				(ft_isalpha(cmd->command_and_arg[1][1]) == 1)))
-			go_path(shell);
-		else if (ca_strcmp(cmd->command_and_arg[1], "..") == 0)
-			go_parent();
-		else if (ft_isalpha(cmd->command_and_arg[1][0]))
-			go_path(shell);
-		get_pwd(shell);
-		set_exit_status(0);
-		return (0);
-	}
+	if ((size_arr2d(cmd->command_and_arg)) == 1)// cd only
+		go_home();
+	else if (ca_strcmp(cmd->command_and_arg[1], "~") == 0)
+		go_home();
+	else if (ca_strcmp(cmd->command_and_arg[1], "-") == 0)//no terminado
+		old_pwd(shell, shell->link_env);
 	else
-	{
-		set_exit_status(1);
-		return (1);
-	}
+		go_path(shell->link_cmd->command_and_arg[1]);
+	get_pwd(shell);
+	set_exit_status(0);
+	return (0);
 }
