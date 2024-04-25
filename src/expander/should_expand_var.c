@@ -16,7 +16,9 @@ void	should_expand_var(t_cmd **cmd)
 		printf("--scanned $ in command %zu--\n", j++);
 		while (cmd_aux->command_and_arg[i] != NULL)//recorre la matriz del comando
 		{
-			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL)//si encuentra un '$'
+			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL \
+			&& ft_strchr(cmd_aux->command_and_arg[i], '\'') != NULL \
+			&& ft_strchr(cmd_aux->command_and_arg[i], '\"'))//si encuentra un '$' '\" '\''
 				printf("	$ en indice %zu de la matriz\n", i);//ELIMINAR ANTES DE ENTREGA
 //				if (!is_single_quoted(cmd_aux->command_and_arg[i])) return TRUE o FALSE. Si no en te, NO s'ha d'expandir.		
 //					expansor(cmd_aux->command_and_arg[i]);//mallocarlo de nuevo expandido y liberar el viejo
