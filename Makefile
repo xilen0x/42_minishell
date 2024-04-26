@@ -80,7 +80,12 @@ FILES =	minishell.c \
 									redirs/redir_new_node.c \
 									redirs/redir_size.c \
 									parser/parser.c \
-									expander/should_expand_var.c\
+									expander/should_expand.c\
+									expander/expand_and_quote_remove.c \
+									expander/get_env_val.c \
+									expander/new_tok_len.c \
+									expander/new_tok_builder.c \
+									expander/get_env_key.c \
 									signals.c \
 									prints/tok_print.c \
 									prints/cmd_print.c \

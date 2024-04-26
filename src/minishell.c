@@ -44,7 +44,7 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);
 		should_expand_var(&cmd, envlist);
-//		expander(&cmd, exit);
+
 		//	builtins(&cmds, env, ac, av);//de carlos
 //		ft_get_paths(env.env_cpy, &env);
 		//ft_open_files(av, &data);
@@ -56,8 +56,3 @@ int	main(int ac, char *av[], char *envp[])
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
 }
-
-/*
-NOTAS:
--preparar el exit_status con los printers de los errores de bash
-*/

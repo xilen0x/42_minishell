@@ -51,13 +51,13 @@ typedef enum e_type
 	DOUBLE_GREATER,
 	DOUBLE_SMALLER
 } 	t_type;
-
+/*------contiene la str y el tipo de cada token-----*/
 typedef struct s_tok
 {
 	char			*str;//contendrá string solo si es WORD, sino será NULLL.
 	t_type			type;
 	struct s_tok	*next;
-}					t_tok;//contiene los datos de cada token
+}					t_tok;
 
 typedef enum e_redir_type
 {
@@ -68,20 +68,29 @@ typedef enum e_redir_type
 	HEREDOC_INPUT = 6//<<
 } 	t_redir_type;
 
+/*----contiene los datos de cada redirección------*/
 typedef struct s_redir
 {
 	char			*filename;
 	t_redir_type	redir_type;
 	struct s_redir	*next;
-}					t_redir;//contiene los datos de cada redirección
+}					t_redir;
 
+/*------contiene los datos de cada pipe de la linea de comando-----*/
 typedef struct s_cmd
 {
 	char			**command_and_arg;
 	t_redir			*redir;
 	struct s_cmd	*next;
 	//char			*pipe_test;//lo borarre luego(carlos)
-}					t_cmd;//contiene los datos de cada pipe de la line
+}					t_cmd;
+
+/*---si las comillas simples o dobles estan abiertas (1) o cerradas (0)----*/
+typedef struct s_qts
+{
+	int	s_quote;
+	int	d_quote;
+}	t_qts;
 
 //-----carlos------------------
 /*COMENTO PARA QUE NO DE CONFLICTO CON MI t_env envlist
@@ -183,7 +192,12 @@ int		is_operator(t_tok *node);
 size_t 	command_and_arg_size(t_tok *tok);
 
 /*---------------expander & quote removal--------------*/
-void	should_expand_var(t_cmd **cmd, t_env *envlist);
+void	should_expand(t_cmd **cmd, t_env *envlist);
+char	*expand_and_quote_remove(char *str, t_env *envlist);
+int		new_tok_len(char *str, t_env *envlist);
+char	*new_tok_builder(char *str, t_env *envlist, char *result);
+char 	*get_env_key(char *str);
+char 	*get_env_val(char *env_key, t_env *envlist);
 
 
 /*---------------utils_libft-----------------*/
