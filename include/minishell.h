@@ -32,7 +32,15 @@
 
 typedef struct s_builtings t_built;
 
-//---joan---
+/*===========joan===========*/
+//Environment Struct
+typedef struct s_env
+{
+	char			*key;
+	char			*val;
+	struct s_env	*next;
+}	t_env;
+
 typedef enum e_type
 {
 	NULL_TYPE = 0,//para saber que se ha inicializado ya 
@@ -76,7 +84,7 @@ typedef struct s_cmd
 }					t_cmd;//contiene los datos de cada pipe de la line
 
 //-----carlos------------------
-
+/*COMENTO PARA QUE NO DE CONFLICTO CON MI t_env envlist
 typedef struct s_env
 {
 	char	**env_cpy;
@@ -91,7 +99,7 @@ typedef struct s_env
 	t_built	*to_built;
 	t_cmd	*to_cmd;
 }	t_env;
-
+*/
 typedef struct s_builtings
 {
 	//char	*echo_n;
@@ -136,7 +144,7 @@ int	builtin_unset(t_built *cmd, t_env env, int ac);
 void 	tokenizer(t_tok **tok, char *line);
 void    parser(t_cmd **cmd, t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
-int bg_color();
+int 	bg_color();
 void	init_msg(void);
 /*---------------------array 2d----------------*/
 size_t  size_arr2d(char **arr2d);
@@ -174,7 +182,9 @@ void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 int		is_operator(t_tok *node);
 size_t 	command_and_arg_size(t_tok *tok);
 
-void	should_expand_var(t_cmd **cmd);
+/*---------------expander & quote removal--------------*/
+void	should_expand_var(t_cmd **cmd, t_env *envlist);
+
 
 /*---------------utils_libft-----------------*/
 size_t	ft_strlen(const char *s);

@@ -1,13 +1,14 @@
 
 #include "minishell.h"
 
-int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARIABLE **ENVIRON
+int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
-	t_env	env;
+	t_env	*envlist;
 	t_tok	*tok;
 	//t_built	cmds;
 	t_cmd	*cmd;
+	extern char	**environ;//temporal, hasta que hagamos merge con Carlos
 
 	tok = NULL;
 	cmd = NULL;
@@ -16,11 +17,12 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		ft_errors(5);
 		exit(0);
 	}
-	env.env_cpy = dup_arr2d(envp);
-	env.export_cpy = dup_arr2d(envp);
+//	env.env_cpy = dup_arr2d(envp);
+//	env.export_cpy = dup_arr2d(envp);
 	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
 	//init_msg();
 	//bg_color();
+	init_list(environ, &envlist);
 	while (1)
 	{
 		set_signals();
@@ -41,7 +43,7 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-//		should_expand_var(&cmd);
+		should_expand_var(&cmd, envlist);
 //		expander(&cmd, exit);
 		//	builtins(&cmds, env, ac, av);//de carlos
 //		ft_get_paths(env.env_cpy, &env);
