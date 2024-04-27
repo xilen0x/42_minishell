@@ -42,18 +42,10 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 ################################################################################
 
 FILES =	minishell.c \
-									builtins/builtins.c \
-									builtins/builtin_cd.c \
-									builtins/builtin_pwd.c \
-									builtins/builtin_echo.c \
-									builtins/builtin_env.c \
-									builtins/builtin_export.c \
-									builtins/builtin_unset.c \
-									builtins/builtin_exit.c \
-									executor/executor.c \
 									utils/utils_libft_0.c \
 									utils/utils_libft_1.c \
 									utils/utils_libft_2.c \
+									utils/utils_libft_3.c \
 									utils/utils0.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
@@ -90,7 +82,7 @@ FILES =	minishell.c \
 									prints/tok_print.c \
 									prints/cmd_print.c \
 									prints/redir_print.c \
-									prints/print_envlist.c 
+									prints/print_envlist.c \
 									prints/print_arr2d.c 
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))

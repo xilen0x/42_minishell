@@ -138,17 +138,17 @@ typedef struct s_builtings
 //int		builtings(t_built	*cmd, char **env, int ac);
 //char	**env_cpy(char *e[]);
 //char	**dup_array_2d(char *envp[]);
-
-int	init (t_built *cmd, int ac, char *av[]);
-int	builtins(t_built *cmd, int ac, char *av[], t_env env);
-int	builtin_cd(t_built *cmd, int ac);
-int	builtin_pwd(void);
-int	builtin_echo(t_built *cmd, int ac);
-int	builtin_env(t_env env);
-int	builtin_export(t_built *cmd, t_env env, int ac);
-int	builtin_exit(t_built *cmd, int ac, char *av[]);
-int	builtin_unset(t_built *cmd, t_env env, int ac);
-
+/*
+int		init (t_built *cmd, int ac, char *av[]);
+int		builtins(t_built *cmd, int ac, char *av[], t_env env);
+int		builtin_cd(t_built *cmd, int ac);
+int		builtin_pwd(void);
+int		builtin_echo(t_built *cmd, int ac);
+int		builtin_env(t_env env);
+int		builtin_export(t_built *cmd, t_env env, int ac);
+int		builtin_exit(t_built *cmd, int ac, char *av[]);
+int		builtin_unset(t_built *cmd, t_env env, int ac);
+*/
 /*----------------minishell----------------*/
 void 	tokenizer(t_tok **tok, char *line);
 void    parser(t_cmd **cmd, t_tok *tok);
@@ -163,7 +163,7 @@ char    **rm_one_arr2d(char **arr2d, int index);
 void    free_arr2d(char **arr2d);
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------------t_tok------------------*/
+/*-----------------utils t_tok------------------*/
 t_tok	*tok_new_node(char *str, int type);
 t_tok	*tok_last(t_tok *lst);
 void	tok_add_back(t_tok **lst, t_tok *new);
@@ -171,7 +171,7 @@ void	tok_free(t_tok **lst);
 int		tok_size(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
 void	tok_print(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*-------------------t_cmd----------------*/
+/*-------------------utils t_cmd----------------*/
 t_cmd	*cmd_new_node(void);
 t_cmd	*cmd_last(t_cmd *lst);
 void	cmd_add_back(t_cmd **lst,t_cmd *new);
@@ -179,7 +179,7 @@ void	cmd_free(t_cmd **lst);
 int		cmd_size(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------------t_redir-----------------*/
+/*-----------------utils t_redir-----------------*/
 t_redir	*redir_new_node(char *str, int redir_type);
 t_redir	*redir_last(t_redir *lst);
 void	redir_add_back(t_redir **lst,t_redir *new);
@@ -190,6 +190,9 @@ void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 /*--------------utils_parser---------------*/
 int		is_operator(t_tok *node);
 size_t 	command_and_arg_size(t_tok *tok);
+//size_t tok_operator_cnt(t_tok *tokens);
+//size_t tok_word_cnt(t_lst *tokens);
+void	handle_error(char *str, t_tok **tok);
 
 /*---------------expander & quote removal--------------*/
 void	should_expand(t_cmd **cmd, t_env *envlist);
@@ -210,6 +213,15 @@ int		ca_strcmp(char *s1, char *s2);
 /*-------------------------signals.c--------------------------*/
 void	set_signals(void);
 
+/*--------------------------utils t_env-------------------*/
+t_env	*lstlast(t_env *lst);
+void	lstadd_back(t_env **lst, t_env *new);
+t_env	*lstnew(char *key, char *value);
+void	init_list(char **envp, t_env **envlist);
+void	cleaner(t_env **lst);
+
+
+
 /*-------------------------executor.c--------------------------*/
 //int		init_momentaneo(char *av[], t_env *data);
 void	ft_get_paths(char **envp, t_env *data);
@@ -217,8 +229,8 @@ int		search_cmds(t_env *data);
 int		executor(t_env *data);
 
 /*-------------------------utils0.c--------------------------*/
-int	ft_errors(int n);
+int		ft_errors(int n);
 
 /*-------------------------int	builtins.c-------------------*/
-int	is_builtin(t_built *cmd, int ac, char *av[], t_env env);
+int		is_builtin(t_built *cmd, int ac, char *av[], t_env env);
 #endif

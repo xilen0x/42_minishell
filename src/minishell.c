@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-int	main(int ac, char *av[], char *envp[])
+int	main(int ac, char *av[])// char *envp[])
 {
 	char	*line;
 	t_env	*envlist;
@@ -43,7 +43,7 @@ int	main(int ac, char *av[], char *envp[])
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		should_expand_var(&cmd, envlist);
+		should_expand(&cmd, envlist);
 
 		//	builtins(&cmds, env, ac, av);//de carlos
 //		ft_get_paths(env.env_cpy, &env);
