@@ -1,14 +1,16 @@
 
 #include "minishell.h"
 
-int	main(int ac, char *av[])// char *envp[])
+//int	main(int ac, char *av[])// char *envp[])
+int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
+	char	**env_cpy;
 	t_env	*envlist;
 	t_tok	*tok;
 	//t_built	cmds;
 	t_cmd	*cmd;
-	extern char	**environ;//temporal, hasta que hagamos merge con Carlos
+//	extern char	**environ;//temporal, hasta que hagamos merge con Carlos
 
 	tok = NULL;
 	cmd = NULL;
@@ -18,11 +20,15 @@ int	main(int ac, char *av[])// char *envp[])
 		exit(0);
 	}
 //	env.env_cpy = dup_arr2d(envp);
+	env_cpy = dup_arr2d(envp);
 //	env.export_cpy = dup_arr2d(envp);
-	//print_arr2d(env);//ELIMINAR ANTES DE ENTREGA
+	print_arr2d(env_cpy);//ELIMINAR ANTES DE ENTREGA
 	//init_msg();
 	//bg_color();
-	init_list(environ, &envlist);
+//	init_list(environ, &envlist);
+	init_envlist(env_cpy, &envlist);
+	printf("==========================");
+	ft_printstack(envlist);
 	while (1)
 	{
 		set_signals();

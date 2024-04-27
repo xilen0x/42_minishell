@@ -39,7 +39,7 @@ typedef struct s_env
 	char			*key;
 	char			*val;
 	struct s_env	*next;
-}	t_env;
+}					t_env;
 
 typedef enum e_type
 {
@@ -155,13 +155,13 @@ void    parser(t_cmd **cmd, t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
 int 	bg_color();
 void	init_msg(void);
+
 /*---------------------array 2d----------------*/
 size_t  size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
 char    **add_one_arr2d(char **arr2d, char *new);
 char    **rm_one_arr2d(char **arr2d, int index);
 void    free_arr2d(char **arr2d);
-void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 
 /*-----------------utils t_tok------------------*/
 t_tok	*tok_new_node(char *str, int type);
@@ -169,7 +169,6 @@ t_tok	*tok_last(t_tok *lst);
 void	tok_add_back(t_tok **lst, t_tok *new);
 void	tok_free(t_tok **lst);
 int		tok_size(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
-void	tok_print(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*-------------------utils t_cmd----------------*/
 t_cmd	*cmd_new_node(void);
@@ -177,7 +176,6 @@ t_cmd	*cmd_last(t_cmd *lst);
 void	cmd_add_back(t_cmd **lst,t_cmd *new);
 void	cmd_free(t_cmd **lst);
 int		cmd_size(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
-void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
 
 /*-----------------utils t_redir-----------------*/
 t_redir	*redir_new_node(char *str, int redir_type);
@@ -185,7 +183,6 @@ t_redir	*redir_last(t_redir *lst);
 void	redir_add_back(t_redir **lst,t_redir *new);
 void	redir_free(t_redir **lst);
 int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
-void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*--------------utils_parser---------------*/
 int		is_operator(t_tok *node);
@@ -208,7 +205,7 @@ size_t	ft_strlen(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 char	*ft_strdup(const char *s1);
 size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
-int		ca_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
 
 /*-------------------------signals.c--------------------------*/
 void	set_signals(void);
@@ -217,7 +214,7 @@ void	set_signals(void);
 t_env	*lstlast(t_env *lst);
 void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
-void	init_list(char **envp, t_env **envlist);
+void	init_envlist(char **envp, t_env **envlist);
 void	cleaner(t_env **lst);
 
 
@@ -233,4 +230,15 @@ int		ft_errors(int n);
 
 /*-------------------------int	builtins.c-------------------*/
 int		is_builtin(t_built *cmd, int ac, char *av[], t_env env);
+
+
+/*--------------------prints-----------------*/
+void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
+void	tok_print(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
+void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
+void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
+void	ft_print_keys(t_env *env_struct);
+void	ft_print_values(t_env *env_struct);
+void	ft_printstack(t_env *env_struct);
+
 #endif

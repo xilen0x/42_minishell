@@ -5,7 +5,7 @@ NAME =	minishell
 GCC := gcc
 
 # Compiler flags
-FLAGS := -Werror -Wextra -Wall -MMD -g -fsanitize=address
+FLAGS := -Werror -Wextra -Wall -MMD -g #-fsanitize=address
 
 # Remove
 RM 	:=	rm -rf
@@ -46,6 +46,7 @@ FILES =	minishell.c \
 									utils/utils_libft_1.c \
 									utils/utils_libft_2.c \
 									utils/utils_libft_3.c \
+									utils/utils_env.c \
 									utils/utils0.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \

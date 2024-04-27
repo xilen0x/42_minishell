@@ -62,6 +62,7 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
+/*---CREO QUE NO SE UTILIZA-----VERIFICAR ANTES DE ENTREGA---*/
 /* Libera todo un array de strings (char **) */
 //Chequear si ya hay una funcion que hace lo mismo en nuestro minishell????
 void	ft_free_split(char **array_strings)

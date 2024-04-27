@@ -11,7 +11,7 @@ char	*expand_and_quote_remove(char *str, t_env *envlist)
 	printf("token final len: %zu\n", len);
 	result = (char *)malloc(sizeof(char) * (len + 1));//reservamos mem con el len del token final
 	if (!result)
-		printf("fallo la creacion del malloc en 'expand_and_quote....");
+		printf("fallo la creacion del malloc");
 	result = new_tok_builder(str, envlist, result);
 //	printf("::%s\n", result);
 	return (result);

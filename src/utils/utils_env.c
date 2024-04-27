@@ -10,7 +10,7 @@ t_env	*lstlast(t_env *lst)
 	}
 	return (lst);
 }
-
+/*-------ESTA FUNCION ESTA MAL, ELIMINARLA-------
 void	lstadd_back(t_env **lst, t_env *new)
 {
 	t_env	*lastnode;
@@ -23,6 +23,39 @@ void	lstadd_back(t_env **lst, t_env *new)
 		else
 			lastnode->next = new;
 	}
+}*/
+/*-----TAMPOCO FUNCIONA, NO ENCUENTRA LA DIRECCION DE MEMORIA
+void lstadd_back(t_env **lst, t_env *new) 
+{
+	t_env	*last;
+
+    if (*lst == NULL) 
+	{
+        *lst = new;  // Si la lista está vacía, el nuevo nodo se convierte en el primer nodo
+        return;
+    }
+    // Recorre la lista hasta llegar al último nodo
+    last = (*lst);
+    while (last->next != NULL) 
+	{
+        last = last->next;
+    }
+    // Inserta el nuevo nodo al final de la lista
+    last->next = new;
+}*/
+
+/*--Adds a node to the end of a t_env list---*/
+void	lstadd_back(t_env **lst, t_env *new)
+{
+	t_env	*aux;
+
+	if (*lst)
+	{
+		aux = lstlast(*lst);
+		aux->next = new;
+	}
+	else
+		*lst = new;
 }
 
 t_env	*lstnew(char *key, char *value)
@@ -42,7 +75,7 @@ t_env	*lstnew(char *key, char *value)
 }
 
 /* Inicializa la lista t_env creando un nodo(newnode) y agregandoselo*/
-void	init_list(char **envp, t_env **envlist)
+void	init_envlist(char **envp, t_env **envlist)
 {
 	int		i;
 	char	**tokens;
@@ -60,11 +93,13 @@ void	init_list(char **envp, t_env **envlist)
 			value = tokens[1];
 			lstadd_back(envlist, lstnew(key, value));
 		}
-		ft_free_split(tokens);
+//		ft_free_split(tokens); Lo sustituyo por la siguiente funcion
+		free_arr2d(tokens);
 		i++;
 	}
 	return ;
 }
+
 /* Borra una lista t_env y libera todos sus nodos */
 void	cleaner(t_env **lst)
 {
