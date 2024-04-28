@@ -14,7 +14,6 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 	j = 0;
 	quotes.s_quote = 0;
 	quotes.d_quote = 0;
-//	tok_key = NULL;//creo que no haria falta porque lo inicializo mas abajo
 	tok_val = NULL;
 	while (str && str[i])
 	{
@@ -35,13 +34,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 				i++;
 				continue;//OJO no se ejecutara nada de lo que hay a continuacion
 			}
-			printf("final tok_key: <%s>\n", tok_key);
 			tok_val = get_env_val(tok_key, envlist);//retorna el content de tok_key en env o NULL si no existe
-			printf("final tok_val: <%s>\n", tok_val);
-//			if (tok_val != NULL)
-//			{
-//				len += ft_strlen(tok_val);//incremento el tamanyo del nuevo token con el de la expansion
-//			while (*tok_val != '\0')//si no es NULL y mientras exista, recorrela
 			if (tok_val != NULL)
 			{
 				while (tok_val && *tok_val != '\0')
@@ -54,10 +47,8 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 			i += ft_strlen(tok_key);//salto el len del nombre de la var en el recorrido del token
 			free(tok_key);
 			tok_key = NULL;
-//			free(tok_val);
 			tok_val = NULL;
-//			ft_printstack(envlist);
-			continue;//salto el ciclo para que no se incremente 'i' de nuevo OJO: SE SALTARA TODO LO QUE TENGA DESPUES
+			continue;//salto el ciclo para que no se incremente 'i' de nuevo
 		}
 		else
 		{
@@ -69,6 +60,5 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 		i++;
 	}
 	result[j] = '\0';
-//	printf("token resultante <%s>\n", result);
 	return (result);
 }

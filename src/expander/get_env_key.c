@@ -16,7 +16,7 @@ char *get_env_key(char *str)
 		ft_strlcpy(var_name, str, i + 1);
 		return (var_name);
 	}
-	if (!ft_isalpha(str[0]) && str[0] != '_')//si el primero no es alpha ni '_'
+	if (!ft_isalpha(str[0]) && str[0] != '_')
 		return (NULL);
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;

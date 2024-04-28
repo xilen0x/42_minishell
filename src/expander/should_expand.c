@@ -5,36 +5,39 @@ redirecciones hay algun '$' que debiera ser expandido*/
 void	should_expand(t_cmd **cmd, t_env *envlist)
 {
 	size_t	i;
-//	size_t	j = 0;//ELIMINAR ANTES DE ENTREGA
 	t_cmd	*cmd_aux;
 	t_redir	*redir_aux;
 
 	cmd_aux = *cmd;
-	while (cmd_aux != NULL)//uso un aux temporal para iterar cmd
+	while (cmd_aux != NULL)
 	{
-		i = 1;//porque el indice 0 es el commando y este no deberia tener '$'(a menos que sea literal' ' y no seria buena practica)
+		i = 0;
 		while (cmd_aux->command_and_arg[i] != NULL)//recorre la matriz del comando
 		{
 			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL \
 			|| ft_strchr(cmd_aux->command_and_arg[i], '\'') != NULL \
-			|| ft_strchr(cmd_aux->command_and_arg[i], '"') != NULL)//si encuentra un '$' '\" '\''
+			|| ft_strchr(cmd_aux->command_and_arg[i], '"') != NULL)
 			{
-				printf("visto '$' o comilla en indice %zu de command\n", i);//ELIMINAR ANTES DE ENTREGA
+				printf("Expansion:\n");
+				printf("<%s>\n", cmd_aux->command_and_arg[i]);
 				(*cmd)->command_and_arg[i] = expand_and_quote_remove(cmd_aux->command_and_arg[i], envlist);//el res lo envio a la lista original, no al aux
-				printf("token final <%s>\n", (*cmd)->command_and_arg[i]);
+				printf("<%s>\n", (*cmd)->command_and_arg[i]);
+				printf("-----------\n");
 			}
 			i++;
 		}
 		redir_aux = (*cmd)->redir;//uso un aux temporal para iterar redir (solo para consultar sus variables)
-		while (redir_aux != NULL)//recorre la lista redir
+		while (redir_aux != NULL)
 		{
 			if (ft_strchr(redir_aux->filename, '$') != NULL \
 			|| ft_strchr(redir_aux->filename, '\'') != NULL \
 			|| ft_strchr(redir_aux->filename, '"') != NULL)
 			{
-				printf("visto '$' o comilla en t_redir\n");//ELIMINAR ANTES DE ENTREGA
+				printf("Expansión:\n");
+				printf("<%s>\n", redir_aux->filename);
 				(*cmd)->redir->filename = expand_and_quote_remove(redir_aux->filename, envlist);//el res lo envio a la lista original, no al aux
-				printf("token final <%s>\n", (*cmd)->redir->filename);
+				printf("<%s>\n", (*cmd)->redir->filename);
+				printf("-----------\n");
 			}
 			redir_aux = redir_aux->next;
 		}
@@ -42,4 +45,3 @@ void	should_expand(t_cmd **cmd, t_env *envlist)
 	}
 	printf("\n");//ELIMINAR ANTES DE ENTREGA
 }
-//SI NO HAY CIERRE DE COMILLAS lo gestionaré como => syntax error near token 'print_del_token'???

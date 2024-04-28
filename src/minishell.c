@@ -10,7 +10,6 @@ int	main(int ac, char *av[], char *envp[])
 	t_tok	*tok;
 	//t_built	cmds;
 	t_cmd	*cmd;
-//	extern char	**environ;//temporal, hasta que hagamos merge con Carlos
 
 	tok = NULL;
 	cmd = NULL;
@@ -22,26 +21,22 @@ int	main(int ac, char *av[], char *envp[])
 //	env.env_cpy = dup_arr2d(envp);
 	env_cpy = dup_arr2d(envp);
 //	env.export_cpy = dup_arr2d(envp);
-	print_arr2d(env_cpy);//ELIMINAR ANTES DE ENTREGA
 	//init_msg();
 	//bg_color();
-//	init_list(environ, &envlist);
 	init_envlist(env_cpy, &envlist);
-	printf("==========================");
-	ft_printstack(envlist);
 	while (1)
 	{
 		set_signals();
 		line = readline(">>>>minishell$ ");
 		if (!line)
 		{
-			printf("exit\n");//en el caso del ctrl-D
+			printf("exit\n");//para el caso del ctrl-D
 			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
 		if (line && *line)
-			add_history(line);//si tiene contenido, agregamos 'line' al historial
-		if (!*line)//else
+			add_history(line);
+		if (!*line)
 		{
 			free(line);
 			continue;
@@ -62,3 +57,4 @@ int	main(int ac, char *av[], char *envp[])
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
 }
+//SI NO HAY CIERRE DE COMILLAS lo gestionaré como => syntax error near token 'print_del_token'???

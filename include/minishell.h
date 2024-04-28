@@ -51,6 +51,7 @@ typedef enum e_type
 	DOUBLE_GREATER,
 	DOUBLE_SMALLER
 } 	t_type;
+
 /*------contiene la str y el tipo de cada token-----*/
 typedef struct s_tok
 {
@@ -187,8 +188,8 @@ int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 /*--------------utils_parser---------------*/
 int		is_operator(t_tok *node);
 size_t 	command_and_arg_size(t_tok *tok);
-//size_t tok_operator_cnt(t_tok *tokens);
-//size_t tok_word_cnt(t_lst *tokens);
+//size_t tok_operator_cnt(t_tok *tokens); DE MOMENTO NO LO USAMOS
+//size_t tok_word_cnt(t_lst *tokens); DE MOMENTO NO LO USAMOS
 void	handle_error(char *str, t_tok **tok);
 
 /*---------------expander & quote removal--------------*/
@@ -237,8 +238,8 @@ void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 void	tok_print(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
 void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
 void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
-void	ft_print_keys(t_env *env_struct);
-void	ft_print_values(t_env *env_struct);
-void	ft_printstack(t_env *env_struct);
+void	ft_print_keys(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
+void	ft_print_values(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
+void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 
 #endif
