@@ -86,25 +86,24 @@ int	get_pwd(t_shell *shell)
 // 	return (0);
 // }
 
-int old_pwd(t_shell *shell, t_env *env)
+int	old_pwd(t_shell *shell, t_env *env)
 {
-    char *oldpwd_value = getenv("OLDPWD"); // Obtener el valor de OLDPWD
+	char *oldpwd_value = getenv("OLDPWD"); // Obtener el valor de OLDPWD
 
-    if (oldpwd_value == NULL) {
-        printf("No existe la variable OLDPWD!\n");
-        return 1; // Retornar 1 en caso de error
-    }
-
-    printf("Sí existe la variable OLDPWD\n");
-
-    // Cambiar al directorio anterior
-    if (chdir(oldpwd_value) != 0) {
-        perror("chdir");
-        set_exit_status(1);
-        return 1; // Retornar 1 en caso de error
-    }
-
-    (void)shell;
-    (void)env;
-    return 0; // Retornar 0 indicando éxito
+	if (oldpwd_value == NULL)
+	{
+		printf("No existe la variable OLDPWD!\n");
+		return (1); // Retornar 1 en caso de error
+	}
+	printf("Sí existe la variable OLDPWD\n");
+	// Cambiar al directorio anterior
+	if (chdir(oldpwd_value) != 0)
+	{
+		perror("chdir");
+		set_exit_status(1);
+		return (1); // Retornar 1 en caso de error
+	}
+	(void)shell;
+	(void)env;
+	return (0); // Retornar 0 indicando éxito
 }
