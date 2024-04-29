@@ -6,7 +6,6 @@ char	*expand_and_quote_remove(char *str, t_env *envlist)
 	size_t	len;
 
 	result = NULL;
-	
 	len = new_tok_len(str, envlist);//calcula el len del nuevo token, sin comillas y expandido
 	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)

@@ -47,9 +47,10 @@ void	tokenizer(t_tok **tok, char *line)
 	size_t	len;
 	int		i;
 
-	i = 0;
-	len = 0;
 	new_tok = NULL;
+	str_aux = NULL;
+	len = 0;
+	i = 0;
 	while (line[i])
 	{
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))

@@ -9,6 +9,7 @@ void	should_expand(t_cmd **cmd, t_env *envlist)
 	t_redir	*redir_aux;
 
 	cmd_aux = *cmd;
+	redir_aux = NULL;
 	while (cmd_aux != NULL)
 	{
 		i = 0;

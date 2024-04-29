@@ -11,6 +11,7 @@ int	main(int ac, char *av[], char *envp[])
 	//t_built	cmds;
 	t_cmd	*cmd;
 
+	envlist = NULL;
 	tok = NULL;
 	cmd = NULL;
 	if (ac != 1 || av[1])
@@ -44,6 +45,7 @@ int	main(int ac, char *av[], char *envp[])
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
+		tok_free(&tok);
 		should_expand(&cmd, envlist);
 
 		//	builtins(&cmds, env, ac, av);//de carlos
@@ -51,7 +53,6 @@ int	main(int ac, char *av[], char *envp[])
 		//ft_open_files(av, &data);
 //	search_cmds(&env);
 //		executor(&env);
-		tok_free(&tok);
 		cmd_free(&cmd);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);

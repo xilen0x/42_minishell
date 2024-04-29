@@ -53,6 +53,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	unsigned int	i;
 	unsigned int	s_len;
 
+	sub = NULL;
 	i = 0;
 	if (!s)
 		return (NULL);

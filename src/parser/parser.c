@@ -8,6 +8,11 @@ void    parser(t_cmd **cmd, t_tok *tok)
     size_t  size;
     t_redir *node_redir;
 
+    node = NULL;
+    tmp = NULL;
+//    i = 0;
+    size = 0;
+    node_redir = NULL;
     tmp = tok_last(tok);//puntero al ultimo token de la lista
     if (tok->type == PIPE || tmp->type == PIPE)//si linea comienza o acaba en '|'
     {
@@ -39,7 +44,7 @@ void    parser(t_cmd **cmd, t_tok *tok)
                 node->command_and_arg[i] = ft_strdup(tmp->str);//rellena matriz
                 i++;
                 if (i == size)
-                    node->command_and_arg[i] = NULL;
+                    node->command_and_arg[i] = NULL;//cierro el array con NULL en el ultimo elemento
                 tmp = tmp->next;
             }
             else if (is_operator(tmp) && tmp->next->type == WORD)//si es operador y next es WORD

@@ -14,6 +14,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 	j = 0;
 	quotes.s_quote = 0;
 	quotes.d_quote = 0;
+	tok_key = NULL;
 	tok_val = NULL;
 	while (str && str[i])
 	{
