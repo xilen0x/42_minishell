@@ -235,9 +235,9 @@ int		is_builtin(t_built *cmd, int ac, char *av[], t_env env);
 
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
-void	tok_print(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
-void	cmd_print(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
-void	redir_print(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
+void	print_tok(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
+void	print_cmd(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
+void	print_redir(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 void	ft_print_keys(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_print_values(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA

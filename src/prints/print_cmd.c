@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*----Imprime lista t_cmd---ELIMINAR ANTES DE ENTREGA----*/
-void	cmd_print(t_cmd *lst)
+void	print_cmd(t_cmd *lst)
 {
 	int	i;
 	while (lst != NULL)
@@ -16,7 +16,7 @@ void	cmd_print(t_cmd *lst)
 			}
 		printf("\n");
 		if (lst->redir != NULL)
-			redir_print(lst->redir);
+			print_redir(lst->redir);
 		else
 			printf("     t_redir = NULL\n");
 		lst = lst->next;

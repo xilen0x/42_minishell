@@ -2,7 +2,7 @@
 /*===============ELIMINAR ESTE FILE ANTES DE ENTREGA=============== */
 
 /*----Imprime una lista t_tok----*/
-void	tok_print(t_tok *lst)
+void	print_tok(t_tok *lst)
 {
 	printf("\n=== %i tokens ===\n", tok_size(lst));
 	while (lst)
