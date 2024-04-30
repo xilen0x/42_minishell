@@ -4,6 +4,7 @@
 int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARIABLE **ENVIRON
 {
 	char	*line;
+	char	**env_cpy;
 	t_tok	*tok;
 	t_cmd	*cmd;
 	t_shell	shell;
@@ -12,8 +13,9 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 	cmd = NULL;
 	if (ac != 1 || av[1])
 		ft_msgs(10);
+	env_cpy = dup_arr2d(envp);
 	init_main_struct(&shell);
-	init_list(envp, &shell);
+	init_list_env(envp, &shell);
 	bg_color();
 	//init_msg();
 	while (1)
@@ -36,15 +38,13 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		tokenizer(&tok, line);
 		free(line);
 		parser(&cmd, tok);
-		if (builtins(cmd, &shell))
-		{
-			get_paths(&shell);
-			//ft_open_files(av, &data);
-			search_command_path(&shell);
-			//executor(env, *cmd);// antes de entrar en executor, crear funcion list to array
-		}
+		//ft_open_files(av, &data);
 //		should_expand_var(&cmd);
 //		expander(&cmd, exit);
+		list_to_array(&shell);
+		//get_paths(&shell);
+		//search_command_path(&shell);
+		//executor(env, *cmd);// antes de entrar en executor, crear funcion list to array
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}

@@ -8,7 +8,7 @@ void	init_main_struct(t_shell *shell)
 	//shell->link_redir = NULL;
 	//shell->link_redir_t = NULL;
 	//shell->link_tok = NULL;
-	g_exit_stat = 0;
+	//g_exit_stat = 0;
 }
 
 /* Función para imprimir solo las claves (keys) del environment*/
@@ -30,7 +30,6 @@ void	ft_print_values(t_env *env_struct)
 		env_struct = env_struct->next;
 	}
 }
-
 
 void	ft_free_split(char **array_strings)
 {
@@ -93,7 +92,7 @@ t_env	*lstnew(char *key, char *value)
 }
 
 /*funcion que inicialista la lista creando un nodo(newnode) y agregandolo a la lista(ft_stack_add_back)*/
-int	*init_list(char **envp, t_shell *shell)
+int	*init_list_env(char **envp, t_shell *shell)
 {
 	int		i;
 	char	**tokens;

@@ -70,12 +70,12 @@ int	ft_msgs(int n)
 /*Function that get the exit status number*/
 int	get_exit_status(void)
 {
-	printf("%d: %s", g_exit_stat, "command not found\n");
+	//printf("%d: %s", g_exit_stat, "command not found\n");
 	return (0);
 }
 
 /*Function that set the exit status number*/
 void	set_exit_status(int num)
 {
-	g_exit_stat = num;
+	//g_exit_stat = num;
 }

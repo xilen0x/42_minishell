@@ -32,7 +32,6 @@
 //typedef struct s_builtings t_built;
 
 //Global Variable allowed
-int	g_exit_stat;
 
 //---joan---
 typedef enum e_type
@@ -184,7 +183,7 @@ void	set_exit_status(int num);
 int		ca_strchr(const char *s, int c);
 
 /*---------------------------utils2.c -------------------------*/
-int		*init_list(char **envp, t_shell *shell);
+int		*init_list_env(char **envp, t_shell *shell);
 void	init_main_struct(t_shell *shell);
 //void	ft_print_env(t_env *env_struct);
 void	lstadd_back(t_env **lst, t_env *new);
@@ -193,6 +192,9 @@ void	ft_free_split(char **array_strings);
 //void	ca_lstdelone(t_env *lst, void (*del)(void*));
 //void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
 void	env_delone(t_env **env, char *node_to_del, void (*del)(void*));
+
+/*---------------------------utils3.c -------------------------*/
+int		list_to_array(t_shell	*shell);
 
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, t_shell *shell);

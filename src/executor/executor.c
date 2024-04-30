@@ -76,7 +76,7 @@ int	executor(t_env *env, t_cmd cmd, t_exe *exe)
 	}
 	else if (pid == 0)
 	{
-		// if (execve(exe->cmd_fullpath, cmd.command_and_arg, env->env_cpy) < 0)//aqui debo pasarle el env como un array
+		 if (execve(exe->cmd_fullpath, cmd.command_and_arg, env->env_cpy) < 0)//aqui debo pasarle el env como un array
 		// {
 		// 	perror(exe->cmd_fullpath);
 		// 	exit(1);
