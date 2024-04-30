@@ -1,6 +1,6 @@
 
-#include "minishell.h"
-
+//#include "minishell.h"
+/*LA COMENTO PORQUE ESTA EN LIBFT   
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -79,3 +79,4 @@ int	ft_strcmp(char *s1, char *s2)
 	else
 		return (-1);
 }
+*/

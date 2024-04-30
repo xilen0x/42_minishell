@@ -42,10 +42,6 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 ################################################################################
 
 FILES =	minishell.c \
-									utils/utils_libft_0.c \
-									utils/utils_libft_1.c \
-									utils/utils_libft_2.c \
-									utils/utils_libft_3.c \
 									utils/utils_env.c \
 									utils/utils0.c \
 									arr2d/add_one_arr2d.c \

@@ -162,7 +162,7 @@ size_t  size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
 char    **add_one_arr2d(char **arr2d, char *new);
 char    **rm_one_arr2d(char **arr2d, int index);
-void    free_arr2d(char **arr2d);
+void    free_arr2d(char **arr2d);//OJO CARLOS: ESTA FUNCION REEMPLAZA A ft_free_split, solo he cambiado el nombre
 
 /*-----------------utils t_tok------------------*/
 t_tok	*tok_new_node(char *str, int type);
@@ -202,11 +202,11 @@ char 	*get_env_val(char *env_key, t_env *envlist);
 
 
 /*---------------utils_libft-----------------*/
-size_t	ft_strlen(const char *s);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
-char	*ft_strdup(const char *s1);
-size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
-int		ft_strcmp(char *s1, char *s2);
+//size_t	ft_strlen(const char *s);
+//void	*ft_memcpy(void *dst, const void *src, size_t n);
+//char	*ft_strdup(const char *s1);
+//size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
+//int		ft_strcmp(char *s1, char *s2);
 
 /*-------------------------signals.c--------------------------*/
 void	set_signals(void);

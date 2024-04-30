@@ -1,5 +1,5 @@
-#include "minishell.h"
-
+//#include "minishell.h"
+/*
 int	ft_isdigit(int c)
 {
 	if (c >= 48 && c <= 57)
@@ -23,3 +23,4 @@ int	ft_isalnum(int c)
 	else
 		return (0);
 }
+*/
