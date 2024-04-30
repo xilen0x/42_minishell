@@ -2,7 +2,7 @@
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
 //int	builtings(t_built	*cmd, char	**env, int ac)
-int	builtins(t_cmd *cmd, t_shell *shell)
+int	builtins(t_cmd *cmd, t_env *env)
 {
 	if (ca_strcmp(*cmd->command_and_arg, "$?") == 0)//este if se irá(se tratará en expansor)
 	{
@@ -17,17 +17,17 @@ int	builtins(t_cmd *cmd, t_shell *shell)
 	}
 	else if ((ca_strcmp(*cmd->command_and_arg, "pwd") == 0) || (ca_strcmp(*cmd->command_and_arg, "PWD") == 0))
 	{
-		builtin_pwd(shell);
+		builtin_pwd(env);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "cd") == 0)
 	{
-		builtin_cd(cmd, shell);
+		builtin_cd(cmd, env);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "env") == 0)
 	{
-		builtin_env(cmd, shell->link_env);
+		builtin_env(cmd, env);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "echo") == 0)
@@ -37,12 +37,12 @@ int	builtins(t_cmd *cmd, t_shell *shell)
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "export") == 0)
 	{
-		builtin_export(cmd, shell->link_env);
+		builtin_export(cmd, env);
 		return (0);
 	}
 	else if (ca_strcmp(*cmd->command_and_arg, "unset") == 0)
 	{
-		builtin_unset(cmd, shell->link_env);
+		builtin_unset(cmd, env);
 		return (0);
 	}
 	else

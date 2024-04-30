@@ -64,6 +64,7 @@
 	"ostream": "c",
 	"rlstdc.h": "c",
 	"history.h": "c",
-	"readline.h": "c"
+	"readline.h": "c",
+	"libft.h": "c"
 }
 }

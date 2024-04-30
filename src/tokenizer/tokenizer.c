@@ -38,7 +38,6 @@ int	tok_len(char *line, t_tok **new_tok)
 	return (len);
 }
 
-/*------------TOKENIZADOR------------*/
 //'str' siempre sera NULL, excepto si es una WORD que contendra su string
 //las comillas se tratan como WORD, si no estan cerradas incluyen hasta el final de la linea
 void	tokenizer(t_tok **tok, char *line)
@@ -48,10 +47,10 @@ void	tokenizer(t_tok **tok, char *line)
 	size_t	len;
 	int		i;
 
-	i = 0;
-	len = 0;
 	new_tok = NULL;
-//----OBTENDRA EL STRING PARA CADA TOKEN HASTA LLEGAR AL FINAL DE 'line'--------
+	str_aux = NULL;
+	len = 0;
+	i = 0;
 	while (line[i])
 	{
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
@@ -64,7 +63,6 @@ void	tokenizer(t_tok **tok, char *line)
 			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna 'len' si es WORD
 			if (len > 0)
 			{
-//-----ASIGNA MEMORIA Y LA RELLENA CON EL STRING-------- 
 				str_aux = (char *)malloc(sizeof(char) * len + 1);
 				if (!str_aux)
 					return ;//gestionar error ???
@@ -81,5 +79,4 @@ void	tokenizer(t_tok **tok, char *line)
 		}
 		i += len;
 	}
-	//tok_print(*tok);//ELIMINAR AL ENTREGAR
 }

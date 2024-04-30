@@ -51,23 +51,22 @@ FILES =	minishell.c \
 									builtins/builtin_exit.c \
 									builtins/builtin_pwd.c \
 									executor/executor.c \
+									utils/utils_env.c \
+									utils/utils0.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
 									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
-									arr2d/print_arr2d.c \
 									tokens/tok_new_node.c \
 									tokens/tok_add_back.c \
 									tokens/tok_last.c \
 									tokens/tok_size.c \
 									tokens/tok_free.c \
-									tokens/tok_print.c \
 									commands/cmd_new_node.c \
 									commands/cmd_add_back.c \
 									commands/cmd_free.c \
 									commands/cmd_last.c \
-									commands/cmd_print.c \
 									commands/cmd_size.c \
 									utils/utils_libft.c \
 									utils/utils0.c \
@@ -82,11 +81,20 @@ FILES =	minishell.c \
 									redirs/redir_free.c \
 									redirs/redir_last.c \
 									redirs/redir_new_node.c \
-									redirs/redir_print.c \
 									redirs/redir_size.c \
 									parser/parser.c \
-									expander/should_expand_var.c\
-									signals.c
+									expander/should_expand.c\
+									expander/expand_and_quote_remove.c \
+									expander/get_env_val.c \
+									expander/new_tok_len.c \
+									expander/new_tok_builder.c \
+									expander/get_env_key.c \
+									signals.c \
+									prints/print_tok.c \
+									prints/print_cmd.c \
+									prints/print_redir.c \
+									prints/print_envlist.c \
+									prints/print_arr2d.c 
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

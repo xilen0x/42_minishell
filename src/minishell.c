@@ -1,21 +1,26 @@
 
 #include "minishell.h"
 
-int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARIABLE **ENVIRON
+//int	main(int ac, char *av[])// char *envp[])
+int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
 	char	**env_cpy;
+	t_env	*envlist;
 	t_tok	*tok;
 	t_cmd	*cmd;
-	t_shell	shell;
+	t_exe	*exe;
 
+	envlist = NULL;
 	tok = NULL;
 	cmd = NULL;
+	exe = NULL;
 	if (ac != 1 || av[1])
 		ft_msgs(10);
 	env_cpy = dup_arr2d(envp);
-	init_main_struct(&shell);
-	init_list_env(envp, &shell);
+	//init_main_struct(&shell);
+	//init_list_env(envp, &shell);
+	init_envlist(env_cpy, &envlist);
 	bg_color();
 	//init_msg();
 	while (1)
@@ -30,7 +35,7 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		}
 		if (line && *line)
 			add_history(line);
-		if (!*line)//else
+		if (!*line)
 		{
 			free(line);
 			continue ;
@@ -41,18 +46,13 @@ int	main(int ac, char *av[], char *envp[])//PROVAR DE OBTENER EL ENV CON LA VARI
 		//ft_open_files(av, &data);
 //		should_expand_var(&cmd);
 //		expander(&cmd, exit);
-		list_to_array(&shell);
-		//get_paths(&shell);
-		//search_command_path(&shell);
-		//executor(env, *cmd);// antes de entrar en executor, crear funcion list to array
+		get_paths(envlist, exe);
+		search_command_path(cmd, exe);
+		//executor(env_cpy, *cmd);// antes de entrar en executor, crear funcion list to array
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
 }
-
-/*
-NOTAS:
--preparar el exit_status con los printers de los errores de bash
-*/
+//SI NO HAY CIERRE DE COMILLAS lo gestionaré como => syntax error near token 'print_del_token'???

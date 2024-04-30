@@ -12,18 +12,18 @@
 }*/
 
 /*Función que obtiene y guarda los envp path*/
-int	get_paths(t_shell *shell)
+int	get_paths(t_env *env, t_exe *exe)
 {
 	int	i;
 	int	exit_status;
 
 	i = 0;
-	while (shell->link_env && ca_strcmp(shell->link_env->key, "PATH") != 0)
+	while (env && ca_strcmp(env->key, "PATH") != 0)
 		i++;
 	exit_status = 0;
 	{
-		shell->link_exe->cmd_fullpath = *ft_split(shell->link_env->val, ':');
-		shell->link_exe->index = i;
+		exe->cmd_fullpath = *ft_split(env->val, ':');
+		exe->index = i;
 	}
 	//shell->link_env = shell->link_env->next;
 	//}
@@ -32,7 +32,7 @@ int	get_paths(t_shell *shell)
 
 /*funcion que crea el fullpath del comando y verifica si existe
 para poder guardarlo o no*/
-int	search_command_path(t_shell *shell)
+int	search_command_path(t_cmd *cmd, t_exe *exe)
 {
 	char	*cmd_path;
 	char	*full_path;
@@ -43,14 +43,14 @@ int	search_command_path(t_shell *shell)
 	while (flag != 1)
 	{
 		// cmd_path = ft_strjoin("/", cmd);
-		cmd_path = ft_strjoin("/", shell->link_cmd->command_and_arg[1]);
+		cmd_path = ft_strjoin("/", cmd->command_and_arg[1]);
 		// full_path = ft_strjoin(exe->paths[i], cmd_path);
-		full_path = ft_strjoin(shell->link_exe->paths[i], cmd_path);
+		full_path = ft_strjoin(exe->paths[i], cmd_path);
 		free(cmd_path);
 		if (access(full_path, F_OK) == 0)
 		{
 			// exe->cmd_fullpath = full_path;
-			shell->link_exe->cmd_fullpath = full_path;
+			exe->cmd_fullpath = full_path;
 			flag = 1;
 			return (0);
 		}
@@ -76,7 +76,7 @@ int	executor(t_env *env, t_cmd cmd, t_exe *exe)
 	}
 	else if (pid == 0)
 	{
-		 if (execve(exe->cmd_fullpath, cmd.command_and_arg, env->env_cpy) < 0)//aqui debo pasarle el env como un array
+		//  if (execve(exe->cmd_fullpath, cmd.command_and_arg, env->env_cpy) < 0)//aqui debo pasarle el env como un array
 		// {
 		// 	perror(exe->cmd_fullpath);
 		// 	exit(1);

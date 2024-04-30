@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:48:43 by jocuni-p          #+#    #+#             */
-/*   Updated: 2023/06/27 17:08:16 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/04/30 12:43:04 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*The strlcpy() and strlcat() functions copy and concatenate strings with
-     the same input parameters.
+
+     /*the same input parameters.
 	 strlcpy() and strlcat() take the full size of the destination buffer and
      guarantee NUL-termination if there is room.  Note that room for the NUL
      should be included in dstsize.
@@ -29,12 +29,12 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t			i;
-	unsigned int	len;
+	size_t	i;
+	size_t	srcsize;
 
 	i = 0;
-	len = ft_strlen(src);
-	if (dstsize != 0)
+	srcsize = ft_strlen(src);
+	if (dstsize > 0)
 	{
 		while (src[i] && i < dstsize - 1)
 		{
@@ -43,7 +43,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 		}
 		dst[i] = '\0';
 	}
-	return (len);
+	return (srcsize);
 }
 /*
 //dstsize - 1 es para dejar un byte para poder cerrar el string con el \0

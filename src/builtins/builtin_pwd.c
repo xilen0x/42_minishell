@@ -24,7 +24,7 @@ t_env	*update_env(t_env *env, char *key, char *val)
 }
 
 /*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
-int	builtin_pwd(t_shell *shell)
+int	builtin_pwd(t_env *env)
 {
 	char	*current_wd;
 
@@ -34,7 +34,7 @@ int	builtin_pwd(t_shell *shell)
 		perror("getcwd");
 		free(current_wd);
 	}
-	*shell->link_env = *update_env(shell->link_env, "PWD", current_wd);
+	*env = *update_env(env, "PWD", current_wd);
 	printf("%s\n", current_wd);
 	set_exit_status(0);
 	free(current_wd);
@@ -42,7 +42,7 @@ int	builtin_pwd(t_shell *shell)
 }
 
 /*actualiza la variable PWD del entorno*/
-int	get_pwd(t_shell *shell)
+int	get_pwd(t_env *env)
 {
 	char	*current_wd;
 
@@ -52,7 +52,7 @@ int	get_pwd(t_shell *shell)
 		perror("getcwd");
 		free(current_wd);
 	}
-	shell->link_env = update_env(shell->link_env, "PWD", current_wd);
+	env = update_env(env, "PWD", current_wd);
 	free(current_wd);
 	return (0);
 }
@@ -86,7 +86,7 @@ int	get_pwd(t_shell *shell)
 // 	return (0);
 // }
 
-int	old_pwd(t_shell *shell, t_env *env)
+int	old_pwd(void)
 {
 	char *oldpwd_value = getenv("OLDPWD"); // Obtener el valor de OLDPWD
 
@@ -103,7 +103,5 @@ int	old_pwd(t_shell *shell, t_env *env)
 		set_exit_status(1);
 		return (1); // Retornar 1 en caso de error
 	}
-	(void)shell;
-	(void)env;
 	return (0); // Retornar 0 indicando éxito
 }

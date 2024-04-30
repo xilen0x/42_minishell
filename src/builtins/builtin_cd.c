@@ -71,18 +71,18 @@ int	go_path(char *path)
 
 /*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
 o a una ruta absoluta o relativa*/
-int	builtin_cd(t_cmd	*cmd, t_shell *shell)
+int	builtin_cd(t_cmd	*cmd, t_env *env)
 {
-	shell->link_cmd = cmd;
+	//cmd = cmd;
 	if ((size_arr2d(cmd->command_and_arg)) == 1)// cd only
 		go_home();
 	else if (ca_strcmp(cmd->command_and_arg[1], "~") == 0)
 		go_home();
 	else if (ca_strcmp(cmd->command_and_arg[1], "-") == 0)//no terminado
-		old_pwd(shell, shell->link_env);
+		old_pwd();
 	else
-		go_path(shell->link_cmd->command_and_arg[1]);
-	get_pwd(shell);
+		go_path(cmd->command_and_arg[1]);
+	get_pwd(env);
 	set_exit_status(0);
 	return (0);
 }

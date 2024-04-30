@@ -2,17 +2,17 @@
 
 /*===============ELIMINAR ANTES DE ENTREGA=============== */
 /*----Imprime una lista t_redir----*/
-void	redir_print(t_redir *lst)
+void	print_redir(t_redir *lst)
 {
-	printf("redirs\n");
+	printf("     t_redir\n");
 	if (!lst)
 	{
-		printf("NULL");
+		printf("            NULL\n");
 		return;
 	}
 	while (lst)
 	{
-		printf("   %s (%i)\n", lst->filename, lst->redir_type);
+		printf("            %s\n", lst->filename);
 		lst = lst->next;
 	}
 }

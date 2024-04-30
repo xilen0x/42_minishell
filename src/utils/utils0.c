@@ -77,5 +77,6 @@ int	get_exit_status(void)
 /*Function that set the exit status number*/
 void	set_exit_status(int num)
 {
+	(void)num;
 	//g_exit_stat = num;
 }

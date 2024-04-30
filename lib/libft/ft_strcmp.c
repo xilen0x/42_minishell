@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 11:51:50 by castorga          #+#    #+#             */
-/*   Updated: 2023/04/17 13:11:34 by castorga         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:00:09 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -17,17 +17,11 @@ int	ft_strcmp(char *s1, char *s2)
 
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i])
-	{
 		i++;
-	}
 	if (s1[i] > s2[i])
-	{
 		return (1);
-	}
 	else if (s1[i] == s2[i])
-	{
 		return (0);
-	}
 	else
 		return (-1);
 

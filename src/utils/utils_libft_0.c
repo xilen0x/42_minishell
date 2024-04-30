@@ -1,8 +1,6 @@
 
-#include "minishell.h"
-
-//COPIADAS DE LIBFT
-
+//#include "minishell.h"
+/*LA COMENTO PORQUE ESTA EN LIBFT   
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -64,7 +62,8 @@ size_t str_l_cpy(char *dst, const char *src, size_t dstsize)
 	return (srcsize);
 }
 
-int	ca_strcmp(char *s1, char *s2)
+//int	ca_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -80,3 +79,4 @@ int	ca_strcmp(char *s1, char *s2)
 	else
 		return (-1);
 }
+*/

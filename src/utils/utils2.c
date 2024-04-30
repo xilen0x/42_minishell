@@ -1,15 +1,15 @@
 #include "minishell.h"
 
-void	init_main_struct(t_shell *shell)
-{
-	shell->link_env = NULL;
-	shell->link_exe = NULL;
-	//shell->link_cmd = NULL;
-	//shell->link_redir = NULL;
-	//shell->link_redir_t = NULL;
-	//shell->link_tok = NULL;
-	//g_exit_stat = 0;
-}
+// void	init_main_struct(t_shell *shell)
+// {
+// 	shell->link_env = NULL;
+// 	shell->link_exe = NULL;
+// 	//shell->link_cmd = NULL;
+// 	//shell->link_redir = NULL;
+// 	//shell->link_redir_t = NULL;
+// 	//shell->link_tok = NULL;
+// 	//g_exit_stat = 0;
+// }
 
 /* Función para imprimir solo las claves (keys) del environment*/
 void	ft_print_keys(t_env *env_struct)
@@ -91,8 +91,8 @@ t_env	*lstnew(char *key, char *value)
 	return (new_node);
 }
 
-/*funcion que inicialista la lista creando un nodo(newnode) y agregandolo a la lista(ft_stack_add_back)*/
-int	*init_list_env(char **envp, t_shell *shell)
+/* Inicializa la lista t_env creando un nodo(newnode) y agregandoselo*/
+void	init_envlist(char **envp, t_env **envlist)
 {
 	int		i;
 	char	**tokens;
@@ -102,17 +102,19 @@ int	*init_list_env(char **envp, t_shell *shell)
 	i = 0;
 	while (envp[i])
 	{
-		tokens = ft_split(envp[i], '=');// Dividir: clave y valor
+		// Dividir la cadena en 'key' y 'val'
+		tokens = ft_split(envp[i], '=');
 		if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
 		{
 			key = tokens[0];
 			value = tokens[1];
-			lstadd_back(&shell->link_env, lstnew(key, value));
+			lstadd_back(envlist, lstnew(key, value));
 		}
-		ft_free_split(tokens);
+//		ft_free_split(tokens); Lo sustituyo por la siguiente funcion
+		free_arr2d(tokens);
 		i++;
 	}
-	return (0);
+	return ;
 }
 
 /*Funcion que elimina una variable del entorno*/
