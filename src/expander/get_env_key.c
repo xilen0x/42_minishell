@@ -10,20 +10,27 @@ char *get_env_key(char *str)
 
 	i = 0;
 	var_name = NULL;
-	if (str[i] == '?')
+	if (str[i] == '?')//SI ES UN '?'
 	{
 		var_name = (char *)malloc(sizeof(char) * 2);
+		if (!var_name)
+		{
+			free(var_name);//NO ESTOY SEGURO 
+			return (NULL);
+		}
 		ft_strlcpy(var_name, str, i + 1);
 		return (var_name);
 	}
+/*SI NO SON CARACTERES VALIDOS PARA UNA VARIABLE DE ENTORNO*/
 	if (!ft_isalpha(str[0]) && str[0] != '_')
 		return (NULL);
+/*SI SON CARACTERES VALIDOS, CUENTALOS, RESERVA MEMORIA Y RELLENALA CON SU VALOR*/
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	var_name = (char *)malloc(sizeof(char) * (i + 1));
 	if (!var_name)
 	{
-		free(var_name);//AQUI QUIZAS HABRIA QUE LIBERAR TODO Y SALIR?
+		free(var_name);//NO ESTOY SEGURO 
 		return (NULL);
 	}
 	ft_strlcpy(var_name, str, i + 1);

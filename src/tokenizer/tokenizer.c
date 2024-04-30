@@ -66,7 +66,7 @@ void	tokenizer(t_tok **tok, char *line)
 				str_aux = (char *)malloc(sizeof(char) * len + 1);
 				if (!str_aux)
 					return ;//gestionar error ???
-				str_l_cpy(str_aux, line + i, len + 1);
+				ft_strlcpy(str_aux, line + i, len + 1);
 				new_tok->str = ft_strdup(str_aux);
 				free(str_aux);
 				new_tok->type = WORD;

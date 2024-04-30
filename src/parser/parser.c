@@ -30,11 +30,11 @@ void    parser(t_cmd **cmd, t_tok *tok)
     {
         node = cmd_new_node();//crea nodo t_cmd
         i = 0;        
-        size = command_and_arg_size(tok);//averigua el size que debera tener la matriz
+        size = command_and_arg_size(tmp);//averigua el size que debera tener la matriz
         node->command_and_arg = (char **)malloc((size + 1) * sizeof(char *));
         while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
         {
-            if (is_operator(tok) && tok->next->type != WORD)//si es operador y siguiente no es WORD
+            if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente no es WORD
             {
                 handle_error(PRINT_SYNTAX_ERR_3, &tok);
                 return;//ARREGLAR

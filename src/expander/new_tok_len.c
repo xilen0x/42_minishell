@@ -29,22 +29,24 @@ int	new_tok_len(char *str, t_env *envlist)
 		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])//si es candidato a expandir.
 		{
 			i++;//salto el '$'
+//			if (str[i] == '?')
+//				logica
 			env_key = get_env_key(str + i);//puntero al inicio del nombre despues del '$'
-			if (env_key == NULL)//en caso de que despues de '$' haya un num o caracter especial
+			if (env_key != NULL)//en caso de que despues de '$' haya un num o caracter especial
 			{
-				i++;
-				continue;//OJO no se ejecutara nada de lo que hay a continuacion dentro del while
+				// i++;
+				// continue;//OJO no se ejecutara nada de lo que hay a continuacion dentro del while
+				env_val = get_env_val(env_key, envlist);
+				if (env_val != NULL)
+				{
+					len += ft_strlen(env_val);//incremento el tamaño del nuevo token con el de la expansion
+				}
+				i += ft_strlen(env_key);//salto el len del nombre de la var en el recorrido del token
+				free(env_key);
+				env_key = NULL;
+				env_val = NULL;
+				continue;//salto el ciclo para que no se incremente 'i' de nuevo
 			}
-			env_val = get_env_val(env_key, envlist);
-			if (env_val != NULL)
-			{
-				len += ft_strlen(env_val);//incremento el tamaño del nuevo token con el de la expansion
-			}
-			i += ft_strlen(env_key);//salto el len del nombre de la var en el recorrido del token
-			free(env_key);
-			env_key = NULL;
-			env_val = NULL;
-			continue;//salto el ciclo para que no se incremente 'i' de nuevo
 		}
 		else
 			len++; 
