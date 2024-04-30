@@ -1,5 +1,6 @@
 
-//#include "minishell.h"
+#include "minishell.h"
+
 /*LA COMENTO PORQUE ESTA EN LIBFT   
 size_t	ft_strlen(const char *s)
 {
@@ -41,7 +42,7 @@ char	*ft_strdup(const char *s1)
 		return (NULL);
 	ft_memcpy(dup, s1, len);
 	return (dup);
-}
+}*/
 
 size_t str_l_cpy(char *dst, const char *src, size_t dstsize)
 {
@@ -62,8 +63,8 @@ size_t str_l_cpy(char *dst, const char *src, size_t dstsize)
 	return (srcsize);
 }
 
-//int	ca_strcmp(char *s1, char *s2)
-int	ft_strcmp(char *s1, char *s2)
+// int	ft_strcmp(char *s1, char *s2)
+int	ca_strcmp(char *s1, char *s2)
 {
 	int	i;
 
@@ -79,4 +80,3 @@ int	ft_strcmp(char *s1, char *s2)
 	else
 		return (-1);
 }
-*/

@@ -1,7 +1,6 @@
 
 #include "minishell.h"
 
-//int	main(int ac, char *av[])// char *envp[])
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
@@ -46,9 +45,14 @@ int	main(int ac, char *av[], char *envp[])
 		//ft_open_files(av, &data);
 //		should_expand_var(&cmd);
 //		expander(&cmd, exit);
-		get_paths(envlist, exe);
+		//get_paths(envlist);
+		exe = (t_exe *)malloc(sizeof(t_exe));
+		if (!exe)
+			return (1);
+		exe->paths = get_paths(envlist);
+		exe->cmd_fullpath = NULL;
 		search_command_path(cmd, exe);
-		//executor(env_cpy, *cmd);// antes de entrar en executor, crear funcion list to array
+		executor(envlist, cmd, exe);// antes de entrar en executor, crear funcion list to array
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}

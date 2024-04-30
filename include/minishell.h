@@ -159,6 +159,13 @@ int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 int		is_operator(t_tok *node);
 size_t	command_and_arg_size(t_tok *tok);
 
+/*---------------expander & quote removal--------------*/
+void	should_expand(t_cmd **cmd, t_env *envlist);
+char	*expand_and_quote_remove(char *str, t_env *envlist);
+int		new_tok_len(char *str, t_env *envlist);
+char	*new_tok_builder(char *str, t_env *envlist, char *result);
+char 	*get_env_key(char *str);
+char 	*get_env_val(char *env_key, t_env *envlist);
 
 /*---------------utils_libft-----------------*/
 size_t	ft_strlen(const char *s);
@@ -174,13 +181,15 @@ void	set_signals(void);
 //int		init_momentaneo(char *av[], t_env *data);
 //void	get_paths(t_env *env);
 // int	get_paths(t_shell *shell);
-int	get_paths(t_env *env, t_exe *exe);
+// int	get_paths(t_env *env, t_exe *exe);
+// int	get_paths(t_env *env);
+char **get_paths(t_env *env);
 //int		search_cmds(t_env *data);
 //int		executor(t_env *env, t_cmd cmd);
-int	executor(t_env *env, t_cmd cmd, t_exe *exe);
+int	executor(t_env *env, t_cmd *cmd, t_exe *exe);
 // int		search_command_path(t_shell *shell);
+// int	search_command_path(t_cmd *cmd, char **paths);
 int	search_command_path(t_cmd *cmd, t_exe *exe);
-
 /*---------------------------utils0.c -------------------------*/
 // int		ft_msgs(int n);
 int		ft_msgs(int n);
@@ -224,12 +233,21 @@ int				variable_exists_op2(t_env *env, char *variable);
 int				variable_exists_op3(t_env *env, char *variable);
 int				var_exists_oldpwd(t_env *env, char *variable);
 
-//void	update_env(t_env *env, char *var, char *val);
 t_env	*update_env(t_env *env, char *key, char *val);
-int	get_pwd(t_env *env);
-int	old_pwd(void);
+int		get_pwd(t_env *env);
+int		old_pwd(void);
+int		go_path(char *path);
+//void	update_env(t_env *env, char *var, char *val);
 // int	old_pwd(t_shell *shell);
 // int	old_pwd(void);
-int	go_path(char *path);
+
+/*--------------------prints-----------------*/
+void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
+void	print_tok(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
+void	print_cmd(t_cmd *list);//ELIMINAR ANTES DE ENTREGA
+void	print_redir(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
+void	ft_print_keys(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
+void	ft_print_values(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
+void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 
 #endif
