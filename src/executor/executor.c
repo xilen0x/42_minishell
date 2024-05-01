@@ -37,22 +37,23 @@
 // 	return (exit_status);
 // }
 
-char **get_paths(t_env *env)
+char	**get_paths(t_env *env)
 {
-    int i = 0;
-    char **full_path = NULL;
+	int i = 0;
+	char **full_path = NULL;
 
-    while (env) {
-        if (ca_strcmp(env->key, "PATH") == 0)
+	while (env)
+	{
+		if (ca_strcmp(env->key, "PATH") == 0)
 		{
-            //*index = i;
-            full_path = ft_split(env->val, ':');
-            break ;
-        }
-        i++;
-        env = env->next;
-    }
-    return full_path;
+			//*index = i;
+			full_path = ft_split(env->val, ':');
+			break ;
+		}
+		i++;
+		env = env->next;
+	}
+	return (full_path);
 }
 
 /*
@@ -97,35 +98,46 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 }
 
 /*Funcion que ejecuta un comando dado(no builtin)*/
-int	executor(t_env *env, t_cmd *cmd, t_exe *exe)
+int	executor(t_env *env, t_cmd *cmd)
 {
-	(void)exe;
 	//int		fd[2];
-	//pid_t	pid;
+	pid_t	pid;
+	t_exe	*exe;
 
-	builtins(cmd, env);
-	// pid = fork();
-	// if (pid < 0)
-	// {
-	// 	perror("Fork failed");
-	// 	exit(1);
-	// }
-	// else if (pid == 0)
-	// {
-	// 	//  if (execve(exe->cmd_fullpath, cmd.command_and_arg, env->env_cpy) < 0)//aqui debo pasarle el env como un array
-	// 	// {
-	// 	// 	perror(exe->cmd_fullpath);
-	// 	// 	exit(1);
-	// 	// }
-	// 	//close(fd[1]);
-	// 	exit(0);
-	// }
-	// else
-	// {
-	// 	wait(NULL);
-	// 	//execve(env->cmd2_fullpath, env->args_2, NULL);
-	// 	//close(fd[0]);
-	// 	return(0);
-	// }
+	if (builtins(cmd, env))
+	{
+		exe = NULL;
+		exe = (t_exe *)malloc(sizeof(t_exe));
+		if (!exe)
+			return (1);
+		exe->paths = get_paths(env);
+		exe->cmd_fullpath = NULL;
+		search_command_path(cmd, exe);
+		list_to_array(env, exe);
+		printf("no soy builtin\n");
+	}
+	pid = fork();
+	if (pid < 0)
+	{
+		perror("Fork failed");
+		exit(1);
+	}
+	else if (pid == 0)
+	{
+		 if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
+		{
+			perror(exe->cmd_fullpath);
+			exit(1);
+		}
+		//close(fd[1]);
+		exit(0);
+	}
+	else
+	{
+		wait(NULL);
+		//execve(env->cmd2_fullpath, env->args_2, NULL);
+		//close(fd[0]);
+		return(0);
+	}
 	return(0);
 }

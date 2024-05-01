@@ -8,12 +8,10 @@ int	main(int ac, char *av[], char *envp[])
 	t_env	*envlist;
 	t_tok	*tok;
 	t_cmd	*cmd;
-	t_exe	*exe;
 
 	envlist = NULL;
 	tok = NULL;
 	cmd = NULL;
-	exe = NULL;
 	if (ac != 1 || av[1])
 		ft_msgs(10);
 	env_cpy = dup_arr2d(envp);
@@ -42,17 +40,10 @@ int	main(int ac, char *av[], char *envp[])
 		tokenizer(&tok, line);
 		free(line);
 		parser(&cmd, tok);
-		//ft_open_files(av, &data);
+//		ft_open_files(av, &data);
 //		should_expand_var(&cmd);
 //		expander(&cmd, exit);
-		//get_paths(envlist);
-		exe = (t_exe *)malloc(sizeof(t_exe));
-		if (!exe)
-			return (1);
-		exe->paths = get_paths(envlist);
-		exe->cmd_fullpath = NULL;
-		search_command_path(cmd, exe);
-		executor(envlist, cmd, exe);// antes de entrar en executor, crear funcion list to array
+		executor(envlist, cmd);
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}

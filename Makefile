@@ -70,6 +70,7 @@ FILES =	minishell.c \
 									utils/utils0.c \
 									utils/utils1.c \
 									utils/utils2.c \
+									utils/utils3.c \
 									utils/utils_libft_0.c \
 									tokenizer/tokenizer.c \
 									utils_parser/is_operator.c \

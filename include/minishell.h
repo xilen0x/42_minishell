@@ -103,6 +103,7 @@ typedef struct s_exe
 	char			**paths;
 	int				index;
 	char			*cmd_fullpath;
+	char			**new_array;
 }	t_exe;
 
 // typedef struct s_shell
@@ -186,7 +187,7 @@ void	set_signals(void);
 char **get_paths(t_env *env);
 //int		search_cmds(t_env *data);
 //int		executor(t_env *env, t_cmd cmd);
-int	executor(t_env *env, t_cmd *cmd, t_exe *exe);
+int	executor(t_env *env, t_cmd *cmd);
 // int		search_command_path(t_shell *shell);
 // int	search_command_path(t_cmd *cmd, char **paths);
 int	search_command_path(t_cmd *cmd, t_exe *exe);
@@ -198,6 +199,7 @@ void	set_exit_status(int num);
 
 /*---------------------------utils1.c -------------------------*/
 int		ca_strchr(const char *s, int c);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 /*---------------------------utils2.c -------------------------*/
 // int		*init_list_env(char **envp, t_shell *shell);
@@ -211,8 +213,8 @@ void	ft_free_split(char **array_strings);
 //void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
 void	env_delone(t_env **env, char *node_to_del, void (*del)(void*));
 
-/*---------------------------utils3.c -------------------------*/
-int		list_to_array(void);
+
+int	list_to_array(t_env *env, t_exe *exe);
 
 /*--------------------------- builtins -------------------------*/
 // int		builtins(t_cmd *cmd, t_shell *shell);
