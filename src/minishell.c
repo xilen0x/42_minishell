@@ -45,7 +45,7 @@ int	main(int ac, char *av[], char *envp[])
 		tokenizer(&tok, line);
 		free(line);
 	  	parser(&cmd, tok);
-		tok_free(&tok);
+//		tok_free(&tok);
 		should_expand(&cmd, envlist);
 
 		//	builtins(&cmds, env, ac, av);//de carlos
