@@ -6,13 +6,9 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:17:06 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/01 10:21:22 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/01 12:04:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-     string s1, does the copy, and returns a pointer to it.  The pointer may
-     subsequently be used as an argument to the function free(3).
-	 If insufficient memory is available, NULL is returned.*/
 
 //#include<string.h>
 //#include<stdio.h>
@@ -32,16 +28,16 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }*/
 /*ALTERNATIVA*/
-char	*ft_strdup(char *str)
+char	*ft_strdup(char *s1)
 {
 	char	*dup;
 	int		len;
 
-	len = ft_strlen(str) + 1;
+	len = ft_strlen(s1) + 1;
 	dup = malloc(len * sizeof(char));
 	if (!dup)
 		return (NULL);
-	ft_strlcpy(dup, str, len);
+	ft_strlcpy(dup, s1, len);
 	return (dup);
 }
 /*

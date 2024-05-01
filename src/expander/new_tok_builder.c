@@ -63,5 +63,6 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 		i++;
 	}
 	result[j] = '\0';
+	free(str);//libera el antiguo token
 	return (result);
 }
