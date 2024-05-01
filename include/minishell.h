@@ -26,6 +26,7 @@
 
 /*--------------------Error messages-------------------*/
 
+# define PRINT_MALLOC_ERR_0 "Error: malloc failed\n"
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
@@ -201,12 +202,9 @@ char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
 
 
-/*---------------utils_libft-----------------*/
-//size_t	ft_strlen(const char *s);
-//void	*ft_memcpy(void *dst, const void *src, size_t n);
-//char	*ft_strdup(const char *s1);
-//size_t 	str_l_cpy(char *dst, const char *src, size_t dstsize);
-//int		ft_strcmp(char *s1, char *s2);
+/*---------------utils_1-----------------*/
+void	malloc_s_pointer_protect(void *name);
+void	malloc_d_pointer_protect(char **name);
 
 /*-------------------------signals.c--------------------------*/
 void	set_signals(void);
