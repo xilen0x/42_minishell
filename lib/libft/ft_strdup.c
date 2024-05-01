@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:17:06 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/01 10:21:22 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/01 13:55:59 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-     string s1, does the copy, and returns a pointer to it.  The pointer may
-     subsequently be used as an argument to the function free(3).
-	 If insufficient memory is available, NULL is returned.*/
 
 //#include<string.h>
 //#include<stdio.h>
@@ -32,7 +28,7 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }*/
 /*ALTERNATIVA*/
-char	*ft_strdup(char *str)
+char	*ft_strdup(const char *str)
 {
 	char	*dup;
 	int		len;
