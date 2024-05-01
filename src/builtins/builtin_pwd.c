@@ -29,11 +29,6 @@ int	builtin_pwd(t_env *env)
 	char	*current_wd;
 
 	current_wd = getcwd(NULL, 0);
-	if (!current_wd)
-	{
-		perror("getcwd");
-		free(current_wd);
-	}
 	*env = *update_env(env, "PWD", current_wd);
 	printf("%s\n", current_wd);
 	set_exit_status(0);

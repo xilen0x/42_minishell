@@ -114,30 +114,29 @@ int	executor(t_env *env, t_cmd *cmd)
 		exe->cmd_fullpath = NULL;
 		search_command_path(cmd, exe);
 		list_to_array(env, exe);
-		printf("no soy builtin\n");
-	}
-	pid = fork();
-	if (pid < 0)
-	{
-		perror("Fork failed");
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		 if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
+		pid = fork();
+		if (pid < 0)
 		{
-			perror(exe->cmd_fullpath);
+			perror("Fork failed");
 			exit(1);
 		}
-		//close(fd[1]);
-		exit(0);
-	}
-	else
-	{
-		wait(NULL);
-		//execve(env->cmd2_fullpath, env->args_2, NULL);
-		//close(fd[0]);
-		return(0);
+		else if (pid == 0)
+		{
+			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
+			{
+				perror(exe->cmd_fullpath);
+				exit(1);
+			}
+			//close(fd[1]);
+			exit(0);
+		}
+		else
+		{
+			wait(NULL);
+			//execve(env->cmd2_fullpath, env->args_2, NULL);
+			//close(fd[0]);
+			return(0);
+		}
 	}
 	return(0);
 }

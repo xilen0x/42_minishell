@@ -2,16 +2,12 @@
 
 int	builtin_unset(t_cmd *cmd, t_env *env)
 {
-	/* char	**tokens;
-	char	**tokens2;
-	char	*key;
-	char	*value; */
 	int		chk_exp;
 
 	//---------------UNSET SIN ARGUMENTOS
 	if (size_arr2d(cmd->command_and_arg) == 1)
 		return (0);
-	//---------------UNSET VARIABLE
+	//---------------UNSET + VARIABLE
 	else
 	{
 		chk_exp = check_export(cmd->command_and_arg[1]);

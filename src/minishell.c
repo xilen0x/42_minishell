@@ -22,12 +22,16 @@ int	main(int ac, char *av[], char *envp[])
 	//init_msg();
 	while (1)
 	{
+		/*
+		NOTA PARA MANANA: WIP en test folder. Eliminando el promer nodo al parecer exitosamente. Faltaria
+		integrar y probar en funcion unset para controlar el error al eliminar el primer nodo.
+		*/
 		set_signals();
 		line = readline(">>>>minishell$ ");
 		if (!line)
 		{
 			printf("exit\n");//en el caso del ctrl-D
-			printf("\033[0m");// Restaurar black
+			printf("\033[40m");//black
 			exit(0);
 		}
 		if (line && *line)
