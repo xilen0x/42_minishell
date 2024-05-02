@@ -54,7 +54,7 @@ int	main(int ac, char *av[], char *envp[])
 		//ft_open_files(av, &data);
 //	search_cmds(&env);
 //		executor(&env);
-//		cmd_free(&cmd);
+		cmd_free(&cmd);
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);
