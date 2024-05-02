@@ -57,7 +57,7 @@ void	lstadd_back(t_env **lst, t_env *new)
 	else
 		*lst = new;
 }
-
+/*OJO: lstnew deberia tener un protector de malloc por si falla???*/
 t_env	*lstnew(char *key, char *value)
 {
 	t_env	*new_node;
@@ -93,8 +93,7 @@ void	init_envlist(char **envp, t_env **envlist)
 			value = tokens[1];
 			lstadd_back(envlist, lstnew(key, value));
 		}
-//		ft_free_split(tokens); Lo sustituyo por la siguiente funcion
-		free_arr2d(tokens);
+		free_arr2d(tokens);//libera malloc que entrega el split a tokens
 		i++;
 	}
 	return ;

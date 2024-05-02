@@ -37,7 +37,7 @@ void    parser(t_cmd **cmd, t_tok *tok)
 //            printf("Memory allocation failed (malloc)\n");
 //            exit (EXIT_FAILURE);
 //        }
-        malloc_d_pointer_protect(node->command_and_arg);
+        malloc_d_pointer_protect(node->command_and_arg);//es el protector del malloc
         while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
         {
             if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente no es WORD

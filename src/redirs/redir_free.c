@@ -5,11 +5,15 @@ void	redir_free(t_redir **lst)
 {
 	t_redir	*aux;
 
+	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
+		return ;
 	aux = (*lst);
 	while (aux)
 	{
-		aux->filename = NULL;
-		aux->redir_type = NULL_REDIR;
+		if (aux->filename != NULL)//BUENA PRACTICA
+			aux->filename = NULL;//BUENA PRACTICA
+		if (aux->redir_type != 0)
+			aux->redir_type = 0;
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);

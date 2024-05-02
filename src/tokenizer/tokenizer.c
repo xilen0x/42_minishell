@@ -65,11 +65,12 @@ void	tokenizer(t_tok **tok, char *line)
 			{
 				str_aux = (char *)malloc(sizeof(char) * len + 1);
 				if (!str_aux)
-				{
-					printf("Memory allocation failed (malloc)\n");
+//				{
+//					printf("Memory allocation failed (malloc)\n");
 //					exit ;
-					return ;
-				}
+//					return ;
+//				}
+					malloc_s_pointer_protect(str_aux);//protector del malloc
 				ft_strlcpy(str_aux, line + i, len + 1);
 				new_tok->str = ft_strdup(str_aux);
 				free(str_aux);

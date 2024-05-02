@@ -1,12 +1,14 @@
 #include "minishell.h"
 
 /*-----Frees and clears a 't_tok' list-----*/
-/*
+
 void	tok_free(t_tok **lst)
 {
 	t_tok	*aux;
 
 	aux = (*lst);
+	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
+		return ;
 	while (aux)
 	{ 
 		aux->str = NULL;
@@ -16,7 +18,8 @@ void	tok_free(t_tok **lst)
 		aux = (*lst);
 	}
 	(*lst) = NULL;
-}*/
+}
+/*ALTERNATIVA
 void	tok_free(t_tok **lst)
 {
 	t_tok	*aux;
@@ -34,5 +37,4 @@ void	tok_free(t_tok **lst)
 		aux = next_node;
 	}
 	(*lst) = NULL;
-//	free(lst);//added in the last moment
-}
+}*/
