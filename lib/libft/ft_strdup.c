@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:17:06 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/01 13:55:59 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:03:27 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }*/
 /*ALTERNATIVA*/
-char	*ft_strdup(const char *str)
+char	*ft_strdup(char *s1)
 {
 	char	*dup;
 	int		len;
 
-	len = ft_strlen(str) + 1;
+	len = ft_strlen(s1) + 1;
 	dup = malloc(len * sizeof(char));
 	if (!dup)
 		return (NULL);
-	ft_strlcpy(dup, str, len);
+	ft_strlcpy(dup, s1, len);
 	return (dup);
 }
 /*

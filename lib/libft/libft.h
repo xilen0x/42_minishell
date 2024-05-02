@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:20:18 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/01 13:52:51 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:02:11 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <fcntl.h>//open/get_next_line
-# include <stddef.h>//get_next_line
-# include <stdarg.h>//ft_printf
+# include <fcntl.h>
+# include <stddef.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -41,7 +41,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strdup(const char *str);
+char	*ft_strdup(char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);

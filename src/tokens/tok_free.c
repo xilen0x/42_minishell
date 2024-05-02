@@ -34,4 +34,5 @@ void	tok_free(t_tok **lst)
 		aux = next_node;
 	}
 	(*lst) = NULL;
+//	free(lst);//added in the last moment
 }
