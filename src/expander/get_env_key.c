@@ -30,8 +30,8 @@ char *get_env_key(char *str)
 	var_name = (char *)malloc(sizeof(char) * (i + 1));
 	if (!var_name)
 	{
-		printf("Falló el malloc");
-		exit;//este ya libera todo lo mallocado
+		printf("Error: malloc failed\n");
+		exit (EXIT_FAILURE);
 	}
 	ft_strlcpy(var_name, str, i + 1);
 	return (var_name);
