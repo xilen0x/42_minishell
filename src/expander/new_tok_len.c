@@ -33,15 +33,9 @@ int	new_tok_len(char *str, t_env *envlist)//unsigned int/int exit_status
 			i++;//salto el '$'
 //			if (str[i] == '?')
 //			{
-//				exit_status_val = itoa(exit_status);
+//				exit_status_val = itoa(exit_status);//crear esta variable y pasarla a cada funcion que la necesite
 //				len += ft_strlen(exit_status_val);
 //				free(exit_status_val);
-//			}
-//			else if (str[i] == '$')
-//			{
-//				logica del $$
-//
-//
 //			}
 //			else
 //			{
