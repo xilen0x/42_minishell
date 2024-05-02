@@ -139,7 +139,7 @@ static int	just_export(t_env *env)
 }
 
 /*Funcion que agrega una nueva variable de entorno si corresp.*/
-int	builtin_export(t_cmd *cmd, t_env *env)
+int	builtin_export(t_cmd *cmd, t_env **env)
 {
 	char	**tokens;
 	char	**tokens2;
@@ -148,13 +148,13 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 	int		chk_exp;
 
 	if (size_arr2d(cmd->command_and_arg) == 1)
-		just_export(env);
+		just_export(*env);
 	else
 	{
 		chk_exp = check_export(cmd->command_and_arg[1]);
 		if (chk_exp == 1)// =
 		{
-			if (!(variable_exists(env, cmd->command_and_arg[1])))
+			if (!(variable_exists(*env, cmd->command_and_arg[1])))
 			{
 				//printf("= NO existe la variable!\n");
 				tokens = ft_split(cmd->command_and_arg[1], '=');
@@ -162,7 +162,7 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 				{
 					key = tokens[0];
 					value = tokens[1];
-					lstadd_back(&env, lstnew(key, value));
+					lstadd_back(env, lstnew(key, value));
 				}
 				ft_free_split(tokens);
 			}
@@ -170,7 +170,7 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 		}
 		else if (chk_exp == 2)// +=
 		{
-			if (!(variable_exists_op2(env, cmd->command_and_arg[1])))
+			if (!(variable_exists_op2(*env, cmd->command_and_arg[1])))
 			{
 				//printf("+= NO existe la variable!\n");
 				tokens = ft_split(cmd->command_and_arg[1], '+');
@@ -179,7 +179,7 @@ int	builtin_export(t_cmd *cmd, t_env *env)
 				{
 					key = tokens[0];
 					value = tokens2[0];
-					lstadd_back(&env, lstnew(key, value));
+					lstadd_back(env, lstnew(key, value));
 				}
 				ft_free_split(tokens);
 			}

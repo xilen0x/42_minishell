@@ -1,6 +1,6 @@
 # include "minishell.h"
 
-int	builtin_unset(t_cmd *cmd, t_env *env)
+int	builtin_unset(t_cmd *cmd, t_env **env)
 {
 	int		chk_exp;
 
@@ -15,12 +15,11 @@ int	builtin_unset(t_cmd *cmd, t_env *env)
 			return (0);
 		else
 		{
-			if (!(variable_exists_op3(env, cmd->command_and_arg[1])))
+			if (!(variable_exists_op3(*env, cmd->command_and_arg[1])))
 				printf("NO existe la variable!\n");//cambiar luego por printf("\n")
 			else
 			{
-				//update_env(env, env->key, env->val);
-				env_delone(&env, cmd->command_and_arg[1], &free);
+				env_delone(env, &cmd->command_and_arg[1], &free);
 				printf("variable elimninada!\n");
 			}
 			return (0);

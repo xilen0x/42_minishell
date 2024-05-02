@@ -71,7 +71,7 @@ int	go_path(char *path)
 
 /*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
 o a una ruta absoluta o relativa*/
-int	builtin_cd(t_cmd	*cmd, t_env *env)
+int	builtin_cd(t_cmd	*cmd, t_env **env)
 {
 	//cmd = cmd;
 	if ((size_arr2d(cmd->command_and_arg)) == 1)// cd only
@@ -82,7 +82,7 @@ int	builtin_cd(t_cmd	*cmd, t_env *env)
 		old_pwd();
 	else
 		go_path(cmd->command_and_arg[1]);
-	get_pwd(env);
+	get_pwd(*env);
 	set_exit_status(0);
 	return (0);
 }

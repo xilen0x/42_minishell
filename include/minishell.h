@@ -187,7 +187,7 @@ void	set_signals(void);
 char **get_paths(t_env *env);
 //int		search_cmds(t_env *data);
 //int		executor(t_env *env, t_cmd cmd);
-int	executor(t_env *env, t_cmd *cmd);
+int	executor(t_env **env, t_cmd *cmd);
 // int		search_command_path(t_shell *shell);
 // int	search_command_path(t_cmd *cmd, char **paths);
 int	search_command_path(t_cmd *cmd, t_exe *exe);
@@ -211,22 +211,22 @@ t_env	*lstnew(char *key, char *value);
 void	ft_free_split(char **array_strings);
 //void	ca_lstdelone(t_env *lst, void (*del)(void*));
 //void env_delone(t_env **env, t_env *node_to_del, void (*del)(void*));
-void	env_delone(t_env **env, char *node_to_del, void (*del)(void*));
+void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 
 
 int	list_to_array(t_env *env, t_exe *exe);
 
 /*--------------------------- builtins -------------------------*/
 // int		builtins(t_cmd *cmd, t_shell *shell);
-int	builtins(t_cmd *cmd, t_env *env);
+int	builtins(t_cmd *cmd, t_env **env);
 int		builtin_exit(t_cmd *cmd);
 //int		builtin_pwd(t_env *env);
 int		builtin_pwd(t_env *env);
-int		builtin_cd(t_cmd	*cmd, t_env *env);
+int		builtin_cd(t_cmd	*cmd, t_env **env);
 int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_echo(t_cmd *cmd);
-int		builtin_export(t_cmd *cmd, t_env *env);
-int		builtin_unset(t_cmd *cmd, t_env *env);
+int		builtin_export(t_cmd *cmd, t_env **env);
+int		builtin_unset(t_cmd *cmd, t_env **env);
 
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
@@ -239,7 +239,6 @@ t_env	*update_env(t_env *env, char *key, char *val);
 int		get_pwd(t_env *env);
 int		old_pwd(void);
 int		go_path(char *path);
-//void	update_env(t_env *env, char *var, char *val);
 // int	old_pwd(t_shell *shell);
 // int	old_pwd(void);
 

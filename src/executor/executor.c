@@ -98,7 +98,7 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 }
 
 /*Funcion que ejecuta un comando dado(no builtin)*/
-int	executor(t_env *env, t_cmd *cmd)
+int	executor(t_env **env, t_cmd *cmd)
 {
 	//int		fd[2];
 	pid_t	pid;
@@ -110,10 +110,10 @@ int	executor(t_env *env, t_cmd *cmd)
 		exe = (t_exe *)malloc(sizeof(t_exe));
 		if (!exe)
 			return (1);
-		exe->paths = get_paths(env);
+		exe->paths = get_paths(*env);
 		exe->cmd_fullpath = NULL;
 		search_command_path(cmd, exe);
-		list_to_array(env, exe);
+		list_to_array(*env, exe);
 		pid = fork();
 		if (pid < 0)
 		{

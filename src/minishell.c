@@ -23,7 +23,7 @@ int	main(int ac, char *av[], char *envp[])
 	while (1)
 	{
 		/*
-		NOTA PARA MANANA: WIP en test folder. Eliminando el promer nodo al parecer exitosamente. Faltaria
+		NOTA: WIP en test folder. Eliminando el primer nodo al parecer exitosamente. Faltaria
 		integrar y probar en funcion unset para controlar el error al eliminar el primer nodo.
 		*/
 		set_signals();
@@ -47,7 +47,7 @@ int	main(int ac, char *av[], char *envp[])
 //		ft_open_files(av, &data);
 //		should_expand_var(&cmd);
 //		expander(&cmd, exit);
-		executor(envlist, cmd);
+		executor(&envlist, cmd);
 		tok_free(&tok);
 		cmd_free(&cmd);
 	}
