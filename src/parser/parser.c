@@ -22,7 +22,7 @@ void    parser(t_cmd **cmd, t_tok *tok)
     if (is_operator(tmp))//si linea acaba en operador <,>,<<,>>
     {
         handle_error(PRINT_SYNTAX_ERR_2, &tok);
-        return;//ARREGLAR
+        return;
     }
     tmp = tok;//lo reinicializo al inicio de lista tok
     //recorre lista de tokens y crea un nodo 't_cmd' para cada pipe.
@@ -38,7 +38,7 @@ void    parser(t_cmd **cmd, t_tok *tok)
 //            exit (EXIT_FAILURE);
 //        }
         malloc_d_pointer_protect(node->command_and_arg);//es el protector del malloc
-         while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
+         while (tmp && tmp->type != NULL_TYPE && tmp->type != PIPE)//Inicializa el nodo t_cmd con el pipe actual
         {
             if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente no es WORD
             {
@@ -51,21 +51,22 @@ void    parser(t_cmd **cmd, t_tok *tok)
                 i++;
                 if (i == size)
                     node->command_and_arg[i] = NULL;//cierro el array con NULL en el ultimo elemento
-                tmp = tmp->next;
+//                tmp = tmp->next;
             }
             else if (is_operator(tmp) && tmp->next->type == WORD)//si es operador y next es WORD
             {
                 node_redir = redir_new_node(ft_strdup(tmp->next->str), tmp->type);//crea e inicializa node t_redir
                 redir_add_back(&node->redir, node_redir);
-                tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
+                tmp = tmp->next;//salto un nodo de tok (operador)
             }
-//creo que siguiente else if se puede eliminar si incluyo en el while 
-            else if (tmp->type == PIPE)//si es pipe
-            {
-                tmp = tmp->next;
-                break;
-            }
+//creo que siguiente else if se puede eliminar si incluyo en el while (&& tmp->type != PIPE)
+//            else if (tmp->type == PIPE)//si es pipe
+//            {
+//                tmp = tmp->next;
+//                break;
+//            }
         }
+        tmp = tmp->next;
         cmd_add_back(cmd, node);
     }
     print_cmd(*cmd);
