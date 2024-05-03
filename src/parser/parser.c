@@ -64,5 +64,5 @@ void    parser(t_cmd **cmd, t_tok *tok)
         cmd_add_back(cmd, node);
     }
     print_cmd(*cmd);
-//    tok_free(&tok);//liberar TODO t_tok una vez acabado el parser (90)
+//    tok_free(&tok);//liberar TODO t_tok una vez acabado el parser
 }
