@@ -16,16 +16,11 @@ int	main(int ac, char *av[], char *envp[])
 		ft_msgs(10);
 	env_cpy = dup_arr2d(envp);
 	//init_main_struct(&shell);
-	//init_list_env(envp, &shell);
 	init_envlist(env_cpy, &envlist);
 	bg_color();
 	//init_msg();
 	while (1)
 	{
-		/*
-		NOTA: WIP en test folder. Eliminando el primer nodo al parecer exitosamente. Faltaria
-		integrar y probar en funcion unset para controlar el error al eliminar el primer nodo.
-		*/
 		set_signals();
 		line = readline(">>>>minishell$ ");
 		if (!line)
