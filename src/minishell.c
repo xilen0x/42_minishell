@@ -43,7 +43,7 @@ int	main(int ac, char *av[], char *envp[])
 			free(line);
 			continue;
 		}
-		tokenizer(&tok, line);
+		tokenizer(&tok, line);//crea una lista t_tok de tokens
 		free(line);
 	  	parser(&cmd, tok);
 		tok_free(&tok);

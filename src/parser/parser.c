@@ -32,11 +32,6 @@ void    parser(t_cmd **cmd, t_tok *tok)
         i = 0;        
         size = command_and_arg_size(tmp);//averigua el size que debera tener la matriz
         node->command_and_arg = (char **)malloc((size + 1) * sizeof(char *));
-//        if (node->command_and_arg == NULL)
-//      {
-//            printf("Memory allocation failed (malloc)\n");
-//            exit (EXIT_FAILURE);
-//        }
         malloc_d_pointer_protect(node->command_and_arg);//es el protector del malloc
          while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
         {
@@ -47,10 +42,10 @@ void    parser(t_cmd **cmd, t_tok *tok)
             }
             if (tmp->type == WORD)//si es palabra
             {
-                node->command_and_arg[i] = ft_strdup(tmp->str);//rellena matriz
+                node->command_and_arg[i] = ft_strdup(tmp->str);//duplica la WORD y la mete en char** de t_cmd
                 i++;
                 if (i == size)
-                    node->command_and_arg[i] = NULL;//cierro el array con NULL en el ultimo elemento
+                    node->command_and_arg[i] = NULL;//cierro el array con NULL si es el ultimo elemento
                 tmp = tmp->next;
             }
             else if (is_operator(tmp) && tmp->next->type == WORD)//si es operador y next es WORD
