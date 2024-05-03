@@ -38,7 +38,7 @@ void    parser(t_cmd **cmd, t_tok *tok)
 //            exit (EXIT_FAILURE);
 //        }
         malloc_d_pointer_protect(node->command_and_arg);//es el protector del malloc
-        while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
+         while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
         {
             if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente no es WORD
             {
@@ -59,6 +59,7 @@ void    parser(t_cmd **cmd, t_tok *tok)
                 redir_add_back(&node->redir, node_redir);
                 tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
             }
+//creo que siguiente else if se puede eliminar si incluyo en el while 
             else if (tmp->type == PIPE)//si es pipe
             {
                 tmp = tmp->next;
