@@ -11,7 +11,7 @@ void	print_cmd(t_cmd *lst)
 		printf("t_cmd\n");
 		while (lst->command_and_arg[i] != NULL)
 			{
-				printf("     %s\n", lst->command_and_arg[i]);
+				printf("     <%s>\n", lst->command_and_arg[i]);
 				i++;
 			}
 		printf("\n");
