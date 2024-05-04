@@ -62,15 +62,15 @@ t_env	*lstnew(char *key, char *value)
 {
 	t_env	*new_node;
 
-	new_node = (t_env *)malloc(sizeof(t_env));
-	if (new_node)
-	{
-		new_node->key = ft_strdup(key);
-		new_node->val = ft_strdup(value);
-		new_node->next = NULL;
-	}
-	else
-		return (NULL);
+	new_node = (t_env *)p_malloc(sizeof(t_env));
+//	if (new_node)
+//	{
+	new_node->key = ft_strdup(key);
+	new_node->val = ft_strdup(value);
+	new_node->next = NULL;
+//	}
+//	else
+//		return (NULL);
 	return (new_node);
 }
 

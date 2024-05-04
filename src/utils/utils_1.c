@@ -1,5 +1,5 @@
 #include "minishell.h"
-
+/*
 void	malloc_s_pointer_protect(void *name)
 {
 	if (!name)
@@ -16,4 +16,4 @@ void	malloc_d_pointer_protect(char **name)
 		printf("Error: malloc failed\n");
 		exit (EXIT_FAILURE);
 	}
-}
+}*/

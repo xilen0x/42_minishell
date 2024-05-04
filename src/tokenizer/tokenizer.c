@@ -63,8 +63,7 @@ void	tokenizer(t_tok **tok, char *line)
 			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna 'len' si es WORD
 			if (len > 0)
 			{
-				str_aux = (char *)malloc(sizeof(char) * len + 1);
-				malloc_s_pointer_protect(str_aux);//protector del malloc
+				str_aux = (char *)p_malloc(sizeof(char) * (len + 1));
 				ft_strlcpy(str_aux, line + i, len + 1);
 				new_tok->str = ft_strdup(str_aux);//OJO esto no es redundante????
 				free(str_aux);

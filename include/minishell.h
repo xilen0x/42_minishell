@@ -202,9 +202,10 @@ char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
 
 
-/*---------------utils_1-----------------*/
-void	malloc_s_pointer_protect(void *name);
-void	malloc_d_pointer_protect(char **name);
+/*---------------utils-----------------*/
+void	*p_malloc(size_t size);
+//void	malloc_s_pointer_protect(void *name);
+//void	malloc_d_pointer_protect(char **name);
 
 /*-------------------------signals.c--------------------------*/
 void	set_signals(void);

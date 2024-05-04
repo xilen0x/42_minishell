@@ -13,9 +13,9 @@ char    **rm_one_arr2d(char **arr2d, int index)
     i = 0;
     tmp_arr2d = arr2d;
     size = size_arr2d(arr2d);
-    new_arr2d = (char **)malloc(size * sizeof(char *));
-    if (!new_arr2d)
-        return (NULL);
+    new_arr2d = (char **)p_malloc(size * sizeof(char *));
+//    if (!new_arr2d)
+//        return (NULL);
     while (i < index)
     {
         new_arr2d[i] = ft_strdup(tmp_arr2d[i]);

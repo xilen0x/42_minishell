@@ -42,7 +42,7 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 ################################################################################
 
 FILES =	minishell.c \
-									utils/utils_1.c \
+									utils/p_malloc.c \
 									utils/utils_env.c \
 									utils/utils0.c \
 									arr2d/add_one_arr2d.c \

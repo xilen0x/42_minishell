@@ -10,9 +10,9 @@ char    **add_one_arr2d(char **arr2d, char *new)
 
     i = 0;
     size = size_arr2d(arr2d);
-    new_arr2d = (char **)malloc((size + 2) * sizeof(char *));
-    if (!new_arr2d)
-        return (NULL);
+    new_arr2d = (char **)p_malloc((size + 2) * sizeof(char *));
+//    if (!new_arr2d)
+//      return (NULL);
     while (i < size)
     {
         new_arr2d[i] = ft_strdup(arr2d[i]);

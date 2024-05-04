@@ -27,12 +27,12 @@ char *get_env_key(char *str)
 /*SI SON CARACTERES VALIDOS, CUENTALOS, RESERVA MEMORIA Y RELLENALA CON SU VALOR*/
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
-	var_name = (char *)malloc(sizeof(char) * (i + 1));
-	if (!var_name)
-	{
-		printf("Error: malloc failed\n");
-		exit (EXIT_FAILURE);
-	}
+	var_name = (char *)p_malloc(sizeof(char) * (i + 1));
+//	if (!var_name)
+//	{
+//		printf("Error: malloc failed\n");
+//		exit (EXIT_FAILURE);
+//	}
 	ft_strlcpy(var_name, str, i + 1);
 	return (var_name);
 }
