@@ -25,7 +25,7 @@ int	main(int ac, char *av[], char *envp[])
 	//init_msg();
 	//bg_color();
 	init_envlist(env_cpy, &envlist);
-//OJO: DEBERIAMOS LIBERAR env_cpy AQUI, PORQUE YA LO TENEMOS EN 'envlist'??
+	free_arr2d(env_cpy);//libero porque ya lo tengo en envlist
 	while (1)
 	{
 		set_signals();
