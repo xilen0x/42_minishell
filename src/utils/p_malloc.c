@@ -8,6 +8,6 @@ void	*p_malloc(size_t size)
 
 	ptr = malloc(size);
 	if (ptr == NULL)
-		exit(EXIT_FAILURE);
+		exit (EXIT_FAILURE);
 	return (ptr);
 }
