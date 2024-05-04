@@ -7,11 +7,15 @@ void	tok_free(t_tok **lst)
 	t_tok	*aux;
 
 	aux = (*lst);
-	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
-		return ;
-	while (aux)
+//	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
+//		return ;
+	while (aux != NULL)
 	{ 
-		aux->str = NULL;
+		if (aux->str != NULL)
+		{
+			free(aux->str);
+			aux->str = NULL;
+		}	
 		aux->type = NULL_TYPE;
 		(*lst) = aux->next;
 		free(aux);

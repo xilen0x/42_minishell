@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*Verifica si en el array de comandos o en la lista de 
-redirecciones hay algun '$' que debiera ser expandido*/
+redirecciones hay alguna comilla simple, doble o '$' que debiera ser expandido*/
 void	should_expand(t_cmd **cmd, t_env *envlist)
 {
 	size_t	i;
@@ -13,7 +13,7 @@ void	should_expand(t_cmd **cmd, t_env *envlist)
 	while (cmd_aux != NULL)
 	{
 		i = 0;
-		while (cmd_aux->command_and_arg[i] != NULL)//recorre la matriz del comando
+		while (cmd_aux->command_and_arg[i] != NULL)//recorre el array de strings de los comandos
 		{
 			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL \
 			|| ft_strchr(cmd_aux->command_and_arg[i], '\'') != NULL \
@@ -28,7 +28,7 @@ void	should_expand(t_cmd **cmd, t_env *envlist)
 			i++;
 		}
 		redir_aux = (*cmd)->redir;//uso un aux temporal para iterar redir (solo para consultar sus variables)
-		while (redir_aux != NULL)
+		while (redir_aux != NULL)//recorre lista redir buscando, '\'' '"' '$'
 		{
 			if (ft_strchr(redir_aux->filename, '$') != NULL \
 			|| ft_strchr(redir_aux->filename, '\'') != NULL \

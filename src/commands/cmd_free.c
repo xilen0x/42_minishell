@@ -6,15 +6,15 @@ void	cmd_free(t_cmd **lst)
 {
 	t_cmd	*aux;
 
-	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
-		return ;
+//	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
+//		return ;
 	aux = (*lst);
-	while (aux)
+	while (aux != NULL)
 	{
-		if (aux->command_and_arg)//BUENA PRACTICA
+		if (aux->command_and_arg != NULL)
         	free_arr2d(aux->command_and_arg);
-		if (aux->redir)
-        	redir_free(&aux->redir);//redir_free(&(*lst)->redir);
+		if (aux->redir != NULL)
+        	redir_free(&aux->redir);//EL & ME PROVOCA MUCHAS DUDAS
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);

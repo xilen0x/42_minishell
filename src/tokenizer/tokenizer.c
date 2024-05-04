@@ -43,12 +43,12 @@ int	tok_len(char *line, t_tok **new_tok)
 void	tokenizer(t_tok **tok, char *line)
 {
 	t_tok	*new_tok;
-	char	*str_aux;
+//	char	*str_aux;
 	size_t	len;
 	int		i;
 
 	new_tok = NULL;
-	str_aux = NULL;
+//	str_aux = NULL;
 	len = 0;
 	i = 0;
 	while (line[i])
@@ -59,14 +59,16 @@ void	tokenizer(t_tok **tok, char *line)
 		}
 		if (line[i])
 		{
-			new_tok = tok_new_node(NULL, NULL_TYPE); 
+			new_tok = tok_new_node(NULL, NULL_TYPE);//malloco node inicialitzat a NULL
 			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna 'len' si es WORD
 			if (len > 0)
 			{
-				str_aux = (char *)p_malloc(sizeof(char) * (len + 1));
-				ft_strlcpy(str_aux, line + i, len + 1);
-				new_tok->str = ft_strdup(str_aux);//OJO esto no es redundante????
-				free(str_aux);
+//				str_aux = (char *)p_malloc(sizeof(char) * (len + 1));
+				new_tok->str = (char *)p_malloc(sizeof(char) * (len + 1));//malloco *str dentro del nodo
+//				ft_strlcpy(str_aux, line + i, len + 1);
+				ft_strlcpy(new_tok->str, line + i, len + 1);
+//				new_tok->str = ft_strdup(str_aux);//OJO esto no es redundante????
+//				free(str_aux);
 				new_tok->type = WORD;
 			}
 			if (new_tok->type == DOUBLE_GREATER || new_tok->type == DOUBLE_SMALLER)

@@ -22,13 +22,12 @@ void	free_arr2d(char **array_strings)
 	size_t	i;
 
 	i = 0;
-
 	if (array_strings)
 	{
 		while (array_strings[i])
 		{
 			free(array_strings[i]);
-			array_strings[i] = NULL;//BUENA PRACTICA
+			array_strings[i] = NULL;
 			i++;
 		}
 		free(array_strings);
