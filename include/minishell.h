@@ -101,7 +101,7 @@ typedef struct s_exe
 	char			*cmd_fullpath;
 	char			**new_array;
 	pid_t			*pid;
-	// int			n_cmds;
+	int				num_cmds;
 	// int			fd_in;
 	// int			fd_out;
 	// int			fd[2];
@@ -189,7 +189,7 @@ void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 
 
 int		list_to_array(t_env *env, t_exe *exe);
-
+int	init_exe(t_exe *exe, t_cmd *cmd);	
 /*--------------------------- builtins -------------------------*/
 
 int		builtins(t_cmd *cmd, t_env **env);

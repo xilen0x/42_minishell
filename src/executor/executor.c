@@ -57,8 +57,14 @@ int	executor(t_env **env, t_cmd *cmd)
 	int		size_pipe;
 	int		i;
 
+	exe = NULL;
 	size_pipe = cmd_size(cmd);
 	i = 0;
+	exe = malloc(sizeof(t_exe));
+	if (!exe)
+		return (1);	
+	if (init_exe(exe, cmd) == 1)
+		return (1);
 	if (is_builtins(cmd) && (size_pipe == 1))
 		return (builtins(cmd, env));
 	else
@@ -75,7 +81,7 @@ int	executor(t_env **env, t_cmd *cmd)
 			search_command_path(cmd, exe);
 			list_to_array(*env, exe);
 			exe->pid[i] = fork();
-			if (exe->pid < 0)
+			if (exe->pid[1] < 0)
 			{
 				perror("Fork failed");
 				exit(1);
