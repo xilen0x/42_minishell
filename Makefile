@@ -77,6 +77,8 @@ FILES =	minishell.c \
 									expander/new_tok_builder.c \
 									expander/get_env_key.c \
 									signals.c \
+									exit_status/get_exit_status_val.c \
+									exit_status/get_exit_status_len.c \
 									prints/print_tok.c \
 									prints/print_cmd.c \
 									prints/print_redir.c \

@@ -1,12 +1,12 @@
 #include <minishell.h>
 /* Retorna un *str con el argumento expandido y/o sin comillas*/
-char	*expand_and_quote_remove(char *str, t_env *envlist)
+char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int exit_status)
 {
 	char	*result;
 	size_t	len;
 
 	result = NULL;
-	len = new_tok_len(str, envlist);//calcula el len del nuevo token, sin comillas y expandido
+	len = new_tok_len(str, envlist, exit_status);//calcula el len del nuevo token, sin comillas y expandido
 	result = (char *)p_malloc(sizeof(char) * (len + 1));//reserva la memoria para el token
 //	if (!result)
 //	{

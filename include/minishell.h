@@ -152,8 +152,8 @@ int		builtin_exit(t_built *cmd, int ac, char *av[]);
 int		builtin_unset(t_built *cmd, t_env env, int ac);
 */
 /*----------------minishell----------------*/
-void 	tokenizer(t_tok **tok, char *line);
-void    parser(t_cmd **cmd, t_tok *tok);
+void 	tokenizer(t_tok **tok, char *line, unsigned int *exit_status);
+void    parser(t_cmd **cmd, t_tok *tok, unsigned int *exit_status);
 void	handle_error(char *str, t_tok **tok);
 int 	bg_color();
 void	init_msg(void);
@@ -194,13 +194,12 @@ size_t 	command_and_arg_size(t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
 
 /*---------------expander & quote removal--------------*/
-void	should_expand(t_cmd **cmd, t_env *envlist);
-char	*expand_and_quote_remove(char *str, t_env *envlist);
-int		new_tok_len(char *str, t_env *envlist);
+void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int exit_status);
+char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int exit_status);
+int		new_tok_len(char *str, t_env *envlist, unsigned int exit_status);
 char	*new_tok_builder(char *str, t_env *envlist, char *result);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
-
 
 /*---------------utils-----------------*/
 void	*p_malloc(size_t size);
@@ -217,8 +216,6 @@ t_env	*lstnew(char *key, char *value);
 void	init_envlist(char **envp, t_env **envlist);
 void	cleaner(t_env **lst);
 
-
-
 /*-------------------------executor.c--------------------------*/
 //int		init_momentaneo(char *av[], t_env *data);
 void	ft_get_paths(char **envp, t_env *data);
@@ -231,6 +228,9 @@ int		ft_errors(int n);
 /*-------------------------int	builtins.c-------------------*/
 int		is_builtin(t_built *cmd, int ac, char *av[], t_env env);
 
+/*-------------------exit_status----------------*/
+unsigned int	get_exit_status_len(unsigned int exit_status);
+char	*get_exit_status_val(unsigned int exit_status);
 
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA

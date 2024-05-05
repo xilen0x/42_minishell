@@ -2,7 +2,7 @@
 
 /*Verifica si en el array de comandos o en la lista de 
 redirecciones hay alguna comilla simple, doble o '$' que debiera ser expandido*/
-void	should_expand(t_cmd **cmd, t_env *envlist)
+void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int exit_status )
 {
 	size_t	i;
 	t_cmd	*cmd_aux;
@@ -21,7 +21,7 @@ void	should_expand(t_cmd **cmd, t_env *envlist)
 			{
 				printf("Expansion:\n");
 				printf("<%s>\n", cmd_aux->command_and_arg[i]);
-				(*cmd)->command_and_arg[i] = expand_and_quote_remove(cmd_aux->command_and_arg[i], envlist);//el res lo envio a la lista original, no al aux
+				(*cmd)->command_and_arg[i] = expand_and_quote_remove(cmd_aux->command_and_arg[i], envlist, exit_status);//el res lo envio a la lista original, no al aux
 				printf("<%s>\n", (*cmd)->command_and_arg[i]);
 				printf("-----------\n");
 			}
