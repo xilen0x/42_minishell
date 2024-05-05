@@ -152,8 +152,8 @@ int		builtin_exit(t_built *cmd, int ac, char *av[]);
 int		builtin_unset(t_built *cmd, t_env env, int ac);
 */
 /*----------------minishell----------------*/
-void 	tokenizer(t_tok **tok, char *line, unsigned int *exit_status);
-void    parser(t_cmd **cmd, t_tok *tok, unsigned int *exit_status);
+void 	tokenizer(t_tok **tok, char *line);
+void    parser(t_cmd **cmd, t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
 int 	bg_color();
 void	init_msg(void);
@@ -194,10 +194,10 @@ size_t 	command_and_arg_size(t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
 
 /*---------------expander & quote removal--------------*/
-void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int exit_status);
-char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int exit_status);
-int		new_tok_len(char *str, t_env *envlist, unsigned int exit_status);
-char	*new_tok_builder(char *str, t_env *envlist, char *result);
+void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int *exit_status);
+char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int *exit_status);
+int		new_tok_len(char *str, t_env *envlist, unsigned int *exit_status);
+char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exit_status);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
 

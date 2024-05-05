@@ -10,12 +10,12 @@ int	main(int ac, char *av[], char *envp[])
 	t_tok	*tok;
 	//t_built	cmds;
 	t_cmd	*cmd;
-	unsigned int *exit_status;
+	unsigned int exit_status;
 
 	envlist = NULL;
 	tok = NULL;
 	cmd = NULL;
-	*exit_status = 255;//inicializo provisionalmente, para que tenga algun valor
+	exit_status = 255;//inicializo provisionalmente, para que tenga algun valor
 	if (ac != 1 || av[1])
 	{
 		ft_errors(5);
@@ -45,11 +45,11 @@ int	main(int ac, char *av[], char *envp[])
 			free(line);
 			continue;
 		}
-		tokenizer(&tok, line, exit_status);//crea una lista t_tok de tokens
+		tokenizer(&tok, line);//crea una lista t_tok de tokens
 		free(line);
-	  	parser(&cmd, tok, exit_status);
+	  	parser(&cmd, tok);
 		tok_free(&tok);
-		should_expand(&cmd, envlist, exit_status);
+		should_expand(&cmd, envlist, &exit_status);
 
 		//	builtins(&cmds, env, ac, av);//de carlos
 //		ft_get_paths(env.env_cpy, &env);

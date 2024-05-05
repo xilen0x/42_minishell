@@ -2,7 +2,7 @@
 
 /*2ra fase: Rellena 'result' con los caracteres correctos que tendrá 
 el nuevo token, una vez expandido y eliminadas comillas del token original 'str'*/
-char	*new_tok_builder(char *str, t_env *envlist, char *result)
+char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exit_status)
 {
 	size_t	i;
 	size_t	j;
@@ -16,6 +16,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 	quotes.d_quote = 0;
 	tok_key = NULL;
 	tok_val = NULL;
+	*exit_status = (*exit_status + 1);//PROVISIONAL mientras no completo el $?
 	while (str && str[i])
 	{
 		if (str[i] == '"' && quotes.d_quote == 0 && quotes.s_quote == 0)

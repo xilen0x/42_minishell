@@ -1,6 +1,6 @@
 #include <minishell.h>
 /* Retorna un *str con el argumento expandido y/o sin comillas*/
-char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int exit_status)
+char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int *exit_status)
 {
 	char	*result;
 	size_t	len;
@@ -13,6 +13,6 @@ char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int exit_statu
 //		printf("fallo la creacion del malloc");
 //	}
 //	malloc_s_pointer_protect(result);
-	result = new_tok_builder(str, envlist, result);//rellena el nuevo token
+	result = new_tok_builder(str, envlist, result, exit_status);//rellena el nuevo token
 	return (result);
 }
