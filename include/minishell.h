@@ -22,7 +22,12 @@
 # define EXIT_FAILURE 1
 # define TRUE 1
 # define FALSE 0
-
+# define RED "\033[0;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[1;34m"
+# define END "\033[0m"
+# define CYAN "\033[1;36m"
 /*--------------------Error messages-------------------*/
 
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"

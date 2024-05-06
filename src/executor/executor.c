@@ -1,7 +1,6 @@
 # include "minishell.h"
 
-
-
+/*function that search by the 'PATH' word and split the content*/
 char	**get_paths(t_env *env)
 {
 	int		i;
@@ -13,7 +12,6 @@ char	**get_paths(t_env *env)
 	{
 		if (ca_strcmp(env->key, "PATH") == 0)
 		{
-			//*index = i;
 			full_path = ft_split(env->val, ':');
 			break ;
 		}
@@ -50,6 +48,15 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 	return (1);
 }
 
+/*close fd 0 and 1*/
+int	close_fd(t_exe	*exe)
+{
+	close(exe->fd[0]);
+	close(exe->fd[1]);
+	return (0);
+}
+
+/*execute commands in pipes*/
 int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
 	int		i;
@@ -72,8 +79,8 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 		{
 			if (cmd->next != NULL)
 				dup2(exe->fd[1], STDOUT_FILENO);
-			close(exe->fd[0]);
-			close(exe->fd[1]);
+			//redireccion aqui?
+			close_fd(exe);
 			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
 			{
 				perror(exe->cmd_fullpath);
@@ -82,20 +89,16 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 			printf("proceso hijo\n");
 			exit(0);
 		}
-			//execve(exe->cmd_fullpath, &cmd->command_and_arg[i], exe->new_array);
 		dup2(exe->fd[0], STDIN_FILENO);
-		close(exe->fd[0]);
-		close(exe->fd[1]);
-		// printf("proceso padre\n");
-		// return (0);
+		close_fd(exe);
 		i++;
 		cmd = cmd->next;
 	}
-	int status;
+	int status;//reemplazar luego esto por lo de la funcion de exit_status
 	dup2(exe->fd_input, STDIN_FILENO);
 	dup2(exe->fd_output, STDOUT_FILENO);
 	i = 0;
-	while(i < exe->num_cmds)
+	while (i < exe->num_cmds)
 	{
 		waitpid(exe->pid[i], &status, 0);
 		i++;
@@ -122,5 +125,4 @@ int	executor(t_env **env, t_cmd *cmd)
 	else
 		executor_core(cmd, exe, env);
 	return (0);
-
 }
