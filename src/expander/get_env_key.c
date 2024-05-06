@@ -1,8 +1,7 @@
 #include "minishell.h"
 
-/*Retorna un nombre de variable mallocado.
-No tiene en cuenta si existe, ni si su sintaxis es valida.
-Retorna NULL si empieza por numero o caracter especial*/
+/*Retorna un nombre de variable mallocado o NULL si empieza por numero o caracter especial
+No tiene en cuenta si existe, ni si su sintaxis es valida.*/
 char *get_env_key(char *str)
 {
 	size_t 	i;

@@ -33,7 +33,7 @@ int	new_tok_len(char *str, t_env *envlist, unsigned int *exit_status)//unsigned 
 				len += get_exit_status_len(exit_status);
 			else//verifica si es un nombre de variable valido y si es de entorno o no
 			{
-				env_key = get_env_key(str + i);//puntero al nombre despues del '$', sea cual sea
+				env_key = get_env_key(str + i);//puntero mallocado al nombre despues del '$', sea cual sea
 				if (env_key != NULL)//en caso de que el nombre NO sea un num o un caracter especial
 				{
 					// i++;

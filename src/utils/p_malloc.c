@@ -8,6 +8,9 @@ void	*p_malloc(size_t size)
 
 	ptr = malloc(size);
 	if (ptr == NULL)
+	{
+		printf("Error: malloc failure\n");
 		exit (EXIT_FAILURE);
+	}
 	return (ptr);
 }

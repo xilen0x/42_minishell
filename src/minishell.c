@@ -38,6 +38,11 @@ int	main(int ac, char *av[], char *envp[])
 			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
+		if (strcmp(line, "exit") == 0)
+		{
+			free(line); 
+			return(0);
+		}
 		if (line && *line)
 			add_history(line);
 		if (!*line)
@@ -58,6 +63,8 @@ int	main(int ac, char *av[], char *envp[])
 //		executor(&env);
 //		print_cmd_para_executor(cmd);
 		cmd_free(&cmd);
+		cleaner(&envlist);
+//-------------------------AQUI FUNCION QUE LIBERA TODOA LA LISTA DE envlist---------------------------------------------------
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
 	return (0);

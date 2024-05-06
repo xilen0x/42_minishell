@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*Retorna el valor de env_key si esta se encuentra en envlist, sino retorna NULL*/
+/*Retorna el valor mallocado de env_key si esta se encuentra en envlist, sino retorna NULL*/
 char *get_env_val(char *env_key, t_env *envlist)
 {
 	char	*val_aux;
