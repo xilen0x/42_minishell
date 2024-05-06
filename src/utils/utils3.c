@@ -16,16 +16,13 @@ void	free_memory(char **array, int size)
 //executor init data
 int	init_exe(t_exe *exe, t_cmd *cmd)
 {
-	exe = malloc(sizeof(t_exe));
-	if (!exe)
-		return (1);
 	exe->num_cmds = cmd_size(cmd);
 	exe->fd[0] = -1;
 	exe->fd[1] = -1;
-	// exe->pid = malloc(sizeof(pid_t) * exe->num_cmds);
-	// if (!exe->pid)
-	// 	return (1);
-	// exe->pid = NULL;
+	exe->pid = malloc(sizeof(pid_t) * exe->num_cmds);
+	if (!exe->pid)
+		return (1);
+	//exe->pid = NULL;
 	return (0);
 }
 

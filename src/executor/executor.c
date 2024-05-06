@@ -56,10 +56,10 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 	// pid_t	pid;
 
 	i = 0;
-	exe = NULL;
-	exe = (t_exe *)malloc(sizeof(t_exe));
-	if (!exe)
-		return (1);
+	//exe = NULL;
+	// exe = (t_exe *)malloc(sizeof(t_exe));
+	// if (!exe)
+	// 	return (1);
 	while (cmd)
 	{
 		//printf("tengo %d pipes\n", size_pipe);
@@ -74,10 +74,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 			error_exe(2);
 		else if (exe->pid == 0)
 		{
-		//dup2(data->infile_fd, STDIN_FILENO);//Redirigir la entrada estándar al archivo de entrada
-		// close(fd[0]);//Se cierra el descriptor de lectura del pipe (fd[0]) ya que no se utilizará en este proceso.
-		// dup2(fd[1], STDOUT_FILENO);//Se redirige la salida estándar al fd[1] para que la salida del primer comando vaya al pipe.
-			dup2(exe->fd_input, STDIN_FILENO);//aki voy!!!!!!
+			dup2(exe->fd_input, STDIN_FILENO);
 			close(exe->fd[0]);
 			dup2(exe->fd[1], STDOUT_FILENO);
 			if (execve(exe->cmd_fullpath, &cmd->command_and_arg[i], exe->new_array) < 0)
@@ -85,7 +82,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 				perror(exe->cmd_fullpath);
 				exit(1);
 			}
-			//close(fd[1]);
+			close(exe->fd[1]);
 			exit(0);
 		}
 		else
@@ -110,6 +107,9 @@ int	executor(t_env **env, t_cmd *cmd)
 	int		size_pipe;
 
 	exe = NULL;
+	exe = malloc(sizeof(t_exe));
+	if (!exe)
+		return (1);
 	size_pipe = cmd_size(cmd);
 	if (init_exe(exe, cmd) == 1)
 		return (1);
