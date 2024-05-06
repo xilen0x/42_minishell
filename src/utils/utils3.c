@@ -16,13 +16,31 @@ void	free_memory(char **array, int size)
 //executor init data
 int	init_exe(t_exe *exe, t_cmd *cmd)
 {
-	exe->num_cmds = cmd_size(cmd);
-	//exe->fd[0] = -1;
-	//exe->fd[1] = -1;
-	exe->pid = malloc(sizeof(pid_t) * exe->num_cmds);
-	if (!exe->pid)
+	exe = malloc(sizeof(t_exe));
+	if (!exe)
 		return (1);
+	exe->num_cmds = cmd_size(cmd);
+	exe->fd[0] = -1;
+	exe->fd[1] = -1;
+	// exe->pid = malloc(sizeof(pid_t) * exe->num_cmds);
+	// if (!exe->pid)
+	// 	return (1);
+	// exe->pid = NULL;
 	return (0);
+}
+
+void	error_exe(int num)
+{
+	if (num == 1)
+	{
+		perror("Pipe failed");
+		exit(1);
+	}
+	else if (num == 2)
+	{
+		perror("Fork failed");
+		exit(1);
+	}
 }
 
 void	allocate_memory(t_env *current, int len, t_exe *exe)
@@ -49,6 +67,7 @@ void	allocate_memory(t_env *current, int len, t_exe *exe)
 	}
 }
 
+/*convert the env(list) to an array(char **)*/
 int	list_to_array(t_env *env, t_exe *exe)
 {
 	int		len;

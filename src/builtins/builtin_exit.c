@@ -13,6 +13,8 @@ int	ca_isnumber(const char *str)
 
 int	builtin_exit(t_cmd *cmd)
 {
+	if ((ca_strcmp(cmd->command_and_arg[1], "9223372036854775807") == 1))
+		printf("minishell: exit: numeric argument required\n");
 	if ((size_arr2d(cmd->command_and_arg)) > 1)
 	{
 		if (ca_isnumber(cmd->command_and_arg[1]))

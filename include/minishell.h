@@ -102,12 +102,12 @@ typedef struct s_exe
 	char			**new_array;
 	pid_t			*pid;
 	int				num_cmds;
-	// int			fd_in;
-	// int			fd_out;
-	// int			fd[2];
-	// int			dup_stdin;
-	// int			dup_stdout;
-	// char			*path;
+	int				fd_input;
+	int				fd_output;
+	int				fd[2];
+	int			dup_stdin;
+	int			dup_stdout;
+	char			*path;
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
@@ -171,6 +171,8 @@ void	set_signals(void);
 char	**get_paths(t_env *env);
 int		executor(t_env **env, t_cmd *cmd);
 int		search_command_path(t_cmd *cmd, t_exe *exe);
+void	error_exe(int num);
+
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
 int		get_exit_status(void);
