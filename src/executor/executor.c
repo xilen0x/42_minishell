@@ -53,16 +53,12 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
 	int		i;
-	// pid_t	pid;
 
+	exe->fd_input = dup(STDIN_FILENO);
+	exe->fd_output = dup(STDOUT_FILENO);
 	i = 0;
-	//exe = NULL;
-	// exe = (t_exe *)malloc(sizeof(t_exe));
-	// if (!exe)
-	// 	return (1);
 	while (cmd)
 	{
-		//printf("tengo %d pipes\n", size_pipe);
 		exe->paths = get_paths(*env);
 		exe->cmd_fullpath = NULL;
 		search_command_path(cmd, exe);
@@ -72,29 +68,37 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 		exe->pid[i] = fork();
 		if (exe->pid[i] < 0)
 			error_exe(2);
-		else if (exe->pid == 0)
+		else if (exe->pid[i] == 0)
 		{
-			dup2(exe->fd_input, STDIN_FILENO);
+			if (cmd->next != NULL)
+				dup2(exe->fd[1], STDOUT_FILENO);
 			close(exe->fd[0]);
-			dup2(exe->fd[1], STDOUT_FILENO);
-			if (execve(exe->cmd_fullpath, &cmd->command_and_arg[i], exe->new_array) < 0)
+			close(exe->fd[1]);
+			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
 			{
 				perror(exe->cmd_fullpath);
 				exit(1);
 			}
-			close(exe->fd[1]);
+			printf("proceso hijo\n");
 			exit(0);
 		}
-		else
-		{
-			wait(NULL);
-			//execve(env->cmd2_fullpath, env->args_2, NULL);
-			//close(fd[0]);
-			return(0);
-		}
-		//size_pipe--;
+			//execve(exe->cmd_fullpath, &cmd->command_and_arg[i], exe->new_array);
+		dup2(exe->fd[0], STDIN_FILENO);
+		close(exe->fd[0]);
+		close(exe->fd[1]);
+		// printf("proceso padre\n");
+		// return (0);
 		i++;
 		cmd = cmd->next;
+	}
+	int status;
+	dup2(exe->fd_input, STDIN_FILENO);
+	dup2(exe->fd_output, STDOUT_FILENO);
+	i = 0;
+	while(i < exe->num_cmds)
+	{
+		waitpid(exe->pid[i], &status, 0);
+		i++;
 	}
 	return (0);
 }
@@ -118,4 +122,5 @@ int	executor(t_env **env, t_cmd *cmd)
 	else
 		executor_core(cmd, exe, env);
 	return (0);
+
 }

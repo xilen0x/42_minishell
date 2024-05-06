@@ -60,6 +60,7 @@ int	builtin_exit(t_cmd *cmd)
 	else if ((size_arr2d(cmd->command_and_arg)) == 1)
 	{
 		printf("exit\n");//exit solo
+		printf("\033[40m");//black
 		exit(0);
 	}
 	else if (cmd->command_and_arg[1])

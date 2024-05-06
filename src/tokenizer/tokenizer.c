@@ -51,8 +51,9 @@ void	tokenizer(t_tok **tok, char *line)
 	str_aux = NULL;
 	len = 0;
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
+		len = 0;
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		{
         	i++;
