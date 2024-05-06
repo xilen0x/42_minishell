@@ -8,11 +8,6 @@ char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int *exit_stat
 	result = NULL;
 	len = new_tok_len(str, envlist, exit_status);//calcula el len del nuevo token, sin comillas y expandido
 	result = (char *)p_malloc(sizeof(char) * (len + 1));//reserva la memoria para el token
-//	if (!result)
-//	{
-//		printf("fallo la creacion del malloc");
-//	}
-//	malloc_s_pointer_protect(result);
 	result = new_tok_builder(str, envlist, result, exit_status);//rellena el nuevo token
 	return (result);
 }

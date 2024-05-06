@@ -229,8 +229,8 @@ int		ft_errors(int n);
 int		is_builtin(t_built *cmd, int ac, char *av[], t_env env);
 
 /*-------------------exit_status----------------*/
-unsigned int	get_exit_status_len(unsigned int exit_status);
-char	*get_exit_status_val(unsigned int exit_status);
+unsigned int	get_exit_status_len(unsigned int *exit_status);
+char	*get_exit_status_val(unsigned int *exit_status);
 
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
@@ -240,5 +240,6 @@ void	print_redir(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 void	ft_print_keys(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_print_values(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
+void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
 #endif

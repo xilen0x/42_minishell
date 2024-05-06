@@ -30,7 +30,7 @@ int	new_tok_len(char *str, t_env *envlist, unsigned int *exit_status)//unsigned 
 		{
 			i++;//salto el '$'
 			if (str[i] == '?')
-				len += get_exit_status_len(*exit_status);
+				len += get_exit_status_len(exit_status);
 			else//verifica si es un nombre de variable valido y si es de entorno o no
 			{
 				env_key = get_env_key(str + i);//puntero al nombre despues del '$', sea cual sea

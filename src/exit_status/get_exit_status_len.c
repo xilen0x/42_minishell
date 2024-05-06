@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-unsigned int	get_exit_status_len(unsigned int exit_status)
+unsigned int	get_exit_status_len(unsigned int *exit_status)
 {
 	unsigned int	len;
 	char			*val;

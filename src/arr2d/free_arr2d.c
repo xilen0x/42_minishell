@@ -21,6 +21,8 @@ void	free_arr2d(char **array_strings)
 {
 	size_t	i;
 
+	if (array_strings == NULL || array_strings[0] == NULL)
+		return ;
 	i = 0;
 	if (array_strings)
 	{
@@ -31,5 +33,6 @@ void	free_arr2d(char **array_strings)
 			i++;
 		}
 		free(array_strings);
+		array_strings = NULL;
 	}
 }

@@ -19,6 +19,7 @@ void	tok_free(t_tok **lst)
 		aux->type = NULL_TYPE;
 		(*lst) = aux->next;
 		free(aux);
+//		aux = NULL;
 		aux = (*lst);
 	}
 	(*lst) = NULL;

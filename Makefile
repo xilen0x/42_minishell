@@ -83,7 +83,8 @@ FILES =	minishell.c \
 									prints/print_cmd.c \
 									prints/print_redir.c \
 									prints/print_envlist.c \
-									prints/print_arr2d.c 
+									prints/print_arr2d.c \
+									prints/print_cmd_para_executor.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

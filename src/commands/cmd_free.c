@@ -6,8 +6,8 @@ void	cmd_free(t_cmd **lst)
 {
 	t_cmd	*aux;
 
-//	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
-//		return ;
+	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
+		return ;
 	aux = (*lst);
 	while (aux != NULL)
 	{

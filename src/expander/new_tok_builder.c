@@ -7,16 +7,15 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exi
 	size_t	i;
 	size_t	j;
 	t_qts	quotes;
-	char	*tok_key;
-	char	*tok_val;
+	char	*env_key;
+	char	*env_val;
 
 	i = 0;
 	j = 0;
 	quotes.s_quote = 0;
 	quotes.d_quote = 0;
-	tok_key = NULL;
-	tok_val = NULL;
-	*exit_status = (*exit_status + 1);//PROVISIONAL mientras no completo el $?
+	env_key = NULL;
+	env_val = NULL;
 	while (str && str[i])
 	{
 		if (str[i] == '"' && quotes.d_quote == 0 && quotes.s_quote == 0)
@@ -30,27 +29,37 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exi
 		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])//si es candidato a expandir.
 		{
 			i++;//salto el '$'
-
-			tok_key = get_env_key(str + i);//puntero al inicio del nombre despues del '$'
-			if (tok_key != NULL)//en caso de que despues de '$' haya un num o caracter especial
+			if (str[i] == '?')
 			{
-//				i++;
-//				continue;//OJO no se ejecutara nada de lo que hay a continuacion
-//			}
-				tok_val = get_env_val(tok_key, envlist);//retorna el content de tok_key en env o NULL si no existe
-				if (tok_val != NULL)
+				env_val = get_exit_status_val(exit_status);//retorna un char* mallocado
+				while (env_val && *env_val != '\0')
 				{
-					while (tok_val && *tok_val != '\0')
-					{
-						result[j] = (*tok_val);
-						j++;
-						tok_val++;
-					}
+					result[j] = (*env_val);
+					j++;
+					env_val++;
 				}
-				i += ft_strlen(tok_key);//salto el len del nombre de la var en el recorrido del token
-				free(tok_key);
-				tok_key = NULL;
-				tok_val = NULL;
+				free (env_val);
+				env_val = NULL;
+			}
+			else//verifica si es un nombre de variable valido y si es de entorno o no
+			{
+				env_key = get_env_key(str + i);//puntero al inicio del nombre despues del '$'
+//				if (env_key != NULL)
+				env_val = get_env_val(env_key, envlist);//retorna el content mallocado de tok_key en env o NULL si no existe
+//				if (env_val != NULL)
+//				{
+				while (env_val && *env_val != '\0')
+				{
+					result[j] = (*env_val);
+					j++;
+					env_val++;
+				}
+//				}
+				i += ft_strlen(env_key);//salto el len del nombre de la var en el recorrido del token
+				free(env_key);
+				env_key = NULL;
+				free(env_val);
+				env_val = NULL;
 				continue;//salto el ciclo para que no se incremente 'i' de nuevo
 			}
 		}
@@ -65,5 +74,5 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exi
 	}
 	result[j] = '\0';
 	free(str);//libera el antiguo token
-	return (result);
+	return (result);//esta mallocado
 }
