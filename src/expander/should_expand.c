@@ -16,22 +16,7 @@ void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int *exit_status )
 	while (*cmd)
 	{
 		i = 0;
-//		while (cmd_aux->command_and_arg[i] != NULL)//recorre el array de strings de los comandos
-//		{
-//			if (ft_strchr(cmd_aux->command_and_arg[i], '$') != NULL \
-//			|| ft_strchr(cmd_aux->command_and_arg[i], '\'') != NULL \
-//			|| ft_strchr(cmd_aux->command_and_arg[i], '"') != NULL)
-//			{
-//				printf("Expansion:\n");
-//				printf("<%s>\n", cmd_aux->command_and_arg[i]);
-//				char * tmp =  expand_and_quote_remove(cmd_aux->command_and_arg[i], envlist, exit_status);//el res lo envio a la lista original, no al aux				free((*cmd)->command_and_arg[i]);
-//				(*cmd)->command_and_arg[i] = tmp;
-//
-//				printf("<%s>\n", (*cmd)->command_and_arg[i]);
-//				printf("-----------\n");
-//			}
-//			i++;
-//		}
+
 		while ((*cmd)->command_and_arg[i] != NULL)//recorre el array de strings de los comandos
 		{
 			if (ft_strchr((*cmd)->command_and_arg[i], '$') != NULL \
@@ -50,22 +35,7 @@ void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int *exit_status )
 			}
 			i++;
 		}
-/*		redir_aux = (*cmd)->redir;//uso un aux temporal para iterar redir (solo para consultar sus variables)
-		while (redir_aux != NULL)//recorre lista redir buscando, '\'' '"' '$'
-		{
-			if (ft_strchr(redir_aux->filename, '$') != NULL \
-			|| ft_strchr(redir_aux->filename, '\'') != NULL \
-			|| ft_strchr(redir_aux->filename, '"') != NULL)
-			{
-				printf("Expansión:\n");
-				printf("<%s>\n", redir_aux->filename);
-				(*cmd)->redir->filename = expand_and_quote_remove(redir_aux->filename, envlist, exit_status);//el res lo envio a la lista original, no al aux
-				printf("<%s>\n", (*cmd)->redir->filename);
-				printf("-----------\n");
-			}
-			redir_aux = redir_aux->next;
-		}*/
-//		redir_aux = (*cmd)->redir;//uso un aux temporal para iterar redir (solo para consultar sus variables)
+
 		while ((*cmd)->redir != NULL)//recorre lista redir buscando, '\'' '"' '$'
 		{
 			if (ft_strchr((*cmd)->redir->filename, '$') != NULL \

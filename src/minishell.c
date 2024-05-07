@@ -8,7 +8,6 @@ int	main(int ac, char *av[], char *envp[])
 	char	**env_cpy;
 	t_env	*envlist;
 	t_tok	*tok;
-	//t_built	cmds;
 	t_cmd	*cmd;
 	unsigned int exit_status;
 
@@ -22,14 +21,9 @@ int	main(int ac, char *av[], char *envp[])
 		exit(0);
 		return (0);
 	}
-//	env.env_cpy = dup_arr2d(envp);
 	env_cpy = dup_arr2d(envp);
-//	env.export_cpy = dup_arr2d(envp);
-	//init_msg();
-	//bg_color();
 	init_envlist(env_cpy, &envlist);
 	free_arr2d(env_cpy);//lo libero, porque ya lo tengo guardado en envlist
-
 	while (1)
 	{
 		set_signals();
@@ -37,24 +31,25 @@ int	main(int ac, char *av[], char *envp[])
 		if (!line)
 		{
 			printf("exit\n");//para el caso del ctrl-D
-			//printf("\033[0m");// Restaurar color de fondo a su estado original al finalizar
 			exit(0);
 		}
 		if (strcmp(line, "exit") == 0)
 		{
 			cleaner_envlist(&envlist);
 			free(line); 
-			return(0);
+//			return(0);
+			exit (EXIT_FAILURE);
 		}
 		if (line && *line)
 			add_history(line);
-		if (!*line)
-		{
-			free(line);
-			continue;
-		}
+//		if (!*line)
+//		{
+//			free(line);
+//			continue;
+//		}
 		tokenizer(&tok, line);//crea una lista de tokens tok
 		free(line);
+
 	  	parser(&cmd, tok);//crea una nueva lista cmd a partir de la lista tok
 		tok_free(&tok);
 		should_expand(&cmd, envlist, &exit_status);
