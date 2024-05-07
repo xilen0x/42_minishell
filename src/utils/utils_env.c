@@ -100,7 +100,7 @@ void	init_envlist(char **envp, t_env **envlist)
 }
 
 /* Borra una lista t_env y libera todos sus nodos */
-void	cleaner(t_env **lst)
+void	cleaner_envlist(t_env **lst)
 {
 	t_env	*aux;
 

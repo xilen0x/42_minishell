@@ -15,11 +15,12 @@ int	main(int ac, char *av[], char *envp[])
 	envlist = NULL;
 	tok = NULL;
 	cmd = NULL;
-	exit_status = 255;//inicializo provisionalmente, para que tenga algun valor
+	exit_status = 555;//inicializo provisionalmente, para que tenga algun valor
 	if (ac != 1 || av[1])
 	{
 		ft_errors(5);
 		exit(0);
+		return (0);
 	}
 //	env.env_cpy = dup_arr2d(envp);
 	env_cpy = dup_arr2d(envp);
@@ -27,7 +28,8 @@ int	main(int ac, char *av[], char *envp[])
 	//init_msg();
 	//bg_color();
 	init_envlist(env_cpy, &envlist);
-	free_arr2d(env_cpy);//libero, porque ya lo tengo guardado en envlist
+	free_arr2d(env_cpy);//lo libero, porque ya lo tengo guardado en envlist
+
 	while (1)
 	{
 		set_signals();
@@ -40,7 +42,7 @@ int	main(int ac, char *av[], char *envp[])
 		}
 		if (strcmp(line, "exit") == 0)
 		{
-			cleaner(&envlist);
+			cleaner_envlist(&envlist);
 			free(line); 
 			return(0);
 		}
@@ -51,9 +53,9 @@ int	main(int ac, char *av[], char *envp[])
 			free(line);
 			continue;
 		}
-		tokenizer(&tok, line);//crea una lista t_tok de tokens
+		tokenizer(&tok, line);//crea una lista de tokens tok
 		free(line);
-	  	parser(&cmd, tok);
+	  	parser(&cmd, tok);//crea una nueva lista cmd a partir de la lista tok
 		tok_free(&tok);
 		should_expand(&cmd, envlist, &exit_status);
 
@@ -63,10 +65,10 @@ int	main(int ac, char *av[], char *envp[])
 //	search_cmds(&env);
 //		executor(&env);
 //		print_cmd_para_executor(cmd);
-		cmd_free(&cmd);
-//-------------------------AQUI FUNCION QUE LIBERA TODOA LA LISTA DE envlist---------------------------------------------------
+		cmd_free(&cmd);//libera toda la lista cmd
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
+	cleaner_envlist(&envlist);//libera la lista de env
 	return (0);
 }
 //SI NO HAY CIERRE DE COMILLAS lo gestionaré como => syntax error near token 'print_del_token'???

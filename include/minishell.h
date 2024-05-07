@@ -214,7 +214,7 @@ t_env	*lstlast(t_env *lst);
 void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
 void	init_envlist(char **envp, t_env **envlist);
-void	cleaner(t_env **lst);
+void	cleaner_envlist(t_env **lst);
 
 /*-------------------------executor.c--------------------------*/
 //int		init_momentaneo(char *av[], t_env *data);
