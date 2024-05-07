@@ -21,6 +21,7 @@ static int	is_space(const char *str)
 	return (i);
 }
 
+/*verifica si un str es un entero válido o no*/
 int	check_int(const char *str)
 {
 	int			i;
@@ -31,15 +32,14 @@ int	check_int(const char *str)
 	sign = 1;
 	i = is_space(str);
 	if (str[i] == '-')
-		sign *= -1;
+		sign = -1;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	if (str[i] < '0' || str[i] > '9')
 		return (-1);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (res * sign > (LLONG_MAX - (str[i] - '0')) / 10 || res
-			* sign < (LLONG_MIN + (str[i] - '0')) / 10)
+		if ((res * sign > (LLONG_MAX - (str[i] - '0')) / 10) || (res * sign < (LLONG_MIN + (str[i] - '0')) / 10))
 			return (-1);
 		res *= 10;
 		res += (str[i] - '0');

@@ -75,12 +75,12 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 		exe->pid[i] = fork();
 		if (exe->pid[i] < 0)
 			error_exe(2);
-		else if (exe->pid[i] == 0)
+		else if (exe->pid[i] == 0)//proceso(s) hijo(s)
 		{
 			if (cmd->next != NULL)
 				dup2(exe->fd[1], STDOUT_FILENO);
-			//redireccion aqui?
 			close_fd(exe);
+			//redireccion aqui?
 			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
 			{
 				perror(exe->cmd_fullpath);

@@ -17,8 +17,8 @@ int	main(int ac, char *av[], char *envp[])
 	env_cpy = dup_arr2d(envp);
 	//init_main_struct(&shell);
 	init_envlist(env_cpy, &envlist);
-	//bg_color();
-	init_msg();
+	bg_color();
+	//init_msg();
 	while (1)
 	{
 		set_signals();

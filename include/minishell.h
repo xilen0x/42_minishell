@@ -110,8 +110,8 @@ typedef struct s_exe
 	int				fd_input;
 	int				fd_output;
 	int				fd[2];
-	int			dup_stdin;
-	int			dup_stdout;
+	int				dup_stdin;
+	int				dup_stdout;
 	char			*path;
 }	t_exe;
 
