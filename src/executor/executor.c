@@ -106,13 +106,36 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 	return (0);
 }
 
+void	redirections(t_cmd *cmd, t_exe *exe)
+{
+	t_redir	*aux;
 
-/*Funcion que ejecuta un comando dado(no builtin)*/
+	if (cmd->next != NULL)
+		dup2(exe->fd[1], STDOUT_FILENO);
+	close_fd(exe);
+	aux = cmd->redir;
+	while (aux)
+	{
+		// if (dup_custom_redirections(exe, aux) == 1)
+		// {
+		// 	unlink_heredocs(commands->redirect);
+		// 	if (out == FT_RETURN)
+		// 		return (perror_return(data, 1, aux. ->file));
+		// 	else
+		// 		perror_exit(data, EXIT_FAILURE, temp->file);
+		// }
+		printf("teste\n");
+		aux = aux->next;
+	}
+}
+
+/*Funcion que ejecuta un comando dado o direcciona a builtin si es el caso*/
 int	executor(t_env **env, t_cmd *cmd)
 {
 	t_exe	*exe;
 	int		size_pipe;
 
+	//signals here...soon
 	exe = NULL;
 	exe = malloc(sizeof(t_exe));
 	if (!exe)
@@ -120,6 +143,7 @@ int	executor(t_env **env, t_cmd *cmd)
 	size_pipe = cmd_size(cmd);
 	if (init_exe(exe, cmd) == 1)
 		return (1);
+	redirections(cmd, exe);
 	if (is_builtins(cmd) && (size_pipe == 1))
 		return (builtins(cmd, env));
 	else

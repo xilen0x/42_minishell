@@ -50,8 +50,28 @@ int	check_int(const char *str)
 	return (0);
 }
 
-int	builtin_exit(t_cmd *cmd)
+/* Borra una lista t_env y libera todos sus nodos */
+// void	cleaner_envlist(t_env **lst)
+// {
+// 	t_env	*aux;
+
+// 	aux = (*lst);
+// 	while (aux)
+// 	{
+// 		free(aux->key);
+// 		aux->key = NULL;
+// 		free(aux->val);
+// 		aux->val = NULL;
+// 		(*lst) = aux->next;
+// 		free(aux);
+// 		aux = (*lst);
+// 	}
+// 	(*lst) = NULL;
+// }
+
+int	builtin_exit(t_cmd *cmd, t_env *envlist)
 {
+	//cleaner_envlist(&envlist);
 	if (cmd->command_and_arg[1] && check_int(cmd->command_and_arg[1]) != 0)
 	{
 		printf("minishell: exit: numeric argument required\n");//exit aesae5 || exit - || exit ++- ...etc

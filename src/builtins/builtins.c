@@ -5,7 +5,7 @@ int	builtins(t_cmd *cmd, t_env **env)
 {
 	if (ca_strcmp(*cmd->command_and_arg, "exit") == 0)
 	{
-		builtin_exit(cmd);
+		builtin_exit(cmd, *env);
 		printf("\033[40m");//black
 		exit (0);
 	}

@@ -121,6 +121,7 @@ void	init_msg(void);
 void	tokenizer(t_tok **tok, char *line);
 void	parser(t_cmd **cmd, t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
+void	cleaner(t_env **lst);
 /*---------------------------array 2d -------------------------*/
 size_t	size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
@@ -200,7 +201,8 @@ int	init_exe(t_exe *exe, t_cmd *cmd);
 /*--------------------------- builtins -------------------------*/
 
 int		builtins(t_cmd *cmd, t_env **env);
-int		builtin_exit(t_cmd *cmd);
+// int		builtin_exit(t_cmd *cmd);
+int	builtin_exit(t_cmd *cmd, t_env *envlist);
 int		builtin_pwd(t_env *env);
 int		builtin_cd(t_cmd	*cmd, t_env **env);
 int		builtin_env(t_cmd *cmd, t_env *env);
