@@ -38,8 +38,9 @@ int	tok_len(char *line, t_tok **new_tok)//faltara añadir el exit_status
 	return (len);
 }
 
+//Tokeniza la 'line' sea cual sea, sin verificar errores sintacticos (separa por ' ', \t, <, >, >>, <<, |)
 //'str' siempre sera NULL, excepto si es una WORD que contendra su string
-//las comillas se tratan como WORD, si no estan cerradas incluyen hasta el final de la linea
+//las comillas se tratan como WORD, si no estan cerradas llegaran hasta el '\0'
 void	tokenizer(t_tok **tok, char *line)
 {
 	t_tok	*new_tok;
@@ -49,10 +50,11 @@ void	tokenizer(t_tok **tok, char *line)
 
 	new_tok = NULL;
 //	str_aux = NULL;
-	len = 0;
+//	len = 0;
 	i = 0;
 	while (line[i])
 	{
+		len = 0;
     	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
 		{
         	i++;
@@ -60,7 +62,7 @@ void	tokenizer(t_tok **tok, char *line)
 		if (line[i])
 		{
 			new_tok = tok_new_node(NULL, NULL_TYPE);//malloco node inicialitzat a NULL
-			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna 'len' si es WORD
+			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna un 'len' > 0 si es una WORD
 			if (len > 0)
 			{
 //				str_aux = (char *)p_malloc(sizeof(char) * (len + 1));

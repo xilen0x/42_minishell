@@ -5,7 +5,7 @@ redirecciones hay alguna comilla simple, doble o '$' que debiera ser expandido*/
 void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int *exit_status )
 {
 	size_t	i;
-	char	*cmd_tmp;
+//	char	*cmd_tmp;
 	char	*redir_tmp;
 //	t_cmd	*cmd_aux;
 //	t_redir	*redir_aux;
@@ -41,9 +41,9 @@ void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int *exit_status )
 				printf("Expansion:\n");
 				printf("<%s>\n", (*cmd)->command_and_arg[i]);
 
-				cmd_tmp = expand_and_quote_remove((*cmd)->command_and_arg[i], envlist, exit_status);//el res lo envio a la lista original, no al aux				free((*cmd)->command_and_arg[i]);
-				free((*cmd)->command_and_arg[i]);
-				(*cmd)->command_and_arg[i] = cmd_tmp;
+				(*cmd)->command_and_arg[i] = expand_and_quote_remove((*cmd)->command_and_arg[i], envlist, exit_status);//el res lo envio a la lista original, no al aux				free((*cmd)->command_and_arg[i]);
+//				free((*cmd)->command_and_arg[i]);
+//				(*cmd)->command_and_arg[i] = cmd_tmp;
 
 				printf("<%s>\n", (*cmd)->command_and_arg[i]);
 				printf("-----------\n");

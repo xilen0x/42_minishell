@@ -10,7 +10,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exi
 	t_qts	quotes;
 	char	*env_key;
 	char	*env_val;
-	char	*aux_str;
+//	char	*aux_str;
 
 	i = 0;
 	j = 0;
@@ -19,8 +19,8 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exi
 	quotes.d_quote = 0;
 	env_key = NULL;
 	env_val = NULL;
-	aux_str = str;//me guardo el str mallocado, por si lo muevo de posicion poder liberarlo completo
-	printf("str %p\n", str);
+//	aux_str = str;//me guardo el str mallocado, por si lo muevo de posicion poder liberarlo completo
+//	printf("str %p\n", str);
 
 	while (str && str[i])
 	{
@@ -79,10 +79,11 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exi
 		i++;
 	}
 	result[j] = '\0';
-	printf("aux %p\n", aux_str);
-	printf("str luego  %p\n", str);
-
-	//free(aux_str);//libera el antiguo token
+//	printf("aux %p\n", aux_str);
+//	printf("str luego  %p\n", str);
+	free(str);//libero el token pre-expansion
+	str = NULL;
+	//free(aux_str);//libera el antiguo token 
 	//str = NULL;
 	return (result);//esta mallocado
 }

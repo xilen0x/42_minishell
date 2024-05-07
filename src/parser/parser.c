@@ -17,12 +17,12 @@ void    parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
     if (tok->type == PIPE || tmp->type == PIPE)//si linea comienza o acaba en '|'
     {
         handle_error(PRINT_SYNTAX_ERR_1, &tok);
-        return;//debemos inicializar exit_status de alguna forma
+        return;//OJO: GESTIONAR ESTA SALIDA
     }
     if (is_operator(tmp))//si linea acaba en operador <,>,<<,>>
     {
         handle_error(PRINT_SYNTAX_ERR_2, &tok);
-        return;//debemos inicializar exit_status de alguna forma
+        return;//OJO: GESTIONAR ESTA SALIDA
     }
     tmp = tok;//lo reinicializo al inicio de lista tok
     while (tmp && tmp->type != NULL_TYPE)//recorre lista t_tok y crea lista t_cmd con cada PIPE
@@ -36,7 +36,7 @@ void    parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
             if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente no es WORD
             {
                 handle_error(PRINT_SYNTAX_ERR_3, &tok);
-                return;//OJO RECOGER EL EXIT_STATUS
+                return;//OJO: GESTIONAR ESTA SALIDA
             }
             if (tmp->type == WORD)
             {

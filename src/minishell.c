@@ -40,6 +40,7 @@ int	main(int ac, char *av[], char *envp[])
 		}
 		if (strcmp(line, "exit") == 0)
 		{
+			cleaner(&envlist);
 			free(line); 
 			return(0);
 		}
@@ -63,7 +64,6 @@ int	main(int ac, char *av[], char *envp[])
 //		executor(&env);
 //		print_cmd_para_executor(cmd);
 		cmd_free(&cmd);
-		cleaner(&envlist);
 //-------------------------AQUI FUNCION QUE LIBERA TODOA LA LISTA DE envlist---------------------------------------------------
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
