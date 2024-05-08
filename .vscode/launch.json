@@ -1,25 +1,16 @@
-
-        {
-            "version": "0.2.0",
-            "configurations": [
-              
-              {
-                "type": "lldb",
-                "request": "launch",
-                "name": "Launch",
-                "program": "${workspaceFolder}/minishell",
-                "args": [],
-                "cwd": "${workspaceFolder}"
-              },
-              
-              {
-                "name": "C/C++ Runner: Debug Session",
-                "type": "lldb",
-                "request": "launch",
-                "program": "${workspaceFolder}/minishell",
-                "args": [],
-                "cwd": "${workspaceFolder}",
-                "preLaunchTask": "C/C++: clang build active file"
-              }
-            ]
-        }    
+{
+	"version": "0.2.0",
+	"configurations": [
+	  {
+		"name": "C/C++ Runner: Debug Session",
+		"type": "lldb",
+		"request": "launch",
+		"program": "${workspaceFolder}/minishell",
+		"args": [],
+		"cwd": "${workspaceFolder}",
+		"externalConsole": true,
+		"preLaunchTask": "C/C++: clang build active file"
+	  }
+	]
+  }
+  

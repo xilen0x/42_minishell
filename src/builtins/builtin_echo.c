@@ -1,24 +1,42 @@
 # include "minishell.h"
 
-// int	builtin_echo(t_built	*cmd, int ac)
-// {
-// 	if (ac == 2)//cambiar luego******
-// 		write (1, "\n", 1);
-// 	else if (ac > 2 && ft_strcmp(cmd->echo_n, "-n") == 0)
-// 	{
-// 		printf ("%s", cmd->the_string);
-// 		return (0);
-// 	}
-// 	else
-// 		printf ("%s\n", cmd->cmd1);
-// 	return (0);
-// }
-
-int	builtin_echo(t_built	*cmd, int ac)
+void	print_without_quotes(char *str)
 {
-	if (ac == 2)//cambiar luego******
-		write (1, "\n", 1);
+	int	len;
+
+	len = ft_strlen(str);
+	if ((len >= 2 && str[0] == '"' && str[len - 1] == '"') || \
+	(len >= 2 && str[0] == '\'' && str[len - 1] == '\''))
+		printf("%.*s", len - 2, str + 1);
 	else
-		printf ("%s\n", cmd->path);//se debera modif esto y debe  considerar imprimir el echo y todo lo q se le pase.
+		printf("%s", str);
+}
+
+int	builtin_echo(t_cmd *cmd)
+{
+	int	i;
+	int	print_newline;
+
+	i = 1;
+	print_newline = 1;
+	if (size_arr2d(cmd->command_and_arg) == 1)
+	{
+		printf("\n");
+		return (0);
+	}
+	else if (ft_strcmp(cmd->command_and_arg[1], "-n") == 0)
+	{
+		print_newline = 0;
+		i++;
+	}
+	while (cmd->command_and_arg[i])
+	{
+		print_without_quotes(cmd->command_and_arg[i]);
+		if (cmd->command_and_arg[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (print_newline)
+		printf("\n");
 	return (0);
 }

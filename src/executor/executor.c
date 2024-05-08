@@ -1,130 +1,149 @@
 # include "minishell.h"
 
-/*int init_momentaneo(char *av[], t_env *data)
+/*function that search by the 'PATH' word and split the content*/
+char	**get_paths(t_env *env)
 {
-	(void)av;
-	char *comando[] = {"ls", "-l", "-h", "-a", NULL};
-	//char *comando[] = {"cat", "teste", NULL};
-	//char *comando[] = {"mkdir", "carpeta", NULL};
-	//char *comando[] = {"top", NULL};
-	//char *comando[] = {"cd", NULL};
-
-	int count = 0;
-	while (comando[count] != NULL)
-		count++;
-	data->to_cmd = malloc(sizeof(t_cmd));
-	if (data->to_cmd == NULL)
-		return (-1);
-	// Inicializar puntero temporal para iterar
-	t_cmd *current_cmd = data->to_cmd;
-	current_cmd->cmd_arg = malloc((count + 1) * sizeof(char *));
-	if (current_cmd->cmd_arg == NULL)
-	{
-		free(data->to_cmd);
-		return (-1);
-	}
-	// Copiar los elementos de comando en cmd_arg
-    int i = 0;
-	while (comando[i] != NULL) {
-		current_cmd->cmd_arg[i] = comando[i];
-		i++;
-	}
-	current_cmd->cmd_arg[count] = NULL; // final del array de argumentos
-	current_cmd->pipe_test = comando[0];
-	// Establecer next a NULL ya que solo hay un elemento en este ejemplo
-	current_cmd->next = NULL;
-	return (0);
-}*/
-
-/*Función que obtiene y guarda los envp path*/
-void	ft_get_paths(char **envp, t_env *data)
-{
-	int	i;
+	int		i;
+	char	**full_path;
 
 	i = 0;
-	while (ft_strnstr(envp[i], "PATH=", 5) == NULL)
+	full_path = NULL;
+	while (env)
+	{
+		if (ft_strcmp(env->key, "PATH") == 0)
+		{
+			full_path = ft_split(env->val, ':');
+			break ;
+		}
 		i++;
-	data->paths = ft_split(&envp[i][5], ':');
+		env = env->next;
+	}
+	return (full_path);
 }
-
-/*Funcion que abre los archivos de entrada y salida(from PIPEX)*/
-/*void	ft_open_files(char **argv, t_env *data)
-{
-	data->infile_fd = open(argv[1], O_RDONLY);
-	if (data->infile_fd == -1)
-		ft_errors(2);
-	data->outfile_fd = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, 0660);
-	if (data->outfile_fd == -1)
-		ft_errors(3);
-}*/
 
 /*funcion que crea el fullpath del comando y verifica si existe
 para poder guardarlo o no*/
-static int	search_command_path(char **cmd, t_env *data)
+int	search_command_path(t_cmd *cmd, t_exe *exe)
 {
 	char	*cmd_path;
 	char	*full_path;
 	int		i;
 
 	i = 0;
-	while (data->paths[i])
+	while (exe->paths[i] != NULL)
 	{
-		cmd_path = ft_strjoin("/", *cmd);
-		full_path = ft_strjoin(data->paths[i], cmd_path);
+		cmd_path = ft_strjoin("/", cmd->command_and_arg[0]);
+		full_path = ft_strjoin(exe->paths[i], cmd_path);
 		free(cmd_path);
+		if (full_path == NULL)
+			return (-1);
 		if (access(full_path, F_OK) == 0)
 		{
-			data->cmd_fullpath = full_path;
+			exe->cmd_fullpath = full_path;
 			return (0);
 		}
+		free(full_path);
 		i++;
 	}
 	return (1);
 }
 
-/*Función puente que envia los comandos 1 a search_command_path */
-int	search_cmds(t_env *data)
+/*close fd 0 and 1*/
+int	close_fd(t_exe	*exe)
 {
-	if (search_command_path(data->to_cmd->command_and_arg, data) != 0)
-	{
-		ft_errors(4);
-		return (1);
-	}
-	/*if (search_command_path2(data->args_2[0], data) == 1)
-	{
-		ft_errors(4);
-		return (1);
-	}*/
+	close(exe->fd[0]);
+	close(exe->fd[1]);
 	return (0);
 }
 
-int	executor(t_env *data)
+/*execute commands in pipes*/
+int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
-	//int		fd[2];
-	pid_t	pid;
+	int		i;
 
-	pid = fork();
-	if (pid < 0)
+	exe->fd_input = dup(STDIN_FILENO);
+	exe->fd_output = dup(STDOUT_FILENO);
+	i = 0;
+	while (cmd)
 	{
-		perror("Fork failed");
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		if (execve(data->cmd_fullpath, data->to_cmd->command_and_arg, data->env_cpy) < 0)//Se ejecuta el primer comando
+		if (pipe(exe->fd) == -1)
+			error_exe(1);
+		exe->pid[i] = fork();
+		if (exe->pid[i] < 0)
+			error_exe(2);
+		else if (exe->pid[i] == 0)//proceso(s) hijo(s)
 		{
-			perror(data->cmd_fullpath);
-			exit(1);
+			exe->paths = get_paths(*env);
+			exe->cmd_fullpath = NULL;
+			search_command_path(cmd, exe);
+			list_to_array(*env, exe);
+			if (cmd->next != NULL)
+				dup2(exe->fd[1], STDOUT_FILENO);
+			close_fd(exe);
+			//redireccion aqui?
+			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
+			{
+				perror(exe->cmd_fullpath);
+				exit(1);
+			}
+			printf("proceso hijo\n");
+			exit(0);
 		}
-		// close(fd[1]);
-		return(0);
+		dup2(exe->fd[0], STDIN_FILENO);
+		close_fd(exe);
+		i++;
+		cmd = cmd->next;
 	}
-	else
+	int status;//reemplazar luego esto por lo de la funcion de exit_status
+	dup2(exe->fd_input, STDIN_FILENO);
+	dup2(exe->fd_output, STDOUT_FILENO);
+	i = 0;
+	while (i < exe->num_cmds)
 	{
-		wait(NULL);
-		//execve(data->cmd2_fullpath, data->args_2, NULL);
-		//close(fd[0]);
-		return(0);
+		waitpid(exe->pid[i], &status, 0);
+		i++;
 	}
-	return(0);
+	return (0);
+}
+
+void	redirections(t_cmd *cmd, t_exe *exe)
+{
+	t_redir	*aux;
+
+	if (cmd->next != NULL)
+		dup2(exe->fd[1], STDOUT_FILENO);
+	close_fd(exe);
+	aux = cmd->redir;
+	while (aux)
+	{
+		// if (dup_custom_redirections(exe, aux) == 1)
+		// {
+		// 	unlink_heredocs(commands->redirect);
+		// 	if (out == FT_RETURN)
+		// 		return (perror_return(data, 1, aux. ->file));
+		// 	else
+		// 		perror_exit(data, EXIT_FAILURE, temp->file);
+		// }
+		printf("teste\n");
+		aux = aux->next;
+	}
+}
+
+/*Funcion que ejecuta un comando dado o direcciona a builtin si es el caso*/
+int	executor(t_env **env, t_cmd *cmd)
+{
+	t_exe	exe;
+	int		size_pipe;
+
+	//signals here...soon
+	size_pipe = cmd_size(cmd);
+	if (init_exe(&exe, cmd) == 1)
+		return (1);
+// //	redirections(cmd, exe);
+	if (is_builtins(cmd) && (size_pipe == 1))
+		return (builtins(cmd, env));
+	else
+		executor_core(cmd, &exe, env);
+	free(exe.pid);
+	return (0);
 }

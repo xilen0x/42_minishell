@@ -4,6 +4,7 @@
 void	print_cmd(t_cmd *lst)
 {
 	int	i;
+
 	while (lst != NULL)
 	{
 		i = 0;

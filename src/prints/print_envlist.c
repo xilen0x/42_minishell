@@ -21,11 +21,11 @@ void	ft_print_values(t_env *env_struct)
 }
 
 /*funcion que imprime la lista env*/
-void	ft_printstack(t_env *env_struct)
+void	ft_printstack(t_env *env)
 {
-	while (env_struct != NULL)
+	while (env != NULL)
 	{
-		printf("%s=%s\n", env_struct->key, env_struct->val);
-		env_struct = env_struct->next;
+		printf("%s=%s\n", env->key, env->val);
+		env = env->next;
 	}
 }

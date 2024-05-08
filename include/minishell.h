@@ -15,15 +15,19 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/wait.h>
-
+# include <limits.h>
 /*------------------------Defines-----------------------*/
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
-
 # define TRUE 1
 # define FALSE 0
-
+# define RED "\033[0;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[1;34m"
+# define END "\033[0m"
+# define CYAN "\033[1;36m"
 /*--------------------Error messages-------------------*/
 
 # define PRINT_MALLOC_ERR_0 "Error: malloc failed\n"
@@ -31,7 +35,9 @@
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
-typedef struct s_builtings t_built;
+//typedef struct s_builtings t_built;
+
+//Global Variable allowed
 
 /*===========joan===========*/
 //Environment Struct
@@ -51,7 +57,7 @@ typedef enum e_type
 	SMALLER,
 	DOUBLE_GREATER,
 	DOUBLE_SMALLER
-} 	t_type;
+}	t_type;
 
 /*------contiene la str y el tipo de cada token-----*/
 typedef struct s_tok
@@ -68,7 +74,7 @@ typedef enum e_redir_type
 	REDIR_INPUT = 4,//<
 	REDIR_OUTPUT_APPEND = 5,//>> 
 	HEREDOC_INPUT = 6//<<
-} 	t_redir_type;
+}	t_redir_type;
 
 /*----contiene los datos de cada redirección------*/
 typedef struct s_redir
@@ -94,104 +100,61 @@ typedef struct s_qts
 	int	d_quote;
 }	t_qts;
 
-//-----carlos------------------
-/*COMENTO PARA QUE NO DE CONFLICTO CON MI t_env envlist
-typedef struct s_env
+typedef struct s_exe
 {
-	char	**env_cpy;
-	char	**export_cpy;
-	char	**paths;
-	char	*cmd_fullpath;
-	char	*key;
-	char	*val;
-	char	*type;
-	char	*str;
-	t_built	*env_to_build;
-	t_built	*to_built;
-	t_cmd	*to_cmd;
-}	t_env;
-*/
-typedef struct s_builtings
-{
-	//char	*echo_n;
-	// char	*cd;
-	// char	*pwd;
-	// char	*export;
-	// char	*unset;
-	//char	*env;
-	// char	*exit;
-	char	*cmd1;
-	char	*path;//borrar luego(posiblemente)
-	//char	*the_string;
-	t_env	*to_env;
-}	t_built;
+	char			**paths;
+	int				index;
+	char			*cmd_fullpath;
+	char			**new_array;
+	pid_t			*pid;
+	int				num_cmds;
+	int				fd_input;
+	int				fd_output;
+	int				fd[2];
+	int				dup_stdin;
+	int				dup_stdout;
+	char			*path;
+}	t_exe;
 
-/*typedef struct s_shell
-{
-	t_tok	**tok;
-	char	**pipes;
-	int		pipex;
-	int		exit;
-	//t_pipe	*p;
-	char	**args;
-	char	*cmd;
-}	t_shell;*/
-
-//int		builtings(t_built	*cmd, char **env, int ac);
-//char	**env_cpy(char *e[]);
-//char	**dup_array_2d(char *envp[]);
-/*
-int		init (t_built *cmd, int ac, char *av[]);
-int		builtins(t_built *cmd, int ac, char *av[], t_env env);
-int		builtin_cd(t_built *cmd, int ac);
-int		builtin_pwd(void);
-int		builtin_echo(t_built *cmd, int ac);
-int		builtin_env(t_env env);
-int		builtin_export(t_built *cmd, t_env env, int ac);
-int		builtin_exit(t_built *cmd, int ac, char *av[]);
-int		builtin_unset(t_built *cmd, t_env env, int ac);
-*/
-/*----------------minishell----------------*/
-void 	tokenizer(t_tok **tok, char *line);
-void    parser(t_cmd **cmd, t_tok *tok);
-void	handle_error(char *str, t_tok **tok);
-int 	bg_color();
+/*---------------------------minishell -------------------------*/
+int		bg_color(void);
 void	init_msg(void);
-
-/*---------------------array 2d----------------*/
-size_t  size_arr2d(char **arr2d);
+void	tokenizer(t_tok **tok, char *line);
+void	parser(t_cmd **cmd, t_tok *tok);
+void	handle_error(char *str, t_tok **tok);
+void	cleaner(t_env **lst);
+/*---------------------------array 2d -------------------------*/
+size_t	size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
-char    **add_one_arr2d(char **arr2d, char *new);
-char    **rm_one_arr2d(char **arr2d, int index);
-void    free_arr2d(char **arr2d);//OJO CARLOS: ESTA FUNCION REEMPLAZA A ft_free_split, solo he cambiado el nombre
+char	**add_one_arr2d(char **arr2d, char *new);
+char	**rm_one_arr2d(char **arr2d, int index);
+void	free_arr2d(char **arr2d);
+void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------------utils t_tok------------------*/
+/*---------------------------t_tok -------------------------*/
 t_tok	*tok_new_node(char *str, int type);
 t_tok	*tok_last(t_tok *lst);
 void	tok_add_back(t_tok **lst, t_tok *new);
 void	tok_free(t_tok **lst);
 int		tok_size(t_tok *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*-------------------utils t_cmd----------------*/
+/*---------------------------t_cmd -------------------------*/
 t_cmd	*cmd_new_node(void);
 t_cmd	*cmd_last(t_cmd *lst);
-void	cmd_add_back(t_cmd **lst,t_cmd *new);
+void	cmd_add_back(t_cmd **lst, t_cmd *new);
 void	cmd_free(t_cmd **lst);
 int		cmd_size(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------------utils t_redir-----------------*/
+/*---------------------------t_redir -------------------------*/
 t_redir	*redir_new_node(char *str, int redir_type);
 t_redir	*redir_last(t_redir *lst);
-void	redir_add_back(t_redir **lst,t_redir *new);
+void	redir_add_back(t_redir **lst, t_redir *new);
 void	redir_free(t_redir **lst);
 int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*--------------utils_parser---------------*/
+/*---------------------------utils_parser -------------------------*/
 int		is_operator(t_tok *node);
-size_t 	command_and_arg_size(t_tok *tok);
-//size_t tok_operator_cnt(t_tok *tokens); DE MOMENTO NO LO USAMOS
-//size_t tok_word_cnt(t_lst *tokens); DE MOMENTO NO LO USAMOS
-void	handle_error(char *str, t_tok **tok);
+size_t	command_and_arg_size(t_tok *tok);
 
 /*---------------expander & quote removal--------------*/
 void	should_expand(t_cmd *cmd, t_env *envlist, unsigned int *exit_status);
@@ -206,7 +169,7 @@ void	*p_malloc(size_t size);
 //void	malloc_s_pointer_protect(void *name);
 //void	malloc_d_pointer_protect(char **name);
 
-/*-------------------------signals.c--------------------------*/
+/*---------------------------signals.c -------------------------*/
 void	set_signals(void);
 
 /*--------------------------utils t_env-------------------*/
@@ -216,21 +179,55 @@ t_env	*lstnew(char *key, char *value);
 void	init_envlist(char **envp, t_env **envlist);
 void	cleaner_envlist(t_env **lst);
 
-/*-------------------------executor.c--------------------------*/
-//int		init_momentaneo(char *av[], t_env *data);
-void	ft_get_paths(char **envp, t_env *data);
-int		search_cmds(t_env *data);
-int		executor(t_env *data);
 
-/*-------------------------utils0.c--------------------------*/
-int		ft_errors(int n);
+/*---------------------------executor.c -------------------------*/
+char	**get_paths(t_env *env);
+int		executor(t_env **env, t_cmd *cmd);
+int		search_command_path(t_cmd *cmd, t_exe *exe);
+void	error_exe(int num);
 
-/*-------------------------int	builtins.c-------------------*/
-int		is_builtin(t_built *cmd, int ac, char *av[], t_env env);
+/*---------------------------utils0.c -------------------------*/
+int		ft_msgs(int n);
+int		get_exit_status(void);
+void	set_exit_status(int num);
+
+/*---------------------------utils1.c -------------------------*/
+int		ca_strchr(const char *s, int c);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 /*-------------------exit_status----------------*/
 unsigned int	get_exit_status_len(unsigned int *exit_status);
 char	*get_exit_status_val(unsigned int *exit_status);
+
+/*---------------------------utils2.c -OJO ORDENAR----------------*/
+void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
+int		list_to_array(t_env *env, t_exe *exe);
+int		init_exe(t_exe *exe, t_cmd *cmd);	
+
+/*--------------------------- builtins -------------------------*/
+
+int		builtins(t_cmd *cmd, t_env **env);
+// int		builtin_exit(t_cmd *cmd);
+int		builtin_exit(t_cmd *cmd, t_env *envlist);
+int		builtin_pwd(t_env *env);
+int		builtin_cd(t_cmd	*cmd, t_env **env);
+int		builtin_env(t_cmd *cmd, t_env *env);
+int		builtin_echo(t_cmd *cmd);
+int		builtin_export(t_cmd *cmd, t_env **env);
+int		builtin_unset(t_cmd *cmd, t_env **env);
+int		is_builtins(t_cmd *cmd);
+
+/*--------------------------- builtin export -------------------------*/
+unsigned int	check_export(char *arg);
+int		variable_exists(t_env *env, char *variable);
+int		variable_exists_op2(t_env *env, char *variable);
+int		variable_exists_op3(t_env *env, char *variable);
+int		var_exists_oldpwd(t_env *env, char *variable);
+
+t_env	*update_env(t_env *env, char *key, char *val);
+int		get_pwd(t_env *env);
+int		old_pwd(void);
+int		go_path(char *path);
 
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA

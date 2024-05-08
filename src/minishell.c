@@ -1,7 +1,6 @@
 
 #include "minishell.h"
 
-//int	main(int ac, char *av[])// char *envp[])
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
@@ -17,30 +16,34 @@ int	main(int ac, char *av[], char *envp[])
 	exit_status = 555;//inicializo provisionalmente, para que tenga algun valor
 	if (ac != 1 || av[1])
 	{
-		ft_errors(5);
-		exit(0);
-		return (0);
+		ft_msgs(10);
+		exit(1);
+//		return (0);
 	}
 	env_cpy = dup_arr2d(envp);
 	init_envlist(env_cpy, &envlist);
 	free_arr2d(env_cpy);//lo libero, porque ya lo tengo guardado en envlist
+	//init_main_struct(&shell);
+	bg_color();
+	//init_msg();
 	while (1)
 	{
 		set_signals();
 		line = readline(">>>>minishell$ ");
 		if (!line)
 		{
-			printf("exit\n");//para el caso del ctrl-D
-//			exit(0);
-			break;
+			printf("exit\n");//en el caso del ctrl-D
+			printf("\033[40m");//black
+			exit(0);
 		}
+//----OJO si funciona el builtin borrar este
 /*		if (strcmp(line, "exit") == 0)
 		{
 			cleaner_envlist(&envlist);
 			free(line); 
 //			return(0);
 			exit (EXIT_FAILURE);
-		}
+		}*/
 		if (line && *line)
 			add_history(line);
 //		if (!*line)
@@ -52,16 +55,8 @@ int	main(int ac, char *av[], char *envp[])
 		free(line);
 	  	parser(&cmd, tok);//crea una nueva lista cmd a partir de la lista tok
 		tok_free(&tok);
-		ft_printf("ANTES: %p\n", cmd);
 		should_expand(cmd, envlist, &exit_status);
-		ft_printf("DESPUES: %p\n", cmd);
-/*
-		//	builtins(&cmds, env, ac, av);//de carlos
-//		ft_get_paths(env.env_cpy, &env);
-		//ft_open_files(av, &data);
-//	search_cmds(&env);
-//		executor(&env);
-//		print_cmd_para_executor(cmd);*/
+		executor(&envlist, cmd);
 		cmd_free(&cmd);//libera toda la lista cmd
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);

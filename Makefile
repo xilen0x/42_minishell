@@ -43,8 +43,15 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 
 FILES =	minishell.c \
 									utils/p_malloc.c \
-									utils/utils_env.c \
-									utils/utils0.c \
+									builtins/builtins.c \
+									builtins/builtin_env.c \
+									builtins/builtin_cd.c \
+									builtins/builtin_echo.c \
+									builtins/builtin_export.c \
+									builtins/builtin_unset.c \
+									builtins/builtin_exit.c \
+									builtins/builtin_pwd.c \
+									executor/executor.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
@@ -60,10 +67,15 @@ FILES =	minishell.c \
 									commands/cmd_free.c \
 									commands/cmd_last.c \
 									commands/cmd_size.c \
+									utils/utils_env.c \
+									utils/utils0.c \
+									utils/utils1.c \
+									utils/utils2.c \
+									utils/utils3.c \
+									tokenizer/tokenizer.c \
 									utils_parser/is_operator.c \
 									utils_parser/command_and_arg_size.c \
 									utils_parser/handle_error.c \
-									tokenizer/tokenizer.c \
 									redirs/redir_add_back.c \
 									redirs/redir_free.c \
 									redirs/redir_last.c \
