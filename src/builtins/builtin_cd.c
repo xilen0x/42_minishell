@@ -76,9 +76,9 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 	//cmd = cmd;
 	if ((size_arr2d(cmd->command_and_arg)) == 1)// cd only
 		go_home();
-	else if (ca_strcmp(cmd->command_and_arg[1], "~") == 0)
+	else if (ft_strcmp(cmd->command_and_arg[1], "~") == 0)
 		go_home();
-	else if (ca_strcmp(cmd->command_and_arg[1], "-") == 0)//no terminado
+	else if (ft_strcmp(cmd->command_and_arg[1], "-") == 0)//no terminado
 		old_pwd();
 	else
 		go_path(cmd->command_and_arg[1]);

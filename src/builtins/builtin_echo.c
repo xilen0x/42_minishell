@@ -24,7 +24,7 @@ int	builtin_echo(t_cmd *cmd)
 		printf("\n");
 		return (0);
 	}
-	else if (ca_strcmp(cmd->command_and_arg[1], "-n") == 0)
+	else if (ft_strcmp(cmd->command_and_arg[1], "-n") == 0)
 	{
 		print_newline = 0;
 		i++;

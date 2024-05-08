@@ -10,7 +10,7 @@ char	**get_paths(t_env *env)
 	full_path = NULL;
 	while (env)
 	{
-		if (ca_strcmp(env->key, "PATH") == 0)
+		if (ft_strcmp(env->key, "PATH") == 0)
 		{
 			full_path = ft_split(env->val, ':');
 			break ;

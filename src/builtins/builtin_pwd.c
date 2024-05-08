@@ -9,7 +9,7 @@ t_env	*update_env(t_env *env, char *key, char *val)
 	current = env;
 	while (current != NULL)
 	{
-		if (ca_strcmp(key, current->key) == 0)
+		if (ft_strcmp(key, current->key) == 0)
 		{
 			free(current->val);
 			current->val = ft_strdup(val);

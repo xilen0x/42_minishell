@@ -45,7 +45,7 @@ int	variable_exists_op3(t_env *env, char *variable)
 	var_ent = ft_split(variable, '=');
 	while (env != NULL)
 	{
-		if (ca_strcmp(var_ent[0], env->key) == 0)
+		if (ft_strcmp(var_ent[0], env->key) == 0)
 		{
 			//env_delone(&env, env, &free); //y la elimina de ser así
 			flag = 1;
@@ -71,7 +71,7 @@ int	variable_exists_op2(t_env *env, char *variable)
 	var_ent2 = ft_split(var_ent1[1], '=');
 	while (env != NULL)
 	{
-		if (ca_strcmp(var_ent1[0], env->key) == 0)
+		if (ft_strcmp(var_ent1[0], env->key) == 0)
 		{
 			env->val = ft_strjoin(env->val,var_ent2[0]);//join
 			flag = 1;
@@ -95,7 +95,7 @@ int	variable_exists(t_env *env, char *variable)
 	var_ent = ft_split(variable, '=');
 	while (env != NULL)
 	{
-		if (ca_strcmp(var_ent[0], env->key) == 0)
+		if (ft_strcmp(var_ent[0], env->key) == 0)
 		{
 			env->val = var_ent[1];
 			flag = 1;
@@ -103,7 +103,7 @@ int	variable_exists(t_env *env, char *variable)
 		i++;
 		env = env->next;
 	}
-	// ft_free_split(var_ent);
+	// free_arr2d(var_ent);
 	return (flag);
 }
 
@@ -118,12 +118,12 @@ int	var_exists_oldpwd(t_env *env, char *variable)
 	var_ent = ft_split(variable, '=');
 	while (env != NULL)
 	{
-		if (ca_strcmp(var_ent[0], env->key) == 0)
+		if (ft_strcmp(var_ent[0], env->key) == 0)
 			flag = 1;
 		i++;
 		env = env->next;
 	}
-	// ft_free_split(var_ent);
+	// free_arr2d(var_ent);
 	return (flag);
 }
 
@@ -164,7 +164,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 					value = tokens[1];
 					lstadd_back(env, lstnew(key, value));
 				}
-				ft_free_split(tokens);
+				free_arr2d(tokens);
 			}
 			return (0);
 		}
@@ -181,7 +181,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 					value = tokens2[0];
 					lstadd_back(env, lstnew(key, value));
 				}
-				ft_free_split(tokens);
+				free_arr2d(tokens);
 			}
 			return (0);
 		}

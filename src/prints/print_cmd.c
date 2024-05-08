@@ -11,17 +11,10 @@ void	print_cmd(t_cmd *lst)
 		printf("-----------------------\n");
 		printf("t_cmd\n");
 		while (lst->command_and_arg[i] != NULL)
-<<<<<<< HEAD
 			{
 				printf("     <%s>\n", lst->command_and_arg[i]);
 				i++;
 			}
-=======
-		{
-			printf("     %s\n", lst->command_and_arg[i]);
-			i++;
-		}
->>>>>>> origin/carlos
 		printf("\n");
 		if (lst->redir != NULL)
 			print_redir(lst->redir);

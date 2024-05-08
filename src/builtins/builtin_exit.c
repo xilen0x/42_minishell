@@ -71,6 +71,7 @@ int	check_int(const char *str)
 
 int	builtin_exit(t_cmd *cmd, t_env *envlist)
 {
+	(void)	envlist;
 	//cleaner_envlist(&envlist);
 	if (cmd->command_and_arg[1] && check_int(cmd->command_and_arg[1]) != 0)
 	{

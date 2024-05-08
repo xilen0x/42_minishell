@@ -11,7 +11,7 @@
 // 	//g_exit_stat = 0;
 // }
 /*
-void	ft_free_split(char **array_strings)
+void	free_arr2d(char **array_strings)
 {
 	size_t	i;
 
@@ -37,7 +37,7 @@ void	env_delone(t_env **env, char **node_to_del, void (*del)(void*))
 	prev = NULL;
 	while (current)
 	{
-		if (ca_strcmp(current->key, *node_to_del) == 0)
+		if (ft_strcmp(current->key, *node_to_del) == 0)
 		{
 			if (prev)
 				prev->next = current->next;

@@ -16,9 +16,9 @@ int	main(int ac, char *av[], char *envp[])
 	exit_status = 555;//inicializo provisionalmente, para que tenga algun valor
 	if (ac != 1 || av[1])
 	{
-		ft_errors(5);
-		exit(0);
-		return (0);
+		ft_msgs(10);
+		exit(1);
+//		return (0);
 	}
 	env_cpy = dup_arr2d(envp);
 	init_envlist(env_cpy, &envlist);
