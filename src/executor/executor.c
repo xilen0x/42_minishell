@@ -141,7 +141,10 @@ int	executor(t_env **env, t_cmd *cmd)
 		return (1);
 // //	redirections(cmd, exe);
 	if (is_builtins(cmd) && (size_pipe == 1))
+	{
+		free(exe.pid);
 		return (builtins(cmd, env));
+	}
 	else
 		executor_core(cmd, &exe, env);
 	free(exe.pid);
