@@ -56,7 +56,7 @@ int	main(int ac, char *av[], char *envp[])
 
 	  	parser(&cmd, tok);//crea una nueva lista cmd a partir de la lista tok
 		tok_free(&tok);
-		should_expand(&cmd, envlist, &exit_status);
+		should_expand(cmd, envlist, &exit_status);
 		executor(&envlist, cmd);
 		cmd_free(&cmd);//libera toda la lista cmd
 	}

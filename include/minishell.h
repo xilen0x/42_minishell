@@ -157,7 +157,7 @@ int		is_operator(t_tok *node);
 size_t	command_and_arg_size(t_tok *tok);
 
 /*---------------expander & quote removal--------------*/
-void	should_expand(t_cmd **cmd, t_env *envlist, unsigned int *exit_status);
+void	should_expand(t_cmd *cmd, t_env *envlist, unsigned int *exit_status);
 char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int *exit_status);
 int		new_tok_len(char *str, t_env *envlist, unsigned int *exit_status);
 char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exit_status);

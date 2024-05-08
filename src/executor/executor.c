@@ -66,10 +66,6 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 	i = 0;
 	while (cmd)
 	{
-		exe->paths = get_paths(*env);
-		exe->cmd_fullpath = NULL;
-		search_command_path(cmd, exe);
-		list_to_array(*env, exe);
 		if (pipe(exe->fd) == -1)
 			error_exe(1);
 		exe->pid[i] = fork();
@@ -77,6 +73,10 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 			error_exe(2);
 		else if (exe->pid[i] == 0)//proceso(s) hijo(s)
 		{
+			exe->paths = get_paths(*env);
+			exe->cmd_fullpath = NULL;
+			search_command_path(cmd, exe);
+			list_to_array(*env, exe);
 			if (cmd->next != NULL)
 				dup2(exe->fd[1], STDOUT_FILENO);
 			close_fd(exe);
@@ -132,21 +132,18 @@ void	redirections(t_cmd *cmd, t_exe *exe)
 /*Funcion que ejecuta un comando dado o direcciona a builtin si es el caso*/
 int	executor(t_env **env, t_cmd *cmd)
 {
-	t_exe	*exe;
+	t_exe	exe;
 	int		size_pipe;
 
 	//signals here...soon
-	exe = NULL;
-	exe = malloc(sizeof(t_exe));
-	if (!exe)
-		return (1);
 	size_pipe = cmd_size(cmd);
-	if (init_exe(exe, cmd) == 1)
+	if (init_exe(&exe, cmd) == 1)
 		return (1);
-	redirections(cmd, exe);
+// //	redirections(cmd, exe);
 	if (is_builtins(cmd) && (size_pipe == 1))
 		return (builtins(cmd, env));
 	else
-		executor_core(cmd, exe, env);
+		executor_core(cmd, &exe, env);
+	free(exe.pid);
 	return (0);
 }
