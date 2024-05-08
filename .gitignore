@@ -1,4 +1,4 @@
-#.vscode/
+.vscode/
 .dep/
 .objs/
 lib/libft/*.o

@@ -6,14 +6,24 @@
 /* this function has been replaced by the next one
 void    free_arr2d(char **arr2d)
 {
-    char    **tmp;
+    // char    **tmp;
 
-    tmp = arr2d;
-    while (*tmp)
-    {
-        free(*tmp);
-        tmp++;
-    }
+    // tmp = arr2d;
+	// printf("free_arr2d 0 (%p)\n", arr2d);
+	// printf("free_arr2d 1 (%s)\n", *tmp);
+    // while (tmp && *tmp)
+
+	// int x = 0;
+	// while(arr2d[x])
+    // {
+		// printf("free_arr2d 2 (%s)\n", *tmp);
+        // free(*tmp);
+        // tmp++;
+		// free(arr2d[x]);
+		// x++;
+		// arr2d++;
+    // }
+	// printf("free_arr2d 3\n");
     free(arr2d);
 }*/
 
