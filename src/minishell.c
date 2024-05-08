@@ -31,9 +31,10 @@ int	main(int ac, char *av[], char *envp[])
 		if (!line)
 		{
 			printf("exit\n");//para el caso del ctrl-D
-			exit(0);
+//			exit(0);
+			break;
 		}
-		if (strcmp(line, "exit") == 0)
+/*		if (strcmp(line, "exit") == 0)
 		{
 			cleaner_envlist(&envlist);
 			free(line); 
@@ -46,20 +47,21 @@ int	main(int ac, char *av[], char *envp[])
 //		{
 //			free(line);
 //			continue;
-//		}
+//		}*/
 		tokenizer(&tok, line);//crea una lista de tokens tok
 		free(line);
-
 	  	parser(&cmd, tok);//crea una nueva lista cmd a partir de la lista tok
 		tok_free(&tok);
-		should_expand(&cmd, envlist, &exit_status);
-
+		ft_printf("ANTES: %p\n", cmd);
+		should_expand(cmd, envlist, &exit_status);
+		ft_printf("DESPUES: %p\n", cmd);
+/*
 		//	builtins(&cmds, env, ac, av);//de carlos
 //		ft_get_paths(env.env_cpy, &env);
 		//ft_open_files(av, &data);
 //	search_cmds(&env);
 //		executor(&env);
-//		print_cmd_para_executor(cmd);
+//		print_cmd_para_executor(cmd);*/
 		cmd_free(&cmd);//libera toda la lista cmd
 	}
 	write(1, "ojo, aqui NO deberia llegar nunca\n", 34);
