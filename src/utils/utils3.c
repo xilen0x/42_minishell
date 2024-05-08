@@ -22,7 +22,6 @@ int	init_exe(t_exe *exe, t_cmd *cmd)
 	exe->pid = malloc(sizeof(pid_t) * exe->num_cmds);
 	if (!exe->pid)
 		return (1);
-	//exe->pid = NULL;
 	return (0);
 }
 
@@ -43,16 +42,10 @@ void	error_exe(int num)
 void	allocate_memory(t_env *current, int len, t_exe *exe)
 {
 	int		i;
-	//size_t	key_len;
-	//size_t	val_len;
-	//size_t	total_len;
 
 	i = 0;
 	while (current && i < len)
 	{
-		//key_len = ft_strlen(current->key);
-		//val_len = ft_strlen(current->val);
-		//total_len = key_len + val_len + 2;
 		exe->new_array[i] = ft_strjoin(current->key, current->val);
 		if (exe->new_array[i] == NULL)
 		{

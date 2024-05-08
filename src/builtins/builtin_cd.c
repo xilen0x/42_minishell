@@ -9,13 +9,13 @@ static int	go_home(void)
 	if (home_dir == NULL)
 	{
 		perror("getenv() error");
-		set_exit_status(1);
+		//set_exit_status(1);
 		return (1);
 	}
 	if (chdir(home_dir) != 0)
 	{
 		perror("chdir() error");
-		set_exit_status(1);
+		//set_exit_status(1);
 		return (1);
 	}
 	return (0);
@@ -63,7 +63,7 @@ int	go_path(char *path)
 	if (chdir(path) != 0)
 	{
 		ft_msgs(2);
-		set_exit_status(1);
+		//set_exit_status(1);
 		return (1);
 	}
 	return (0);
@@ -83,6 +83,6 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 	else
 		go_path(cmd->command_and_arg[1]);
 	get_pwd(*env);
-	set_exit_status(0);
+	//set_exit_status(0);
 	return (0);
 }

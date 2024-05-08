@@ -72,6 +72,7 @@ FILES =	minishell.c \
 									utils/utils1.c \
 									utils/utils2.c \
 									utils/utils3.c \
+									utils/utils_readline.c \
 									tokenizer/tokenizer.c \
 									utils_parser/is_operator.c \
 									utils_parser/command_and_arg_size.c \

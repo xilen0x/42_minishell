@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-void    parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
+void	parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
 {
-    t_cmd   *node;
+	t_cmd   *node;
     t_tok   *tmp;
     size_t  i;
     size_t  size;
@@ -60,5 +60,5 @@ void    parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
         }
         cmd_add_back(cmd, node);
     }
-    print_cmd(*cmd);
+    //print_cmd(*cmd);
 }
