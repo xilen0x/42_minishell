@@ -44,13 +44,10 @@ int	tok_len(char *line, t_tok **new_tok)//faltara añadir el exit_status
 void	tokenizer(t_tok **tok, char *line)
 {
 	t_tok	*new_tok;
-//	char	*str_aux;
 	size_t	len;
 	int		i;
 
 	new_tok = NULL;
-//	str_aux = NULL;
-//	len = 0;
 	i = 0;
 	while (line && line[i])
 	{
@@ -65,12 +62,8 @@ void	tokenizer(t_tok **tok, char *line)
 			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna un 'len' > 0 si es una WORD
 			if (len > 0)
 			{
-//				str_aux = (char *)p_malloc(sizeof(char) * (len + 1));
 				new_tok->str = (char *)p_malloc(sizeof(char) * (len + 1));//malloco *str dentro del nodo
-//				ft_strlcpy(str_aux, line + i, len + 1);
 				ft_strlcpy(new_tok->str, line + i, len + 1);
-//				new_tok->str = ft_strdup(str_aux);//OJO esto no es redundante????
-//				free(str_aux);
 				new_tok->type = WORD;
 			}
 			if (new_tok->type == DOUBLE_GREATER || new_tok->type == DOUBLE_SMALLER)

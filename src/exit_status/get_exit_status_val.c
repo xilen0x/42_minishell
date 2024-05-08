@@ -7,5 +7,5 @@ char	*get_exit_status_val(unsigned int *exit_status)
 	result = ft_itoa(*exit_status);
 	if (!result)
 		exit (EXIT_FAILURE);
-	return (result);//OJO: itoa retorna un char* mallocado
+	return (result);//retorna un char* mallocado
 }

@@ -42,5 +42,4 @@ void	should_expand(t_cmd *cmd, t_env *envlist, unsigned int *exit_status )
 		 }
 		(cmd) = (cmd)->next;
 	}
-	printf("\n");//ELIMINAR ANTES DE ENTREGA
 }

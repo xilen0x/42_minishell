@@ -36,8 +36,6 @@ int	new_tok_len(char *str, t_env *envlist, unsigned int *exit_status)//unsigned 
 				env_key = get_env_key(str + i);//puntero mallocado al nombre despues del '$', sea cual sea
 				if (env_key != NULL)//en caso de que el nombre NO sea un num o un caracter especial
 				{
-					// i++;
-					// continue;//OJO no se ejecutara nada de lo que hay a continuacion dentro del while
 					env_val = get_env_val(env_key, envlist);
 					if (env_val != NULL)
 						len += ft_strlen(env_val);//incremento el tamaño del nuevo token con el de la expansion

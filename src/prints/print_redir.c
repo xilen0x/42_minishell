@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-/*===============ELIMINAR ANTES DE ENTREGA=============== */
 /*----Imprime una lista t_redir----*/
 void	print_redir(t_redir *lst)
 {

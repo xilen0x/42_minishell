@@ -18,7 +18,6 @@ int	main(int ac, char *av[], char *envp[])
 	{
 		ft_msgs(10);
 		exit(1);
-//		return (0);
 	}
 	env_cpy = dup_arr2d(envp);
 	init_envlist(env_cpy, &envlist);
@@ -36,21 +35,13 @@ int	main(int ac, char *av[], char *envp[])
 			printf("\033[40m");//black
 			exit(0);
 		}
-//----OJO si funciona el builtin borrar este
-/*		if (strcmp(line, "exit") == 0)
-		{
-			cleaner_envlist(&envlist);
-			free(line); 
-//			return(0);
-			exit (EXIT_FAILURE);
-		}*/
 		if (line && *line)
 			add_history(line);
-//		if (!*line)
-//		{
-//			free(line);
-//			continue;
-//		}*/
+		if (!*line)
+		{
+			free(line);
+			continue;
+		}
 		tokenizer(&tok, line);//crea una lista de tokens tok
 		free(line);
 	  	parser(&cmd, tok);//crea una nueva lista cmd a partir de la lista tok
@@ -63,4 +54,3 @@ int	main(int ac, char *av[], char *envp[])
 	cleaner_envlist(&envlist);//libera la lista de env
 	return (0);
 }
-//SI NO HAY CIERRE DE COMILLAS lo gestionaré como => syntax error near token 'print_del_token'???

@@ -10,7 +10,6 @@ void    parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
 
     node = NULL;
     tmp = NULL;
-//    i = 0;
     size = 0;
     node_redir = NULL;
     tmp = tok_last(tok);//puntero al ultimo token de la lista
