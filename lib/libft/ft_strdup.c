@@ -3,22 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:17:06 by jocuni-p          #+#    #+#             */
-/*   Updated: 2023/05/31 13:07:32 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:03:27 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*The strdup() function allocates sufficient memory for a copy of the
-     string s1, does the copy, and returns a pointer to it.  The pointer may
-     subsequently be used as an argument to the function free(3).
-	 If insufficient memory is available, NULL is returned.*/
 
 //#include<string.h>
 //#include<stdio.h>
 //#include<stdlib.h>
 #include "libft.h"
-
+/*
 char	*ft_strdup(const char *s1)
 {
 	char	*dup;
@@ -29,6 +25,19 @@ char	*ft_strdup(const char *s1)
 	if (!dup)
 		return (NULL);
 	ft_memcpy(dup, s1, len);
+	return (dup);
+}*/
+/*ALTERNATIVA*/
+char	*ft_strdup(char *s1)
+{
+	char	*dup;
+	int		len;
+
+	len = ft_strlen(s1) + 1;
+	dup = malloc(len * sizeof(char));
+	if (!dup)
+		return (NULL);
+	ft_strlcpy(dup, s1, len);
 	return (dup);
 }
 /*

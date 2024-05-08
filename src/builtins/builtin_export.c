@@ -1,120 +1,190 @@
 # include "minishell.h"
 
-/*Funcion que imprime el export(la copia)*/
-int	print_builtin_export(t_env env)
+/*check if export argument comes with = or += */
+unsigned int	check_export(char *arg)
 {
 	int	i;
 
 	i = 0;
-	while (env.export_cpy[i])
-	{
-		printf ("%s\n", env.export_cpy[i]);
+	while (arg[i] && (ft_isalpha(arg[i]) || arg[i] == '_' || ft_isdigit(arg[i])))
 		i++;
+	if (arg[i] == '+')
+	{
+		if (ft_strncmp(&arg[i], "+=", 2) == 0)
+			return (2);
 	}
+	else if (arg[i] == '=')
+		return (1);
 	return (0);
 }
 
-/*Funcion que imprime el nuevo env*/
-int	print_builtin_export_with_arg(char	**new_env)
-{
-	int	i;
+// void	update_env(t_env *env, char *key, char *val)
+// {
+// 	(void)key;
+// 	t_env		*aux;
 
-	i = 0;
-	while (new_env[i])
-	{
-		printf ("%s\n", new_env[i]);
-		i++;
-	}
-	return (0);
-}
+// 	aux = env;
+// 	if (aux->val)
+// 		free (aux->val);
+// 	if (val)
+// 		aux->val = ft_strdup(val);
+// 	else
+// 		aux->val = ft_strdup("");
+// 	return ;
+// }
 
-int	if_exist_builtin_export(t_built *cmd, t_env *env)
+/*verifica si la variable ya existe en el env.*/
+int	variable_exists_op3(t_env *env, char *variable)
 {
 	int		i;
-	size_t	len;
+	char	**var_ent;
+	int		flag;
 
-	len = ft_strlen(cmd->path) + 1;
 	i = 0;
-	while (env->env_cpy[i])
+	flag = 0;
+	var_ent = ft_split(variable, '=');
+	while (env != NULL)
 	{
-		if (ca_strcmp(env->env_cpy[i], cmd->path) == 0)
+		if (ft_strcmp(var_ent[0], env->key) == 0)
 		{
-			ft_memcpy(env->env_cpy, cmd->path, len);
-			return (0);
+			//env_delone(&env, env, &free); //y la elimina de ser así
+			flag = 1;
+			break ;
 		}
 		i++;
+		env = env->next;
 	}
-	return (1);
+	return (flag);
 }
 
-
-/*Funcion que agrega una nueva variable de entorno*/
-int	builtin_export_with_arg(t_built *cmd, t_env *env)
+/*verifica si la variable ya existe en el env y la actualiza de ser así(caso +=)*/
+int	variable_exists_op2(t_env *env, char *variable)
 {
 	int		i;
-	char	**new_env;
-	int		len;
-
-	if (if_exist_builtin_export(cmd, env))//CORREGIR : esta agregando a la variable pero no sobreescribiendola si es q existe!
-	{
-		i = 0;
-		while (env->env_cpy[i])
-			i++;
-		len = i + 2;
-		new_env = malloc(sizeof(char *) * (len + 1));
-		if (!new_env)
-			return (0);
-		i = 0;
-		while (env->env_cpy[i])
-		{
-			new_env[i] = ft_strdup(env->env_cpy[i]);
-			if (!new_env[i])
-				return (0);
-			i++;
-		}
-		new_env[i] = ft_strdup(cmd->path);
-		if (!new_env[i])
-			return (0);
-		new_env[i + 1] = NULL;
-		free(env->env_cpy);
-		env->env_cpy = new_env;
-	}
-	print_builtin_export_with_arg(env->env_cpy);
-	return (0);
-}
-
-
-/*builtin que agrega el string "declare -x " al output del export, al ejecutar 
-export sin argumentos*/
-int	builtin_export(t_built *cmd, t_env env, int ac)
-{
-	int		i;
-	size_t	len;
-	char	*new_env_var;
+	char	**var_ent1;
+	char	**var_ent2;
+	int		flag;
 
 	i = 0;
-	if (ac == 2)//si solo viene export
+	flag = 0;
+	var_ent1 = ft_split(variable, '+');
+	var_ent2 = ft_split(var_ent1[1], '=');
+	while (env != NULL)
 	{
-		while (env.export_cpy[i])
+		if (ft_strcmp(var_ent1[0], env->key) == 0)
 		{
-			len = ft_strlen(env.export_cpy[i]);
-			new_env_var = (char *)malloc((len + 12) * sizeof(char));
-			if (!new_env_var)
-				return (-1);
-			ft_memcpy(new_env_var, "declare -x ", 11);
-			ft_memcpy(new_env_var + 11, env.export_cpy[i], len + 1);
-			free(env.export_cpy[i]);
-			env.export_cpy[i] = new_env_var;
-			i++;
+			env->val = ft_strjoin(env->val,var_ent2[0]);//join
+			flag = 1;
+			break ;
 		}
-		print_builtin_export(env);
+		i++;
+		env = env->next;
 	}
-	else// si viene por ej. 'export TEST=10'
-	 	builtin_export_with_arg(cmd, &env);
+	return (flag);
+}
+
+/*verifica si la variable ya existe en el env y la actualiza de ser así(caso =)*/
+int	variable_exists(t_env *env, char *variable)
+{
+	int		i;
+	char	**var_ent;
+	int		flag;
+
+	i = 0;
+	flag = 0;
+	var_ent = ft_split(variable, '=');
+	while (env != NULL)
+	{
+		if (ft_strcmp(var_ent[0], env->key) == 0)
+		{
+			env->val = var_ent[1];
+			flag = 1;
+		}
+		i++;
+		env = env->next;
+	}
+	// free_arr2d(var_ent);
+	return (flag);
+}
+
+int	var_exists_oldpwd(t_env *env, char *variable)
+{
+	int		i;
+	char	**var_ent;
+	int		flag;
+
+	i = 0;
+	flag = 0;
+	var_ent = ft_split(variable, '=');
+	while (env != NULL)
+	{
+		if (ft_strcmp(var_ent[0], env->key) == 0)
+			flag = 1;
+		i++;
+		env = env->next;
+	}
+	// free_arr2d(var_ent);
+	return (flag);
+}
+
+/*print the export output(without argument)*/
+static int	just_export(t_env *env)
+{
+	while (env != NULL)
+	{
+		printf("declare -x %s=\"%s\"\n", env->key, env->val);
+		env = env->next;
+	}
 	return (0);
 }
 
-/*
-	NOTA: Buildin 'export' la he dejado en pausa hasta tener la estructura 
-		definitiva, al igual que 'unset'
-*/
+/*Funcion que agrega una nueva variable de entorno si corresp.*/
+int	builtin_export(t_cmd *cmd, t_env **env)
+{
+	char	**tokens;
+	char	**tokens2;
+	char	*key;
+	char	*value;
+	int		chk_exp;
+
+	if (size_arr2d(cmd->command_and_arg) == 1)
+		just_export(*env);
+	else
+	{
+		chk_exp = check_export(cmd->command_and_arg[1]);
+		if (chk_exp == 1)// =
+		{
+			if (!(variable_exists(*env, cmd->command_and_arg[1])))
+			{
+				//printf("= NO existe la variable!\n");
+				tokens = ft_split(cmd->command_and_arg[1], '=');
+				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
+				{
+					key = tokens[0];
+					value = tokens[1];
+					lstadd_back(env, lstnew(key, value));
+				}
+				free_arr2d(tokens);
+			}
+			return (0);
+		}
+		else if (chk_exp == 2)// +=
+		{
+			if (!(variable_exists_op2(*env, cmd->command_and_arg[1])))
+			{
+				//printf("+= NO existe la variable!\n");
+				tokens = ft_split(cmd->command_and_arg[1], '+');
+				tokens2 = ft_split(tokens[1], '=');
+				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
+				{
+					key = tokens[0];
+					value = tokens2[0];
+					lstadd_back(env, lstnew(key, value));
+				}
+				free_arr2d(tokens);
+			}
+			return (0);
+		}
+	}
+	return (0);
+}

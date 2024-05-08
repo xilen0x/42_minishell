@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 10:20:18 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/03/05 10:59:53 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:02:11 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <fcntl.h>//open/get_next_line
-# include <stddef.h>//get_next_line
-# include <stdarg.h>//ft_printf
+# include <fcntl.h>
+# include <stddef.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -36,12 +36,12 @@ int		ft_toupper(int c);
 int		ft_tolower(int c);
 
 size_t	ft_strlen(const char *s);
-//size_t	ft_strlcpy(char *dst, const char *src, size_t destsize);
+size_t	ft_strlcpy(char *dst, const char *src, size_t destsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-char	*ft_strdup(const char *s1);
+char	*ft_strdup(char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
@@ -51,7 +51,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_strcmp(char *s1, char *s2);
 
 int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
 char	*ft_itoa(int n);
+char	*ft_ltoa(int n);
 
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
