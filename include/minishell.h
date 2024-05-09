@@ -37,6 +37,10 @@
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
+/*-----------global variable------------*/
+int	get_signal = 0;
+
+
 //Environment list struct
 typedef struct s_env
 {
@@ -110,7 +114,7 @@ typedef struct s_exe
 	int				dup_stdin;
 	int				dup_stdout;
 	char			*path;
-	int				exit_stat;
+//	int				exit_stat;
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
