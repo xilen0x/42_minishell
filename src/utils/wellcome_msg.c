@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+/*----Wellcome message-----*/
 void	init_msg(void)
 {
 	printf("\n%s\

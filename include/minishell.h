@@ -84,7 +84,7 @@ typedef struct s_redir
 /*------contiene los datos de cada pipe de la linea de comando-----*/
 typedef struct s_cmd
 {
-	char			**command_and_arg;
+	char			**commands;
 	t_redir			*redir;
 	struct s_cmd	*next;
 }					t_cmd;
@@ -116,6 +116,7 @@ typedef struct s_exe
 /*---------------------------minishell -------------------------*/
 int		bg_color(void);
 void	init_msg(void);
+char	*minishell(char	*line, t_tok	*tok, t_env	*envlist, t_cmd	*cmd);
 void	tokenizer(t_tok **tok, char *line);
 void	parser(t_cmd **cmd, t_tok *tok);
 void	handle_error(char *str, t_tok **tok);
@@ -151,11 +152,11 @@ int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*---------------------------utils_parser -------------------------*/
 int		is_operator(t_tok *node);
-size_t	command_and_arg_size(t_tok *tok);
+size_t	commands_size(t_tok *tok);
 
 /*---------------expander & quote removal--------------*/
 void	should_expand(t_cmd *cmd, t_env *envlist, unsigned int *exit_status);
-char	*expand_and_quote_remove(char *str, t_env *envlist, unsigned int *exit_status);
+char	*expand_quote_rm(char *str, t_env *envlist, unsigned int *exit_status);
 int		new_tok_len(char *str, t_env *envlist, unsigned int *exit_status);
 char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exit_status);
 char 	*get_env_key(char *str);
@@ -200,9 +201,6 @@ char			*get_exit_status_val(unsigned int *exit_status);
 void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 int		list_to_array(t_env *env, t_exe *exe);
 int		init_exe(t_exe *exe, t_cmd *cmd);	
-
-//--------------------------- utils_readline ----------------------
-char	*from_readline(char	*line, t_tok	*tok, t_env	*envlist, t_cmd	*cmd);
 
 /*--------------------------- builtins -------------------------*/
 

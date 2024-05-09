@@ -58,7 +58,7 @@ int	get_pwd(t_env *env)
 // 	char	*old_wd;
 
 // 	old_wd = "/";
-// 	if (variable_exists(shell->link_env, shell->link_cmd->command_and_arg[1]))
+// 	if (variable_exists(shell->link_env, shell->link_cmd->commands[1]))
 // 	{
 // 		printf("variable oldpwd existe\n");
 // 	}

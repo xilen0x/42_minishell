@@ -32,7 +32,7 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 	i = 0;
 	while (exe->paths[i] != NULL)
 	{
-		cmd_path = ft_strjoin("/", cmd->command_and_arg[0]);
+		cmd_path = ft_strjoin("/", cmd->commands[0]);
 		full_path = ft_strjoin(exe->paths[i], cmd_path);
 		free(cmd_path);
 		if (full_path == NULL)
@@ -82,7 +82,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 				dup2(exe->fd[1], STDOUT_FILENO);
 			close_fd(exe);
 			//redireccion aqui?
-			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
+			if (execve(exe->cmd_fullpath, cmd->commands, exe->new_array) < 0)
 				ft_msgs(0);
 			exit(0);
 		}

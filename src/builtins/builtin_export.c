@@ -147,17 +147,17 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 	char	*value;
 	int		chk_exp;
 
-	if (size_arr2d(cmd->command_and_arg) == 1)
+	if (size_arr2d(cmd->commands) == 1)
 		just_export(*env);
 	else
 	{
-		chk_exp = check_export(cmd->command_and_arg[1]);
+		chk_exp = check_export(cmd->commands[1]);
 		if (chk_exp == 1)// =
 		{
-			if (!(variable_exists(*env, cmd->command_and_arg[1])))
+			if (!(variable_exists(*env, cmd->commands[1])))
 			{
 				//printf("= NO existe la variable!\n");
-				tokens = ft_split(cmd->command_and_arg[1], '=');
+				tokens = ft_split(cmd->commands[1], '=');
 				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
 				{
 					key = tokens[0];
@@ -170,10 +170,10 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 		}
 		else if (chk_exp == 2)// +=
 		{
-			if (!(variable_exists_op2(*env, cmd->command_and_arg[1])))
+			if (!(variable_exists_op2(*env, cmd->commands[1])))
 			{
 				//printf("+= NO existe la variable!\n");
-				tokens = ft_split(cmd->command_and_arg[1], '+');
+				tokens = ft_split(cmd->commands[1], '+');
 				tokens2 = ft_split(tokens[1], '=');
 				if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
 				{

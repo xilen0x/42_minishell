@@ -10,9 +10,9 @@ void	print_cmd_para_executor(t_cmd *lst)
 		printf("-----------------------\n");
 		printf("t_cmd para executor\n");
 		printf("     <");
-		while (lst->command_and_arg[i] != NULL)
+		while (lst->commands[i] != NULL)
 			{
-				printf("%s", lst->command_and_arg[i]);
+				printf("%s", lst->commands[i]);
 				i++;
 			}
 		printf(">\n");

@@ -11,8 +11,8 @@ void	cmd_free(t_cmd **lst)
 	aux = (*lst);
 	while (aux != NULL)
 	{
-		if (aux->command_and_arg != NULL)
-        	free_arr2d(aux->command_and_arg);
+		if (aux->commands != NULL)
+        	free_arr2d(aux->commands);
 		if (aux->redir != NULL)
         	redir_free(&aux->redir);
 		(*lst) = aux->next;

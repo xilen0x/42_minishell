@@ -2,7 +2,7 @@
 
 /*2ra fase: Rellena 'result' con los caracteres correctos que tendrá 
 el nuevo token, una vez expandido y eliminadas comillas del token original 'str'*/
-char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exit_status)
+char	*new_tok_builder(char *str, t_env *envlist, char *result, t_exe *exe)
 {
 	size_t	i;
 	size_t	j;
@@ -34,7 +34,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exi
 			i++;//salto el '$'
 			if (str[i] == '?')
 			{
-				env_val = get_exit_status_val(exit_status);//retorna un char* mallocado
+				env_val = get_exit_status_val(exe);//retorna un char* mallocado
 				while (env_val && env_val[k] != '\0')
 				{
 					result[j] = (env_val[k]);
