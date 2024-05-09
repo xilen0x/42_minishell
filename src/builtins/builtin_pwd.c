@@ -31,7 +31,7 @@ int	builtin_pwd(t_env *env)
 	current_wd = getcwd(NULL, 0);
 	*env = *update_env(env, "PWD", current_wd);
 	printf("%s\n", current_wd);
-	set_exit_status(0);
+	//set_exit_status(0);
 	free(current_wd);
 	return (0);
 }
@@ -95,7 +95,7 @@ int	old_pwd(void)
 	if (chdir(oldpwd_value) != 0)
 	{
 		perror("chdir");
-		set_exit_status(1);
+		//set_exit_status(1);
 		return (1); // Retornar 1 en caso de error
 	}
 	return (0); // Retornar 0 indicando éxito

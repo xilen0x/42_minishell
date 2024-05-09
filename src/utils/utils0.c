@@ -2,36 +2,32 @@
 
 void	init_msg(void)
 {
-	printf("\033[44m");
-	printf("\n\t%s\
-		███    ███ ██ ███    ██ ██  ██████ ██     ██  ████████ ██       ██ %s\n", \
-	CYAN, END);
-	printf("\t%s\
-		██ ████ ██║██║██ ██  ██║██║██ ════╝██╝    ██╝║██══════╝██║      ██║%s \n", \
-	CYAN, END);
-	printf("\t%s\
-		██║╚██ ╝██║██║██║╚██ ██║██║╚█████  █████████ ║████████ ██║      ██║%s \n", \
-	CYAN, END);
-	printf("\t%s\
-		██║ ╚═╝ ██║██║██║  ╚███║██║ ╚═══██ ██ ═══ ██║║██ ═════╝██║      ██║%s\n", \
-	CYAN, END);
-	printf("\t%s\
-		██║     ██║██║██║   ╚██╝██║██████ ╝██║    ██║║████████ ████████ ████████ %s\n", \
-	CYAN, END);
-	printf("\t%s\
-		╚═╝     ╚═╝╚═╝╚═╝    ╚═╝═╝╚══════╝ ╚═╝	  ╚══╝╚═══════╝╚═══════╝╚═══════╝%s\n", \
-	CYAN, END);
-	printf("%s\n\t\t\tby jocuni-p & castorga%s\t\t\t\n", CYAN, \
+	printf("\n%s\
+			██    ██ █ █    █ █  ████ █     █  ██████   █     █ %s\n", \
+			CYAN, END);
+	printf("%s\
+			█  █   █ █ █ █  █ █ █     █     █  █        █     █%s \n", \
+			CYAN, END);
+	printf("%s\
+			█  █   █ █ █  █ █ █ ███   ███████  ██████   █     █%s \n", \
+			CYAN, END);
+	printf("%s\
+			█      █ █ █    █ █     █ █     █  █        █     █%s\n", \
+			CYAN, END);
+	printf("%s\
+			█      █ █ █    █ █ ████  █     █  ██████   █████ █████ %s\n", \
+			CYAN, END);
+	printf("%s\n\t\tby jocuni-p & castorga%s\t\t\t\n", CYAN, \
 		END);
-	printf("\t\t\n\n");
-	printf("\033[44m");
+	printf("\t\n\n");
+	printf(BLUE);
 }
 
 /*Function that changes the color of the terminal*/
 int	bg_color(void)
 {
-	printf("\033[44m"); //fondo a azul
-	printf("\033[2J");// Limpia la pantalla
+	printf(BLUE);
+	printf(CLEAN_SCREEN);
 	return (0);
 }
 
@@ -39,58 +35,33 @@ int	bg_color(void)
 int	ft_msgs(int n)
 {
 	if (n == 0)
-	{
-		write (2, "xCommand not found!\n", 20);
-		return (1);
-	}
+		write (2, "minishell: command not found!\n", 30);
 	else if (n == 1)
-	{
-		write (2, "xcannot execute binary file\n", 28);
-		return (1);
-	}
+		write (2, "cannot execute binary file\n", 27);
 	else if (n == 2)
-	{
-		write (2, "xNo such file or directory\n", 27);
-		return (1);
-	}
+		write (2, "No such file or directory\n", 26);
 	else if (n == 3)
-	{
-		write (2, "xbash: outfile: Permission denied\n", 34);
-		return (1);
-	}
-	// else if (n == 4)
-	// {
-	// 	write (2, "xCommand not found!\n", 19);
-	// 	return (1);
-	// }
+		write (2, "bash: outfile: Permission denied\n", 33);
+	else if (n == 4)
+		write (2, "...\n", 4);
 	else if (n == 5)
-	{
-		write (2, "xnot a valid identifier\n", 25);
-		return (1);
-	}
+		write (2, "not a valid identifier\n", 24);
 	else if (n == 6)
-	{
-		write (2, "xinvalid option\n", 16);
-		return (1);
-	}
+		write (2, "invalid option\n", 15);
 	else if (n == 10)
-	{
-		write (2, "xRun minishell without arguments!\n", 34);
-		exit(0);
-	}
+		write (2, "Run minishell without arguments!\n", 33);
 	return (1);
 }
 
 /*Function that get the exit status number*/
-int	get_exit_status(void)
+int	get_exit_status(t_exe *exe)
 {
-	//printf("%d: %s", g_exit_stat, "command not found\n");
+	printf("%d: %s", exe->exit_stat, "command not found\n");
 	return (0);
 }
 
 /*Function that set the exit status number*/
-void	set_exit_status(int num)
+void	set_exit_status(int num, t_exe *exe)
 {
-	(void)num;
-	//g_exit_stat = num;
+	exe->exit_stat = num;
 }

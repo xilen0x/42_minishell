@@ -28,6 +28,9 @@
 # define BLUE "\033[1;34m"
 # define END "\033[0m"
 # define CYAN "\033[1;36m"
+# define BLACK "\033[40m"
+# define CLEAN_SCREEN "\033[2J"
+
 /*--------------------Error messages-------------------*/
 
 # define PRINT_MALLOC_ERR_0 "Error: malloc failed\n"
@@ -90,7 +93,6 @@ typedef struct s_cmd
 	char			**command_and_arg;
 	t_redir			*redir;
 	struct s_cmd	*next;
-	//char			*pipe_test;//lo borarre luego(carlos)
 }					t_cmd;
 
 /*---si las comillas simples o dobles estan abiertas (1) o cerradas (0)----*/
@@ -114,6 +116,7 @@ typedef struct s_exe
 	int				dup_stdin;
 	int				dup_stdout;
 	char			*path;
+	int				exit_stat;
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
@@ -188,8 +191,8 @@ void	error_exe(int num);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
-int		get_exit_status(void);
-void	set_exit_status(int num);
+int		get_exit_status(t_exe *exe);//funciones repetidas ?
+void	set_exit_status(int num, t_exe *exe);
 
 /*---------------------------utils1.c -------------------------*/
 int		ca_strchr(const char *s, int c);
@@ -197,12 +200,15 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 /*-------------------exit_status----------------*/
 unsigned int	get_exit_status_len(unsigned int *exit_status);
-char	*get_exit_status_val(unsigned int *exit_status);
+char			*get_exit_status_val(unsigned int *exit_status);
 
 /*---------------------------utils2.c -OJO ORDENAR----------------*/
 void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 int		list_to_array(t_env *env, t_exe *exe);
 int		init_exe(t_exe *exe, t_cmd *cmd);	
+
+//--------------------------- utils_readline ----------------------
+char	*from_readline(char	*line, t_tok	*tok, t_env	*envlist, t_cmd	*cmd);
 
 /*--------------------------- builtins -------------------------*/
 

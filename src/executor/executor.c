@@ -74,6 +74,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 		else if (exe->pid[i] == 0)//proceso(s) hijo(s)
 		{
 			exe->paths = get_paths(*env);
+			// ft_open_files(argv, &data);
 			exe->cmd_fullpath = NULL;
 			search_command_path(cmd, exe);
 			list_to_array(*env, exe);
@@ -82,11 +83,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env)
 			close_fd(exe);
 			//redireccion aqui?
 			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
-			{
-				perror(exe->cmd_fullpath);
-				exit(1);
-			}
-			printf("proceso hijo\n");
+				ft_msgs(0);
 			exit(0);
 		}
 		dup2(exe->fd[0], STDIN_FILENO);

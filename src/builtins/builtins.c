@@ -45,6 +45,29 @@ int	is_builtins(t_cmd *cmd)
 		return (1);
 	else if (ft_strcmp(*cmd->command_and_arg, "unset") == 0)
 		return (1);
+	else if (
+		(ft_strcmp(*cmd->command_and_arg, "alias") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "source") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "trap") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "readonly") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "declare") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "set") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "eval") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "shift") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "fc") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "exec") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "jobs") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "history") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "bg") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "builtin") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "fg") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "type") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "ulimit") == 0) ||
+		(ft_strcmp(*cmd->command_and_arg, "return") == 0))
+		{
+			printf("built-in was not included in the subject.!\n");
+			return (1);
+		}
 	else
 		return (0);
 }
