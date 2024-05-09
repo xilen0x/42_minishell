@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-char	*get_exit_status_val(t_exe *exe)
+char	*get_exit_status_val(void)
 {
 	char	*result;
 
-	result = ft_itoa(exe->exit_stat);
+	result = ft_itoa(get_signal);
 	if (!result)
 		exit (EXIT_FAILURE);
 	return (result);//retorna un char* mallocado

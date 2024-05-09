@@ -17,7 +17,8 @@
 # include <sys/wait.h>
 # include <limits.h>
 
-/*------------------------Defines-----------------------*/
+/*-----------------Defines-------------*/
+
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 # define TRUE 1
@@ -31,6 +32,10 @@
 # define BLACK "\033[40m"
 # define CLEAN_SCREEN "\033[2J"
 
+/*--------------Signals-------------------*/
+# define CTRL_C SIGINT
+# define CTRL_SLASH SIGQUIT
+
 /*--------------------Error messages-------------------*/
 # define PRINT_MALLOC_ERR_0 "Error: malloc failed\n"
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
@@ -38,7 +43,7 @@
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 /*-----------global variable------------*/
-int	get_signal = 0;
+int	get_signal = 0;//recoge todos los exit_status
 
 
 //Environment list struct
@@ -159,10 +164,10 @@ int		is_operator(t_tok *node);
 size_t	commands_size(t_tok *tok);
 
 /*---------------expander & quote removal--------------*/
-void	should_expand(t_cmd *cmd, t_env *envlist, unsigned int *exit_status);
-char	*expand_quote_rm(char *str, t_env *envlist, unsigned int *exit_status);
-int		new_tok_len(char *str, t_env *envlist, unsigned int *exit_status);
-char	*new_tok_builder(char *str, t_env *envlist, char *result, unsigned int *exit_status);
+void	should_expand(t_cmd *cmd, t_env *envlist);
+char	*expand_quote_rm(char *str, t_env *envlist);
+int		new_tok_len(char *str, t_env *envlist);
+char	*new_tok_builder(char *str, t_env *envlist, char *result);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
 
@@ -198,8 +203,8 @@ int		ca_strchr(const char *s, int c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 /*-------------------exit_status----------------*/
-unsigned int	get_exit_status_len(unsigned int *exit_status);
-char			*get_exit_status_val(unsigned int *exit_status);
+unsigned int	get_exit_status_len(void);
+char			*get_exit_status_val(void);
 
 /*---------------------------utils2.c -OJO ORDENAR----------------*/
 void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));

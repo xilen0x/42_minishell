@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*Look for any expandable or quote removable token into 'cmd' list*/
-void	should_expand(t_cmd *cmd, t_env *envlist, t_exe *exe)
+void	should_expand(t_cmd *cmd, t_env *envlist)
 {
 	size_t	i;
 	char	*redir_tmp;
@@ -17,7 +17,7 @@ void	should_expand(t_cmd *cmd, t_env *envlist, t_exe *exe)
 			{
 				printf("Expansion:\n");
 				printf("<%s>\n", cmd->commands[i]);
-				cmd->commands[i] = expand_quote_rm(cmd->commands[i], envlist, exe);
+				cmd->commands[i] = expand_quote_rm(cmd->commands[i], envlist);
 				free(cmd->commands[i]);
 				printf("<%s>\n", cmd->commands[i]);
 				printf("-----------\n");
@@ -32,7 +32,7 @@ void	should_expand(t_cmd *cmd, t_env *envlist, t_exe *exe)
 		 	{
 		 		printf("Expansión:\n");
 		 		printf("<%s>\n", cmd->redir->filename);
-	 			redir_tmp = expand_quote_rm(cmd->redir->filename, envlist, exe);
+	 			redir_tmp = expand_quote_rm(cmd->redir->filename, envlist);
 		 		free(cmd->redir->filename);
 		 		cmd->redir->filename = redir_tmp;
 	 			printf("<%s>\n", cmd->redir->filename);

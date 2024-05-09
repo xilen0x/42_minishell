@@ -2,7 +2,7 @@
 
 /*Calcula el len que tendra el token(str) una vez haya eliminado comillas 
 y expandido las variables que procedan*/
-int	new_tok_len(char *str, t_env *envlist, t_exe *exe)//unsigned int/int exit_status
+int	new_tok_len(char *str, t_env *envlist)
 {
 	size_t	i;
 	size_t	len;
@@ -30,7 +30,7 @@ int	new_tok_len(char *str, t_env *envlist, t_exe *exe)//unsigned int/int exit_st
 		{
 			i++;//salto el '$'
 			if (str[i] == '?')
-				len += get_exit_status_len(exe);
+				len += get_exit_status_len();
 			else//verifica si es un nombre de variable valido y si es de entorno o no
 			{
 				env_key = get_env_key(str + i);//puntero mallocado al nombre despues del '$', sea cual sea
