@@ -15,7 +15,7 @@ int	main(int ac, char *av[], char *envp[])
 	line = NULL;
 	if (ac != 1 || av[1])
 	{
-		ft_msgs(10);
+		//ft_msgs(10);
 		exit(1);
 	}
 	env_cpy = dup_arr2d(envp);

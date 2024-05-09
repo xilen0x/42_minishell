@@ -52,6 +52,8 @@ FILES =	minishell.c \
 									builtins/builtin_exit.c \
 									builtins/builtin_pwd.c \
 									executor/executor.c \
+									executor/redirections.c \
+									executor/path.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \

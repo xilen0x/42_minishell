@@ -29,6 +29,7 @@
 # define END "\033[0m"
 # define CYAN "\033[1;36m"
 # define BLACK "\033[40m"
+# define WHITE "\033[1;37m"
 # define CLEAN_SCREEN "\033[2J"
 
 /*--------------------Error messages-------------------*/
@@ -185,9 +186,13 @@ void	cleaner_envlist(t_env **lst);
 
 /*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
-int		executor(t_env **env, t_cmd *cmd);
+int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
 int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
+int	close_fd(t_exe	*exe);
+
+/*---------------------------redirections.c -------------------------*/
+int	redirections(t_cmd *cmd, t_exe *exe);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);

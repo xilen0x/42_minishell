@@ -21,7 +21,10 @@ int	init_exe(t_exe *exe, t_cmd *cmd)
 	exe->fd[1] = -1;
 	exe->pid = malloc(sizeof(pid_t) * exe->num_cmds);
 	if (!exe->pid)
-		return (1);
+	{
+		free(exe->pid);
+		exit(1);
+	}
 	return (0);
 }
 
