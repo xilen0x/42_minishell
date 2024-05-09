@@ -20,7 +20,7 @@ void	init_msg(void)
 	printf("%s\n\t\tby jocuni-p & castorga%s\t\t\t\n", CYAN, \
 		END);
 	printf("\t\n\n");
-	printf(CYAN);
+	//printf(CYAN);
 }
 
 /*Function that changes the color of the terminal*/

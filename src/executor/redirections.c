@@ -1,14 +1,42 @@
 # include "minishell.h"
 
-/*
-	NULL_REDIR = 0,          //necesario?
-	REDIR_OUTPUT = 3,        //>
-	REDIR_INPUT = 4,         //<
-	REDIR_OUTPUT_APPEND = 5, //>> 
-	HEREDOC_INPUT = 6        //<<
-*/
+void	rm_doc(t_redir *aux)
+{
+	while (aux)
+	{
+		if (aux->redir_type == HEREDOC_INPUT)
+		{
+			unlink(aux->filename);
+		}
+		aux = aux->next;
+	}
+}
 
-int	redirections(t_cmd *cmd, t_exe *exe)
+int	redirections(t_exe *exe, t_redir *aux)
+{
+	if (aux->redir_type == REDIR_INPUT || aux->redir_type == HEREDOC_INPUT)// < || <<
+	{
+		exe->fd_input = open(aux->filename, O_RDONLY);
+		if (exe->fd_input < 0)
+			return (1);
+		dup2(exe->fd_input, STDIN_FILENO);
+		close(exe->fd_input);
+	}
+	else if (aux->redir_type == REDIR_OUTPUT || aux->redir_type == REDIR_OUTPUT_APPEND)
+	{
+		if (aux->redir_type == REDIR_OUTPUT_APPEND)// >>
+			exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_APPEND, 0660);
+		else
+			exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_TRUNC, 0660);// >
+		if (exe->fd_output < 0)
+			return (1);
+		dup2(exe->fd_output, STDOUT_FILENO);
+		close(exe->fd_output);
+	}
+	return (0);
+}
+
+int	pre_redirections(t_cmd *cmd, t_exe *exe)
 {
 	t_redir	*aux;
 
@@ -18,16 +46,10 @@ int	redirections(t_cmd *cmd, t_exe *exe)
 	aux = cmd->redir;
 	while (aux)
 	{
-		// if (dup_custom_redirections(exe, aux) == 1)
-		// {
-		// 	unlink_heredocs(commands->redirect);
-		// 	if (out == FT_RETURN)
-		// 		return (perror_return(data, 1, aux. ->file));
-		// 	else
-		// 		perror_exit(data, EXIT_FAILURE, temp->file);
-		// }
-		printf("teste\n");
+		if (redirections(exe, aux) == 1)
+			rm_doc(cmd->redir);
 		aux = aux->next;
 	}
+	rm_doc(cmd->redir);
 	return (0);
 }

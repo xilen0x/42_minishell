@@ -16,12 +16,15 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <limits.h>
+
 /*------------------------Defines-----------------------*/
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+
 # define TRUE 1
 # define FALSE 0
+
 # define RED "\033[0;31m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[0;33m"
@@ -73,11 +76,11 @@ typedef struct s_tok
 
 typedef enum e_redir_type
 {
-	NULL_REDIR = 0,//Creo que no es necesario
-	REDIR_OUTPUT = 3,//>
-	REDIR_INPUT = 4,//<
-	REDIR_OUTPUT_APPEND = 5,//>> 
-	HEREDOC_INPUT = 6//<<
+	NULL_REDIR = 0,
+	REDIR_INPUT,//<
+	HEREDOC_INPUT,//<<
+	REDIR_OUTPUT,//>
+	REDIR_OUTPUT_APPEND,//>> 
 }	t_redir_type;
 
 /*----contiene los datos de cada redirección------*/
@@ -192,7 +195,7 @@ void	error_exe(int num);
 int	close_fd(t_exe	*exe);
 
 /*---------------------------redirections.c -------------------------*/
-int	redirections(t_cmd *cmd, t_exe *exe);
+int	pre_redirections(t_cmd *cmd, t_exe *exe);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);

@@ -1,10 +1,12 @@
 # include "minishell.h"
 
-/*close fd 0 and 1*/
+/* Close fd 0 and 1 if corresp.*/
 int	close_fd(t_exe	*exe)
 {
-	close(exe->fd[0]);
-	close(exe->fd[1]);
+	if (exe->fd[0] != -1)
+		close(exe->fd[0]);
+	if (exe->fd[1] != -1)
+		close(exe->fd[1]);
 	return (0);
 }
 
@@ -68,7 +70,7 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 
 	//signals here...soon
 	size_pipe = cmd_size(cmd);
-	redirections(cmd, exe);
+	pre_redirections(cmd, exe);
 	if (is_builtins(cmd) && (size_pipe == 1))
 	{
 		free(exe->pid);
