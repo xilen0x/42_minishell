@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+//OJO: REVISAR SI HACE FALTA, porque ya tenemos free_arr2d para liberar un char**
 void	free_memory(char **array, int size)
 {
 	int	j;
@@ -11,18 +12,6 @@ void	free_memory(char **array, int size)
 		j++;
 	}
 	free(array);
-}
-
-//executor init data
-int	init_exe(t_exe *exe, t_cmd *cmd)
-{
-	exe->num_cmds = cmd_size(cmd);
-	exe->fd[0] = -1;
-	exe->fd[1] = -1;
-	exe->pid = malloc(sizeof(pid_t) * exe->num_cmds);
-	if (!exe->pid)
-		return (1);
-	return (0);
 }
 
 void	error_exe(int num)

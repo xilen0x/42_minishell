@@ -2,7 +2,7 @@
 #include "minishell.h"
 
 /*Returns the token's len pointed by 'line' if it is WORD, otherwise inits 'key' if it is an operator */
-int	tok_len(char *line, t_tok **new_tok)//faltara añadir el exit_status
+int	tok_len(char *line, t_tok **new_tok)
 {
 	int		len;
 	char	c;

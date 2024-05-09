@@ -42,7 +42,6 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 ################################################################################
 
 FILES =	minishell.c \
-									utils/p_malloc.c \
 									builtins/builtins.c \
 									builtins/builtin_env.c \
 									builtins/builtin_cd.c \
@@ -67,6 +66,7 @@ FILES =	minishell.c \
 									commands/cmd_free.c \
 									commands/cmd_last.c \
 									commands/cmd_size.c \
+									utils/p_malloc.c \
 									utils/utils_env.c \
 									utils/utils0.c \
 									utils/utils1.c \

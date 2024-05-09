@@ -22,6 +22,7 @@ char	*from_readline(char	*line, t_tok	*tok, t_env	*envlist, t_cmd	*cmd)
 	parser(&cmd, tok);
 	tok_free(&tok);
 	should_expand(cmd, envlist, &exit_status);
+//	actualizar 'num_cmds' de 'exe' (exe->num_cmds = cmd_size(cmd);)
 	executor(&envlist, cmd);
 	cmd_free(&cmd);
 	return (line);

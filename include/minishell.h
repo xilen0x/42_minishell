@@ -16,8 +16,8 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <limits.h>
-/*------------------------Defines-----------------------*/
 
+/*------------------------Defines-----------------------*/
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 # define TRUE 1
@@ -32,18 +32,12 @@
 # define CLEAN_SCREEN "\033[2J"
 
 /*--------------------Error messages-------------------*/
-
 # define PRINT_MALLOC_ERR_0 "Error: malloc failed\n"
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
-//typedef struct s_builtings t_built;
-
-//Global Variable allowed
-
-/*===========joan===========*/
-//Environment Struct
+//Environment list struct
 typedef struct s_env
 {
 	char			*key;
