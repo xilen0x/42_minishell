@@ -128,8 +128,7 @@ void	redirections(t_cmd *cmd, t_exe *exe)
 
 /*Funcion que ejecuta un comando dado o direcciona a builtin si es el caso*/
 int	executor(t_env **env, t_cmd *cmd)
-{
-	t_exe	exe;
+{	t_exe	exe;
 	int		size_pipe;
 
 	//signals here...soon
