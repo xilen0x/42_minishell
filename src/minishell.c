@@ -25,7 +25,7 @@ void	minishell(char *line, t_tok *tok, t_env *envlist, t_cmd *cmd)
 	tok_free(&tok);
 	should_expand(cmd, envlist);
 	init_exe(&exe, cmd);
-	executor(&envlist, cmd);
+	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);
 //	return (line);
 }

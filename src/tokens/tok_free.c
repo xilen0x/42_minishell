@@ -7,8 +7,8 @@ void	tok_free(t_tok **lst)
 	t_tok	*aux;
 
 	aux = (*lst);
-//	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
-//		return ;
+	if (lst == NULL || (*lst) == NULL)//BUENA PRACTICA
+		return ;
 	while (aux != NULL)
 	{ 
 		if (aux->str != NULL)

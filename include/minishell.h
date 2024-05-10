@@ -193,15 +193,11 @@ void	cleaner_envlist(t_env **lst);
 
 /*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
-<<<<<<< HEAD
-int		executor(t_env **env, t_cmd *cmd);
-int		list_to_array(t_env *env, t_exe *exe);
-=======
 int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
->>>>>>> origin/castorga
 int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
-int	close_fd(t_exe	*exe);
+int		list_to_array(t_env *env, t_exe *exe);
+int		close_fd(t_exe	*exe);
 
 /*---------------------------redirections.c -------------------------*/
 int	pre_redirections(t_cmd *cmd, t_exe *exe);
