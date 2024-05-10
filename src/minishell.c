@@ -1,10 +1,11 @@
 
 #include "minishell.h"
 
-char	*minishell(char *line, t_tok *tok, t_env *envlist, t_cmd *cmd)
+void	minishell(char *line, t_tok *tok, t_env *envlist, t_cmd *cmd)
 {
-	t_exe	*exe;
+	t_exe	exe;
 
+	get_signal = 0;
 	line = readline(">>>>minishell$ ");
 	if (!line)//lo gestinamos aqui, porque el exit_status de Ctrl+D cierra el minishell y no seria necesario recogerlo.
 	{
@@ -16,15 +17,15 @@ char	*minishell(char *line, t_tok *tok, t_env *envlist, t_cmd *cmd)
 	if (!*line || *line == ' ')
 	{
 		free(line);
-		return (0);
+		return ;
 	}
 	tokenizer(&tok, line);
 	free(line);
 	parser(&cmd, tok);
 	tok_free(&tok);
-	init_exe(exe, cmd);
-	should_expand(cmd, envlist, exe);
+	should_expand(cmd, envlist);
+	init_exe(&exe, cmd);
 	executor(&envlist, cmd);
 	cmd_free(&cmd);
-	return (line);
+//	return (line);
 }

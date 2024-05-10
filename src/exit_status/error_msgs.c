@@ -23,14 +23,14 @@ int	ft_msgs(int n)
 }
 
 /*Function that get the exit status number*/
-int	get_exit_status(t_exe *exe)
+/*int	get_exit_status(t_exe *exe)
 {
 	printf("%d: %s", exe->exit_stat, "command not found\n");
 	return (0);
-}
+}*/
 
 /*Function that set the exit status number*/
-void	set_exit_status(int num, t_exe *exe)
+/*void	set_exit_status(int num, t_exe *exe)
 {
 	exe->exit_stat = num;
-}
+}*/

@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+//extern int	get_signal;
+
 char	*get_exit_status_val(void)
 {
 	char	*result;

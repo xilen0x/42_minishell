@@ -6,7 +6,7 @@ unsigned int	get_exit_status_len(void)
 	char			*val;
 
 	len = 0;
-	val = get_exit_status_val(get_signal);//retorna un char * mallocado de la variable global que contiene el exit_status
+	val = get_exit_status_val();//retorna un char * mallocado de la variable global que contiene el exit_status
 	len = ft_strlen(val);
 	free(val);
 	return (len);

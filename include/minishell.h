@@ -43,7 +43,7 @@
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 /*-----------global variable------------*/
-int	get_signal = 0;//recoge todos los exit_status
+int	get_signal;//recoge todos los exit_status
 
 
 //Environment list struct
@@ -108,7 +108,7 @@ typedef struct s_qts
 typedef struct s_exe
 {
 	char			**paths;
-	int				index;
+//	int				index;
 	char			*cmd_fullpath;
 	char			**new_array;
 	pid_t			*pid;
@@ -118,18 +118,21 @@ typedef struct s_exe
 	int				fd[2];
 	int				dup_stdin;
 	int				dup_stdout;
-	char			*path;
+//	char			*path;
 //	int				exit_stat;
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
 int		bg_color(void);
 void	init_msg(void);
-char	*minishell(char	*line, t_tok	*tok, t_env	*envlist, t_cmd	*cmd);
+void	set_signals(void);
+void	minishell(char	*line, t_tok	*tok, t_env	*envlist, t_cmd	*cmd);
 void	tokenizer(t_tok **tok, char *line);
 void	parser(t_cmd **cmd, t_tok *tok);
+void	init_exe(t_exe *exe, t_cmd *cmd);	
 void	handle_error(char *str, t_tok **tok);
-void	cleaner(t_env **lst);
+void	cleaner_envlist(t_env **lst);
+
 /*---------------------------array 2d -------------------------*/
 size_t	size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
@@ -176,27 +179,26 @@ void	*p_malloc(size_t size);
 //void	malloc_s_pointer_protect(void *name);
 //void	malloc_d_pointer_protect(char **name);
 
-/*---------------------------signals.c -------------------------*/
-void	set_signals(void);
-
 /*--------------------------utils t_env-------------------*/
 t_env	*lstlast(t_env *lst);
 void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
 void	init_envlist(char **envp, t_env **envlist);
+void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 void	cleaner_envlist(t_env **lst);
 
 
 /*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
 int		executor(t_env **env, t_cmd *cmd);
+int		list_to_array(t_env *env, t_exe *exe);
 int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
-int		get_exit_status(t_exe *exe);//funciones repetidas ?
-void	set_exit_status(int num, t_exe *exe);
+//int		get_exit_status(t_exe *exe);//funciones repetidas ?
+//void	set_exit_status(int num, t_exe *exe);
 
 /*---------------------------utils1.c -------------------------*/
 int		ca_strchr(const char *s, int c);
@@ -206,13 +208,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 unsigned int	get_exit_status_len(void);
 char			*get_exit_status_val(void);
 
-/*---------------------------utils2.c -OJO ORDENAR----------------*/
-void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
-int		list_to_array(t_env *env, t_exe *exe);
-int		init_exe(t_exe *exe, t_cmd *cmd);	
-
 /*--------------------------- builtins -------------------------*/
-
 int		builtins(t_cmd *cmd, t_env **env);
 // int		builtin_exit(t_cmd *cmd);
 int		builtin_exit(t_cmd *cmd, t_env *envlist);

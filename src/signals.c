@@ -9,7 +9,7 @@ void	signal_handler(int sig)
 		rl_replace_line("", 1);//reemplaza la línea actual de entrada con una cadena vacía.
 		rl_on_new_line();// cursor debe moverse a una nueva línea.
 		rl_redisplay();//redibuja la línea actual. Se utiliza después de realizar cambios en la línea de entrada para actualizar la pantalla y mostrar los cambios.
-		get_signal = 1;
+		// get_signal = 1;
 	}
 	else if (sig == CTRL_SLASH)
 		//printf("\nCtrl-\\ recibido.\n");

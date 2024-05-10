@@ -18,7 +18,6 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 				printf("Expansion:\n");
 				printf("<%s>\n", cmd->commands[i]);
 				cmd->commands[i] = expand_quote_rm(cmd->commands[i], envlist);
-				free(cmd->commands[i]);
 				printf("<%s>\n", cmd->commands[i]);
 				printf("-----------\n");
 			}
@@ -33,7 +32,7 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 		 		printf("Expansión:\n");
 		 		printf("<%s>\n", cmd->redir->filename);
 	 			redir_tmp = expand_quote_rm(cmd->redir->filename, envlist);
-		 		free(cmd->redir->filename);
+//		 		free(cmd->redir->filename);YA SE LIBERO EN new_tok_builder
 		 		cmd->redir->filename = redir_tmp;
 	 			printf("<%s>\n", cmd->redir->filename);
 		 		printf("-----------\n");

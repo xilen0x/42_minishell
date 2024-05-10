@@ -133,8 +133,6 @@ int	executor(t_env **env, t_cmd *cmd)
 
 	//signals here...soon
 	size_pipe = cmd_size(cmd);
-	if (init_exe(&exe, cmd) == 1)
-		return (1);
 // //	redirections(cmd, exe);
 	if (is_builtins(cmd) && (size_pipe == 1))
 	{
