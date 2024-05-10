@@ -21,8 +21,10 @@
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
+
 # define TRUE 1
 # define FALSE 0
+
 # define RED "\033[0;31m"
 # define GREEN "\033[1;32m"
 # define YELLOW "\033[0;33m"
@@ -30,6 +32,7 @@
 # define END "\033[0m"
 # define CYAN "\033[1;36m"
 # define BLACK "\033[40m"
+# define WHITE "\033[1;37m"
 # define CLEAN_SCREEN "\033[2J"
 
 /*--------------Signals-------------------*/
@@ -75,11 +78,11 @@ typedef struct s_tok
 
 typedef enum e_redir_type
 {
-	NULL_REDIR = 0,//Creo que no es necesario
-	REDIR_OUTPUT = 3,//>
-	REDIR_INPUT = 4,//<
-	REDIR_OUTPUT_APPEND = 5,//>> 
-	HEREDOC_INPUT = 6//<<
+	NULL_REDIR = 0,
+	REDIR_INPUT,//<
+	HEREDOC_INPUT,//<<
+	REDIR_OUTPUT,//>
+	REDIR_OUTPUT_APPEND,//>> 
 }	t_redir_type;
 
 /*----contiene los datos de cada redirección------*/
@@ -190,10 +193,18 @@ void	cleaner_envlist(t_env **lst);
 
 /*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
+<<<<<<< HEAD
 int		executor(t_env **env, t_cmd *cmd);
 int		list_to_array(t_env *env, t_exe *exe);
+=======
+int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
+>>>>>>> origin/castorga
 int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
+int	close_fd(t_exe	*exe);
+
+/*---------------------------redirections.c -------------------------*/
+int	pre_redirections(t_cmd *cmd, t_exe *exe);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n);
