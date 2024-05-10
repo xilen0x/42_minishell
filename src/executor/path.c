@@ -3,10 +3,10 @@
 /*function that search by the 'PATH' word and split the content*/
 char	**get_paths(t_env *env)
 {
-	int		i;
+//	int		i;
 	char	**full_path;
 
-	i = 0;
+//	i = 0;
 	full_path = NULL;
 	while (env)
 	{
@@ -15,7 +15,7 @@ char	**get_paths(t_env *env)
 			full_path = ft_split(env->val, ':');
 			break ;
 		}
-		i++;
+//		i++;
 		env = env->next;
 	}
 	return (full_path);

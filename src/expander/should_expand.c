@@ -15,11 +15,11 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 			|| ft_strchr(cmd->commands[i], '\'') != NULL \
 			|| ft_strchr(cmd->commands[i], '"') != NULL)
 			{
-				printf("Expansion:\n");
-				printf("<%s>\n", cmd->commands[i]);
+//				printf("Expansion:\n");
+//				printf("<%s>\n", cmd->commands[i]);
 				cmd->commands[i] = expand_quote_rm(cmd->commands[i], envlist);
-				printf("<%s>\n", cmd->commands[i]);
-				printf("-----------\n");
+//				printf("<%s>\n", cmd->commands[i]);
+//				printf("-----------\n");
 			}
 			i++;
 		}
@@ -29,13 +29,13 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 		 	|| ft_strchr(cmd->redir->filename, '\'') != NULL \
 		 	|| ft_strchr(cmd->redir->filename, '"') != NULL)
 		 	{
-		 		printf("Expansión:\n");
-		 		printf("<%s>\n", cmd->redir->filename);
+//		 		printf("Expansión:\n");
+//		 		printf("<%s>\n", cmd->redir->filename);
 	 			redir_tmp = expand_quote_rm(cmd->redir->filename, envlist);
 //		 		free(cmd->redir->filename);YA SE LIBERO EN new_tok_builder
 		 		cmd->redir->filename = redir_tmp;
-	 			printf("<%s>\n", cmd->redir->filename);
-		 		printf("-----------\n");
+//	 			printf("<%s>\n", cmd->redir->filename);
+//		 		printf("-----------\n");
 		 	}
 		 	cmd->redir = cmd->redir->next;
 		 }
