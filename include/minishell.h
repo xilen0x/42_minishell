@@ -48,6 +48,9 @@
 /*-----------global variable------------*/
 int	get_signal;//recoge todos los exit_status
 
+/*--------------------------- Pipe ---------------------------*/
+# define READ 0
+# define WRITE 1
 
 //Environment list struct
 typedef struct s_env
@@ -248,5 +251,8 @@ void	ft_print_keys(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_print_values(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
+
+/*-----------redirections---------------*/
+int	check_redirections(t_cmd *cmd);
 
 #endif

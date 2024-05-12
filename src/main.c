@@ -21,7 +21,7 @@ int	main(int ac, char *av[], char *envp[])
 	env_cpy = dup_arr2d(envp);//hace falta duplicarlo. No se podria enviar envp a init_list directamente?
 	init_envlist(env_cpy, &envlist);
 	free_arr2d(env_cpy);
-	init_msg();
+	// init_msg();
 	while (1)
 	{
 		set_signals();

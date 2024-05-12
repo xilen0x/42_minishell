@@ -1,0 +1,11 @@
+total 1056
+-rw-r--r--   1 castorga  2023_barcelona    4885 May 12 14:37 Makefile
+-rw-r--r--   1 castorga  2023_barcelona    4941 Mar  8 16:21 README.md
+-rw-r--r--   1 castorga  2023_barcelona      18 May 12 13:49 file
+-rwxr-xr-x   1 castorga  2023_barcelona     436 Mar  8 16:21 git-script.sh
+drwxr-xr-x   3 castorga  2023_barcelona     102 May 12 13:50 include
+-rw-r--r--   1 castorga  2023_barcelona       8 May 10 13:55 kkk
+drwxr-xr-x   4 castorga  2023_barcelona     136 Mar 19 11:14 lib
+-rwxr-xr-x   1 castorga  2023_barcelona  508680 May 12 15:55 minishell
+-rw-r--r--   1 castorga  2023_barcelona       0 May 12 15:57 output_file
+drwxr-xr-x  20 castorga  2023_barcelona     680 May 12 13:50 src
