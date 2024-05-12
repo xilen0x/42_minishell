@@ -15,12 +15,12 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 {
 	while (cmd)
 	{
-		if (pipe(exe->fd) == -1)
+		if (pipe(exe->fd) == -1)// guarda en fd los dos file descriptors
 			error_exe(1);
-		exe->pid[i] = fork();
+		exe->pid[i] = fork();//crea un proceso hijo, clon del padre
 		if (exe->pid[i] < 0)
 			error_exe(2);
-		else if (exe->pid[i] == 0)//Si condicion se cumple, se ejecutará el proceso(s) hijo(s)
+		else if (exe->pid[i] == 0) // Si condicion se cumple, se ejecutará el proceso hijo
 		{
 			exe->paths = get_paths(*env);
 			// ft_open_files(argv, &data);
@@ -47,7 +47,7 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
 	int		i;
 
-	exe->fd_input = dup(STDIN_FILENO);
+	exe->fd_input = dup(STDIN_FILENO);//almaceno el fd de stdin en fd_input y stdout en fd_output
 	exe->fd_output = dup(STDOUT_FILENO);
 	i = 0;
 	executor_core(cmd, exe, env, i);

@@ -109,7 +109,7 @@ typedef struct s_qts
 typedef struct s_exe
 {
 	char			**paths;
-	int				index;
+	// int				index;
 	char			*cmd_fullpath;
 	char			**new_array;
 	pid_t			*pid;
@@ -119,7 +119,7 @@ typedef struct s_exe
 	int				fd[2];
 	int				dup_stdin;
 	int				dup_stdout;
-	char			*path;
+	// char			*path;
 	int				exit_stat;
 }	t_exe;
 
