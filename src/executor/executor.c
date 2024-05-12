@@ -30,7 +30,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 			if (cmd->next != NULL)
 				dup2(exe->fd[1], STDOUT_FILENO);
 			close_fd(exe);
-			if (execve(exe->cmd_fullpath, cmd->command_and_arg, exe->new_array) < 0)
+			if (execve(exe->cmd_fullpath, cmd->commands, exe->new_array) < 0)
 				ft_msgs(0);
 			exit(0);
 		}

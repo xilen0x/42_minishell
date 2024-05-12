@@ -42,64 +42,70 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 ################################################################################
 
 FILES =	minishell.c \
-									utils/p_malloc.c \
-									builtins/builtins.c \
-									builtins/builtin_env.c \
-									builtins/builtin_cd.c \
-									builtins/builtin_echo.c \
-									builtins/builtin_export.c \
-									builtins/builtin_unset.c \
-									builtins/builtin_exit.c \
-									builtins/builtin_pwd.c \
-									executor/executor.c \
-									executor/redirections.c \
-									executor/path.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
-									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
-									tokens/tok_new_node.c \
-									tokens/tok_add_back.c \
-									tokens/tok_last.c \
-									tokens/tok_size.c \
-									tokens/tok_free.c \
-									commands/cmd_new_node.c \
+									arr2d/size_arr2d.c \
+									builtins/builtin_cd.c \
+									builtins/builtin_echo.c \
+									builtins/builtin_env.c \
+									builtins/builtin_exit.c \
+									builtins/builtin_export.c \
+									builtins/builtin_pwd.c \
+									builtins/builtin_unset.c \
+									builtins/builtins.c \
 									commands/cmd_add_back.c \
 									commands/cmd_free.c \
 									commands/cmd_last.c \
+									commands/cmd_new_node.c \
 									commands/cmd_size.c \
-									utils/utils_env.c \
-									utils/utils0.c \
-									utils/utils1.c \
-									utils/utils2.c \
-									utils/utils3.c \
-									utils/utils_readline.c \
-									tokenizer/tokenizer.c \
-									utils_parser/is_operator.c \
-									utils_parser/command_and_arg_size.c \
-									utils_parser/handle_error.c \
+									env_list/env_cleaner_list.c \
+									env_list/env_delone_lst.c \
+									env_list/env_init_list.c \
+									env_list/env_lstadd_back.c \
+									env_list/env_lstlast.c \
+									env_list/env_lstnew.c \
+									executor/executor.c \
+									executor/redirections.c \
+									executor/path.c \
+									exit_status/error_msgs.c \
+									exit_status/get_exit_status_len.c \
+									exit_status/get_exit_status_val.c \
+									expander/expand_quote_rm.c \
+									expander/get_env_key.c \
+									expander/get_env_val.c \
+									expander/new_tok_builder.c \
+									expander/new_tok_len.c \
+									expander/should_expand.c\
+									prints/print_arr2d.c \
+									prints/print_cmd_para_executor.c \
+									prints/print_cmd.c \
+									prints/print_envlist.c \
+									prints/print_redir.c \
+									prints/print_tok.c \
 									redirs/redir_add_back.c \
 									redirs/redir_free.c \
 									redirs/redir_last.c \
 									redirs/redir_new_node.c \
 									redirs/redir_size.c \
-									parser/parser.c \
-									expander/should_expand.c\
-									expander/expand_and_quote_remove.c \
-									expander/get_env_val.c \
-									expander/new_tok_len.c \
-									expander/new_tok_builder.c \
-									expander/get_env_key.c \
+									tokens/tok_add_back.c \
+									tokens/tok_free.c \
+									tokens/tok_last.c \
+									tokens/tok_new_node.c \
+									tokens/tok_size.c \
+									utils/p_malloc.c \
+									utils/utils1.c \
+									utils/utils3.c \
+									utils/wellcome_msg.c \
+									utils_parser/commands_size.c \
+									utils_parser/handle_error.c \
+									utils_parser/is_operator.c \
+									init_exe.c \
+									main.c \
+									parser.c \
 									signals.c \
-									exit_status/get_exit_status_val.c \
-									exit_status/get_exit_status_len.c \
-									prints/print_tok.c \
-									prints/print_cmd.c \
-									prints/print_redir.c \
-									prints/print_envlist.c \
-									prints/print_arr2d.c \
-									prints/print_cmd_para_executor.c
+									tokenizer.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

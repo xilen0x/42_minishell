@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-/* cuenta los command_and_arg (num de WORD - num de OPERATORS) del pipe actual en la lista 't_tok'*/
-size_t command_and_arg_size(t_tok *tok)
+/* Counts the number of 'commands' in the current pipe */
+size_t commands_size(t_tok *tok)
 {
     t_tok   *aux;
     size_t  cnt1;

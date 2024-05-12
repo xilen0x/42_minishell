@@ -1,6 +1,7 @@
 #include "minishell.h"
 
 /*Displays all elements contained in a bi-dimensional array*/
+/*
 void	print_arr2d(char **arr2d)
 {
 	size_t	size;
@@ -13,21 +14,21 @@ void	print_arr2d(char **arr2d)
 	}
 	return ;
 }
-
-/*dejar uno de estos dos(print_arr2d o este)*/
-void	print_array(char **array)
+*/
+/*----Cualquiera de las 2 funciones son validas----*/
+void	print_arr2d(char **arr2d)
 {
 	int	i;
 
 	i = 0;
-	if (array == NULL)
+	if (arr2d == NULL)
 	{
 		printf("El array es NULL\n");
 		return ;
 	}
-	while (array[i] != NULL)
+	while (arr2d[i] != NULL)
 	{
-		printf("%s\n", array[i]);
+		printf("%s\n", arr2d[i]);
 		i++;
 	}
 }

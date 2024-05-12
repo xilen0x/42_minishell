@@ -12,7 +12,7 @@ char *get_env_val(char *env_key, t_env *envlist)
 	{
 		if (ft_strcmp(envlist->key, env_key) == 0)
 		{
-			val_aux = ft_strdup(envlist->val);//Quizas debiera ser un strdup, para despues liberarlo sin afectar al env?
+			val_aux = ft_strdup(envlist->val);
 			return (val_aux);
 		}
 		envlist = envlist->next;

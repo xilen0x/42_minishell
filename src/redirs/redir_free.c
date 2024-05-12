@@ -10,10 +10,10 @@ void	redir_free(t_redir **lst)
 	aux = (*lst);
 	while (aux)
 	{
-		if (aux->filename != NULL)//BUENA PRACTICA
+		if (aux->filename != NULL)
 		{
 			free(aux->filename);
-			aux->filename = NULL;//BUENA PRACTICA
+			aux->filename = NULL;
 		}
 		if (aux->redir_type != 0)
 			aux->redir_type = 0;

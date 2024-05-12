@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*cuenta el numero de nodos en una lista t_cmd*/
+/*Returns the node number of a 't_cmd' list */
 int	cmd_size(t_cmd *lst)
 {
 	int	size;

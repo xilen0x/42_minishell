@@ -17,13 +17,13 @@ void	print_env(t_env *env)
 /*builtin que imprime el environment(la copia)*/
 int	builtin_env(t_cmd *cmd, t_env *env)
 {
-	if (size_arr2d(cmd->command_and_arg) > 1)
+	if (size_arr2d(cmd->commands) > 1)
 	{//casos especiales
-		if ((ft_strcmp(cmd->command_and_arg[1], "test") == 0) || \
-		(ft_strcmp(cmd->command_and_arg[1], "true") == 0) || \
-		(ft_strcmp(cmd->command_and_arg[1], "false") == 0))
+		if ((ft_strcmp(cmd->commands[1], "test") == 0) || \
+		(ft_strcmp(cmd->commands[1], "true") == 0) || \
+		(ft_strcmp(cmd->commands[1], "false") == 0))
 			return (0);
-		else if (ft_strcmp(cmd->command_and_arg[1], "echo") == 0)
+		else if (ft_strcmp(cmd->commands[1], "echo") == 0)
 			printf("\n");
 		else
 			ft_msgs(2);

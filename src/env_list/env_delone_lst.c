@@ -1,33 +1,6 @@
 #include "minishell.h"
 
-// void	init_main_struct(t_shell *shell)
-// {
-// 	shell->link_env = NULL;
-// 	shell->link_exe = NULL;
-// 	//shell->link_cmd = NULL;
-// 	//shell->link_redir = NULL;
-// 	//shell->link_redir_t = NULL;
-// 	//shell->link_tok = NULL;
-// 	//g_exit_stat = 0;
-// }
-/*
-void	free_arr2d(char **array_strings)
-{
-	size_t	i;
-
-	i = 0;
-	if (array_strings)
-	{
-		while (array_strings[i])
-		{
-			free(array_strings[i]);
-			i++;
-		}
-		free(array_strings);
-	}
-}
-*/
-//Funcion que elimina una variable del entorno
+//Removes a node from a 't-env' list
 void	env_delone(t_env **env, char **node_to_del, void (*del)(void*))
 {
 	t_env	*current;
@@ -52,9 +25,6 @@ void	env_delone(t_env **env, char **node_to_del, void (*del)(void*))
 		current = current->next;
 	}
 }
-
-
-
 /*
 	env = update_env(env, "PWD", current_wd);
 	free(current_wd);

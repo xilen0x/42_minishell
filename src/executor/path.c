@@ -3,10 +3,10 @@
 /*function that search by the 'PATH' word and split the content*/
 char	**get_paths(t_env *env)
 {
-	int		i;
+//	int		i;
 	char	**full_path;
 
-	i = 0;
+//	i = 0;
 	full_path = NULL;
 	while (env)
 	{
@@ -15,7 +15,7 @@ char	**get_paths(t_env *env)
 			full_path = ft_split(env->val, ':');
 			break ;
 		}
-		i++;
+//		i++;
 		env = env->next;
 	}
 	return (full_path);
@@ -32,7 +32,7 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 	i = 0;
 	while (exe->paths[i] != NULL)
 	{
-		cmd_path = ft_strjoin("/", cmd->command_and_arg[0]);
+		cmd_path = ft_strjoin("/", cmd->commands[0]);
 		full_path = ft_strjoin(exe->paths[i], cmd_path);
 		free(cmd_path);
 		if (full_path == NULL)

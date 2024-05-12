@@ -1,11 +1,13 @@
 #include "minishell.h"
 
-char	*get_exit_status_val(unsigned int *exit_status)
+//extern int	get_signal;
+
+char	*get_exit_status_val(void)
 {
 	char	*result;
 
-	result = ft_itoa(*exit_status);
+	result = ft_itoa(get_signal);
 	if (!result)
 		exit (EXIT_FAILURE);
-	return (result);//OJO: itoa retorna un char* mallocado
+	return (result);//retorna un char* mallocado
 }

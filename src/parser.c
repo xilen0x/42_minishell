@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
+void	parser(t_cmd **cmd, t_tok *tok)
 {
 	t_cmd   *node;
     t_tok   *tmp;
@@ -10,7 +10,6 @@ void	parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
 
     node = NULL;
     tmp = NULL;
-//    i = 0;
     size = 0;
     node_redir = NULL;
     tmp = tok_last(tok);//puntero al ultimo token de la lista
@@ -29,8 +28,8 @@ void	parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
     {
         node = cmd_new_node();//crea nodo t_cmd
         i = 0;        
-        size = command_and_arg_size(tmp);//averigua el size que debera tener la matriz
-        node->command_and_arg = (char **)p_malloc((size + 1) * sizeof(char *));
+        size = commands_size(tmp);//averigua el size que debera tener la matriz
+        node->commands = (char **)p_malloc((size + 1) * sizeof(char *));
          while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
         {
             if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente no es WORD
@@ -40,10 +39,10 @@ void	parser(t_cmd **cmd, t_tok *tok)//faltara añadir el exit_status
             }
             if (tmp->type == WORD)
             {
-                node->command_and_arg[i] = ft_strdup(tmp->str);//duplica la WORD y la mete en char** de t_cmd
+                node->commands[i] = ft_strdup(tmp->str);//duplica la WORD y la mete en char** de t_cmd
                 i++;
                 if (i == size)
-                    node->command_and_arg[i] = NULL;//cierro el array con NULL si es el ultimo elemento
+                    node->commands[i] = NULL;//cierro el array con NULL si es el ultimo elemento
                 tmp = tmp->next;
             }
             else if (is_operator(tmp) && tmp->next->type == WORD)//si es operador y next es WORD

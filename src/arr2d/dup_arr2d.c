@@ -11,8 +11,6 @@ char	**dup_arr2d(char **arr2d)
 	i = 0;
 	size = size_arr2d(arr2d);
 	env = (char **)p_malloc((size + 1) * sizeof(char *));
-//	if (env == NULL)
-//		exit (EXIT_FAILURE);//definir en el .h  ???
 	while (i < size)
 	{
 		env[i] = ft_strdup(arr2d[i]);

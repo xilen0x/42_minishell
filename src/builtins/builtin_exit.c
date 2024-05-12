@@ -73,27 +73,27 @@ int	builtin_exit(t_cmd *cmd, t_env *envlist)
 {
 	(void)	envlist;
 	//cleaner_envlist(&envlist);
-	if (cmd->command_and_arg[1] && check_int(cmd->command_and_arg[1]) != 0)
+	if (cmd->commands[1] && check_int(cmd->commands[1]) != 0)
 	{
 		printf("minishell: exit: numeric argument required\n");//exit aesae5 || exit - || exit ++- ...etc
 		exit(255);
 	}
-	else if ((size_arr2d(cmd->command_and_arg)) == 1)
+	else if ((size_arr2d(cmd->commands)) == 1)
 	{
 		printf("exit\n");//exit solo
 		printf(WHITE);
 		exit(0);
 	}
-	else if (cmd->command_and_arg[1])
+	else if (cmd->commands[1])
 	{
-		if ((size_arr2d(cmd->command_and_arg)) > 2)
+		if ((size_arr2d(cmd->commands)) > 2)
 		{
 			printf("minishell: exit: too many arguments\n");//exit 34 343
 			// *exit_status = 1;
 			return (1);
 		}
 		printf("exit\n");//exit 356
-		exit(ft_atoi(cmd->command_and_arg[1]));
+		exit(ft_atoi(cmd->commands[1]));
 	}
 	printf("exit\n");//otros casos
 	//exit(*exit_status);

@@ -10,9 +10,9 @@ void	print_cmd(t_cmd *lst)
 		i = 0;
 		printf("-----------------------\n");
 		printf("t_cmd\n");
-		while (lst->command_and_arg[i] != NULL)
+		while (lst->commands[i] != NULL)
 			{
-				printf("     <%s>\n", lst->command_and_arg[i]);
+				printf("     <%s>\n", lst->commands[i]);
 				i++;
 			}
 		printf("\n");
