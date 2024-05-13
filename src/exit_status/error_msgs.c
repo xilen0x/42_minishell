@@ -4,7 +4,7 @@
 int	ft_msgs(int n)
 {
 	if (n == 0)
-		write (2, "minishell: command not found!\n", 30);
+		write (2, "minishell: <AQUI VA EL TOKEN:> command not found!\n", 30);
 	else if (n == 1)
 		write (2, "cannot execute binary file\n", 27);
 	else if (n == 2)
@@ -19,7 +19,7 @@ int	ft_msgs(int n)
 		write (2, "invalid option\n", 15);
 	else if (n == 10)
 		write (2, "Run minishell without arguments!\n", 33);
-	return (1);
+	return (0);
 }
 
 /*Function that get the exit status number*/

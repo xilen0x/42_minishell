@@ -70,7 +70,7 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 
 	//signals here...soon
 	size_pipe = cmd_size(cmd);
-	pre_redirections(cmd, exe);
+//	pre_redirections(cmd, exe);
 	if (is_builtins(cmd) && (size_pipe == 1))
 	{
 		free(exe->pid);

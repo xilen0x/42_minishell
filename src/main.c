@@ -3,11 +3,11 @@
 
 int	main(int ac, char *av[], char *envp[])
 {
-	char	*line;
+	char	*line;//se podria declarar en minishell
 	char	**env_cpy;
 	t_env	*envlist;
-	t_tok	*tok;
-	t_cmd	*cmd;
+	t_tok	*tok;//se podria declarar en minishell
+	t_cmd	*cmd;//se podria declarar en minishell
 
 	envlist = NULL;
 	tok = NULL;
@@ -16,10 +16,10 @@ int	main(int ac, char *av[], char *envp[])
 	if (ac != 1 || av[1])
 	{
 		ft_msgs(10);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
-	env_cpy = dup_arr2d(envp);//hace falta duplicarlo. No se podria enviar envp a init_list directamente?
-	init_envlist(env_cpy, &envlist);
+	env_cpy = dup_arr2d(envp);//hace falta duplicarlo? No se podria enviar envp a init_list directamente?
+	env_init_list(env_cpy, &envlist);
 	free_arr2d(env_cpy);
 	init_msg();
 	while (1)
@@ -27,6 +27,5 @@ int	main(int ac, char *av[], char *envp[])
 		set_signals();
 		minishell(line, tok, envlist, cmd);
 	}
-	cleaner_envlist(&envlist);
-	return (0);
+//	cleaner_envlist(&envlist);//AQUI NO LLEGA NUNCA, DEBERIA ESTAR EN EL 'exit' o en el 'Ctrl+D' 
 }

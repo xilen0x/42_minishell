@@ -186,7 +186,7 @@ void	*p_malloc(size_t size);
 t_env	*lstlast(t_env *lst);
 void	lstadd_back(t_env **lst, t_env *new);
 t_env	*lstnew(char *key, char *value);
-void	init_envlist(char **envp, t_env **envlist);
+void	env_init_list(char **envp, t_env **envlist);
 void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 void	cleaner_envlist(t_env **lst);
 
