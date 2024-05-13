@@ -20,7 +20,7 @@ void	parser(t_cmd **cmd, t_tok *tok)
     }
     if (is_operator(tmp))//si linea acaba en operador <,>,<<,>>
     {
-        handle_error(PRINT_SYNTAX_ERR_2, &tok);
+        handle_error(PRINT_SYNTAX_ERR_2, &tok); //segfault
         return;//OJO: GESTIONAR ESTA SALIDA
     }
     tmp = tok;//lo reinicializo al inicio de lista tok
@@ -47,7 +47,7 @@ void	parser(t_cmd **cmd, t_tok *tok)
             }
             else if (is_operator(tmp) && tmp->next->type == WORD)//si es operador y next es WORD
             {
-                node_redir = redir_new_node(ft_strdup(tmp->next->str), tmp->type);//crea e inicializa node t_redir
+                node_redir = redir_new_node(ft_strdup(tmp->next->str), tmp->type - 2);//crea e inicializa node t_redir
                 redir_add_back(&node->redir, node_redir);
                 tmp = tmp->next->next;//salto dos nodos de tok (operador + key)
             }

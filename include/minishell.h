@@ -65,10 +65,10 @@ typedef enum e_type
 	NULL_TYPE = 0,//para saber que se ha inicializado ya 
 	WORD,
 	PIPE,
-	GREATER,
 	SMALLER,
-	DOUBLE_GREATER,
-	DOUBLE_SMALLER
+	DOUBLE_SMALLER,
+	GREATER,
+	DOUBLE_GREATER
 }	t_type;
 
 /*------contiene la str y el tipo de cada token-----*/
@@ -82,10 +82,10 @@ typedef struct s_tok
 typedef enum e_redir_type
 {
 	NULL_REDIR = 0,
-	REDIR_INPUT,//<
-	HEREDOC_INPUT,//<<
-	REDIR_OUTPUT,//>
-	REDIR_OUTPUT_APPEND,//>> 
+	REDIR_INPUT = 1,//<
+	HEREDOC_INPUT = 2,//<<
+	REDIR_OUTPUT = 3,//>
+	REDIR_OUTPUT_APPEND = 4,//>> 
 }	t_redir_type;
 
 /*----contiene los datos de cada redirección------*/
@@ -253,6 +253,6 @@ void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*-----------redirections---------------*/
-int	check_redirections(t_cmd *cmd);
+int	check_redirections(t_redir *aux);
 
 #endif

@@ -67,10 +67,12 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 {
 	unsigned int	size_pipe;
-
+	t_redir			*aux;
 	//signals here...soon
+	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
-	if ((check_redirections(cmd) == 0))
+	aux = cmd->redir;
+	if ((check_redirections(aux) == 0))//0: Si NO hay redirecciones
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))
 		{
@@ -80,9 +82,9 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 		else
 			executor(cmd, exe, env);
 	}
-	else
+	else//1: Sí hay redirecciones
 	{
-		printf("Se han encontrado redirecciones\n");
+		pre_redirections(cmd, exe);
 	}
 	free(exe->pid);
 	return (0);

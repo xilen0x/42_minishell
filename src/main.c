@@ -4,7 +4,7 @@
 int	main(int ac, char *av[], char *envp[])
 {
 	char	*line;
-	char	**env_cpy;
+	//char	**env_cpy;
 	t_env	*envlist;
 	t_tok	*tok;
 	t_cmd	*cmd;
@@ -18,9 +18,9 @@ int	main(int ac, char *av[], char *envp[])
 		ft_msgs(10);
 		exit(1);
 	}
-	env_cpy = dup_arr2d(envp);//hace falta duplicarlo. No se podria enviar envp a init_list directamente?
-	init_envlist(env_cpy, &envlist);
-	free_arr2d(env_cpy);
+	//env_cpy = dup_arr2d(envp);//hace falta duplicarlo. No se podria enviar envp a init_list directamente?
+	init_envlist(envp, &envlist);
+	//free_arr2d(env_cpy);
 	// init_msg();
 	while (1)
 	{

@@ -23,7 +23,7 @@ void	minishell(char *line, t_tok *tok, t_env *envlist, t_cmd *cmd)
 	free(line);
 	parser(&cmd, tok);
 	tok_free(&tok);
-	should_expand(cmd, envlist);
+//	should_expand(cmd, envlist);
 //	print_cmd(cmd);
 //	print_cmd_para_executor(cmd);
 	init_exe(&exe, cmd);
