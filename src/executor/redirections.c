@@ -1,6 +1,6 @@
 # include "minishell.h"
 
-void	rm_doc(t_redir *aux)
+static void	rm_ref_file(t_redir *aux)
 {
 	while (aux)
 	{
@@ -12,7 +12,7 @@ void	rm_doc(t_redir *aux)
 	}
 }
 
-int	redirections(t_exe *exe, t_redir *aux)
+int	open_files(t_exe *exe, t_redir *aux)
 {
 	// (void)exe;
 	if (aux->redir_type == REDIR_OUTPUT || aux->redir_type == REDIR_OUTPUT_APPEND)
@@ -42,9 +42,9 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 	aux = cmd->redir;
 	while (aux)
 	{
-		if (redirections(exe, aux) == 1)
+		if (open_files(exe, aux))
 			return (1);
-		rm_doc(cmd->redir);
+		// rm_ref_file(cmd->redir);
 		aux = aux->next;
 	}
 	if (cmd->next)
@@ -53,7 +53,7 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 	}
 	// close(STDOUT_FILENO);
 	close_fd(exe);
-	// rm_doc(cmd->redir);
+	rm_ref_file(cmd->redir);
 	return (0);
 }
 
