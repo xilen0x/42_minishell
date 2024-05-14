@@ -40,7 +40,6 @@
 # define CTRL_SLASH SIGQUIT
 
 /*--------------------Error messages-------------------*/
-# define PRINT_MALLOC_ERR_0 "Error: malloc failed\n"
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
@@ -126,12 +125,12 @@ typedef struct s_exe
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
-int		bg_color(void);
+//int		bg_color(void);
 void	init_msg(void);
 void	set_signals(void);
-void	minishell(char	*line, t_env	*envlist);
+void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
-void	parser(t_cmd **cmd, t_tok *tok);
+int		parser(t_cmd **cmd, t_tok *tok);
 void	init_exe(t_exe *exe, t_cmd *cmd);	
 void	handle_error(char *str, t_tok **tok);
 void	cleaner_envlist(t_env **lst);

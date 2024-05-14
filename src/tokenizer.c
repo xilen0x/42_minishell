@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-/*Returns the token's len pointed by 'line' if it is WORD, otherwise inits 'key' if it is an operator */
+/*Returns the token's len pointed by 'line' if it is a WORD, otherwise inits 'key' if it is an operator */
 int	tok_len(char *line, t_tok **new_tok)
 {
 	int		len;
@@ -40,7 +40,7 @@ int	tok_len(char *line, t_tok **new_tok)
 
 //Tokeniza la 'line' sea cual sea, sin verificar errores sintacticos (separa por ' ', \t, <, >, >>, <<, |)
 //'str' siempre sera NULL, excepto si es una WORD que contendra su string
-//las comillas se tratan como WORD, si no estan cerradas llegaran hasta el '\0'
+//las comillas se tratan como WORD y si no estan cerradas llegaran hasta fin de linea
 void	tokenizer(t_tok **tok, char *line)
 {
 	t_tok	*new_tok;

@@ -3,16 +3,10 @@
 
 int	main(int ac, char *av[], char *envp[])
 {
-	char	*line;//se podria declarar en minishell
 //	char	**env_cpy;
 	t_env	*envlist;
-//	t_tok	*tok;//se podria declarar en minishell
-//	t_cmd	*cmd;//se podria declarar en minishell
 
 	envlist = NULL;
-//	tok = NULL;
-//	cmd = NULL;
-	line = NULL;
 	if (ac != 1 || av[1])
 	{
 		ft_msgs(10);
@@ -26,7 +20,7 @@ int	main(int ac, char *av[], char *envp[])
 	while (1)
 	{
 		set_signals();
-		minishell(line, envlist);
+		minishell(envlist);
+		printf("get_signal = %i\n", get_signal);
 	}
-//	cleaner_envlist(&envlist);//AQUI NO LLEGA NUNCA, DEBERIA ESTAR EN EL 'exit' o en el 'Ctrl+D' 
 }

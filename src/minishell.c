@@ -10,13 +10,14 @@ static void	control_and_d(char *line)
 	}
 }
 
-void	minishell(char *line, t_env *envlist)
+void	minishell(t_env *envlist)
 {
+	char	*line;
 	t_tok	*tok;
 	t_cmd	*cmd;
 	t_exe	exe;
 
-	get_signal = 0;//INIT DE VARIABLE GLOBAL
+	get_signal = 0;//VAR GLOBAL
 	tok = NULL;
 	cmd = NULL;
 	line = readline(">>>>minishell$ ");
@@ -30,11 +31,13 @@ void	minishell(char *line, t_env *envlist)
 	}
 	tokenizer(&tok, line);
 	free(line);
-	parser(&cmd, tok);
+	if (parser(&cmd, tok) == 1)
+		return ;
 	tok_free(&tok);
 	should_expand(cmd, envlist);
-	print_cmd(cmd);
+	print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
 	init_exe(&exe, cmd);
 	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);
+//	printf("get_signal = %i\n", get_signal);
 }

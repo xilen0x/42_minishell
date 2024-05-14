@@ -6,7 +6,7 @@ void	cmd_free(t_cmd **lst)
 {
 	t_cmd	*aux;
 
-	if (lst == NULL || (*lst) == NULL)
+	if (lst == NULL || (*lst) == NULL)//Adri, perque '||' i no '&&'?
 		return ;
 	aux = (*lst);
 	while (aux != NULL)
