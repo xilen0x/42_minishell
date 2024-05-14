@@ -29,7 +29,7 @@ READLINE := ${READLINE_ROOT}libreadline.a ${READLINE_ROOT}libhistory.a
 
 # Libft
 LIBFT_ROOT := ${LIB_ROOT}libft/
-LIBFT_INC := $(LIBFT_ROOT)include/
+LIBFT_INC := $(LIBFT_ROOT)include/ 
 LIBFT := $(LIBFT_ROOT)libft.a
 
 INC_DIRS += ${LIBFT_INC}

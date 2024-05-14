@@ -7,7 +7,7 @@ void	print_redir(t_redir *lst)
 	if (!lst)
 	{
 		printf("            NULL\n");
-		return;
+		return ;
 	}
 	while (lst)
 	{

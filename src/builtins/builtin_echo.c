@@ -29,7 +29,7 @@ int	builtin_echo(t_cmd *cmd)
 		print_newline = 0;
 		i++;
 	}
-	while (cmd->commands[i])
+	while (cmd->commands[i])// != '\0' ???
 	{
 		print_without_quotes(cmd->commands[i]);
 		if (cmd->commands[i + 1])

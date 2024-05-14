@@ -15,24 +15,26 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 {
 	while (cmd)
 	{
-		if (pipe(exe->fd) == -1)
+		if (pipe(exe->fd) == -1)// guarda en fd los dos file descriptors
 			error_exe(1);
-		exe->pid[i] = fork();
+		exe->pid[i] = fork();//crea un proceso hijo, clon del padre
 		if (exe->pid[i] < 0)
 			error_exe(2);
-		else if (exe->pid[i] == 0)//Si condicion se cumple, se ejecutará el proceso(s) hijo(s)
+		else if (exe->pid[i] == 0) // Si condicion se cumple, se ejecutará el proceso hijo
 		{
 			exe->paths = get_paths(*env);
-			// ft_open_files(argv, &data);
-			exe->cmd_fullpath = NULL;
-			search_command_path(cmd, exe);
-			list_to_array(*env, exe);
-			if (cmd->next != NULL)
-				dup2(exe->fd[1], STDOUT_FILENO);
-			close_fd(exe);
-			if (execve(exe->cmd_fullpath, cmd->commands, exe->new_array) < 0)
-				ft_msgs(0);
-			exit(0);
+			if (pre_redirections(cmd, exe) == 0)
+			{
+				exe->cmd_fullpath = NULL;
+				search_command_path(cmd, exe);
+				list_to_array(*env, exe);
+				if (cmd->next != NULL)
+					dup2(exe->fd[1], STDOUT_FILENO);
+				close_fd(exe);
+				if (execve(exe->cmd_fullpath, cmd->commands, exe->new_array) < 0)
+					ft_msgs(0);
+				exit(0);
+			}
 		}
 		dup2(exe->fd[0], STDIN_FILENO);
 		close_fd(exe);
@@ -47,11 +49,11 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
 	int		i;
 
-	exe->fd_input = dup(STDIN_FILENO);
+	exe->fd_input = dup(STDIN_FILENO);//almaceno el fd de stdin en fd_input y stdout en fd_output
 	exe->fd_output = dup(STDOUT_FILENO);
 	i = 0;
 	executor_core(cmd, exe, env, i);
-	int status;//reemplazar luego esto por lo de la funcion de exit_status
+	int status;//reemplazar luego esto por lo del exit_status de joan
 	dup2(exe->fd_input, STDIN_FILENO);
 	dup2(exe->fd_output, STDOUT_FILENO);
 	i = 0;
@@ -67,17 +69,25 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 {
 	unsigned int	size_pipe;
-
+	t_redir			*aux;
 	//signals here...soon
+	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
-//	pre_redirections(cmd, exe);
-	if (is_builtins(cmd) && (size_pipe == 1))
+	aux = cmd->redir;
+	if (!exist_redirections(aux))//0: Si NO hay redirecciones
 	{
-		free(exe->pid);
-		return (builtins(cmd, env));
+		if (is_builtins(cmd) && (size_pipe == 1))
+		{
+			free(exe->pid);
+			return (builtins(cmd, env));
+		}
+		else
+			executor(cmd, exe, env);
 	}
-	else
+	else//1: Sí hay redirecciones
+	{
 		executor(cmd, exe, env);
+	}
 	free(exe->pid);
 	return (0);
 }
