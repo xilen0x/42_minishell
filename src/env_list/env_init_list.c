@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-/* Copies the entire '**envp' into a new malloced 't_env' list*/
-void	init_envlist(char **envp, t_env **envlist)
+/* Copies the entire 'char **envp' into a new malloced 't_env' list*/
+void	env_init_list(char **envp, t_env **envlist)
 {
 	int		i;
 	char	**tokens;

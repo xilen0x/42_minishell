@@ -47,7 +47,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 			else//verifica si es un nombre de variable valido y si es de entorno o no
 			{
 				env_key = get_env_key(str + i);//puntero mallocado al inicio del nombre despues del '$'
-				env_val = get_env_val(env_key, envlist);//retorna el content mallocado de tok_key en env o NULL si no existe
+				env_val = get_env_val(env_key, envlist);//retorna el content mallocado de tok_key en env o NULL si no existe	
 				while (env_val && env_val[k] != '\0')
 				{
 					result[j] = (env_val[k]);

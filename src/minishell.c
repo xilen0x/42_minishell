@@ -1,17 +1,27 @@
 
 #include "minishell.h"
 
-void	minishell(char *line, t_tok *tok, t_env *envlist, t_cmd *cmd)
+static void	control_and_d(char *line)
 {
+	if (!line)//Ctrl+D cierra el minishell y no seria necesario recoger el exit_status.
+	{
+		printf("exit\n");//ctrl-D arroja un 'exit' por consola
+		exit(EXIT_SUCCESS);
+	}
+}
+
+void	minishell(t_env *envlist)
+{
+	char	*line;
+	t_tok	*tok;
+	t_cmd	*cmd;
 	t_exe	exe;
 
-	get_signal = 0;
+	get_signal = 0;//VAR GLOBAL
+	tok = NULL;
+	cmd = NULL;
 	line = readline(">>>>minishell$ ");
-	if (!line)//lo gestinamos aqui, porque el exit_status de Ctrl+D cierra el minishell y no seria necesario recogerlo.
-	{
-		printf("exit\n");//en el caso del ctrl-D
-		exit(0);
-	}
+	control_and_d(line);
 	if (line && *line)
 		add_history(line);
 	if (!*line || *line == ' ')
@@ -21,13 +31,12 @@ void	minishell(char *line, t_tok *tok, t_env *envlist, t_cmd *cmd)
 	}
 	tokenizer(&tok, line);
 	free(line);
-	parser(&cmd, tok);
+	if (parser(&cmd, tok) == 1)
+		return ;
 	tok_free(&tok);
 	should_expand(cmd, envlist);
-//	print_cmd(cmd);
-//	print_cmd_para_executor(cmd);
+	// print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
 	init_exe(&exe, cmd);
 	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);
-//	return (line);
 }

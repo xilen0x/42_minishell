@@ -33,7 +33,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 				close_fd(exe);
 				if (execve(exe->cmd_fullpath, cmd->commands, exe->new_array) < 0)
 					ft_msgs(0);
-				exit(0);
+				exit(EXIT_FAILURE);
 			}
 			exit(1);
 		}

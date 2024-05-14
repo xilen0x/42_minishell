@@ -19,7 +19,7 @@ int	ft_msgs(int n)
 		write (2, "invalid option\n", 15);
 	else if (n == 10)
 		write (2, "Run minishell without arguments!\n", 33);
-	return (1);
+	return (0);
 }
 
 /*Function that get the exit status number*/
