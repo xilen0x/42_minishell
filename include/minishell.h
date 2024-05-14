@@ -129,7 +129,7 @@ typedef struct s_exe
 int		bg_color(void);
 void	init_msg(void);
 void	set_signals(void);
-void	minishell(char	*line, t_tok	*tok, t_env	*envlist, t_cmd	*cmd);
+void	minishell(char	*line, t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
 void	parser(t_cmd **cmd, t_tok *tok);
 void	init_exe(t_exe *exe, t_cmd *cmd);	

@@ -12,7 +12,7 @@ void	signal_handler(int sig)
 	}
 	else if (sig == CTRL_SLASH)//Existe para justificar el subject
 		//printf("\nCtrl-\\ recibido.\n");
-	return ;//SE PODRIA ELIMINAR??
+	return ;
 }
 
 /*-----Manages Ctrl+C response------*/ 
