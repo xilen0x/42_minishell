@@ -15,16 +15,17 @@ void	rm_doc(t_redir *aux)
 int	redirections(t_exe *exe, t_redir *aux)
 {
 	// (void)exe;
-    if (aux->redir_type == REDIR_OUTPUT || aux->redir_type == REDIR_OUTPUT_APPEND) {
-        if (aux->redir_type == REDIR_OUTPUT_APPEND)
-            exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_APPEND, 0660);
-        else
-            exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_TRUNC, 0660);
-        if (exe->fd_output == -1)
-            return 1;
-        if (dup2(exe->fd_output, STDOUT_FILENO) == -1)
-            return 1;
-        close(exe->fd_output);
+	if (aux->redir_type == REDIR_OUTPUT || aux->redir_type == REDIR_OUTPUT_APPEND)
+	{
+		if (aux->redir_type == REDIR_OUTPUT_APPEND)
+			exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_APPEND, 0660);
+		else
+			exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_TRUNC, 0660);
+		if (exe->fd_output == -1)
+			return (1);
+		if (dup2(exe->fd_output, STDOUT_FILENO) == -1)
+			return (1);
+		close(exe->fd_output);
 	}
 	else if (aux->redir_type == REDIR_INPUT || aux->redir_type == HEREDOC_INPUT)// < || <<
 	{
@@ -43,7 +44,7 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 	{
 		if (redirections(exe, aux) == 1)
 			return (1);
-		// rm_doc(cmd->redir);
+		rm_doc(cmd->redir);
 		aux = aux->next;
 	}
 	if (cmd->next)
@@ -58,7 +59,7 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 
 
 /*check if a redirection operator(>, >>, <, <<) was found*/
-int	check_redirections(t_redir *aux)
+int	exist_redirections(t_redir *aux)
 {
 	if (!aux)
 		return (0);

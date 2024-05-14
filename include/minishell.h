@@ -253,6 +253,6 @@ void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*-----------redirections---------------*/
-int	check_redirections(t_redir *aux);
+int	exist_redirections(t_redir *aux);
 
 #endif
