@@ -6,7 +6,7 @@ static void	control_and_d(char *line)
 	if (!line)//Ctrl+D cierra el minishell y no seria necesario recoger el exit_status.
 	{
 		printf("exit\n");//ctrl-D arroja un 'exit' por consola
-		exit(EXIT_FAILURE);
+		exit(EXIT_SUCCESS);
 	}
 }
 
@@ -39,5 +39,4 @@ void	minishell(t_env *envlist)
 	init_exe(&exe, cmd);
 	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);
-//	printf("get_signal = %i\n", get_signal);
 }

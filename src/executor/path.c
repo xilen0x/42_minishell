@@ -36,12 +36,17 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 		full_path = ft_strjoin(exe->paths[i], cmd_path);
 		free(cmd_path);
 		if (full_path == NULL)
+		{
+			get_signal = 127;
 			return (-1);
+		}
 		if (access(full_path, F_OK) == 0)
 		{
 			exe->cmd_fullpath = full_path;
 			return (0);
 		}
+		else
+			get_signal = 1;
 		free(full_path);
 		i++;
 	}
