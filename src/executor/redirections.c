@@ -16,10 +16,7 @@ int	open_files(t_exe *exe, t_redir *aux)
 {
 	if (aux->redir_type == REDIR_INPUT || aux->redir_type == HEREDOC_INPUT)// < || <<
 	{
-		//if (aux->redir_type == REDIR_INPUT)
-			exe->fd_input = open(aux->filename, O_RDONLY);
-		// else
-		// 	exe->fd_input = open(aux->filename, O_CREAT | O_WRONLY | O_TRUNC, 0660);
+		exe->fd_input = open(aux->filename, O_RDONLY);
 		if (exe->fd_input == -1)
 			return (1);
 		if (dup2(exe->fd_input, STDIN_FILENO) == -1)
@@ -79,5 +76,6 @@ int	exist_redirections(t_redir *aux)
 			return (1);
 		}
 	}
+	free(aux);
 	return (0);
 }

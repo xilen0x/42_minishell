@@ -32,6 +32,7 @@ void	allocate_memory(t_env *current, int len, t_exe *exe)
 {
 	int		i;
 	char	*tmp;
+
 	i = 0;
 	while (current && i < len)
 	{
