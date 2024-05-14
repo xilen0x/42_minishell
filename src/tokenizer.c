@@ -1,17 +1,15 @@
 
 #include "minishell.h"
 
-/*Returns the token's len pointed by 'line' if it is a WORD, otherwise inits 'key' if it is an operator */
-int	tok_len(char *line, t_tok **new_tok)
+static int	init_operator_type(char *line, t_tok **new_tok)
 {
-	int		len;
-	char	c;
+	int	flag;
 
-	len = 0;
+	flag = 1;
 	if (*line == '>' && *line == *(line + 1))
 		(*new_tok)->type = DOUBLE_GREATER;
 	else if (*line == '<' && *line == *(line + 1))
-		(*new_tok)->type = DOUBLE_SMALLER;		
+		(*new_tok)->type = DOUBLE_SMALLER;	
 	else if (*line == '>')
 		(*new_tok)->type = GREATER;
 	else if (*line == '<')
@@ -19,6 +17,32 @@ int	tok_len(char *line, t_tok **new_tok)
 	else if (*line == '|')
 		(*new_tok)->type = PIPE;
 	else
+		flag = 0;
+	return (flag);
+}
+
+
+
+/*Returns the token's len pointed by 'line' if it is a WORD, otherwise inits 'type' if it is an operator */
+int	tok_len(char *line, t_tok **new_tok)
+{
+	int		len;
+	char	c;
+
+	len = 0;
+	if (init_operator_type(line, new_tok) == 0)//si no es ningun operador de redir ni un pipe
+
+//	if (*line == '>' && *line == *(line + 1))
+//		(*new_tok)->type = DOUBLE_GREATER;
+//	else if (*line == '<' && *line == *(line + 1))
+//		(*new_tok)->type = DOUBLE_SMALLER;		
+//	else if (*line == '>')
+//		(*new_tok)->type = GREATER;
+//	else if (*line == '<')
+//		(*new_tok)->type = SMALLER;
+//	else if (*line == '|')
+//		(*new_tok)->type = PIPE;
+//	else
 	{
 		while (*(line + len) && (*(line + len) != ' ' && *(line + len)!= '\t' \
 		&& *(line + len) != '|' && *(line + len) != '<' \

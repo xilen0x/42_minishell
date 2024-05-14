@@ -31,11 +31,13 @@ void	error_exe(int num)
 void	allocate_memory(t_env *current, int len, t_exe *exe)
 {
 	int		i;
-
+	char	*tmp;
 	i = 0;
 	while (current && i < len)
 	{
-		exe->new_array[i] = ft_strjoin(current->key, current->val);
+		tmp = ft_strjoin(current->key, "=");
+		exe->new_array[i] = ft_strjoin(tmp, current->val);
+		free(tmp);
 		if (exe->new_array[i] == NULL)
 		{
 			free_memory(exe->new_array, i);
