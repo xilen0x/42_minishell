@@ -35,6 +35,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 					ft_msgs(0);
 				exit(0);
 			}
+			exit(1);
 		}
 		dup2(exe->fd[0], STDIN_FILENO);
 		close_fd(exe);
@@ -74,7 +75,7 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
 	aux = cmd->redir;
-	if (!exist_redirections(aux))//0: Si NO hay redirecciones
+	if (!exist_redirections(aux))//0: if NO hay redirecciones
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))
 		{
@@ -84,10 +85,8 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 		else
 			executor(cmd, exe, env);
 	}
-	else//1: Sí hay redirecciones
-	{
+	else//1: if Sí hay redirecciones
 		executor(cmd, exe, env);
-	}
 	free(exe->pid);
 	return (0);
 }

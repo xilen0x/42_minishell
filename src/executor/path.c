@@ -30,6 +30,11 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 	int		i;
 
 	i = 0;
+	if (ft_strchr(cmd->commands[0], '/'))
+	{
+		exe->cmd_fullpath = ft_strdup(cmd->commands[0]);
+		return (0);
+	}
 	while (exe->paths[i] != NULL)
 	{
 		cmd_path = ft_strjoin("/", cmd->commands[0]);
