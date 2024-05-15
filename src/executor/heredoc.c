@@ -8,7 +8,7 @@ int	heredoc_create(t_cmd *cmd)
 	t_redir	*aux;
 
 	tmp_dir = ft_strdup("/tmp/heredoc");
-	fd_tmp = open(tmp_dir, O_CREAT | O_RDWR, 0660);
+	fd_tmp = open(tmp_dir, O_CREAT | O_WRONLY | O_TRUNC, 0660);
 	if (fd_tmp == -1)
 	{
 		free(tmp_dir);
@@ -31,6 +31,7 @@ int	heredoc_create(t_cmd *cmd)
 		if (!aux || ft_strcmp(line, aux->filename) == 0)
 		{
 			free(line);
+			close(fd_tmp);
 			break ;
 		}
 	}
