@@ -14,17 +14,15 @@ int	heredoc_create(t_cmd *cmd)
 		free(tmp_dir);
 		return (1);
 	}
-	free(tmp_dir);
-	line = get_next_line(STDIN_FILENO);
+	line = readline("> ");
 	while (line)
 	{
 		aux = cmd->redir;
 		while (aux && ft_strcmp(line, aux->filename) != 0)
 		{
 			write(fd_tmp, line, ft_strlen(line));
-            // write(fd_tmp, "\n", 1);
 			free(line);
-			line = get_next_line(STDIN_FILENO);
+			line = readline("> ");
 			if (!(line))
 				break ;
 		}
@@ -35,6 +33,7 @@ int	heredoc_create(t_cmd *cmd)
 			break ;
 		}
 	}
+	free(tmp_dir);
 	close(fd_tmp);
 	return (0);
 }
