@@ -26,17 +26,17 @@ int	new_tok_len(char *str, t_env *envlist)
 			quotes.s_quote = 1;
 		else if (str[i] == '\'' && quotes.s_quote == 1)
 			quotes.s_quote = 0;
-		else if (str[i] == '$' && quotes.s_quote == 0)
+		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])//si es un '$' y despues hay algo
 		{
 			i++;//salto el '$'
-			if (str[i] == '?')
+			if (str[i] && str[i] == '?')
 				len += get_exit_status_len();
-			else//verifica si es un nombre de variable valido y si es de entorno o no
+			else//verifica si despues de $ hay un nombre de variable valido y si es de entorno o no
 			{
 				env_key = get_env_key(str + i);//puntero mallocado al nombre despues del '$', sea cual sea
-				if (env_key != NULL)//en caso de que el nombre NO sea un num o un caracter especial
+				if (env_key != NULL)//en caso de que el nombre NO sea NULL (un num o un caracter especial)
 				{
-					env_val = get_env_val(env_key, envlist);
+					env_val = get_env_val(env_key, envlist);//busco su valor en el env
 					if (env_val != NULL)
 						len += ft_strlen(env_val);//incremento el tamaño del nuevo token con el de la expansion
 					free(env_val);

@@ -17,100 +17,6 @@
 //#include<stdlib.h>
 //#include<string.h>
 #include "libft.h"
-/*
-void    *ft_memcpy(void *dst, const void *src, size_t n)
-{
-    size_t          i;
-    unsigned char   *s;
-    unsigned char   *d;
-
-    i = 0;
-    s = (unsigned char *)src;
-    d = (unsigned char *)dst;
-    if (!dst && !src)
-        return (0);
-    while (n > i)
-    {
-        d[i] = s[i];
-        i++;
-    }
-    return (d);
-}
-
-size_t  ft_strlen(const char *s)
-{
-    size_t  i;
-
-    i = 0;
-    while (s[i])
-        i++;
-    return (i);
-}
-
-char    *ft_strdup(const char *s1)
-{
-    char    *dup;
-    size_t  len;
-
-    len = ft_strlen(s1) + 1;
-    dup = (char *) malloc(len * sizeof(char));
-    if (!dup)
-        return (NULL);
-    ft_memcpy(dup, s1, len);
-    return (dup);
-}
-
-char    *ft_substr(char const *s, unsigned int start, size_t len)
-{
-    char            *sub;
-    unsigned int    i;
-    unsigned int    s_len;
-
-    i = 0;
-    if (!s)
-        return (NULL);
-    s_len = ft_strlen(s);
-    if (start > s_len)
-        return (ft_strdup(""));
-    if (ft_strlen(&s[start]) < len)
-        len = ft_strlen(&s[start]);
-    sub = (char *) malloc(sizeof(char) * (len + 1));
-    if (!sub)
-        return (NULL);
-    while (s[start + i] && i < len)
-    {
-        sub[i] = s[start + i];
-        i++;
-    }
-    sub[i] = '\0';
-    return (sub);
-}
-
-void    ft_bzero(void *s, size_t n)
-{
-    char    *a;
-    int     i;
-
-    i = 0;
-    a = s;
-    while (n > 0)
-    {
-        a[i] = 0;
-        i++;
-        n--;
-    }
-}
-
-void    *ft_calloc(size_t count, size_t size)
-{
-    void    *array;
-
-    array = malloc(count * size);
-    if (!array)
-        return (NULL);
-    ft_bzero(array, (count * size));
-    return (array);
-}*/
 
 static int	ft_counter(char const *s, char c)
 {
@@ -155,6 +61,8 @@ char	**ft_split(char const *s, char c)
 
 	i = -1;
 	num = 0;
+    if (!s)
+        return (NULL);
 	split = (char **)ft_calloc((ft_counter(s, c) + 1), sizeof(char *));
 	if (!split)
 		return (NULL);
