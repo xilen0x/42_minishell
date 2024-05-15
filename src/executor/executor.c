@@ -45,19 +45,6 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 	return (0);
 }
 
-
-/*
-		else if (aux->redir_type == HEREDOC_INPUT)
-		{
-			exe->fd_input = open(aux->filename, O_CREAT | O_RDWR, 0660);
-			if (exe->fd_input == -1)
-				return (1);
-			if (dup2(exe->fd_input, STDOUT_FILENO) == -1)
-				return (1);
-			close(exe->fd_input);
-		}
-*/
-
 /*execute commands in pipes - p1*/
 int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
@@ -84,11 +71,11 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 {
 	unsigned int	size_pipe;
 	t_redir			*aux;
-	//signals here...soon
+	//signals here...?
 	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
 	aux = cmd->redir;
-	if (!exist_redirections(aux))//0: if NO hay redirecciones
+	if (!exist_redirections(aux))//--------------0: if NO hay redirecciones
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))
 		{
@@ -98,8 +85,12 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 		else
 			executor(cmd, exe, env);
 	}
-	else//1: if Sí hay redirecciones
+	else//---------------------------------------1: if Sí hay redirecciones
+	{
+		if (heredoc_found(cmd))
+			heredoc_create(cmd);
 		executor(cmd, exe, env);
+	}
 	free(exe->pid);
 	return (0);
 }

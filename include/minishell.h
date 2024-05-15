@@ -254,4 +254,8 @@ void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 /*-----------redirections---------------*/
 int	exist_redirections(t_redir *aux);
 
+/*-------------------heredoc----------------*/
+int	heredoc_found(t_cmd *cmd);
+int	heredoc_create(t_cmd *cmd);
+
 #endif
