@@ -87,8 +87,8 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 	}
 	else//---------------------------------------1: if Sí hay redirecciones
 	{
-		if (heredoc_found(cmd))
-			heredoc_create(cmd);
+		// if (heredoc_found(cmd))
+		// 	heredoc_create(cmd);
 		executor(cmd, exe, env);
 	}
 	free(exe->pid);

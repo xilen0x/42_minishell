@@ -25,3 +25,8 @@ int	main(int ac, char *av[], char *envp[])
 	}
 	return (0);
 }
+/*
+nota: puede haber un problema al llamar a las redirecciones dentro del executor.
+ver posibilidad de hacerlo antes. luego tratar al heredoc como un archivo normal.
+algo asi.
+*/

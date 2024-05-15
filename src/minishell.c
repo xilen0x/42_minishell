@@ -35,7 +35,8 @@ void	minishell(t_env *envlist)
 		return ;
 	tok_free(&tok);
 	should_expand(cmd, envlist);
-	// print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
+	if (heredoc_found(cmd))//agregada
+		heredoc_create(cmd);//agegada
 	init_exe(&exe, cmd);
 	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);

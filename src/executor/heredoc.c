@@ -15,23 +15,20 @@ int	heredoc_create(t_cmd *cmd)
 		return (1);
 	}
 	line = readline("> ");
-	while (line)
+	aux = cmd->redir;
+	while (aux && ft_strcmp(line, aux->filename) != 0)
 	{
-		aux = cmd->redir;
-		while (aux && ft_strcmp(line, aux->filename) != 0)
-		{
-			write(fd_tmp, line, ft_strlen(line));
-			free(line);
-			line = readline("> ");
-			if (!(line))
-				break ;
-		}
-		if (!aux || ft_strcmp(line, aux->filename) == 0)
-		{
-			free(line);
-			close(fd_tmp);
+		write(fd_tmp, line, ft_strlen(line));
+		free(line);
+		line = readline("> ");
+		if (!(line))
 			break ;
-		}
+	}
+	if (!aux || ft_strcmp(line, aux->filename) == 0)
+	{
+		free(line);
+		close(fd_tmp);
+		return (0);
 	}
 	free(tmp_dir);
 	close(fd_tmp);
