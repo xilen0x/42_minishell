@@ -45,6 +45,19 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 	return (0);
 }
 
+
+/*
+		else if (aux->redir_type == HEREDOC_INPUT)
+		{
+			exe->fd_input = open(aux->filename, O_CREAT | O_RDWR, 0660);
+			if (exe->fd_input == -1)
+				return (1);
+			if (dup2(exe->fd_input, STDOUT_FILENO) == -1)
+				return (1);
+			close(exe->fd_input);
+		}
+*/
+
 /*execute commands in pipes - p1*/
 int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 {

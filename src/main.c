@@ -16,7 +16,7 @@ int	main(int ac, char *av[], char *envp[])
 //	env_init_list(env_cpy, &envlist);
 //	free_arr2d(env_cpy);
 	env_init_list(envp, &envlist);
-	init_msg();
+	//init_msg();
 	while (1)
 	{
 		set_signals();
