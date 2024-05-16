@@ -6,6 +6,7 @@ int	main(int ac, char *av[], char *envp[])
 //	char	**env_cpy;
 	t_env	*envlist;
 
+	get_signal = 0;//INIT VAR GLOBAL
 	envlist = NULL;
 	if (ac != 1 || av[1])
 	{

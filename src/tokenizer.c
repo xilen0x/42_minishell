@@ -31,7 +31,7 @@ int	tok_len(char *line, t_tok **new_tok)
 
 	len = 0;
 	if (init_operator_type(line, new_tok) == 0)//si no es ningun operador de redir ni un pipe
-
+//MOVIDO A LA FUNCION DE ARRIBA POR CUMPLIR NORMA
 //	if (*line == '>' && *line == *(line + 1))
 //		(*new_tok)->type = DOUBLE_GREATER;
 //	else if (*line == '<' && *line == *(line + 1))

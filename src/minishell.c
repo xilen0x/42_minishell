@@ -19,7 +19,6 @@ void	minishell(t_env *envlist)
 	t_cmd	*cmd;
 	t_exe	exe;
 
-	get_signal = 0;//VAR GLOBAL
 	tok = NULL;
 	cmd = NULL;
 	line = readline("minishell$ ");
@@ -32,6 +31,7 @@ void	minishell(t_env *envlist)
 		return ;
 	}
 	tokenizer(&tok, line);
+	print_tok(tok);
 	free(line);
 	if (parser(&cmd, tok) == 1)
 		return ;

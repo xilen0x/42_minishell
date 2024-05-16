@@ -13,7 +13,8 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 	while (cmd_aux)
 	{
 		i = 0;
-		while (cmd_aux->commands[i] != NULL)//recorre cada elemento/string buscando algo que expandir o quote remover
+//		while (cmd_aux->commands[i] != NULL)//recorre cada elemento/string buscando algo que expandir o quote remover
+		while (cmd_aux->commands && cmd_aux->commands[i])
 		{
 			if (ft_strchr(cmd_aux->commands[i], '$') != NULL \
 			|| ft_strchr(cmd_aux->commands[i], '\'') != NULL \

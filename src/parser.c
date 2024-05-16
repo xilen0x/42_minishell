@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+
 int	parser(t_cmd **cmd, t_tok *tok)
 {
 	t_cmd   *node;
@@ -24,25 +25,29 @@ int	parser(t_cmd **cmd, t_tok *tok)
         return (1);
     }
     tmp = tok;//lo reinicializo al inicio de lista tok
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>two_operator_check(tok);
     while (tmp && tmp->type != NULL_TYPE)//recorre lista t_tok y crea lista t_cmd con cada PIPE
     {
-        node = cmd_new_node();//crea nodo t_cmd
+        node = cmd_new_node();//crea un nodo t_cmd mallocado con todos sus elementos a NULL
         i = 0;        
         size = commands_size(tmp);//averigua el size que debera tener la matriz
-        node->commands = (char **)p_malloc((size + 1) * sizeof(char *));
+        if (size > 0)//solo se malloca **commands si existe algun comando 
+            node->commands = (char **)p_malloc((size + 1) * sizeof(char *));
          while (tmp && tmp->type != NULL_TYPE)//Inicializa el nodo t_cmd con el pipe actual
         {
-            if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente no es WORD
+            if (is_operator(tmp) && tmp->next->type != WORD)//si es operador y siguiente NO es WORD
             {
                 handle_error(PRINT_SYNTAX_ERR_3, &tok);//printa error y libera tok
                 cmd_free(&node);//libero el nodo cmd y la matriz command que acabo de mallocar, porque no llegara al free del minishell
+//                tok_free(&tok);
+                if (cmd != NULL)
+                    cmd_free(cmd);
                 return (1);
             }
             if (tmp->type == WORD)
             {
                 node->commands[i] = ft_strdup(tmp->str);//duplica la WORD y la mete en char** de t_cmd
-                i++;
-                if (i == size)
+                i++;                if (i == size)
                     node->commands[i] = NULL;//cierro el array con NULL si es el ultimo elemento
                 tmp = tmp->next;
             }

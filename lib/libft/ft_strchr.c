@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 12:07:13 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/15 16:07:31 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/16 10:12:43 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+		return (NULL);
 	c = (unsigned char)c;
 	while (s[i])
 	{
