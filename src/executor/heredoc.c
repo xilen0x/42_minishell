@@ -1,18 +1,13 @@
 # include "minishell.h"
 
-int	heredoc_create(t_redir *redir)
+int	heredoc_create(t_redir *redir, int hd_nbr)
 {
 	char	*tmp_dir;
 	int		fd_tmp;
 	char	*line;
 
-	tmp_dir = ft_strdup("/tmp/heredoc");
+	tmp_dir = ft_strjoin("/tmp/heredoc", ft_itoa(hd_nbr));
 	fd_tmp = open(tmp_dir, O_CREAT | O_WRONLY | O_TRUNC, 0660);
-	if (fd_tmp == -1)
-	{
-		free(tmp_dir);
-		return (1);
-	}
 	line = readline("> ");
 	while (line && ft_strcmp(line, redir->filename) != 0)
 	{
@@ -26,13 +21,16 @@ int	heredoc_create(t_redir *redir)
 	free(redir->filename);
 	redir->filename = ft_strdup(tmp_dir);
 	free(tmp_dir);
+	hd_nbr--;
 	return (0);
 }
 
 int	heredoc(t_cmd *cmd)
 {
 	t_redir	*aux;
+	int		hd_nbr;
 
+	hd_nbr = 0;
 	while (cmd)
 	{
 		aux = cmd->redir;
@@ -40,8 +38,8 @@ int	heredoc(t_cmd *cmd)
 		{
 			if (aux->redir_type == HEREDOC_INPUT)
 			{
-				if (heredoc_create(aux))
-					return (1);
+				heredoc_create(aux, hd_nbr);
+				hd_nbr++;
 			}
 			aux = aux->next;
 		}

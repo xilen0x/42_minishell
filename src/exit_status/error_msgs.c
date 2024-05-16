@@ -1,14 +1,39 @@
 #include "minishell.h"
 
 /*Funcion que muestra mensaje de error y uso correcto*/
-int	ft_msgs(int n)
+int	ft_msgs(int n, t_cmd *cmd)
 {
+	const char	*prefix;
+	const char	*error_message;
+	size_t		prefix_length;
+	size_t		len_error_msg;
+	size_t		len_cmd;
+
+	prefix = "minishell: ";
+	prefix_length = ft_strlen(prefix);
+	len_cmd = ft_strlen(cmd->commands[0]);
+	error_message = strerror(errno);
+	len_error_msg = ft_strlen(error_message);
 	if (n == 0)
-		write (2, "minishell: command not found!\n", 30);
+	{
+		write(2, prefix, prefix_length);
+		write(2, cmd->commands[0], len_cmd);
+		write(2, ": ", 2);
+		write(2, "command not found", 17);
+		write(2, "\n", 1);
+	}
 	else if (n == 1)
 		write (2, "cannot execute binary file\n", 27);
 	else if (n == 2)
-		write (2, "No such file or directory\n", 26);
+	{
+		write(2, prefix, prefix_length);
+		write(2, cmd->commands[0], len_cmd);
+		write(2, ": ", 2);
+		write(2, cmd->commands[1], ft_strlen(cmd->commands[1]));
+		write(2, ": ", 2);
+		write(2, error_message, len_error_msg);
+		write(2, "\n", 1);
+	}
 	else if (n == 3)
 		write (2, "bash: outfile: Permission denied\n", 33);
 	else if (n == 4)

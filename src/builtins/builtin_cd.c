@@ -58,11 +58,11 @@ static int	go_home(void)
 // }
 
 /*cambia a un directorio especifico */
-int	go_path(char *path)
+int	go_path(t_cmd *cmd)
 {
-	if (chdir(path) != 0)
+	if (chdir(cmd->commands[1]) != 0)
 	{
-		ft_msgs(2);
+		ft_msgs(2, cmd);
 		//set_exit_status(1);
 		return (1);
 	}
@@ -81,7 +81,7 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 	else if (ft_strcmp(cmd->commands[1], "-") == 0)//no terminado
 		old_pwd();
 	else
-		go_path(cmd->commands[1]);
+		go_path(cmd);
 	get_pwd(*env);
 	//set_exit_status(0);
 	return (0);

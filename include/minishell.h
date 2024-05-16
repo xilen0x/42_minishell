@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <errno.h>
 
 /*-----------------Defines-------------*/
 
@@ -205,7 +206,7 @@ int		close_fd(t_exe	*exe);
 int	pre_redirections(t_cmd *cmd, t_exe *exe);
 
 /*---------------------------utils0.c -------------------------*/
-int		ft_msgs(int n);
+int	ft_msgs(int n, t_cmd *cmd);
 //int		get_exit_status(t_exe *exe);//funciones repetidas ?
 //void	set_exit_status(int num, t_exe *exe);
 
@@ -239,7 +240,8 @@ int		var_exists_oldpwd(t_env *env, char *variable);
 t_env	*update_env(t_env *env, char *key, char *val);
 int		get_pwd(t_env *env);
 int		old_pwd(void);
-int		go_path(char *path);
+// int		go_path(char *path);
+int		go_path(t_cmd *cmd);
 
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
@@ -251,11 +253,11 @@ void	ft_print_values(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------redirections---------------*/
-int	exist_redirections(t_redir *aux);
+/*------------------redirections---------------*/
+int		exist_redirections(t_redir *aux);
 
 /*-------------------heredoc----------------*/
-int	heredoc_found(t_cmd *cmd);
-int	heredoc_create(t_redir *redir);
-int	heredoc(t_cmd *cmd);
+int		heredoc_create(t_redir *redir, int hd_nbr);
+int		heredoc(t_cmd *cmd);
+
 #endif

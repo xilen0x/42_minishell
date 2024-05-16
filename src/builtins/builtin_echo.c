@@ -24,9 +24,13 @@ int	builtin_echo(t_cmd *cmd)
 		printf("\n");
 		return (0);
 	}
-	else if (
-		((ft_strcmp(&cmd->commands[1][0], "-") == 0) && (ft_strcmp(&cmd->commands[1][1], "n") == 0)))
-	//else if (ft_strcmp(cmd->commands[1], "-n") == 0)
+	// if ((ca_strchr(&cmd->commands[1][0], '-') == 1) && \
+	// 			(ca_strchr(&cmd->commands[1][1], 'n') == 1))
+	// {
+	// 	print_newline = 0;
+	// 	i++;
+	// }
+	if (ft_strcmp(cmd->commands[1], "-n") == 0)
 	{
 		print_newline = 0;
 		i++;

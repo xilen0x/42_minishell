@@ -9,7 +9,7 @@ int	main(int ac, char *av[], char *envp[])
 	envlist = NULL;
 	if (ac != 1 || av[1])
 	{
-		ft_msgs(10);
+		ft_msgs(10, NULL);
 		exit(EXIT_FAILURE);
 	}
 //	env_cpy = dup_arr2d(envp);

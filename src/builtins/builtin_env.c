@@ -26,7 +26,7 @@ int	builtin_env(t_cmd *cmd, t_env *env)
 		else if (ft_strcmp(cmd->commands[1], "echo") == 0)
 			printf("\n");
 		else
-			ft_msgs(2);
+			ft_msgs(2, cmd);
 		return (0);
 	}
 	else
