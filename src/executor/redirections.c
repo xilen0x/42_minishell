@@ -17,24 +17,24 @@ int	open_files(t_exe *exe, t_redir *aux)
 	if (aux->redir_type == REDIR_INPUT || aux->redir_type == HEREDOC_INPUT)// < || <<
 	{
 
-		if (aux->redir_type == HEREDOC_INPUT)// <<
-		{
-			// exe->fd_input = open(aux->filename, O_CREAT | O_WRONLY | O_TRUNC, 0660);
-			// if (exe->fd_input == -1)
-			// 	return (1);
-			if (dup2(exe->fd_output, STDIN_FILENO) == -1)
-				return (1);
-			close_fd(exe);
-		}
-		else
-		{
+		// if (aux->redir_type == HEREDOC_INPUT)// <<
+		// {
+		// 	// exe->fd_input = open(aux->filename, O_CREAT | O_WRONLY | O_TRUNC, 0660);
+		// 	// if (exe->fd_input == -1)
+		// 	// 	return (1);
+		// 	if (dup2(exe->fd_output, STDIN_FILENO) == -1)
+		// 		return (1);
+		// 	close_fd(exe);
+		// }
+		// else
+		// {
 			exe->fd_input = open(aux->filename, O_RDONLY);
 			if (exe->fd_input == -1)
 				return (1);
 			if (dup2(exe->fd_input, STDIN_FILENO) == -1)
 				return (1);
 			close(exe->fd_input);
-		}
+		// }
 	}
 	else if (aux->redir_type == REDIR_OUTPUT || aux->redir_type == REDIR_OUTPUT_APPEND)// > || >>
 	{
@@ -56,14 +56,14 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 	t_redir	*aux;
 
 	aux = cmd->redir;
-	if (cmd->next)
+	if (cmd->next != NULL)
 	{
 		dup2(exe->fd[1], STDOUT_FILENO);
 	}
-	close_fd(exe);
+	// close_fd(exe);
 	while (aux)
 	{
-		if (open_files(exe, aux))
+		if (open_files(exe, aux) == 1)
 		{
 			if (aux->redir_type == HEREDOC_INPUT)
 			{

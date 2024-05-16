@@ -256,6 +256,6 @@ int	exist_redirections(t_redir *aux);
 
 /*-------------------heredoc----------------*/
 int	heredoc_found(t_cmd *cmd);
-int	heredoc_create(t_cmd *cmd);
-
+int	heredoc_create(t_redir *redir);
+int	heredoc(t_cmd *cmd);
 #endif

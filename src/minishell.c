@@ -5,7 +5,7 @@ static void	control_and_d(char *line)
 {
 	if (!line)//Ctrl+D cierra el minishell y no seria necesario recoger el exit_status.
 	{
-		// write(2, "exit\n", 5);//ctrl-D arroja un 'exit' por consola
+		//write(2, "exit\n", 5);//ctrl-D [ojo: descomentado da error mpanic]
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -35,9 +35,8 @@ void	minishell(t_env *envlist)
 		return ;
 	tok_free(&tok);
 	should_expand(cmd, envlist);
-	if (heredoc_found(cmd))//agregada
-		heredoc_create(cmd);//agegada
 	init_exe(&exe, cmd);
+	heredoc(cmd);
 	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);
 }

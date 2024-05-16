@@ -41,7 +41,8 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 # Source Files
 ################################################################################
 
-FILES =	minishell.c \
+FILES =	main.c \
+									minishell.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
@@ -103,7 +104,6 @@ FILES =	minishell.c \
 									utils_parser/handle_error.c \
 									utils_parser/is_operator.c \
 									init_exe.c \
-									main.c \
 									parser.c \
 									signals.c \
 									tokenizer.c
