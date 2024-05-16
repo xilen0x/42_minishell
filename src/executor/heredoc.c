@@ -1,26 +1,5 @@
 # include "minishell.h"
 
-int	heredoc(t_cmd *cmd)
-{
-	t_redir	*aux;
-
-	while (cmd)
-	{
-		aux = cmd->redir;
-		while (aux)
-		{
-			if (aux->redir_type == HEREDOC_INPUT)
-			{
-				if (heredoc_create(aux))
-					return (1);
-			}
-			aux = aux->next;
-		}
-		cmd = cmd->next;
-	}
-	return (0);
-}
-
 int	heredoc_create(t_redir *redir)
 {
 	char	*tmp_dir;
@@ -50,17 +29,38 @@ int	heredoc_create(t_redir *redir)
 	return (0);
 }
 
-/*return 1 if heredoc simbol was found*/
-int	heredoc_found(t_cmd *cmd)
+int	heredoc(t_cmd *cmd)
 {
 	t_redir	*aux;
 
-	aux = cmd->redir;
-	while (aux)
+	while (cmd)
 	{
-		if (aux->redir_type == HEREDOC_INPUT)
-			return (1);
-		aux = aux->next;
+		aux = cmd->redir;
+		while (aux)
+		{
+			if (aux->redir_type == HEREDOC_INPUT)
+			{
+				if (heredoc_create(aux))
+					return (1);
+			}
+			aux = aux->next;
+		}
+		cmd = cmd->next;
 	}
 	return (0);
 }
+
+/*return 1 if heredoc simbol was found*/
+// int	heredoc_found(t_cmd *cmd)
+// {
+// 	t_redir	*aux;
+
+// 	aux = cmd->redir;
+// 	while (aux)
+// 	{
+// 		if (aux->redir_type == HEREDOC_INPUT)
+// 			return (1);
+// 		aux = aux->next;
+// 	}
+// 	return (0);
+// }
