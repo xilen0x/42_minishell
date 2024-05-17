@@ -25,7 +25,3 @@ void	env_delone(t_env **env, char **node_to_del, void (*del)(void*))
 		current = current->next;
 	}
 }
-/*
-	env = update_env(env, "PWD", current_wd);
-	free(current_wd);
-*/

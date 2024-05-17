@@ -239,12 +239,15 @@ t_env	*update_env(t_env *env, char *key, char *val);
 
 /*--------------------------- oldpwd -------------------------*/
 int		var_exists_oldpwd(t_env *env, char *variable);
-int		get_pwd(t_env *env);
+// int		update_pwd(t_env *env);
+char	*update_pwd(t_env *env);
 int		set_old_pwd(t_cmd *cmd, t_env *env);
 // int		go_path(char *path);
-int		get_old_pwd(t_cmd *cmd, t_env *env);
+// int		get_old_pwd(t_cmd *cmd, t_env *env);
+int	get_old_pwd(char *current_wd, t_env *env);
 int		go_path(t_cmd *cmd, t_env **env);
-
+// int		update_oldpwd(t_env *env);
+int	update_oldpwd(t_env *env, char *current_wd);
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 void	print_tok(t_tok *lst);//ELIMINAR ANTES DE ENTREGA

@@ -37,7 +37,7 @@ int	builtin_pwd(t_env *env)
 }
 
 /*actualiza la variable PWD del entorno*/
-int	get_pwd(t_env *env)
+char	*update_pwd(t_env *env)
 {
 	char	*current_wd;
 
@@ -49,7 +49,7 @@ int	get_pwd(t_env *env)
 	}
 	env = update_env(env, "PWD", current_wd);
 	free(current_wd);
-	return (0);
+	return (current_wd);
 }
 
 

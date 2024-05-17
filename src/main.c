@@ -17,7 +17,7 @@ int	main(int ac, char *av[], char *envp[])
 //	free_arr2d(env_cpy);
 	env_init_list(envp, &envlist);
 	//init_msg();
-	bg_color();
+	//bg_color();
 	while (1)
 	{
 		set_signals();
