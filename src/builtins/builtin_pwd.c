@@ -81,22 +81,22 @@ int	get_pwd(t_env *env)
 // 	return (0);
 // }
 
-int	old_pwd(void)
+int	old_pwd(t_cmd *cmd)
 {
-	char *oldpwd_value = getenv("OLDPWD"); // Obtener el valor de OLDPWD
-
+	char	*oldpwd_value;
+(void)cmd;
+	oldpwd_value = getenv("OLDPWD");
 	if (oldpwd_value == NULL)
 	{
 		printf("No existe la variable OLDPWD!\n");
-		return (1); // Retornar 1 en caso de error
+		// ft_msgs(4, cmd);
+		return (1);
 	}
-	printf("Sí existe la variable OLDPWD\n");
 	// Cambiar al directorio anterior
 	if (chdir(oldpwd_value) != 0)
 	{
 		perror("chdir");
-		//set_exit_status(1);
-		return (1); // Retornar 1 en caso de error
+		return (1);
 	}
-	return (0); // Retornar 0 indicando éxito
+	return (0);
 }

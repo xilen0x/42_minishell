@@ -129,7 +129,7 @@ typedef struct s_exe
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
-//int		bg_color(void);
+int		bg_color(void);
 void	init_msg(void);
 void	set_signals(void);
 void	minishell(t_env	*envlist);
@@ -239,7 +239,7 @@ int		var_exists_oldpwd(t_env *env, char *variable);
 
 t_env	*update_env(t_env *env, char *key, char *val);
 int		get_pwd(t_env *env);
-int		old_pwd(void);
+int	old_pwd(t_cmd *cmd);
 // int		go_path(char *path);
 int		go_path(t_cmd *cmd);
 

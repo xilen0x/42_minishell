@@ -37,7 +37,10 @@ int	ft_msgs(int n, t_cmd *cmd)
 	else if (n == 3)
 		write (2, "bash: outfile: Permission denied\n", 33);
 	else if (n == 4)
-		write (2, "...\n", 4);
+	{
+		write(2, error_message, len_error_msg);
+		write(2, "\n", 1);
+	}
 	else if (n == 5)
 		write (2, "not a valid identifier\n", 24);
 	else if (n == 6)

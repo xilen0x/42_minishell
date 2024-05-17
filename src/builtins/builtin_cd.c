@@ -21,41 +21,25 @@ static int	go_home(void)
 	return (0);
 }
 
-/*cambia al directorio raiz */
-// static int	go_root(void)
-// {
-// 	if (chdir("/") != 0)
-// 	{
-// 		perror("chdir() error");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-// /*cambia al directorio padre */
-// static int	go_parent(void)
-// {
-// 	if (chdir("..") != 0)
-// 	{
-// 		perror("chdir() error");
-// 		set_exit_status(1);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 // /*cambia al directorio anterior(si existe) */
-// static int	go_old_pwd(void)
-// {
-
-// 	if (chdir("OLDPWD") != 0)
-// 	{
-// 		perror("cd: OLDPWD not set");
-// 		set_exit_status(1);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+static int	go_old_pwd(t_cmd *cmd, t_env *env)
+{
+	(void)cmd;
+	if (!(variable_exists_op3(env, "OLDPWD")))
+		printf("NO existe la variable OLDPWD!\n");//cambiar luego por write("\n")
+	else
+	{
+		printf("Existe la variable OLDPWD!\n");
+		// if (chdir("OLDPWD") != 0)
+		// {
+		// 	// perror("cd: OLDPWD not set");
+		// 	ft_msgs(4, cmd);
+		// 	// set_exit_status(1);
+		// 	return (1);
+		// }
+	}
+	return (0);
+}
 
 /*cambia a un directorio especifico */
 int	go_path(t_cmd *cmd)
@@ -79,7 +63,8 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 	else if (ft_strcmp(cmd->commands[1], "~") == 0)
 		go_home();
 	else if (ft_strcmp(cmd->commands[1], "-") == 0)//no terminado
-		old_pwd();
+		go_old_pwd(cmd, *env);
+		// old_pwd();
 	else
 		go_path(cmd);
 	get_pwd(*env);
