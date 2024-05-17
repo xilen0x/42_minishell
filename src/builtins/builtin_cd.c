@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*cambia al directorio home del usuario */
-static int	go_home(void)
+static int	go_home(t_cmd *cmd, t_env **env)
 {
 	char	*home_dir;
 
@@ -18,31 +18,12 @@ static int	go_home(void)
 		//set_exit_status(1);
 		return (1);
 	}
-	return (0);
-}
-
-// /*cambia al directorio anterior(si existe) */
-static int	go_old_pwd(t_cmd *cmd, t_env *env)
-{
-	(void)cmd;
-	if (!(variable_exists_op3(env, "OLDPWD")))
-		printf("NO existe la variable OLDPWD!\n");//cambiar luego por write("\n")
-	else
-	{
-		printf("Existe la variable OLDPWD!\n");
-		// if (chdir("OLDPWD") != 0)
-		// {
-		// 	// perror("cd: OLDPWD not set");
-		// 	ft_msgs(4, cmd);
-		// 	// set_exit_status(1);
-		// 	return (1);
-		// }
-	}
+	set_old_pwd(cmd, *env);
 	return (0);
 }
 
 /*cambia a un directorio especifico */
-int	go_path(t_cmd *cmd)
+int	go_path(t_cmd *cmd, t_env **env)
 {
 	if (chdir(cmd->commands[1]) != 0)
 	{
@@ -50,6 +31,7 @@ int	go_path(t_cmd *cmd)
 		//set_exit_status(1);
 		return (1);
 	}
+	set_old_pwd(cmd, *env);
 	return (0);
 }
 
@@ -59,15 +41,15 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 {
 	//cmd = cmd;
 	if ((size_arr2d(cmd->commands)) == 1)// cd only
-		go_home();
+		go_home(cmd, env);
 	else if (ft_strcmp(cmd->commands[1], "~") == 0)
-		go_home();
+		go_home(cmd, env);
 	else if (ft_strcmp(cmd->commands[1], "-") == 0)//no terminado
-		go_old_pwd(cmd, *env);
-		// old_pwd();
+		get_old_pwd(cmd, *env);
 	else
-		go_path(cmd);
+		go_path(cmd, env);
 	get_pwd(*env);
 	//set_exit_status(0);
 	return (0);
 }
+
