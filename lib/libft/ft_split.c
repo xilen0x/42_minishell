@@ -61,8 +61,8 @@ char	**ft_split(char const *s, char c)
 
 	i = -1;
 	num = 0;
-    if (!s)
-        return (NULL);
+	if (!s)
+		return (NULL);
 	split = (char **)ft_calloc((ft_counter(s, c) + 1), sizeof(char *));
 	if (!split)
 		return (NULL);
