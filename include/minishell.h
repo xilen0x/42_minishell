@@ -169,6 +169,7 @@ int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*---------------------------utils_parser -------------------------*/
 int		is_operator(t_tok *node);
+int		is_redirection(t_tok *node);
 size_t	commands_size(t_tok *tok);
 
 /*---------------expander & quote removal--------------*/

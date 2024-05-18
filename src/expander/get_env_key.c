@@ -19,3 +19,4 @@ char *get_env_key(char *str)
 	ft_strlcpy(var_name, str, i + 1);
 	return (var_name);
 }
+/*OJO: aqui deberia devolver el key, sea valido o no, para poder contarlos y saltarlos*/
