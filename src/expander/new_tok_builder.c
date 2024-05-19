@@ -12,8 +12,6 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 	char	*env_val;
 
 	i = 0;
-	j = 0;
-	k = 0;
 	quotes.s_quote = 0;
 	quotes.d_quote = 0;
 	env_key = NULL;
@@ -21,6 +19,8 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 
 	while (str && str[i])
 	{
+		j = 0;
+		k = 0;
 		if (str[i] == '"' && quotes.d_quote == 0 && quotes.s_quote == 0)
 			quotes.d_quote = 1;
 		else if (str[i] == '"' && quotes.d_quote == 1)
