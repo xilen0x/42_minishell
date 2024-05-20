@@ -66,35 +66,22 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 	return (0);
 }
 
-char	*exist_cwd()
-{
-	char	*cwd;
-
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-	{
-		cwd = getenv("OLDPWD");
-	}
-	return (cwd);
-}
-
 /*Funcion que direcciona a builtin si es el caso o envia pipe a executor*/
 int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 {
 	unsigned int	size_pipe;
 	t_redir			*aux;
-	char	*current_wd;
 	//signals here...?
 	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
 	aux = cmd->redir;
-	current_wd = exist_cwd();
+	// current_wd = exist_cwd(&current_wd);//aki voy
 	if (!exist_redirections(aux))//--------------0: if NO hay redirecciones
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))
 		{
 			free(exe->pid);
-			return (builtins(cmd, env, current_wd));
+			return (builtins(cmd, env));
 		}
 		else
 			executor(cmd, exe, env);

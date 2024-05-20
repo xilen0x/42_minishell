@@ -1,17 +1,17 @@
 #include "minishell.h"
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
-int	builtins(t_cmd *cmd, t_env **env, char *current_wd)
+int	builtins(t_cmd *cmd, t_env **env)
 {
 	if (ft_strcmp(*cmd->commands, "exit") == 0)
 	{
 		builtin_exit(cmd, *env);
-		printf("\033[40m");//black
+		// printf("\033[40m");//black
 		exit (0);
 	}
 	else if ((ft_strcmp(*cmd->commands, "pwd") == 0) || \
 		(ft_strcmp(*cmd->commands, "PWD") == 0))
-		builtin_pwd(*env, current_wd);
+		builtin_pwd(*env);
 	else if (ft_strcmp(*cmd->commands, "cd") == 0)
 		builtin_cd(cmd, env);
 	else if (ft_strcmp(*cmd->commands, "env") == 0)

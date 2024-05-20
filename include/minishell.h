@@ -219,17 +219,17 @@ unsigned int	get_exit_status_len(void);
 char			*get_exit_status_val(void);
 
 /*--------------------------- builtins -------------------------*/
-int		builtins(t_cmd *cmd, t_env **env, char *current_wd);
+int		builtins(t_cmd *cmd, t_env **env);
 // int		builtin_exit(t_cmd *cmd);
 int		builtin_exit(t_cmd *cmd, t_env *envlist);
-int		builtin_pwd(t_env *env, char *current_wd);
+int		builtin_pwd(t_env *env);
 int		builtin_cd(t_cmd	*cmd, t_env **env);
 int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env **env);
 int		builtin_unset(t_cmd *cmd, t_env **env);
 int		is_builtins(t_cmd *cmd);
-
+int	exist_cwd(void);
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
 int		variable_exists(t_env *env, char *variable);
@@ -248,6 +248,7 @@ int	get_old_pwd(char *current_wd, t_env *env);
 int		go_path(t_cmd *cmd, t_env **env);
 // int		update_oldpwd(t_env *env);
 int	update_oldpwd(t_env *env, char *current_wd);
+
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
 void	print_tok(t_tok *lst);//ELIMINAR ANTES DE ENTREGA

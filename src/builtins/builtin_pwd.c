@@ -23,19 +23,37 @@ t_env	*update_env(t_env *env, char *key, char *val)
 	return (env);
 }
 
-/*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
-int	builtin_pwd(t_env *env, char *current_wd)
+int	exist_cwd(void)
 {
-	if (!current_wd)
+	char	*curr_wd;
+
+	curr_wd = getcwd(NULL, 0);
+	if (curr_wd == NULL)
+		return (1);
+	return (0);
+}
+
+/*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
+int	builtin_pwd(t_env *env)
+{
+	char	*current_wd;
+	char	*prev_wd;
+
+	prev_wd = getenv("OLDPWD");
+	if (exist_cwd() == 1)
 	{
-		printf("%s\n", current_wd);
+		printf("%s\n", prev_wd);
+		chdir(prev_wd);
 		return (1);
 	}
-	current_wd = getcwd(NULL, 0);
-	*env = *update_env(env, "PWD", current_wd);
-	printf("%s\n", current_wd);
-	//set_exit_status(0);
-	free(current_wd);
+	else
+	{
+		current_wd = getcwd(NULL, 0);
+		*env = *update_env(env, "PWD", current_wd);
+		printf("%s\n", current_wd);
+		//set_exit_status(0);
+		free(current_wd);
+	}
 	return (0);
 }
 
