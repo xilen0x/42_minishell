@@ -21,10 +21,13 @@ char *get_env_key(char *str)
 	ft_strlcpy(var_name, str, i + 1);
 	return (var_name);
 */
-//	while (str[i])
-	while (str[i] && str[i] != '\'' && str[i] != '"')
+//SI HAY CARACTERES QUE NO SON ', ", $, \0, ME LOS LLEVO
+	while (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$')
 		i++;
-	var_name = (char *)p_malloc(sizeof(char) * (i + 1));
-	ft_strlcpy(var_name, str, i + 1);
+	if (i > 0)
+	{
+		var_name = (char *)p_malloc(sizeof(char) * (i + 1));
+		ft_strlcpy(var_name, str, i + 1);
+	}
 	return (var_name);
 }

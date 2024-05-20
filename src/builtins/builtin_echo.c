@@ -2,13 +2,13 @@
 
 void	print_without_quotes(char *str)
 {
-	int	len;
-
-	len = ft_strlen(str);
-	if ((len >= 2 && str[0] == '"' && str[len - 1] == '"') || \
-	(len >= 2 && str[0] == '\'' && str[len - 1] == '\''))
-		printf("%.*s", len - 2, str + 1);
-	else
+//	int	len;
+//
+////	len = ft_strlen(str);
+//	if ((len >= 2 && str[0] == '"' && str[len - 1] == '"') || \
+//	(len >= 2 && str[0] == '\'' && str[len - 1] == '\''))
+//		printf("%.*s", len - 2, str + 1);
+//	else
 		printf("%s", str);
 }
 
