@@ -24,10 +24,13 @@ t_env	*update_env(t_env *env, char *key, char *val)
 }
 
 /*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
-int	builtin_pwd(t_env *env)
+int	builtin_pwd(t_env *env, char *current_wd)
 {
-	char	*current_wd;
-
+	if (!current_wd)
+	{
+		printf("%s\n", current_wd);
+		return (1);
+	}
 	current_wd = getcwd(NULL, 0);
 	*env = *update_env(env, "PWD", current_wd);
 	printf("%s\n", current_wd);

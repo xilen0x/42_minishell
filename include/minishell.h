@@ -219,10 +219,10 @@ unsigned int	get_exit_status_len(void);
 char			*get_exit_status_val(void);
 
 /*--------------------------- builtins -------------------------*/
-int		builtins(t_cmd *cmd, t_env **env);
+int		builtins(t_cmd *cmd, t_env **env, char *current_wd);
 // int		builtin_exit(t_cmd *cmd);
 int		builtin_exit(t_cmd *cmd, t_env *envlist);
-int		builtin_pwd(t_env *env);
+int		builtin_pwd(t_env *env, char *current_wd);
 int		builtin_cd(t_cmd	*cmd, t_env **env);
 int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_echo(t_cmd *cmd);

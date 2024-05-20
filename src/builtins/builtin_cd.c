@@ -42,6 +42,7 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 	char	*current_wd;
 
 	current_wd = "";
+	// if ()
 	if ((size_arr2d(cmd->commands)) == 1)// cd only
 		go_home(cmd, env);
 	else if (ft_strcmp(cmd->commands[1], "~") == 0)
