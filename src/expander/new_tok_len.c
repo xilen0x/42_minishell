@@ -16,7 +16,8 @@ int	new_tok_len(char *str, t_env *envlist)
 	quotes.d_quote = 0;
 	env_key = NULL;
 	env_val = NULL;
-	while (str && str[i])
+	while (str[i])
+//	while (str && str[i])
 	{
 		if (str[i] == '"' && quotes.d_quote == 0 && quotes.s_quote == 0)
 			quotes.d_quote = 1;
@@ -26,19 +27,20 @@ int	new_tok_len(char *str, t_env *envlist)
 			quotes.s_quote = 1;
 		else if (str[i] == '\'' && quotes.s_quote == 1)
 			quotes.s_quote = 0;
-		else if (str[i] == '$' && quotes.s_quote == 0)
+		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])//si es un '$' y despues hay algo
 		{
 			i++;//salto el '$'
 			if (str[i] == '?')
 				len += get_exit_status_len();
-			else//verifica si es un nombre de variable valido y si es de entorno o no
+			else//verifica si lo que hay despues de $ es un nombre de variable de entorno que exista
 			{
-				env_key = get_env_key(str + i);//puntero mallocado al nombre despues del '$', sea cual sea
-				if (env_key != NULL)//en caso de que el nombre NO sea un num o un caracter especial
+				env_key = get_env_key(str + i);//retorna un puntero mallocado al nombre despues del '$'
+//				if (env_key != NULL)
+//				{
+				env_val = get_env_val(env_key, envlist);//busco su valor en el env y retorna un mallocado o un NULL si no lo hay
+				if (env_val != NULL)
 				{
-					env_val = get_env_val(env_key, envlist);
-					if (env_val != NULL)
-						len += ft_strlen(env_val);//incremento el tamaño del nuevo token con el de la expansion
+					len += ft_strlen(env_val);//incremento el tamaño del nuevo token con el de la expansion
 					free(env_val);
 					env_val = NULL;
 				}

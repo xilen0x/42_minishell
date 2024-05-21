@@ -5,8 +5,10 @@ static void	control_and_d(char *line)
 {
 	if (!line)//Ctrl+D cierra el minishell y no seria necesario recoger el exit_status.
 	{
-		//write(2, "exit\n", 5);//ctrl-D [ojo: descomentado da error mpanic]
-		exit(EXIT_SUCCESS);
+   		 if (isatty(STDIN_FILENO))
+			write(2, "exit\n", 6);
+		// printf("exit\n");//ctrl-D arroja un 'exit' por consola
+		 exit(EXIT_SUCCESS);
 	}
 }
 
@@ -17,7 +19,6 @@ void	minishell(t_env *envlist)
 	t_cmd	*cmd;
 	t_exe	exe;
 
-	get_signal = 0;//VAR GLOBAL
 	tok = NULL;
 	cmd = NULL;
 	envlist->tmp_cwd = getenv("OLDPWD");
@@ -31,11 +32,13 @@ void	minishell(t_env *envlist)
 		return ;
 	}
 	tokenizer(&tok, line);
+//	print_tok(tok);
 	free(line);
 	if (parser(&cmd, tok) == 1)
 		return ;
 	tok_free(&tok);
 	should_expand(cmd, envlist);
+//	print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
 	init_exe(&exe, cmd);
 	heredoc(cmd);
 	pre_executor(&envlist, cmd, &exe);
