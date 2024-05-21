@@ -21,6 +21,13 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write(2, ": ", 2);
 		write(2, "command not found", 17);
 		write(2, "\n", 1);
+		return (127);//aki voy
+		/*
+		>>>>minishell$ echoecho
+minishell: echoecho: command not found
+>>>>minishell$ $?
+minishell: 0: command not found
+		*/
 	}
 	else if (n == 1)
 		write (2, "cannot execute binary file\n", 27);

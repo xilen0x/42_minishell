@@ -21,7 +21,6 @@ void	minishell(t_env *envlist)
 
 	tok = NULL;
 	cmd = NULL;
-	// envlist->tmp_cwd = getenv("OLDPWD");
 	line = readline(">>>>minishell$ ");
 	control_and_d(line);
 	if (line && *line)
