@@ -104,6 +104,7 @@ FILES =	main.c \
 									utils_parser/commands_size.c \
 									utils_parser/handle_error.c \
 									utils_parser/is_operator.c \
+									utils_parser/is_redirection.c \
 									init_exe.c \
 									parser.c \
 									signals.c \

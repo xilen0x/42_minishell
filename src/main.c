@@ -6,6 +6,7 @@ int	main(int ac, char *av[], char *envp[])
 //	char	**env_cpy;
 	t_env	*envlist;
 
+	get_signal = 0;//INIT VAR GLOBAL
 	envlist = NULL;
 	if (ac != 1 || av[1])
 	{
@@ -16,13 +17,12 @@ int	main(int ac, char *av[], char *envp[])
 //	env_init_list(env_cpy, &envlist);
 //	free_arr2d(env_cpy);
 	env_init_list(envp, &envlist);
-	//init_msg();
-	//bg_color();
+//	init_msg();
 	while (1)
 	{
 		set_signals();
 		minishell(envlist);
-		// printf("get_signal = %i\n", get_signal);
+//		printf("get_signal = %i\n", get_signal);
 	}
 	return (0);
 }

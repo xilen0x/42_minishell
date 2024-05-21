@@ -1,4 +1,5 @@
-#include <minishell.h>
+#include "minishell.h"
+
 /* Returns a *char expanded and the quote removed */
 char	*expand_quote_rm(char *str, t_env *envlist)
 {
