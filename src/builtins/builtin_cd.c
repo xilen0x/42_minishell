@@ -28,7 +28,7 @@ static int	go_home(t_cmd *cmd, t_env **env)
 int	go_path(t_cmd *cmd, t_env **env)
 {
 	(void)env;
-	if (exist_cwd() == 1)
+	if (!exist_cwd())
 		return (1);
 	else
 	{
@@ -52,17 +52,23 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 		set_old_pwd(cmd, *env);
 	else if (ft_strcmp(cmd->commands[1], ".") == 0)
 	{
-		write(2, "cd: error retrieving current directory: ", 40);
-		write(2, "getcwd: cannot access parent directories: ", 44);
-		write(2, "No such file or directory\n", 27);
-		return (0);
+		if (!exist_cwd())
+		{
+			write(2, "cd: error retrieving current directory: ", 40);
+			write(2, "getcwd: cannot access parent directories: ", 44);
+			write(2, "No such file or directory\n", 27);
+			return (0);
+		}
+		else
+			go_path(cmd, env);
 	}
 	else
 	{
-		current_wd = getcwd(NULL, 0);
+		// current_wd = getcwd(NULL, 0);
 		go_path(cmd, env);
 	}
 	update_pwd(*env);
+	update_oldpwd(*env, current_wd);
 	get_old_pwd(current_wd, *env);
 	// update_oldpwd(*env);
 	//set_exit_status(0);

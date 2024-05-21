@@ -75,7 +75,6 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
 	aux = cmd->redir;
-	// current_wd = exist_cwd(&current_wd);//aki voy
 	if (!exist_redirections(aux))//--------------0: if NO hay redirecciones
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))

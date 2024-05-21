@@ -29,21 +29,21 @@ int	exist_cwd(void)
 
 	curr_wd = getcwd(NULL, 0);
 	if (curr_wd == NULL)
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 /*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
 int	builtin_pwd(t_env *env)
 {
 	char	*current_wd;
-	char	*prev_wd;
+	// char	*prev_wd;
 
-	prev_wd = getenv("OLDPWD");
-	if (exist_cwd() == 1)
+	// prev_wd = getenv("OLDPWD");
+	if (!exist_cwd())
 	{
-		printf("%s\n", prev_wd);
-		chdir(prev_wd);
+		printf("%s\n", env->tmp_cwd);
+		chdir(env->tmp_cwd);
 		return (1);
 	}
 	else

@@ -1,17 +1,5 @@
 # include "minishell.h"
 
-void	print_without_quotes(char *str)
-{
-	int	len;
-
-	len = ft_strlen(str);
-	if ((len >= 2 && str[0] == '"' && str[len - 1] == '"') || \
-	(len >= 2 && str[0] == '\'' && str[len - 1] == '\''))
-		printf("%.*s", len - 2, str + 1);
-	else
-		printf("%s", str);
-}
-
 int	builtin_echo(t_cmd *cmd)
 {
 	int	i;
@@ -37,7 +25,8 @@ int	builtin_echo(t_cmd *cmd)
 	}
 	while (cmd->commands[i])// != '\0' ???
 	{
-		print_without_quotes(cmd->commands[i]);
+		// print_without_quotes(cmd->commands[i]);
+		printf("%s", cmd->commands[i]);
 		if (cmd->commands[i + 1])
 			printf(" ");
 		i++;
