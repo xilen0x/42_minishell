@@ -18,8 +18,8 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 	quotes.d_quote = 0;
 	env_key = NULL;
 	env_val = NULL;
-
-	while (str && str[i])
+//	while (str && str[i])
+	while (str[i])
 	{
 		if (str[i] == '"' && quotes.d_quote == 0 && quotes.s_quote == 0)
 			quotes.d_quote = 1;
@@ -35,7 +35,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 			if (str[i] == '?')
 			{
 				env_val = get_exit_status_val();//retorna un char* mallocado
-				while (env_val && env_val[k] != '\0')
+				while (env_val && env_val[k] != '\0')//mientras el puntero exista (no sea NULL) y mientras al iterarlo no sea \0
 				{
 					result[j] = (env_val[k]);
 					j++;
@@ -43,6 +43,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 				}
 				free (env_val);
 				env_val = NULL;
+				k = 0;
 			}
 			else//verifica si es un nombre de variable valido y si es de entorno o no
 			{
@@ -59,6 +60,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 				env_key = NULL;
 				free(env_val);
 				env_val = NULL;
+				k = 0;
 				continue;//salto el ciclo para que no se incremente 'i' de nuevo
 			}
 		}

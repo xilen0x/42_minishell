@@ -6,7 +6,7 @@ char *get_env_val(char *env_key, t_env *envlist)
 	char	*val_aux;
 
 	val_aux = NULL;
-	if (env_key == NULL)//proteccion por si despues de $ viene un num
+	if (env_key == NULL)//proteccion por si despues de $ viene un num o caracter especial
 		return (NULL);
 	while (envlist)
 	{

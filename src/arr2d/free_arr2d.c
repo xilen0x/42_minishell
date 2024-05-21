@@ -6,12 +6,12 @@ void	free_arr2d(char **array_strings)
 {
 	size_t	i;
 
-	if (array_strings == NULL || array_strings[0] == NULL)
+	if (array_strings == NULL)
 		return ;
 	i = 0;
-	if (array_strings)
+	if (array_strings != NULL)
 	{
-		while (array_strings[i])
+		while (array_strings[i] != NULL)
 		{
 			free(array_strings[i]);
 			array_strings[i] = NULL;
