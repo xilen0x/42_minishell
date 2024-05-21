@@ -15,6 +15,8 @@ unsigned int	check_export(char *arg)
 	}
 	else if (arg[i] == '=')
 		return (1);
+	else
+		return (3);//sin = ni +=
 	return (0);
 }
 
@@ -75,6 +77,45 @@ int	overwrite_variable(t_env *env, char *cmd)
 	return (0);
 }
 
+int	check_syntax(t_cmd *cmd)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	if (!(ft_isalpha(cmd->commands[1][i])))
+	{
+		flag = 1;
+		return (1);
+	}
+	while (cmd->commands[1][i])
+	{
+		// if (ca_strchr(&cmd->commands[1][i], '/'))
+		if ((cmd->commands[1][i]) < 65 || (cmd->commands[1][i] > 122))
+		{
+			if (cmd->commands[1][i] == '=')
+				return (0);
+			flag = 1;
+			return (1);
+		}
+		if ((cmd->commands[1][i]) > 90 && (cmd->commands[1][i] < 97))
+		{
+			flag = 1;
+			return (1);
+		}
+			// flag = 1;
+		i++;
+	}
+	// if (flag == 1)
+	// {
+		// ft_msgs(5, cmd);
+		// write(2, "export: not a valid identifier\n", 30);
+	// 	return (1);
+	// }
+	return (0);
+}
+
 /*Funcion que agrega una nueva variable de entorno si corresp.*/
 int	builtin_export(t_cmd *cmd, t_env **env)
 {
@@ -84,6 +125,11 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 		just_export(*env);
 	else
 	{
+		if (check_syntax(cmd))
+		{
+			ft_msgs(5, cmd);
+			return (1);
+		}
 		chk_exp = check_export(cmd->commands[1]);
 		if (chk_exp == 1) // '='
 		{
@@ -95,6 +141,8 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 			overwrite_variable(*env, cmd->commands[1]);
 			return (0);
 		}
+		else if (chk_exp == 3)
+			return (1);
 	}
 	return (0);
 }

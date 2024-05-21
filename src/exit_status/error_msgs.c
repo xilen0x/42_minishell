@@ -23,10 +23,10 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write(2, "\n", 1);
 		return (127);//aki voy
 		/*
-		>>>>minishell$ echoecho
-minishell: echoecho: command not found
->>>>minishell$ $?
-minishell: 0: command not found
+		minishell$ echoecho
+		minishell: echoecho: command not found
+		minishell$ $?
+		minishell: 0: command not found
 		*/
 	}
 	else if (n == 1)
@@ -49,12 +49,20 @@ minishell: 0: command not found
 		write(2, "\n", 1);
 	}
 	else if (n == 5)
-		write (2, "not a valid identifier\n", 24);
+	{
+		write(2, prefix, prefix_length);
+		write(2, cmd->commands[0], len_cmd);
+		write(2, ": ", 2);
+		write(2, cmd->commands[1], ft_strlen(cmd->commands[1]));
+		write(2, ": ", 2);
+		write (2, "not a valid identifier\n", 23);
+	}
 	else if (n == 6)
 		write (2, "invalid option\n", 15);
 	else if (n == 10)
 		write (2, "Run minishell without arguments!\n", 33);
-	return (0);
+		get_signal = 1;
+	return (1);
 }
 
 /*Function that get the exit status number*/
