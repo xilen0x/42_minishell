@@ -21,7 +21,7 @@ void	minishell(t_env *envlist)
 
 	tok = NULL;
 	cmd = NULL;
-	line = readline(">>>>minishell$ ");
+	line = readline("minishell$ ");
 	control_and_d(line);
 	if (line && *line)
 		add_history(line);

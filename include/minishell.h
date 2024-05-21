@@ -57,7 +57,8 @@ typedef struct s_env
 {
 	char			*key;
 	char			*val;
-	// char			*tmp_cwd;
+	char			**tokens;
+	char			**tokens2;
 	struct s_env	*next;
 }					t_env;
 
@@ -115,7 +116,6 @@ typedef struct s_qts
 typedef struct s_exe
 {
 	char			**paths;
-//	int				index;
 	char			*cmd_fullpath;
 	char			**new_array;
 	pid_t			*pid;
@@ -125,8 +125,6 @@ typedef struct s_exe
 	int				fd[2];
 	int				dup_stdin;
 	int				dup_stdout;
-//	char			*path;
-//	int				exit_stat;
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
@@ -234,7 +232,8 @@ int		is_builtins(t_cmd *cmd);
 int	exist_cwd(void);
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
-int		variable_exists(t_env *env, char *variable);
+// int		variable_exists(t_env *env, char *variable);
+int variable_exists(t_env **env, char *variable);
 int		variable_exists_op2(t_env *env, char *variable);
 int		variable_exists_op3(t_env *env, char *variable);
 t_env	*update_env(t_env *env, char *key, char *val);

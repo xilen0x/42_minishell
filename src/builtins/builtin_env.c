@@ -3,14 +3,14 @@
 
 void	print_env(t_env *env)
 {
-	t_env	*tmp;
+	// t_env	*tmp;
 
-	tmp = env;
-	while (tmp)
+	// tmp = env;
+	while (env)
 	{
-		if (tmp->val)
-			printf("%s=%s\n", tmp->key, tmp->val);
-		tmp = tmp->next;
+		if (env->val)
+			printf("%s=%s\n", env->key, env->val);
+		env = env->next;
 	}
 }
 

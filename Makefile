@@ -57,6 +57,7 @@ FILES =	main.c \
 									builtins/builtin_unset.c \
 									builtins/builtins.c \
 									builtins/oldpwd/oldpwd.c \
+									builtins/utils_export/var_exists.c \
 									commands/cmd_add_back.c \
 									commands/cmd_free.c \
 									commands/cmd_last.c \
