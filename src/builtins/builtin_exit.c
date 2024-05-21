@@ -81,7 +81,7 @@ int	builtin_exit(t_cmd *cmd, t_env *envlist)
 	else if ((size_arr2d(cmd->commands)) == 1)
 	{
 		printf("exit\n");//exit solo
-		printf(WHITE);
+		// printf(WHITE);
 		exit(0);
 	}
 	else if (cmd->commands[1])

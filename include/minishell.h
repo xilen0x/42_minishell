@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <errno.h>
 
 /*-----------------Defines-------------*/
 
@@ -56,6 +57,7 @@ typedef struct s_env
 {
 	char			*key;
 	char			*val;
+	char			*tmp_cwd;
 	struct s_env	*next;
 }					t_env;
 
@@ -128,7 +130,7 @@ typedef struct s_exe
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
-//int		bg_color(void);
+int		bg_color(void);
 void	init_msg(void);
 void	set_signals(void);
 void	minishell(t_env	*envlist);
@@ -206,7 +208,7 @@ int		close_fd(t_exe	*exe);
 int	pre_redirections(t_cmd *cmd, t_exe *exe);
 
 /*---------------------------utils0.c -------------------------*/
-int		ft_msgs(int n);
+int	ft_msgs(int n, t_cmd *cmd);
 //int		get_exit_status(t_exe *exe);//funciones repetidas ?
 //void	set_exit_status(int num, t_exe *exe);
 
@@ -229,18 +231,25 @@ int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env **env);
 int		builtin_unset(t_cmd *cmd, t_env **env);
 int		is_builtins(t_cmd *cmd);
-
+int	exist_cwd(void);
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
 int		variable_exists(t_env *env, char *variable);
 int		variable_exists_op2(t_env *env, char *variable);
 int		variable_exists_op3(t_env *env, char *variable);
-int		var_exists_oldpwd(t_env *env, char *variable);
-
 t_env	*update_env(t_env *env, char *key, char *val);
-int		get_pwd(t_env *env);
-int		old_pwd(void);
-int		go_path(char *path);
+
+/*--------------------------- oldpwd -------------------------*/
+int		var_exists_oldpwd(t_env *env, char *variable);
+// int		update_pwd(t_env *env);
+char	*update_pwd(t_env *env);
+int		set_old_pwd(t_cmd *cmd, t_env *env);
+// int		go_path(char *path);
+// int		get_old_pwd(t_cmd *cmd, t_env *env);
+int	get_old_pwd(char *current_wd, t_env *env);
+int		go_path(t_cmd *cmd, t_env **env);
+// int		update_oldpwd(t_env *env);
+int	update_oldpwd(t_env *env, char *current_wd);
 
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
@@ -252,7 +261,11 @@ void	ft_print_values(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
-/*-----------redirections---------------*/
-int	exist_redirections(t_redir *aux);
+/*------------------redirections---------------*/
+int		exist_redirections(t_redir *aux);
+
+/*-------------------heredoc----------------*/
+int		heredoc_create(t_redir *redir, int hd_nbr);
+int		heredoc(t_cmd *cmd);
 
 #endif

@@ -39,6 +39,8 @@ void	minishell(t_env *envlist)
 	should_expand(cmd, envlist);
 //	print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
 	init_exe(&exe, cmd);
+	heredoc(cmd);
 	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);
 }
+

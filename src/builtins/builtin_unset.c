@@ -16,7 +16,7 @@ int	builtin_unset(t_cmd *cmd, t_env **env)
 		else
 		{
 			if (!(variable_exists_op3(*env, cmd->commands[1])))
-				printf("NO existe la variable!\n");//cambiar luego por printf("\n")
+				printf("NO existe la variable!\n");//cambiar luego por write("\n")
 			else
 			{
 				env_delone(env, &cmd->commands[1], &free);

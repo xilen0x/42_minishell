@@ -1,10 +1,12 @@
 #include "minishell.h"
 
 /*cambia al directorio home del usuario */
-static int	go_home(void)
+static int	go_home(t_cmd *cmd, t_env **env)
 {
 	char	*home_dir;
 
+	(void)env;
+	(void)cmd;
 	home_dir = getenv("HOME");
 	if (home_dir == NULL)
 	{
@@ -18,71 +20,57 @@ static int	go_home(void)
 		//set_exit_status(1);
 		return (1);
 	}
+	// set_old_pwd(cmd, *env);
 	return (0);
 }
 
-/*cambia al directorio raiz */
-// static int	go_root(void)
-// {
-// 	if (chdir("/") != 0)
-// 	{
-// 		perror("chdir() error");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-// /*cambia al directorio padre */
-// static int	go_parent(void)
-// {
-// 	if (chdir("..") != 0)
-// 	{
-// 		perror("chdir() error");
-// 		set_exit_status(1);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-// /*cambia al directorio anterior(si existe) */
-// static int	go_old_pwd(void)
-// {
-
-// 	if (chdir("OLDPWD") != 0)
-// 	{
-// 		perror("cd: OLDPWD not set");
-// 		set_exit_status(1);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-/*cambia a un directorio especifico */
-int	go_path(char *path)
+/* Cambia a un directorio especifico */
+int	go_path(t_cmd *cmd, t_env **env)
 {
-	if (chdir(path) != 0)
-	{
-		ft_msgs(2);
-		//set_exit_status(1);
+	(void)env;
+	if (!exist_cwd())
 		return (1);
+	else
+	{
+		if (chdir(cmd->commands[1]) != 0)
+			return (1);
 	}
 	return (0);
 }
 
-/*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
-o a una ruta absoluta o relativa*/
+/*Funcion que cambia de directorio segun parámetro*/
 int	builtin_cd(t_cmd	*cmd, t_env **env)
 {
-	//cmd = cmd;
+	char	*current_wd;
+
+	current_wd = "";
 	if ((size_arr2d(cmd->commands)) == 1)// cd only
-		go_home();
+		go_home(cmd, env);
 	else if (ft_strcmp(cmd->commands[1], "~") == 0)
-		go_home();
-	else if (ft_strcmp(cmd->commands[1], "-") == 0)//no terminado
-		old_pwd();
+		go_home(cmd, env);
+	else if (ft_strcmp(cmd->commands[1], "-") == 0)
+		set_old_pwd(cmd, *env);
+	else if (ft_strcmp(cmd->commands[1], ".") == 0)
+	{
+		if (!exist_cwd())
+		{
+			write(2, "cd: error retrieving current directory: ", 40);
+			write(2, "getcwd: cannot access parent directories: ", 44);
+			write(2, "No such file or directory\n", 27);
+			return (0);
+		}
+		else
+			go_path(cmd, env);
+	}
 	else
-		go_path(cmd->commands[1]);
-	get_pwd(*env);
+	{
+		// current_wd = getcwd(NULL, 0);
+		go_path(cmd, env);
+	}
+	update_pwd(*env);
+	update_oldpwd(*env, current_wd);
+	get_old_pwd(current_wd, *env);
+	// update_oldpwd(*env);
 	//set_exit_status(0);
 	return (0);
 }

@@ -10,7 +10,7 @@ int	main(int ac, char *av[], char *envp[])
 	envlist = NULL;
 	if (ac != 1 || av[1])
 	{
-		ft_msgs(10);
+		ft_msgs(10, NULL);
 		exit(EXIT_FAILURE);
 	}
 //	env_cpy = dup_arr2d(envp);
@@ -24,4 +24,6 @@ int	main(int ac, char *av[], char *envp[])
 		minishell(envlist);
 //		printf("get_signal = %i\n", get_signal);
 	}
+	return (0);
 }
+

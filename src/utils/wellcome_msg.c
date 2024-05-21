@@ -25,10 +25,10 @@ void	init_msg(void)
 }
 
 /*Function that changes the color of the terminal*/
-/*
+
 int	bg_color(void)
 {
 	printf(BLUE);
 	printf(CLEAN_SCREEN);
 	return (0);
-}*/
+}

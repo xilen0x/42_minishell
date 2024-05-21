@@ -41,7 +41,8 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 # Source Files
 ################################################################################
 
-FILES =	minishell.c \
+FILES =	main.c \
+									minishell.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
@@ -55,6 +56,7 @@ FILES =	minishell.c \
 									builtins/builtin_pwd.c \
 									builtins/builtin_unset.c \
 									builtins/builtins.c \
+									builtins/oldpwd/oldpwd.c \
 									commands/cmd_add_back.c \
 									commands/cmd_free.c \
 									commands/cmd_last.c \
@@ -69,6 +71,7 @@ FILES =	minishell.c \
 									executor/executor.c \
 									executor/redirections.c \
 									executor/path.c \
+									executor/heredoc.c \
 									exit_status/error_msgs.c \
 									exit_status/get_exit_status_len.c \
 									exit_status/get_exit_status_val.c \
@@ -103,7 +106,6 @@ FILES =	minishell.c \
 									utils_parser/is_operator.c \
 									utils_parser/is_redirection.c \
 									init_exe.c \
-									main.c \
 									parser.c \
 									signals.c \
 									tokenizer.c

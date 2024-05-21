@@ -15,9 +15,9 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 {
 	while (cmd)
 	{
-		if (pipe(exe->fd) == -1)// guarda en fd los dos file descriptors
+		if (pipe(exe->fd) == -1) // guarda en fd los dos file descriptors
 			error_exe(1);
-		exe->pid[i] = fork();//crea un proceso hijo, clon del padre
+		exe->pid[i] = fork();
 		if (exe->pid[i] < 0)
 			error_exe(2);
 		else if (exe->pid[i] == 0) // Si condicion se cumple, se ejecutará el proceso hijo
@@ -32,8 +32,8 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 					dup2(exe->fd[1], STDOUT_FILENO);
 				close_fd(exe);
 				if (execve(exe->cmd_fullpath, cmd->commands, exe->new_array) < 0)
-					ft_msgs(0);
-				exit(EXIT_FAILURE);
+					ft_msgs(0, cmd);
+				exit(0);
 			}
 			exit(1);
 		}
@@ -50,7 +50,7 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
 	int		i;
 
-	exe->fd_input = dup(STDIN_FILENO);//almaceno el fd de stdin en fd_input y stdout en fd_output
+	exe->fd_input = dup(STDIN_FILENO);//almaceno los fd estandar
 	exe->fd_output = dup(STDOUT_FILENO);
 	i = 0;
 	executor_core(cmd, exe, env, i);
@@ -71,11 +71,11 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 {
 	unsigned int	size_pipe;
 	t_redir			*aux;
-	//signals here...soon
+	//signals here...?
 	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
 	aux = cmd->redir;
-	if (!exist_redirections(aux))//0: if NO hay redirecciones
+	if (!exist_redirections(aux))//--------------0: if NO hay redirecciones
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))
 		{
@@ -85,8 +85,10 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 		else
 			executor(cmd, exe, env);
 	}
-	else//1: if Sí hay redirecciones
+	else//---------------------------------------1: if Sí hay redirecciones
+	{
 		executor(cmd, exe, env);
+	}
 	free(exe->pid);
 	return (0);
 }
