@@ -1,5 +1,5 @@
 # include "minishell.h"
-
+/*
 void	print_without_quotes(char *str)
 {
 //	int	len;
@@ -11,6 +11,7 @@ void	print_without_quotes(char *str)
 //	else
 		printf("%s", str);
 }
+*/
 
 int	builtin_echo(t_cmd *cmd)
 {

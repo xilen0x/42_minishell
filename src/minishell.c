@@ -31,13 +31,13 @@ void	minishell(t_env *envlist)
 		return ;
 	}
 	tokenizer(&tok, line);
-//	print_tok(tok);
+	print_tok(tok);
 	free(line);
 	if (parser(&cmd, tok) == 1)
 		return ;
 	tok_free(&tok);
 	should_expand(cmd, envlist);
-//	print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
+	print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
 	init_exe(&exe, cmd);
 	heredoc(cmd);
 	pre_executor(&envlist, cmd, &exe);
