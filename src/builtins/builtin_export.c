@@ -46,6 +46,15 @@ int	create_variable(char *cmd, t_env **env)
 		}
 		free_arr2d(tokens);
 	}
+	else if (tokens && tokens[0])
+	{
+		if (!variable_exists_op3(*env, tokens[0]))
+		{
+			new_var = lstnew(tokens[0], " ");
+			lstadd_back(env, new_var);
+		}
+		free_arr2d(tokens);
+	}
 	return (0);
 }
 
@@ -110,7 +119,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 				return (1);
 			}
 			chk_exp = check_export(cmd->commands[i]);
-			if (chk_exp == 1) // '='
+			if ((chk_exp == 1) || (chk_exp == 3)) // '=' || wordx
 			{
 				create_variable(cmd->commands[i], env);
 			}
@@ -118,7 +127,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 			{
 				overwrite_variable(*env, cmd->commands[i]);
 			}
-			else if (chk_exp == 3)
+			else
 				return (1);
 			i++;
 		}

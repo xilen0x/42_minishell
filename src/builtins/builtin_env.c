@@ -3,12 +3,10 @@
 
 void	print_env(t_env *env)
 {
-	// t_env	*tmp;
-
-	// tmp = env;
 	while (env)
 	{
-		if (env->val)
+		// if (env->val != " ")
+		if (!(ft_strchr(env->val, 32)))
 			printf("%s=%s\n", env->key, env->val);
 		env = env->next;
 	}
