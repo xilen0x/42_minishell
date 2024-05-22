@@ -239,6 +239,9 @@ int		variable_exists_op3(t_env *env, char *variable);
 t_env	*variable_exists_op4(t_env *env, char *key);
 t_env	*update_env(t_env *env, char *key, char *val);
 
+/*--------------------------- builtin unset -------------------------*/
+int		check_syntax(char *cmd);
+
 /*--------------------------- oldpwd -------------------------*/
 int		var_exists_oldpwd(t_env *env, char *variable);
 // int		update_pwd(t_env *env);

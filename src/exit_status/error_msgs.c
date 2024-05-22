@@ -53,15 +53,15 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write(2, prefix, prefix_length);
 		write(2, cmd->commands[0], len_cmd);
 		write(2, ": ", 2);
-		write(2, cmd->commands[1], ft_strlen(cmd->commands[1]));
-		write(2, ": ", 2);
+		// write(2, cmd->commands[1], ft_strlen(cmd->commands[1]));
+		// write(2, ": ", 2);
 		write (2, "not a valid identifier\n", 23);
 	}
 	else if (n == 6)
 		write (2, "invalid option\n", 15);
 	else if (n == 10)
 		write (2, "Run minishell without arguments!\n", 33);
-		get_signal = 1;
+	get_signal = 1;
 	return (1);
 }
 
