@@ -96,6 +96,8 @@ int	check_syntax(t_cmd *cmd)
 		{
 			if (cmd->commands[1][i] == '=')
 				return (0);
+			if ((cmd->commands[1][i] > 47) && (cmd->commands[1][i] < 58))
+				return (0);
 			flag = 1;
 			return (1);
 		}
@@ -120,29 +122,35 @@ int	check_syntax(t_cmd *cmd)
 int	builtin_export(t_cmd *cmd, t_env **env)
 {
 	int	chk_exp;
+	int	i;
 
+	i = 0;
 	if (size_arr2d(cmd->commands) == 1)
 		just_export(*env);
 	else
 	{
-		if (check_syntax(cmd))
+		while (cmd->commands[i])
 		{
-			ft_msgs(5, cmd);
-			return (1);
+			if (check_syntax(cmd))
+			{
+				ft_msgs(5, cmd);
+				return (1);
+			}
+			chk_exp = check_export(cmd->commands[1]);
+			if (chk_exp == 1) // '='
+			{
+				create_variable(cmd, env);
+				return (0);
+			}
+			else if (chk_exp == 2) // '+='
+			{
+				overwrite_variable(*env, cmd->commands[1]);
+				return (0);
+			}
+			else if (chk_exp == 3)
+				return (1);
+			i++;
 		}
-		chk_exp = check_export(cmd->commands[1]);
-		if (chk_exp == 1) // '='
-		{
-			create_variable(cmd, env);
-			return (0);
-		}
-		else if (chk_exp == 2) // '+='
-		{
-			overwrite_variable(*env, cmd->commands[1]);
-			return (0);
-		}
-		else if (chk_exp == 3)
-			return (1);
 	}
 	return (0);
 }
