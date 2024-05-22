@@ -31,23 +31,19 @@ static int	just_export(t_env *env)
 	return (0);
 }
 
-int	create_variable(t_cmd *cmd, t_env **env)
+int	create_variable(char *cmd, t_env **env)
 {
 	char	**tokens;
 	t_env	*new_var;
 
-	tokens = ft_split(cmd->commands[1], '=');
+	tokens = ft_split(cmd, '=');
 	if (tokens && tokens[0] && tokens[1])
 	{
-		if (!variable_exists(env, cmd->commands[1]))
+		if (!variable_exists(env, tokens))
 		{
 			new_var = lstnew(tokens[0], tokens[1]);
 			lstadd_back(env, new_var);
 		}
-		// else
-		// {
-		// 	variable_exists(env, pipe);
-		// }
 		free_arr2d(tokens);
 	}
 	return (0);
@@ -77,44 +73,21 @@ int	overwrite_variable(t_env *env, char *cmd)
 	return (0);
 }
 
-int	check_syntax(t_cmd *cmd)
+int	check_syntax(char *cmd)
 {
 	int	i;
-	int	flag;
 
 	i = 0;
-	flag = 0;
-	if (!(ft_isalpha(cmd->commands[1][i])))
-	{
-		flag = 1;
+	if (!(ft_isalpha(cmd[i]) || cmd[i] == '_'))
 		return (1);
-	}
-	while (cmd->commands[1][i])
+	while (cmd[i])
 	{
-		// if (ca_strchr(&cmd->commands[1][i], '/'))
-		if ((cmd->commands[1][i]) < 65 || (cmd->commands[1][i] > 122))
-		{
-			if (cmd->commands[1][i] == '=')
-				return (0);
-			if ((cmd->commands[1][i] > 47) && (cmd->commands[1][i] < 58))
-				return (0);
-			flag = 1;
+		if (!ft_isalnum(cmd[i]) && cmd[i] != '_' && cmd[i] != '=' && cmd[i] != '+')
 			return (1);
-		}
-		if ((cmd->commands[1][i]) > 90 && (cmd->commands[1][i] < 97))
-		{
-			flag = 1;
-			return (1);
-		}
-			// flag = 1;
+		if (cmd[i] == '=' && i > 0)
+			return (0);
 		i++;
 	}
-	// if (flag == 1)
-	// {
-		// ft_msgs(5, cmd);
-		// write(2, "export: not a valid identifier\n", 30);
-	// 	return (1);
-	// }
 	return (0);
 }
 
@@ -124,28 +97,26 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 	int	chk_exp;
 	int	i;
 
-	i = 0;
 	if (size_arr2d(cmd->commands) == 1)
 		just_export(*env);
 	else
 	{
-		while (cmd->commands[i])
+		i = 1;
+		while (cmd->commands[i] != NULL)
 		{
-			if (check_syntax(cmd))
+			if (check_syntax(cmd->commands[i]))
 			{
 				ft_msgs(5, cmd);
 				return (1);
 			}
-			chk_exp = check_export(cmd->commands[1]);
+			chk_exp = check_export(cmd->commands[i]);
 			if (chk_exp == 1) // '='
 			{
-				create_variable(cmd, env);
-				return (0);
+				create_variable(cmd->commands[i], env);
 			}
 			else if (chk_exp == 2) // '+='
 			{
-				overwrite_variable(*env, cmd->commands[1]);
-				return (0);
+				overwrite_variable(*env, cmd->commands[i]);
 			}
 			else if (chk_exp == 3)
 				return (1);
@@ -154,3 +125,4 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 	}
 	return (0);
 }
+

@@ -36,6 +36,18 @@ int	variable_exists_op3(t_env *env, char *variable)
 	return (flag);
 }
 
+t_env	*variable_exists_op4(t_env *env, char *key)
+{
+	while (env != NULL)
+	{
+		if (ft_strcmp(key, env->key) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
+
+
 /*verifica si la variable ya existe en el env y la actualiza de ser así(caso +=)*/
 int variable_exists_op2(t_env *env, char *variable)
 {
@@ -65,13 +77,13 @@ int variable_exists_op2(t_env *env, char *variable)
 }
 
 /*verifica si la variable ya existe en el env y la actualiza de ser así(caso =)*/
-int	variable_exists(t_env **env, char *variable)
+int	variable_exists(t_env **env, char **variable)
 {
 	char	**var_ent;
 	int		flag;
 	t_env	*current;
 
-	var_ent = ft_split(variable, '=');
+	var_ent = ft_split(*variable, '=');
 	flag = 0;
 	current = *env;
 
@@ -85,9 +97,7 @@ int	variable_exists(t_env **env, char *variable)
 	{
 		if (ft_strcmp(var_ent[0], current->key) == 0)
 		{
-			// free(current->val);
-			// current->val = ft_strdup(var_ent[0]);
-			current->val = ft_strdup(var_ent[1]);
+			current->val = ft_strdup(variable[1]);
 			flag = 1;
 			break ;
 		}
