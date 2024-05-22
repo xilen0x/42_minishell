@@ -22,6 +22,7 @@ int	heredoc_create(t_redir *redir, int hd_nbr)
 	redir->filename = ft_strdup(tmp_dir);
 	free(tmp_dir);
 	hd_nbr--;
+	set_signals(PARENT);
 	return (0);
 }
 

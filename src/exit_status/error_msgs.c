@@ -31,7 +31,7 @@ int	ft_msgs(int n, t_cmd *cmd)
 	}
 	else if (n == 1)
 		write (2, "cannot execute binary file\n", 27);
-	else if (n == 2)
+	else if (n == 2)//Undefined error
 	{
 		write(2, prefix, prefix_length);
 		write(2, cmd->commands[0], len_cmd);
@@ -42,10 +42,17 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write(2, "\n", 1);
 	}
 	else if (n == 3)
+	{
+		write(2, prefix, prefix_length);
+		write(2, ": ", 2);
 		write (2, "bash: outfile: Permission denied\n", 33);
+	}
 	else if (n == 4)
 	{
-		write(2, error_message, len_error_msg);
+		write(2, prefix, prefix_length);
+		write(2, cmd->commands[0], len_cmd);
+		write(2, ": ", 2);
+		write(2, "No such file or directory", 25);
 		write(2, "\n", 1);
 	}
 	else if (n == 5)

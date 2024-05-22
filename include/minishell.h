@@ -39,7 +39,9 @@
 /*--------------Signals-------------------*/
 # define CTRL_C SIGINT
 # define CTRL_SLASH SIGQUIT
-
+// Modes signals
+# define PARENT 0
+# define CHILD 1
 /*--------------------Error messages-------------------*/
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
@@ -130,7 +132,7 @@ typedef struct s_exe
 /*---------------------------minishell -------------------------*/
 int		bg_color(void);
 void	init_msg(void);
-void	set_signals(void);
+int		set_signals(int mode);
 void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
 int		parser(t_cmd **cmd, t_tok *tok);

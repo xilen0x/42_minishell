@@ -27,7 +27,7 @@ int	builtin_env(t_cmd *cmd, t_env *env)
 			return (0);
 		}
 		else
-			ft_msgs(2, cmd);
+			ft_msgs(4, cmd);
 		return (1);
 	}
 	else
