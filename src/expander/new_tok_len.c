@@ -30,7 +30,24 @@ int	new_tok_len(char *str, t_env *envlist)
 		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])//si es un '$' y despues hay algo
 		{
 			i++;//salto el '$'
-			if (str[i] == '?')
+
+//VERIFICO QUE SEA UN NOMBRE VALIDO (en caso que despues del $  NO sea '?', alfabetico o '_')
+			if (str[i] != '?' && !ft_isalpha(str[i]) && str[i] != '_')//ESTO NO SE EXPANDE
+			{
+
+//				result[j] = '$';//meto un '$' en result, porque no expando y antes lo salte
+				len++;//cuento el '$' saltado hace dos lineas
+				while (str[i] && str[i] != '$')//voy metiendo lo que encuentro en 'result' hasta encontrar otro '$' o '\0'
+				{
+					result[j] = str[i];
+					i++;
+					j++;
+				}		
+
+
+
+			}
+			else if (str[i] == '?')
 				len += get_exit_status_len();
 			else//verifica si lo que hay despues de $ es un nombre de variable de entorno que exista
 			{
