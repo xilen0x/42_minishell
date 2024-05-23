@@ -42,8 +42,9 @@ int	builtin_pwd(t_env *env)
 	// prev_wd = getenv("OLDPWD");
 	if (!exist_cwd())
 	{
-		printf("%s\n", env->tmp_cwd);
-		chdir(env->tmp_cwd);
+		current_wd = getenv("OLDPWD");
+		printf("%s\n", current_wd);
+		chdir(current_wd);
 		return (1);
 	}
 	else

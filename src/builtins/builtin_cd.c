@@ -1,26 +1,21 @@
 #include "minishell.h"
 
 /*cambia al directorio home del usuario */
-static int	go_home(t_cmd *cmd, t_env **env)
+static int	go_home(void)
 {
 	char	*home_dir;
 
-	(void)env;
-	(void)cmd;
 	home_dir = getenv("HOME");
 	if (home_dir == NULL)
 	{
 		perror("getenv() error");
-		//set_exit_status(1);
 		return (1);
 	}
 	if (chdir(home_dir) != 0)
 	{
 		perror("chdir() error");
-		//set_exit_status(1);
 		return (1);
 	}
-	// set_old_pwd(cmd, *env);
 	return (0);
 }
 
@@ -45,32 +40,24 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 
 	current_wd = "";
 	if ((size_arr2d(cmd->commands)) == 1)// cd only
-		go_home(cmd, env);
+		go_home();
 	else if (ft_strcmp(cmd->commands[1], "~") == 0)
-		go_home(cmd, env);
+		go_home();
 	else if (ft_strcmp(cmd->commands[1], "-") == 0)
 		set_old_pwd(cmd, *env);
 	else if (ft_strcmp(cmd->commands[1], ".") == 0)
+		return (0);
+	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || (ft_strcmp(cmd->commands[1]," / ") == 0))
 	{
-		if (!exist_cwd())
-		{
-			write(2, "cd: error retrieving current directory: ", 40);
-			write(2, "getcwd: cannot access parent directories: ", 44);
-			write(2, "No such file or directory\n", 27);
-			return (0);
-		}
-		else
-			go_path(cmd, env);
+		ft_msgs(4, cmd);
+		return (1);
 	}
 	else
 	{
-		// current_wd = getcwd(NULL, 0);
+		current_wd = getcwd(NULL, 0);
 		go_path(cmd, env);
 	}
 	update_pwd(*env);
 	update_oldpwd(*env, current_wd);
-	get_old_pwd(current_wd, *env);
-	// update_oldpwd(*env);
-	//set_exit_status(0);
 	return (0);
 }

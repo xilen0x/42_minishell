@@ -13,6 +13,8 @@ int	close_fd(t_exe	*exe)
 /*execute commands in pipes - p2.*/
 int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 {
+	int		err_execve;
+
 	while (cmd)
 	{
 		if (pipe(exe->fd) == -1) // guarda en fd los dos file descriptors
@@ -22,6 +24,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 			error_exe(2);
 		else if (exe->pid[i] == 0) // Si condicion se cumple, se ejecutará el proceso hijo
 		{
+			set_signals(CHILD);
 			exe->paths = get_paths(*env);
 			if (pre_redirections(cmd, exe) == 0)
 			{
@@ -31,7 +34,8 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 				if (cmd->next != NULL)
 					dup2(exe->fd[1], STDOUT_FILENO);
 				close_fd(exe);
-				if (execve(exe->cmd_fullpath, cmd->commands, exe->new_array) < 0)
+				err_execve = execve(exe->cmd_fullpath, cmd->commands, exe->new_array);
+				if (err_execve == -1)
 					ft_msgs(0, cmd);
 				exit(0);
 			}
@@ -48,8 +52,11 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 /*execute commands in pipes - p1*/
 int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
-	int		i;
+	int	i;
+	// int	exit_status;
+	// int	term_signal;
 
+	// set_signals(CHILD);
 	exe->fd_input = dup(STDIN_FILENO);//almaceno los fd estandar
 	exe->fd_output = dup(STDOUT_FILENO);
 	i = 0;
@@ -60,9 +67,17 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 	i = 0;
 	while (i < exe->num_cmds)
 	{
-		waitpid(exe->pid[i], &status, 0);
+		if (waitpid(exe->pid[i], &status, 0) == -1)
+		{
+			perror("waitpid");
+			return (1);
+		}
 		i++;
 	}
+	if (WIFEXITED(status))
+		get_signal = WEXITSTATUS(status);
+	// else if (WIFSIGNALED(status))
+	// 	term_signal = WTERMSIG(status);
 	return (0);
 }
 
@@ -71,7 +86,7 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 {
 	unsigned int	size_pipe;
 	t_redir			*aux;
-	//signals here...?
+
 	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
 	aux = cmd->redir;

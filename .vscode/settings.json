@@ -66,6 +66,24 @@
 	"history.h": "c",
 	"readline.h": "c",
 	"libft.h": "c",
-	"errno.h": "c"
+	"errno.h": "c",
+	"__node_handle": "c",
+	"__bit_reference": "c",
+	"__functional_base": "c",
+	"algorithm": "c",
+	"atomic": "c",
+	"bitset": "c",
+	"chrono": "c",
+	"__memory": "c",
+	"functional": "c",
+	"iterator": "c",
+	"limits": "c",
+	"memory": "c",
+	"optional": "c",
+	"ratio": "c",
+	"system_error": "c",
+	"tuple": "c",
+	"type_traits": "c",
+	"vector": "c"
 }
 }

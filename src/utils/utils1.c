@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*funcion que busca un caracter en un string y retorna 1 si lo encuentra*/
+/*Busca un caracter en un string y retorna 1 si lo encuentra*/
 int	ca_strchr(const char *s, int c)
 {
 	int	i;
@@ -19,6 +19,25 @@ int	ca_strchr(const char *s, int c)
 		return (0);
 	return (0);
 }
+
+// int	ca_strchr(const char *s, int c)//*****
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	c = (unsigned char) c;
+// 	if (!s)
+// 		return (0);
+// 	while (s[i])
+// 	{
+// 		if (s[i] == c)
+// 			return (1);
+// 		i++;
+// 	}
+// 	if (c == '\0')
+// 		return (0);
+// 	return (0);
+// }
 
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {

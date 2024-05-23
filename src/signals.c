@@ -1,5 +1,5 @@
 #include "minishell.h"
-void	signal_handler(int sig)
+void	signal_parent(int sig)
 {
 	if (sig == CTRL_C)
 	{
@@ -10,18 +10,26 @@ void	signal_handler(int sig)
 		rl_redisplay();//redibuja la línea actual. Se utiliza después de realizar cambios en la línea de entrada para actualizar la pantalla y mostrar los cambios.
 		get_signal = 1;
 	}
-	else if (sig == CTRL_SLASH)//Existe para justificar el subject
-		//printf("\nCtrl-\\ recibido.\n");
-	return ;
+}
+
+void	signal_child(int sig)
+{
+	if (sig == CTRL_C)
+		write (2, "\n", 1);
 }
 
 /*-----Manages Ctrl+C response------*/ 
-void	set_signals(void)
+int	set_signals(int mode)
 {
 	rl_catch_signals = 0;//para eliminar el ^C al hacer ctrl-c
-	//ctrl-C 
-	signal(CTRL_C, signal_handler);
-
-	//ctrl-backslash 
-	signal(CTRL_SLASH, signal_handler);//Existe para justificar el subject
+	if (mode == PARENT)
+	{
+		signal(CTRL_C, signal_parent);
+		signal(CTRL_SLASH, signal_parent);//Existe para justificar el subject
+	}
+	else if (mode == CHILD)
+	{
+		signal(CTRL_C, signal_child);
+	}
+	return (1);
 }

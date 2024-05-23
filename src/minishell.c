@@ -43,4 +43,3 @@ void	minishell(t_env *envlist)
 	pre_executor(&envlist, cmd, &exe);
 	cmd_free(&cmd);
 }
-

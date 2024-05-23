@@ -39,7 +39,9 @@
 /*--------------Signals-------------------*/
 # define CTRL_C SIGINT
 # define CTRL_SLASH SIGQUIT
-
+// Modes signals
+# define PARENT 0
+# define CHILD 1
 /*--------------------Error messages-------------------*/
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
@@ -57,7 +59,8 @@ typedef struct s_env
 {
 	char			*key;
 	char			*val;
-	char			*tmp_cwd;
+	char			**tokens;
+	char			**tokens2;
 	struct s_env	*next;
 }					t_env;
 
@@ -115,7 +118,6 @@ typedef struct s_qts
 typedef struct s_exe
 {
 	char			**paths;
-//	int				index;
 	char			*cmd_fullpath;
 	char			**new_array;
 	pid_t			*pid;
@@ -125,14 +127,12 @@ typedef struct s_exe
 	int				fd[2];
 	int				dup_stdin;
 	int				dup_stdout;
-//	char			*path;
-//	int				exit_stat;
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
 int		bg_color(void);
 void	init_msg(void);
-void	set_signals(void);
+int		set_signals(int mode);
 void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
 int		parser(t_cmd **cmd, t_tok *tok);
@@ -234,10 +234,15 @@ int		is_builtins(t_cmd *cmd);
 int	exist_cwd(void);
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
-int		variable_exists(t_env *env, char *variable);
+// int		variable_exists(t_env *env, char *variable);
+int variable_exists(t_env **env, char **variable);
 int		variable_exists_op2(t_env *env, char *variable);
 int		variable_exists_op3(t_env *env, char *variable);
+t_env	*variable_exists_op4(t_env *env, char *key);
 t_env	*update_env(t_env *env, char *key, char *val);
+
+/*--------------------------- builtin unset -------------------------*/
+int		check_syntax(char *cmd);
 
 /*--------------------------- oldpwd -------------------------*/
 int		var_exists_oldpwd(t_env *env, char *variable);

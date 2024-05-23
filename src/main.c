@@ -20,7 +20,7 @@ int	main(int ac, char *av[], char *envp[])
 //	init_msg();
 	while (1)
 	{
-		set_signals();
+		set_signals(PARENT);
 		minishell(envlist);
 //		printf("get_signal = %i\n", get_signal);
 	}
