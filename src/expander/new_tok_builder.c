@@ -42,7 +42,8 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 					result[j] = str[i];
 					i++;
 					j++;
-				}		
+				}
+				continue;
 			}			
 			else if (str[i] == '?')
 			{

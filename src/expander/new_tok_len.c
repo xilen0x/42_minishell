@@ -36,16 +36,13 @@ int	new_tok_len(char *str, t_env *envlist)
 			{
 
 //				result[j] = '$';//meto un '$' en result, porque no expando y antes lo salte
-				len++;//cuento el '$' saltado hace dos lineas
-				while (str[i] && str[i] != '$')//voy metiendo lo que encuentro en 'result' hasta encontrar otro '$' o '\0'
+				len++;//cuento el '$' saltado hace dos lineas, porque lo deberé añadir
+				while ((str[i] && str[i] != '$') || (str[i] && str[i] == '$' && str[i + 1] == '$'))//voy metiendo lo que encuentro en 'result' hasta encontrar otro '$' o '\0'
 				{
-					result[j] = str[i];
 					i++;
-					j++;
-				}		
-
-
-
+					len++;
+				}	
+				continue;
 			}
 			else if (str[i] == '?')
 				len += get_exit_status_len();
