@@ -36,10 +36,12 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 				close_fd(exe);
 				err_execve = execve(exe->cmd_fullpath, cmd->commands, exe->new_array);
 				if (err_execve == -1)
+				{
 					ft_msgs(0, cmd);
-				exit(0);
+					exit(127);
+				}
 			}
-			exit(1);
+			exit(0);
 		}
 		dup2(exe->fd[0], STDIN_FILENO);
 		close_fd(exe);
@@ -53,15 +55,14 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int i)
 int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 {
 	int	i;
-	// int	exit_status;
-	// int	term_signal;
+	int	status;
+	int	exit_status;
 
-	// set_signals(CHILD);
+	exit_status = 0;
 	exe->fd_input = dup(STDIN_FILENO);//almaceno los fd estandar
 	exe->fd_output = dup(STDOUT_FILENO);
 	i = 0;
 	executor_core(cmd, exe, env, i);
-	int status;//reemplazar luego esto por lo del exit_status de joan
 	dup2(exe->fd_input, STDIN_FILENO);
 	dup2(exe->fd_output, STDOUT_FILENO);
 	i = 0;
@@ -72,12 +73,15 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 			perror("waitpid");
 			return (1);
 		}
+		if (WIFEXITED(status))
+		{
+			int child_exit_status = WEXITSTATUS(status);
+			if (child_exit_status != 0)
+				exit_status = child_exit_status; // se actualiza exit_status si el hijo no terminó exitosamente
+		}
 		i++;
 	}
-	if (WIFEXITED(status))
-		get_signal = WEXITSTATUS(status);
-	// else if (WIFSIGNALED(status))
-	// 	term_signal = WTERMSIG(status);
+	get_signal = exit_status;
 	return (0);
 }
 
@@ -85,12 +89,9 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 {
 	unsigned int	size_pipe;
-	t_redir			*aux;
 
-	aux = p_malloc(sizeof(t_redir));
 	size_pipe = cmd_size(cmd);
-	aux = cmd->redir;
-	if (!exist_redirections(aux))//--------------0: if NO hay redirecciones
+	if (!exist_redirections(cmd))//--------------0: if NO hay redirecciones
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))
 		{

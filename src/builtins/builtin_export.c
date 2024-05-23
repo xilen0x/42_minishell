@@ -132,6 +132,7 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 			i++;
 		}
 	}
+	get_signal = 0;
 	return (0);
 }
 

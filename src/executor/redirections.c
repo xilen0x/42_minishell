@@ -53,8 +53,12 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 
 
 /*check if a redirection operator(>, >>, <, <<) was found*/
-int	exist_redirections(t_redir *aux)
+int	exist_redirections(t_cmd *cmd)
 {
+	t_redir			*aux;
+
+	// aux = p_malloc(sizeof(t_redir));
+	aux = cmd->redir;
 	if (!aux)
 		return (0);
 	else
@@ -62,6 +66,6 @@ int	exist_redirections(t_redir *aux)
 		if (aux->redir_type != NULL_REDIR)
 			return (1);
 	}
-	free(aux);
+	// free(aux);
 	return (0);
 }
