@@ -17,7 +17,7 @@ The strchr() function locates the first occurrence of c (converted to a char)
   terminating `\0'.
  The function strchr() return a pointer to the located character, or NULL if 
  the character does not appear in the string.*/
- 
+
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)

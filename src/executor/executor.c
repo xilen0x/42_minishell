@@ -103,6 +103,12 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 	}
 	else//---------------------------------------1: if Sí hay redirecciones
 	{
+		if (cmd->commands == NULL)	
+		{
+			ft_msgs(6, cmd);
+			// write(1, "no hay comando\n", 15);//aqui debe crear el archivo vacio
+			return (1);
+		}
 		executor(cmd, exe, env);
 	}
 	free(exe->pid);

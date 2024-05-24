@@ -1,9 +1,9 @@
 #include "minishell.h"
+
 void	signal_parent(int sig)
 {
 	if (sig == CTRL_C)
 	{
-		//printf("\nCtrl-C recibido.\n");
 		printf("\n");
 		rl_replace_line("", 1);//reemplaza la línea actual de entrada con una cadena vacía.
 		rl_on_new_line();// cursor debe moverse a una nueva línea.
@@ -18,14 +18,13 @@ void	signal_child(int sig)
 		write (2, "\n", 1);
 }
 
-/*-----Manages Ctrl+C response------*/ 
 int	set_signals(int mode)
 {
-	rl_catch_signals = 0;//para eliminar el ^C al hacer ctrl-c
+	rl_catch_signals = 0;
 	if (mode == PARENT)
 	{
 		signal(CTRL_C, signal_parent);
-		signal(CTRL_SLASH, signal_parent);//Existe para justificar el subject
+		signal(CTRL_SLASH, signal_parent);//no hace nada. Existe para justificar el subject
 	}
 	else if (mode == CHILD)
 	{

@@ -3,7 +3,6 @@
 
 int	main(int ac, char *av[], char *envp[])
 {
-//	char	**env_cpy;
 	t_env	*envlist;
 
 	get_signal = 0;//INIT VAR GLOBAL
@@ -13,17 +12,12 @@ int	main(int ac, char *av[], char *envp[])
 		ft_msgs(10, NULL);
 		exit(EXIT_FAILURE);
 	}
-//	env_cpy = dup_arr2d(envp);
-//	env_init_list(env_cpy, &envlist);
-//	free_arr2d(env_cpy);
 	env_init_list(envp, &envlist);
-//	init_msg();
+	// init_msg();
 	while (1)
 	{
 		set_signals(PARENT);
 		minishell(envlist);
-//		printf("get_signal = %i\n", get_signal);
 	}
 	return (0);
 }
-
