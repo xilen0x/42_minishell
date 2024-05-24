@@ -18,6 +18,11 @@ int	builtin_echo(t_cmd *cmd)
 		print_newline = 0;
 		i++;
 	}
+	if (ft_strcmp(cmd->commands[1], "~") == 0)
+	{
+		printf("%s\n", getenv("HOME"));
+		return (0);
+	}
 	while (cmd->commands[i])
 	{
 		printf("%s", cmd->commands[i]);

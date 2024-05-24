@@ -85,7 +85,7 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 		set_old_pwd(cmd, *env);
 	else if (ft_strcmp(cmd->commands[1], ".") == 0)
 		return (0);
-	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || (ft_strcmp(cmd->commands[1]," / ") == 0))
+	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || (ft_strcmp(cmd->commands[1], " / ") == 0))
 	{
 		ft_msgs(4, cmd);
 		return (1);

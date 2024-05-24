@@ -11,11 +11,12 @@ int	ft_msgs(int n, t_cmd *cmd)
 
 	prefix = "minishell: ";
 	prefix_length = ft_strlen(prefix);
-	len_cmd = ft_strlen(cmd->commands[0]);
+	// len_cmd = ft_strlen(cmd->commands[0]);
 	error_message = strerror(errno);
 	len_error_msg = ft_strlen(error_message);
 	if (n == 0)
 	{
+		len_cmd = ft_strlen(cmd->commands[0]);
 		write(2, prefix, prefix_length);
 		write(2, cmd->commands[0], len_cmd);
 		write(2, ": ", 2);
@@ -28,6 +29,7 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write (2, "cannot execute binary file\n", 27);
 	else if (n == 2)//Undefined error
 	{
+		len_cmd = ft_strlen(cmd->commands[0]);
 		write(2, prefix, prefix_length);
 		write(2, cmd->commands[0], len_cmd);
 		write(2, ": ", 2);
@@ -44,6 +46,7 @@ int	ft_msgs(int n, t_cmd *cmd)
 	}
 	else if (n == 4)
 	{
+		len_cmd = ft_strlen(cmd->commands[0]);
 		write(2, prefix, prefix_length);
 		write(2, cmd->commands[0], len_cmd);
 		write(2, ": ", 2);
@@ -52,6 +55,7 @@ int	ft_msgs(int n, t_cmd *cmd)
 	}
 	else if (n == 5)
 	{
+		len_cmd = ft_strlen(cmd->commands[0]);
 		write(2, prefix, prefix_length);
 		write(2, cmd->commands[0], len_cmd);
 		write(2, ": ", 2);
@@ -60,7 +64,7 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write (2, "not a valid identifier\n", 23);
 	}
 	else if (n == 6)
-		write (2, "invalid option\n", 15);
+		write (2, "syntax error\n", 13);
 	else if (n == 7)
 		write (2, "Not a directory\n", 16);
 	else if (n == 10)
