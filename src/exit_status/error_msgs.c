@@ -21,13 +21,8 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write(2, ": ", 2);
 		write(2, "command not found", 17);
 		write(2, "\n", 1);
-		return (127);//aki voy
-		/*
-		minishell$ echoecho
-		minishell: echoecho: command not found
-		minishell$ $?
-		minishell: 0: command not found
-		*/
+		get_signal = 127;
+		return (1);//?
 	}
 	else if (n == 1)
 		write (2, "cannot execute binary file\n", 27);
@@ -66,6 +61,8 @@ int	ft_msgs(int n, t_cmd *cmd)
 	}
 	else if (n == 6)
 		write (2, "invalid option\n", 15);
+	else if (n == 7)
+		write (2, "Not a directory\n", 16);
 	else if (n == 10)
 		write (2, "Run minishell without arguments!\n", 33);
 	get_signal = 1;

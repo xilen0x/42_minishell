@@ -84,6 +84,8 @@
 	"system_error": "c",
 	"tuple": "c",
 	"type_traits": "c",
-	"vector": "c"
+	"vector": "c",
+	"__string": "c",
+	"cstdio": "c"
 }
 }

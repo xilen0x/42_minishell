@@ -17,6 +17,7 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <errno.h>
+# include <sys/stat.h>
 
 /*-----------------Defines-------------*/
 
@@ -38,10 +39,12 @@
 
 /*--------------Signals-------------------*/
 # define CTRL_C SIGINT
+# define CTRL_D SIGQUIT
 # define CTRL_SLASH SIGQUIT
 // Modes signals
 # define PARENT 0
 # define CHILD 1
+
 /*--------------------Error messages-------------------*/
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
@@ -267,7 +270,7 @@ void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*------------------redirections---------------*/
-int		exist_redirections(t_redir *aux);
+int	exist_redirections(t_cmd *cmd);
 
 /*-------------------heredoc----------------*/
 int		heredoc_create(t_redir *redir, int hd_nbr);

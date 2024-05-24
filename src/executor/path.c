@@ -42,7 +42,7 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 		free(cmd_path);
 		if (full_path == NULL)
 		{
-			get_signal = 127;
+			// get_signal = 127;
 			return (-1);
 		}
 		if (access(full_path, F_OK) == 0)
@@ -51,7 +51,7 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 			return (0);
 		}
 		else
-			get_signal = 1;
+			// get_signal = 1;
 		free(full_path);
 		i++;
 	}

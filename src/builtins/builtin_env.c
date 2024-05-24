@@ -32,5 +32,6 @@ int	builtin_env(t_cmd *cmd, t_env *env)
 	}
 	else
 		print_env(env);
+	get_signal = 0;
 	return (0);
 }
