@@ -30,10 +30,26 @@ int	new_tok_len(char *str, t_env *envlist)
 		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])//si es un '$' y despues hay algo
 		{
 			i++;//salto el '$'
+//			if (str[i] == '\'' || str[i] == '"')
+
 //FILTRA NOMBRES SINTACTICAMENTE NO VALIDOS (en caso que despues del $  NO sea '?', alfabetico o '_')
 			if (str[i] != '?' && !ft_isalpha(str[i]) && str[i] != '_')//ESTO NO SE EXPANDIRA, SINO QUE SE AÑADIRA TAL CUAL
 			{
-				len += 2;//cuento el '$' saltado hace dos lineas y el char actual no valido, porque los deberé añadir
+				if (str[i] == '\'' || str[i] == '"')//ULTIMO ADDED PARA SOLVENTAR $'h'
+				{
+					if (str[i] == '"' && quotes.d_quote == 0 && quotes.s_quote == 0)
+						quotes.d_quote = 1;
+					else if (str[i] == '"' && quotes.d_quote == 1)
+						quotes.d_quote = 0;
+					else if (str[i] == '\'' && quotes.s_quote == 0 && quotes.d_quote == 0)
+						quotes.s_quote = 1;
+					else if (str[i] == '\'' && quotes.s_quote == 1)
+						quotes.s_quote = 0;
+//					i++;
+					len++;//cuento el simbolo '$' saltado arriba
+				}
+				else
+					len += 2;//cuento el '$' saltado hace dos lineas y el char actual no valido, porque los deberé añadir
 //				while ((str[i] && str[i] != '$') || (str[i] && str[i] == '$' && str[i + 1] == '$'))//voy metiendo lo que encuentro en 'result' hasta encontrar otro '$' o '\0'
 //				while ((str[i] && str[i] != '$' && (quotes.d_quote == 1 && str[i] != '"')) || (str[i] && str[i] == '$' && str[i + 1] == '$'))
 //AQUI HE DE DIR: I SI LAS DOBLES COMILLAS ESTAN ABIERTAS (1) I NO ES UNA '"' ENTRA

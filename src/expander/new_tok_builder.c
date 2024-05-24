@@ -37,9 +37,22 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 			{
 				result[j] = '$';//meto un '$' en result, porque no expando y antes lo salte
 				j++;
-//				result[j] = str[i - 1];
-				result[j] = str[i];
-				j++;
+				if (str[i] == '\'' || str[i] == '"')//ULTIMO ADDED PARA SOLVENTAR $'h'
+				{
+					if (str[i] == '"' && quotes.d_quote == 0 && quotes.s_quote == 0)
+						quotes.d_quote = 1;
+					else if (str[i] == '"' && quotes.d_quote == 1)
+						quotes.d_quote = 0;
+					else if (str[i] == '\'' && quotes.s_quote == 0 && quotes.d_quote == 0)
+						quotes.s_quote = 1;
+					else if (str[i] == '\'' && quotes.s_quote == 1)
+						quotes.s_quote = 0;
+//					i++;
+				}
+				else
+				{
+					result[j] = str[i];
+					j++;
 //				while (str[i] && str[i] != '$')//voy metiendo lo que encuentro en 'result' hasta encontrar otro '$' o '\0'
 //				{
 //					result[j] = str[i];
@@ -47,6 +60,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result)
 //					j++;
 //				}
 //				continue;
+				}
 			}			
 			else if (str[i] == '?')
 			{
