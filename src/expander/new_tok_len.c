@@ -30,23 +30,22 @@ int	new_tok_len(char *str, t_env *envlist)
 		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])//si es un '$' y despues hay algo
 		{
 			i++;//salto el '$'
-
-//VERIFICO QUE SEA UN NOMBRE VALIDO (en caso que despues del $  NO sea '?', alfabetico o '_')
-			if (str[i] != '?' && !ft_isalpha(str[i]) && str[i] != '_')//ESTO NO SE EXPANDE
+//FILTRA NOMBRES SINTACTICAMENTE NO VALIDOS (en caso que despues del $  NO sea '?', alfabetico o '_')
+			if (str[i] != '?' && !ft_isalpha(str[i]) && str[i] != '_')//ESTO NO SE EXPANDIRA, SINO QUE SE AÑADIRA TAL CUAL
 			{
-
-//				result[j] = '$';//meto un '$' en result, porque no expando y antes lo salte
-				len++;//cuento el '$' saltado hace dos lineas, porque lo deberé añadir
-				while ((str[i] && str[i] != '$') || (str[i] && str[i] == '$' && str[i + 1] == '$'))//voy metiendo lo que encuentro en 'result' hasta encontrar otro '$' o '\0'
-				{
-					i++;
-					len++;
-				}	
-				continue;
+				len += 2;//cuento el '$' saltado hace dos lineas y el char actual no valido, porque los deberé añadir
+//				while ((str[i] && str[i] != '$') || (str[i] && str[i] == '$' && str[i + 1] == '$'))//voy metiendo lo que encuentro en 'result' hasta encontrar otro '$' o '\0'
+//				while ((str[i] && str[i] != '$' && (quotes.d_quote == 1 && str[i] != '"')) || (str[i] && str[i] == '$' && str[i + 1] == '$'))
+//AQUI HE DE DIR: I SI LAS DOBLES COMILLAS ESTAN ABIERTAS (1) I NO ES UNA '"' ENTRA
+//				{
+//					i++;
+//					len++;
+//				}	
+//				continue;
 			}
-			else if (str[i] == '?')
+			else if (str[i] == '?')//VERIFICA SI ES EL CASO ESPECIAL DEL '$?'
 				len += get_exit_status_len();
-			else//verifica si lo que hay despues de $ es un nombre de variable de entorno que exista
+			else//SI EL NOMBRE ES VALIDO SINTACTICAMENTE, BUSCARA SI CORRESPONDE CON UNA VARIABLE DE ENTORNO Y CONTARA SU LEN
 			{
 				env_key = get_env_key(str + i);//retorna un puntero mallocado al nombre despues del '$'
 //				if (env_key != NULL)

@@ -40,7 +40,7 @@ int	builtin_echo(t_cmd *cmd)
 	{
 		// print_without_quotes(cmd->commands[i]);
 		printf("%s", cmd->commands[i]);
-		if (cmd->commands[i + 1])
+		if (cmd->commands[i + 1] && cmd->commands[i][0] != '\0')
 			printf(" ");
 		i++;
 	}
