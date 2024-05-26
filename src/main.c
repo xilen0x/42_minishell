@@ -5,7 +5,7 @@ int	main(int ac, char *av[], char *envp[])
 {
 	t_env	*envlist;
 
-	get_signal = 0;//INIT VAR GLOBAL
+	get_signal = 0;//INIT GLOBAL VAR
 	envlist = NULL;
 	if (ac != 1 || av[1])
 	{

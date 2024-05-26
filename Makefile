@@ -82,6 +82,13 @@ FILES =	main.c \
 									expander/new_tok_builder.c \
 									expander/new_tok_len.c \
 									expander/should_expand.c\
+									parser/commands_size.c \
+									parser/handle_error.c \
+									parser/is_operator.c \
+									parser/is_redirection.c \
+									parser/parser.c \
+									parser/syntax_check_1.c \
+									parser/syntax_check_2.c \
 									prints/print_arr2d.c \
 									prints/print_cmd_para_executor.c \
 									prints/print_cmd.c \
@@ -102,12 +109,7 @@ FILES =	main.c \
 									utils/utils1.c \
 									utils/utils3.c \
 									utils/wellcome_msg.c \
-									utils_parser/commands_size.c \
-									utils_parser/handle_error.c \
-									utils_parser/is_operator.c \
-									utils_parser/is_redirection.c \
 									init_exe.c \
-									parser.c \
 									signals.c \
 									tokenizer.c
 
