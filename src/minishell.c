@@ -30,7 +30,7 @@ void	minishell(t_env *envlist)
 		return ;
 	}
 	tokenizer(&tok, line);
-//	print_tok(tok);
+//	print_tok(tok);//ELIMINAR ANTES DE ENTREGA
 	free(line);
 	if (parser(&cmd, tok) == 1)
 		return ;

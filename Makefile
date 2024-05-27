@@ -100,6 +100,10 @@ FILES =	main.c \
 									redirs/redir_last.c \
 									redirs/redir_new_node.c \
 									redirs/redir_size.c \
+									tokenizer/tokenizer.c \
+									tokenizer/init_operator_type.c \
+									tokenizer/tok_len.c \
+									tokenizer/init_word_str.c \
 									tokens/tok_add_back.c \
 									tokens/tok_free.c \
 									tokens/tok_last.c \
@@ -110,8 +114,7 @@ FILES =	main.c \
 									utils/utils3.c \
 									utils/wellcome_msg.c \
 									init_exe.c \
-									signals.c \
-									tokenizer.c
+									signals.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

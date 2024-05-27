@@ -179,6 +179,11 @@ void	redir_add_back(t_redir **lst, t_redir *new);
 void	redir_free(t_redir **lst);
 int		redir_size(t_redir *lst);//ELIMINAR ANTES DE ENTREGA
 
+/*-------------------tokenizer------------------*/
+int		init_operator_type(char *line, t_tok **new_tok);
+int		tok_len(char *line, t_tok **new_tok);
+void	init_word_str(size_t len, t_tok *new_tok, char *line, size_t i);
+
 /*---------------------parser-------------------*/
 int		is_operator(t_tok *node);
 int		is_redirection(t_tok *node);
