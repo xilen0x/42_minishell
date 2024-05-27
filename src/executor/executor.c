@@ -22,10 +22,33 @@ int	close_fd(t_exe	*exe)
 	return (0);
 }
 
+int	child_process(t_cmd *cmd, t_exe *exe, t_env **env)
+{
+	int		err_execve;
+
+	set_signals(CHILD);
+	exe->paths = get_paths(*env);
+	if (pre_redirections(cmd, exe) == 0)
+	{
+		exe->cmd_fullpath = NULL;
+		search_command_path(cmd, exe);
+		list_to_array(*env, exe);
+		if (cmd->next != NULL)
+			dup2(exe->fd[1], STDOUT_FILENO);
+		close_fd(exe);
+		err_execve = execve(exe->cmd_fullpath, cmd->commands, exe->new_array);
+		if (err_execve == -1)
+		{
+			ft_msgs(0, cmd);
+			exit(127);
+		}
+	}
+	exit(0);
+}
+
 /*execute commands in pipes - p2.*/
 int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int *i)
 {
-	int		err_execve;
 
 	exe->fd_input = dup(STDIN_FILENO);
 	exe->fd_output = dup(STDOUT_FILENO);
@@ -37,26 +60,7 @@ int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int *i)
 		if (exe->pid[*i] < 0)
 			error_exe(2);
 		else if (exe->pid[*i] == 0) // Si condicion se cumple, se ejecutará el proceso hijo
-		{
-			set_signals(CHILD);
-			exe->paths = get_paths(*env);
-			if (pre_redirections(cmd, exe) == 0)
-			{
-				exe->cmd_fullpath = NULL;
-				search_command_path(cmd, exe);
-				list_to_array(*env, exe);
-				if (cmd->next != NULL)
-					dup2(exe->fd[1], STDOUT_FILENO);
-				close_fd(exe);
-				err_execve = execve(exe->cmd_fullpath, cmd->commands, exe->new_array);
-				if (err_execve == -1)
-				{
-					ft_msgs(0, cmd);
-					exit(127);
-				}
-			}
-			exit(0);
-		}
+			child_process(cmd, exe, env);
 		dup2(exe->fd[0], STDIN_FILENO);
 		close_fd(exe);
 		// *i++;
