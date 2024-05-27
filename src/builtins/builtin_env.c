@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 16:15:26 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 16:15:35 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -5,7 +16,6 @@ void	print_env(t_env *env)
 {
 	while (env)
 	{
-		// if (env->val != " ")
 		if (!(ft_strchr(env->val, 32)))
 			printf("%s=%s\n", env->key, env->val);
 		env = env->next;
@@ -16,7 +26,7 @@ void	print_env(t_env *env)
 int	builtin_env(t_cmd *cmd, t_env *env)
 {
 	if (size_arr2d(cmd->commands) > 1)
-	{//casos especiales
+	{
 		if ((ft_strcmp(cmd->commands[1], "test") == 0) || \
 		(ft_strcmp(cmd->commands[1], "true") == 0) || \
 		(ft_strcmp(cmd->commands[1], "false") == 0))
@@ -32,6 +42,6 @@ int	builtin_env(t_cmd *cmd, t_env *env)
 	}
 	else
 		print_env(env);
-	get_signal = 0;
+	g_get_signal = 0;
 	return (0);
 }

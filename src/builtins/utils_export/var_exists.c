@@ -1,4 +1,15 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   var_exists.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 15:25:50 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 15:25:54 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include "minishell.h"
 
 int	var_exists_oldpwd(t_env *env, char *variable)
 {
@@ -48,8 +59,9 @@ t_env	*variable_exists_op4(t_env *env, char *key)
 }
 
 
-/*verifica si la variable ya existe en el env y la actualiza de ser así(caso +=)*/
-int variable_exists_op2(t_env *env, char *variable)
+/*verifica si la variable ya existe en el env y la actualiza 
+de ser así(caso +=)*/
+int	variable_exists_op2(t_env *env, char *variable)
 {
 	char	**var_ent1;
 	char	**var_ent2;
@@ -76,7 +88,8 @@ int variable_exists_op2(t_env *env, char *variable)
 	return (flag);
 }
 
-/*verifica si la variable ya existe en el env y la actualiza de ser así(caso =)*/
+/*verifica si la variable ya existe en el env y la actualiza 
+de ser así(caso =)*/
 int	variable_exists(t_env **env, char **variable)
 {
 	char	**var_ent;
@@ -86,7 +99,6 @@ int	variable_exists(t_env **env, char **variable)
 	var_ent = ft_split(*variable, '=');
 	flag = 0;
 	current = *env;
-
 	if (var_ent == NULL || var_ent[0] == NULL)
 	{
 		if (var_ent)

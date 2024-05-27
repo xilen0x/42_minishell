@@ -5,7 +5,7 @@ NAME =	minishell
 GCC := gcc
 
 # Compiler flags
-FLAGS := -Wall -Werror -Wextra -MMD -g #-fsanitize=address
+FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
 
 # Remove
 RM 	:=	rm -rf
@@ -58,6 +58,7 @@ FILES =	main.c \
 									builtins/builtins.c \
 									builtins/utils_pwd/oldpwd.c \
 									builtins/utils_export/var_exists.c \
+									builtins/utils_export/checks.c \
 									commands/cmd_add_back.c \
 									commands/cmd_free.c \
 									commands/cmd_last.c \

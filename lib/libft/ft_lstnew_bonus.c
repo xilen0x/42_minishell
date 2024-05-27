@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
- /*La variable miembro ’content’ se inicializa con el contenido del parámetro
- ’content’. La variable ’next’, con NULL.
- Cuando dejamos de usarlo hay que liberar la memeoria alojada por el  malloc.
- Retorna el nuevo nodo.*/
-
+/*La variable miembro ’content’ se inicializa con el contenido del parámetro
+’content’. La variable ’next’, con NULL.
+Cuando dejamos de usarlo hay que liberar la memeoria alojada por el  malloc.
+Retorna el nuevo nodo.*/
 #include "libft.h"
 
 t_list	*ft_lstnew(void *content)

@@ -5,7 +5,7 @@ int	main(int ac, char *av[], char *envp[])
 {
 	t_env	*envlist;
 
-	get_signal = 0;//INIT VAR GLOBAL
+	g_get_signal = 0;//INIT VAR GLOBAL
 	envlist = NULL;
 	if (ac != 1 || av[1])
 	{
@@ -13,7 +13,8 @@ int	main(int ac, char *av[], char *envp[])
 		exit(EXIT_FAILURE);
 	}
 	env_init_list(envp, &envlist);
-	// init_msg();
+	bg_color();
+	init_msg();
 	while (1)
 	{
 		set_signals(PARENT);

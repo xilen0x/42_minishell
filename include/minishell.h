@@ -20,7 +20,6 @@
 # include <sys/stat.h>
 
 /*-----------------Defines-------------*/
-
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
@@ -49,9 +48,6 @@
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
-
-/*-----------global variable------------*/
-int	get_signal;//recoge todos los exit_status
 
 /*--------------------------- Pipe ---------------------------*/
 # define READ 0
@@ -133,6 +129,7 @@ typedef struct s_exe
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
+int		g_get_signal;
 int		bg_color(void);
 void	init_msg(void);
 int		set_signals(int mode);
@@ -182,13 +179,11 @@ void	should_expand(t_cmd *cmd, t_env *envlist);
 char	*expand_quote_rm(char *str, t_env *envlist);
 int		new_tok_len(char *str, t_env *envlist);
 char	*new_tok_builder(char *str, t_env *envlist, char *result);
-char 	*get_env_key(char *str);
-char 	*get_env_val(char *env_key, t_env *envlist);
+char	*get_env_key(char *str);
+char	*get_env_val(char *env_key, t_env *envlist);
 
 /*---------------utils-----------------*/
 void	*p_malloc(size_t size);
-//void	malloc_s_pointer_protect(void *name);
-//void	malloc_d_pointer_protect(char **name);
 
 /*--------------------------utils t_env-------------------*/
 t_env	*lstlast(t_env *lst);
@@ -208,10 +203,10 @@ int		list_to_array(t_env *env, t_exe *exe);
 int		close_fd(t_exe	*exe);
 
 /*---------------------------redirections.c -------------------------*/
-int	pre_redirections(t_cmd *cmd, t_exe *exe);
+int		pre_redirections(t_cmd *cmd, t_exe *exe);
 
 /*---------------------------utils0.c -------------------------*/
-int	ft_msgs(int n, t_cmd *cmd);
+int		ft_msgs(int n, t_cmd *cmd);
 //int		get_exit_status(t_exe *exe);//funciones repetidas ?
 //void	set_exit_status(int num, t_exe *exe);
 
@@ -225,8 +220,7 @@ char			*get_exit_status_val(void);
 
 /*--------------------------- builtins -------------------------*/
 int		builtins(t_cmd *cmd, t_env **env);
-// int		builtin_exit(t_cmd *cmd);
-int		builtin_exit(t_cmd *cmd, t_env *envlist);
+int		builtin_exit(t_cmd *cmd);
 int		builtin_pwd(t_env *env);
 int		builtin_cd(t_cmd	*cmd, t_env **env);
 int		builtin_env(t_cmd *cmd, t_env *env);
@@ -234,11 +228,10 @@ int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env **env);
 int		builtin_unset(t_cmd *cmd, t_env **env);
 int		is_builtins(t_cmd *cmd);
-int	exist_cwd(void);
+int		exist_cwd(void);
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
-// int		variable_exists(t_env *env, char *variable);
-int variable_exists(t_env **env, char **variable);
+int		variable_exists(t_env **env, char **variable);
 int		variable_exists_op2(t_env *env, char *variable);
 int		variable_exists_op3(t_env *env, char *variable);
 t_env	*variable_exists_op4(t_env *env, char *key);
@@ -249,15 +242,11 @@ int		check_syntax(char *cmd);
 
 /*--------------------------- oldpwd -------------------------*/
 int		var_exists_oldpwd(t_env *env, char *variable);
-// int		update_pwd(t_env *env);
 char	*update_pwd(t_env *env);
-int		set_old_pwd(t_cmd *cmd, t_env *env);
-// int		go_path(char *path);
-// int		get_old_pwd(t_cmd *cmd, t_env *env);
-int	get_old_pwd(char *current_wd, t_env *env);
-int		go_path(t_cmd *cmd, t_env **env);
-// int		update_oldpwd(t_env *env);
-int	update_oldpwd(t_env *env, char *current_wd);
+int		set_old_pwd(void);
+int		get_old_pwd(char *current_wd, t_env *env);
+int		go_path(t_cmd *cmd);
+int		update_oldpwd(t_env *env, char *current_wd);
 
 /*--------------------prints-----------------*/
 void	print_arr2d(char **arr2d);//ELIMINAR ANTES DE ENTREGA
@@ -270,7 +259,7 @@ void	ft_printstack(t_env *env_struct);//ELIMINAR ANTES DE ENTREGA
 void	print_cmd_para_executor(t_cmd *lst);//ELIMINAR ANTES DE ENTREGA
 
 /*------------------redirections---------------*/
-int	exist_redirections(t_cmd *cmd);
+int		exist_redirections(t_cmd *cmd);
 
 /*-------------------heredoc----------------*/
 int		heredoc_create(t_redir *redir, int hd_nbr);

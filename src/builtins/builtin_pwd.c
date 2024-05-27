@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 17:04:39 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 17:04:41 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*Update env after moving to new location with cd*/
@@ -17,7 +29,7 @@ t_env	*update_env(t_env *env, char *key, char *val)
 		}
 		current = current->next;
 	}
-	// Si no se encontró la variable de entorno, agregarla al final de la lista
+	// Si no se encontró la variable de entorno, se agrega al final de la lista
 	new_env = lstnew(key, val);
 	lstadd_back(&env, new_env);
 	return (env);
@@ -37,9 +49,7 @@ int	exist_cwd(void)
 int	builtin_pwd(t_env *env)
 {
 	char	*current_wd;
-	// char	*prev_wd;
 
-	// prev_wd = getenv("OLDPWD");
 	if (!exist_cwd())
 	{
 		current_wd = getenv("OLDPWD");
@@ -52,10 +62,9 @@ int	builtin_pwd(t_env *env)
 		current_wd = getcwd(NULL, 0);
 		*env = *update_env(env, "PWD", current_wd);
 		printf("%s\n", current_wd);
-		//set_exit_status(0);
 		free(current_wd);
 	}
-	get_signal = 0;
+	g_get_signal = 0;
 	return (0);
 }
 
@@ -74,6 +83,3 @@ char	*update_pwd(t_env *env)
 	free(current_wd);
 	return (current_wd);
 }
-
-
-

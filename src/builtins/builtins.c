@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 18:26:18 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 18:26:21 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
@@ -5,8 +17,7 @@ int	builtins(t_cmd *cmd, t_env **env)
 {
 	if (ft_strcmp(*cmd->commands, "exit") == 0)
 	{
-		builtin_exit(cmd, *env);
-		// printf("\033[40m");//black
+		builtin_exit(cmd);
 		exit (0);
 	}
 	else if ((ft_strcmp(*cmd->commands, "pwd") == 0) || \

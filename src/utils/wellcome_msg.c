@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wellcome_msg.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 16:57:16 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 16:57:18 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-/*----Wellcome message-----*/
+/*----Welcome message-----*/
 void	init_msg(void)
 {
 	printf("\n%s\
@@ -21,11 +33,9 @@ void	init_msg(void)
 	printf("%s\n\t\tby jocuni-p & castorga%s\t\t\t\n", CYAN, \
 		END);
 	printf("\t\n\n");
-	//printf(CYAN);
 }
 
 /*Function that changes the color of the terminal*/
-
 int	bg_color(void)
 {
 	printf(BLUE);
