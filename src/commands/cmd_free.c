@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_free.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/28 17:29:52 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/05/28 17:29:54 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -12,9 +23,9 @@ void	cmd_free(t_cmd **lst)
 	while (aux != NULL)
 	{
 		if (aux->commands != NULL)
-        	free_arr2d(aux->commands);
+			free_arr2d(aux->commands);
 		if (aux->redir != NULL)
-        	redir_free(&aux->redir);
+			redir_free(&aux->redir);
 		(*lst) = aux->next;
 		free(aux);
 		aux = (*lst);
