@@ -55,7 +55,7 @@ int	builtin_pwd(t_env *env)
 		//set_exit_status(0);
 		free(current_wd);
 	}
-	get_signal = 0;
+	g_get_signal = 0;
 	return (0);
 }
 

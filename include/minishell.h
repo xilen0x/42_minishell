@@ -51,7 +51,7 @@
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 /*-----------global variable------------*/
-int	get_signal;//recoge todos los exit_status
+int	g_get_signal;//recoge todos los exit_status
 
 /*--------------------------- Pipe ---------------------------*/
 # define READ 0
@@ -201,6 +201,7 @@ int		new_tok_len(char *str, t_env *envlist);
 char	*new_tok_builder(char *str, t_env *envlist, char *result);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
+size_t	get_len_and_free(char *str);
 
 /*---------------------utils--------------------*/
 void	*p_malloc(size_t size);

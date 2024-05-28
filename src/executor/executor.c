@@ -81,7 +81,7 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 		}
 		i++;
 	}
-	get_signal = exit_status;
+	g_get_signal = exit_status;
 	return (0);
 }
 

@@ -22,7 +22,7 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write(2, ": ", 2);
 		write(2, "command not found", 17);
 		write(2, "\n", 1);
-		get_signal = 127;
+		g_get_signal = 127;
 		return (1);//?
 	}
 	else if (n == 1)
@@ -69,7 +69,7 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write (2, "Not a directory\n", 16);
 	else if (n == 10)
 		write (2, "Run minishell without arguments!\n", 33);
-	get_signal = 1;
+	g_get_signal = 1;
 	return (1);
 }
 

@@ -10,7 +10,7 @@ int	builtin_unset(t_cmd *cmd, t_env **env)
 	//---------------UNSET SIN ARGUMENTOS
 	if (size_arr2d(cmd->commands) == 1)
 	{
-		get_signal = 0;
+		g_get_signal = 0;
 		return (0);
 	}
 	//---------------UNSET + VARIABLE
@@ -44,6 +44,6 @@ int	builtin_unset(t_cmd *cmd, t_env **env)
 		else if (flag == 2)
 			printf("Variable successfully removed!\n");
 	}
-	get_signal = 0;
+	g_get_signal = 0;
 	return (0);
 }

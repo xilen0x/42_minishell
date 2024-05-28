@@ -16,7 +16,7 @@ static int	go_home(void)
 		perror("chdir() error");
 		return (1);
 	}
-	get_signal = 0;
+	g_get_signal = 0;
 	return (0);
 }
 

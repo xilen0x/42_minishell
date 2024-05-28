@@ -82,6 +82,7 @@ FILES =	main.c \
 									expander/new_tok_builder.c \
 									expander/new_tok_len.c \
 									expander/should_expand.c\
+									expander/get_len_and_free.c \
 									parser/commands_size.c \
 									parser/handle_error.c \
 									parser/is_operator.c \
