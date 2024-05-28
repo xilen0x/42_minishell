@@ -80,7 +80,6 @@ int	go_path(t_cmd *cmd)
 		get_info_file(cmd, &info_f);
 		if (chdir(cmd->commands[1]) == -1)
 		{
-			ft_msgs(4, cmd);
 			return (1);
 		}
 	}

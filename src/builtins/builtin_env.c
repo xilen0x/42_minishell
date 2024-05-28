@@ -22,7 +22,7 @@ void	print_env(t_env *env)
 	}
 }
 
-/*builtin que imprime el environment(la copia)*/
+/*builtin que imprime el environment*/
 int	builtin_env(t_cmd *cmd, t_env *env)
 {
 	if (size_arr2d(cmd->commands) > 1)
