@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /* Counts the number of 'commands' in the current pipe */
-size_t commands_size(t_tok *tok)
+size_t commands_counter(t_tok *tok)
 {
     t_tok   *aux;
     size_t  cnt1;
@@ -15,7 +15,7 @@ size_t commands_size(t_tok *tok)
         if (aux->type == WORD)
             cnt1++;
         if (aux->type == GREATER || aux->type == SMALLER \
-        || aux->type == DOUBLE_GREATER || aux->type == DOUBLE_SMALLER)
+        || aux->type == D_GREATER || aux->type == D_SMALLER)
             cnt2++;
         aux = aux->next;
     }

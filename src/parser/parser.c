@@ -1,10 +1,12 @@
 #include "minishell.h"
 
-
+/*Reordena los tokens en una nueva lista donde cada pipe es un nodo 
+que a su vez contiene un array de comandos-argumentos y una lista 
+con las redirecciones. Retorna 0 o 1 si encontro algun error de sintaxis*/
 int	parser(t_cmd **cmd, t_tok *tok)
 {
 	t_cmd   *node;
-    t_tok   *tmp;
+    t_tok   *tmp;//Creo que puedo prescindir de este tmp y hacerlo todo con tok
     size_t  i;
     size_t  size;
     t_redir *node_redir;
@@ -23,7 +25,7 @@ int	parser(t_cmd **cmd, t_tok *tok)
     {
         node = cmd_new_node();//crea un nodo t_cmd mallocado con todos sus elementos a NULL
         i = 0;        
-        size = commands_size(tmp);//averigua el size que debera tener el array de commands
+        size = commands_counter(tmp);//averigua el size que debera tener el array de commands
 //        printf("size de commands: %zu\n", size);
         if (size > 0)//solo se malloca **commands si existe algun comando, sino es NULL 
             node->commands = (char **)p_malloc((size + 1) * sizeof(char *));

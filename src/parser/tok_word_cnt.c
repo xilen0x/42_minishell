@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 /*OJO, DE MOMENTO NO SE USA*/
-/*---Cuenta el num de WORD de una lista t_lst----*/
+/*-Counts the num of WORD on a list are found-*/
 size_t tok_word_cnt(t_tok *tokens)
 {
     t_tok   *aux;

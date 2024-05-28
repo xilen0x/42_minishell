@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*---If len is bigger than 0, initializes t_tok->str and t_tok->type--*/
+/*---If len is bigger than 0, initializes t_tok->str and t_tok->type with 'line'.--*/
 void	init_word_str(size_t len, t_tok *new_tok, char *line, size_t i)
 {
 	if (len > 0)

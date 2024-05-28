@@ -1,6 +1,7 @@
 #include "minishell.h"
 
-/*Returns '1' if 'tok' list contain an operator next to another operator*/
+/*Returns '1' if two consecutive operators on the list are found, otherwise 
+returns 0*/
 int	syntax_check_2(t_tok *tok)
 {
 	t_tok	*tmp;
@@ -8,7 +9,7 @@ int	syntax_check_2(t_tok *tok)
 	tmp = tok;
 	while (tmp)
     {
-        if (is_operator(tmp) && is_operator(tmp->next))//SI DESPUES DE UN OPERADOR HAY OTRO OPERADOR
+        if (is_operator(tmp) && is_operator(tmp->next))//si dos operador juntos
         {
             handle_error(PRINT_SYNTAX_ERR_3, &tok);//printa error y libera tok
             return (1);

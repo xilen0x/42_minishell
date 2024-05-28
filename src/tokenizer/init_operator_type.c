@@ -7,9 +7,9 @@ int	init_operator_type(char *line, t_tok **new_tok)
 
 	flag = 1;
 	if (*line == '>' && *line == *(line + 1))
-		(*new_tok)->type = DOUBLE_GREATER;
+		(*new_tok)->type = D_GREATER;
 	else if (*line == '<' && *line == *(line + 1))
-		(*new_tok)->type = DOUBLE_SMALLER;	
+		(*new_tok)->type = D_SMALLER;	
 	else if (*line == '>')
 		(*new_tok)->type = GREATER;
 	else if (*line == '<')

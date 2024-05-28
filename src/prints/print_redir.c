@@ -11,7 +11,7 @@ void	print_redir(t_redir *lst)
 	}
 	while (lst)
 	{
-		printf("            (%i)%s\n", lst->redir_type, lst->filename);
+		printf("            (%i)%s\n", lst->redir_type, lst->fname);
 		lst = lst->next;
 	}
 }

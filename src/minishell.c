@@ -11,6 +11,12 @@ static void	control_and_d(char *line)
 	}
 }
 
+static void	line_history(char *line)
+{
+	if (line && *line)
+		add_history(line);
+}
+
 void	minishell(t_env *envlist)
 {
 	char	*line;
@@ -22,8 +28,9 @@ void	minishell(t_env *envlist)
 	cmd = NULL;
 	line = readline("minishell$ ");
 	control_and_d(line);
-	if (line && *line)
-		add_history(line);
+	line_history(line);
+//	if (line && *line)
+//		add_history(line);
 	if (!*line || *line == ' ')
 	{
 		free(line);
@@ -34,7 +41,7 @@ void	minishell(t_env *envlist)
 	free(line);
 	if (parser(&cmd, tok) == 1)
 		return ;
-	tok_free(&tok);
+	tok_free(&tok);//quizas podria
 	should_expand(cmd, envlist);
 //	print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
 	init_exe(&exe, cmd);

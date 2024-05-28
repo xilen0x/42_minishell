@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*Returns '1' if a syntax error in the first or last node of 'tok' list is found.*/
+/*Returns '1' if a syntax error on the list is found, otherwise returns 0.*/
 int	syntax_check_1(t_tok *tok)
 {
 	t_tok	*tmp;

@@ -9,7 +9,7 @@ int	heredoc_create(t_redir *redir, int hd_nbr)
 	tmp_dir = ft_strjoin("/tmp/heredoc", ft_itoa(hd_nbr));
 	fd_tmp = open(tmp_dir, O_CREAT | O_WRONLY | O_TRUNC, 0660);
 	line = readline("> ");
-	while (line && ft_strcmp(line, redir->filename) != 0)
+	while (line && ft_strcmp(line, redir->fname) != 0)
 	{
 		write(fd_tmp, line, ft_strlen(line));
 		write(fd_tmp, "\n", 1);
@@ -18,8 +18,8 @@ int	heredoc_create(t_redir *redir, int hd_nbr)
 	}
 	close(fd_tmp);
 	free(line);
-	free(redir->filename);
-	redir->filename = ft_strdup(tmp_dir);
+	free(redir->fname);
+	redir->fname = ft_strdup(tmp_dir);
 	free(tmp_dir);
 	hd_nbr--;
 	set_signals(PARENT);

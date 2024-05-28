@@ -73,9 +73,9 @@ typedef enum e_type
 	WORD,
 	PIPE,
 	SMALLER,
-	DOUBLE_SMALLER,
+	D_SMALLER,
 	GREATER,
-	DOUBLE_GREATER
+	D_GREATER
 }	t_type;
 
 /*------contiene la str y el tipo de cada token-----*/
@@ -98,7 +98,7 @@ typedef enum e_redir_type
 /*----contiene los datos de cada redirección------*/
 typedef struct s_redir
 {
-	char			*filename;
+	char			*fname;
 	t_redir_type	redir_type;
 	struct s_redir	*next;
 }					t_redir;
@@ -188,7 +188,7 @@ void	init_word_str(size_t len, t_tok *new_tok, char *line, size_t i);
 int		is_operator(t_tok *node);
 int		is_redirection(t_tok *node);
 void	handle_error(char *str, t_tok **tok);
-size_t	commands_size(t_tok *tok);
+size_t	commands_counter(t_tok *tok);
 int		syntax_check_1(t_tok *tok);
 int		syntax_check_2(t_tok *tok);
 //size_t 	tok_operator_cnt(t_tok *tokens);//OJO DE MOMENTO NO SE USA

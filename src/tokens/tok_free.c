@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-/*-----Frees and clears a 't_tok' list-----*/
+/*--Frees and points to NULL a 't_tok' list--*/
 
 void	tok_free(t_tok **lst)
 {

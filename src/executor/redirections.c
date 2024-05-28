@@ -4,7 +4,7 @@ int	open_files(t_exe *exe, t_redir *aux)
 {
 	if (aux->redir_type == REDIR_INPUT || aux->redir_type == HEREDOC_INPUT)// < || <<
 	{
-		exe->fd_input = open(aux->filename, O_RDONLY);
+		exe->fd_input = open(aux->fname, O_RDONLY);
 		if (exe->fd_input == -1)
 			return (1);
 		if (dup2(exe->fd_input, STDIN_FILENO) == -1)
@@ -14,9 +14,9 @@ int	open_files(t_exe *exe, t_redir *aux)
 	else if (aux->redir_type == REDIR_OUTPUT || aux->redir_type == REDIR_OUTPUT_APPEND)// > || >>
 	{
 		if (aux->redir_type == REDIR_OUTPUT_APPEND)// >>
-			exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_APPEND, 0660);
+			exe->fd_output = open(aux->fname, O_CREAT | O_WRONLY | O_APPEND, 0660);
 		else
-			exe->fd_output = open(aux->filename, O_CREAT | O_WRONLY | O_TRUNC, 0660);
+			exe->fd_output = open(aux->fname, O_CREAT | O_WRONLY | O_TRUNC, 0660);
 		if (exe->fd_output == -1)
 			return (1);
 		if (dup2(exe->fd_output, STDOUT_FILENO) == -1)
@@ -42,7 +42,7 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 		{
 			if (aux->redir_type == HEREDOC_INPUT)
 			{
-				unlink(aux->filename);
+				unlink(aux->fname);
 			}
 			return (1);
 		}
