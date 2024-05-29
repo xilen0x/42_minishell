@@ -2,9 +2,9 @@
 
 long	ft_atol(const char *str)
 {
-	int			i;
+	int		i;
 	long	nbr;
-	int			flag;
+	int		flag;
 
 	i = 0;
 	nbr = 0;

@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:03:01 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/02 10:03:43 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:22:53 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	i = 0;
 	s = (unsigned char *)src;
 	d = (unsigned char *)dst;
-	if (!dst || !src)//(!dst && !src)
+	if (!dst || !src)
 		return (0);
 	while (n > i)
 	{

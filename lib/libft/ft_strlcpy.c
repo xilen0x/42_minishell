@@ -6,11 +6,11 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:48:43 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/15 16:17:35 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:31:19 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- /*
+/*
  The strlcpy() and strlcat() functions copy and concatenate strings with the
   same input parameters.
  strlcpy() and strlcat() take the full size of the destination buffer and

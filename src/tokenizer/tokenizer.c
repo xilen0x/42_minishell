@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 12:09:43 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/05/29 12:11:57 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*Tokenizes the content of 'line' using delimiters (' ', \t, <, >, >>, <<, |) \
@@ -9,18 +21,18 @@ void	tokenizer(t_tok **tok, char *line)
 {
 	t_tok	*new_tok;
 	size_t	len;
-	size_t	i;
+	size_t	i;	
 
 	new_tok = NULL;
 	i = 0;
 	while (line && line[i])
 	{
 		len = 0;
-    	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-        	i++;
+		while (line[i] && (line[i] == ' ' || line[i] == '\t'))
+			i++;
 		if (line[i])
 		{
-			new_tok = tok_new_node(NULL, NULL_TYPE);//malloco node inicialitzat a NULL
+			new_tok = tok_new_node(NULL, NULL_TYPE);//inicialitzat a NULL
 			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna un 'len' > 0 si es una WORD
 			init_word_str(len, new_tok, line, i);//si len > 0, inicializo tok->str con la palabra mallocada y tok->type con el enum 'WORD' 
 			if (new_tok->type == D_GREATER || new_tok->type == D_SMALLER)

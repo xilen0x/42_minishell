@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 11:51:50 by castorga          #+#    #+#             */
-/*   Updated: 2024/05/15 15:44:01 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:30:04 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ The strcmp() function return an integer greater than, equal to, or less than 0,
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	size_t	i;
-
+	size_t			i;
 	unsigned char	*str1;
 	unsigned char	*str2;
-	
+
 	i = 0;
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
