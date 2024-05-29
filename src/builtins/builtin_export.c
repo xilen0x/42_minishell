@@ -102,7 +102,6 @@ int	builtin_export_core(t_cmd *cmd, t_env **env)
 
 int	builtin_export(t_cmd *cmd, t_env **env)
 {
-
 	if (size_arr2d(cmd->commands) == 1)
 		just_export(*env);
 	else
@@ -110,5 +109,3 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 	g_get_signal = 0;
 	return (0);
 }
-
-

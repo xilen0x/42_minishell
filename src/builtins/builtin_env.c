@@ -16,7 +16,12 @@ void	print_env(t_env *env)
 {
 	while (env)
 	{
-		if (!(ft_strchr(env->val, 32)))
+		if (!variable_exists_op3(env, "PATH"))
+		{
+			executor(cmd, env);//aki voy
+			continue ;
+		}
+		else if (!(ft_strchr(env->val, 32)) || (ft_strcmp(env->key, "PATH") == 0))
 			printf("%s=%s\n", env->key, env->val);
 		env = env->next;
 	}

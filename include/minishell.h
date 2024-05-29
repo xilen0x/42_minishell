@@ -205,6 +205,7 @@ int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
 int		list_to_array(t_env *env, t_exe *exe);
 int		close_fd(t_exe	*exe);
+int		executor(t_cmd *cmd, t_env *env);
 
 /*---------------------------redirections.c -------------------------*/
 int		pre_redirections(t_cmd *cmd, t_exe *exe);
