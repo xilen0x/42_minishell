@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+/*----help message-----*/
+int	help_mini(void)
+{
+	printf("\n%s█████████████████████████████████████████████████████████████ %s\n", CYAN, END);
+	printf("\n%s█ 42 minishell, version 0.1-release (x86_64-apple-darwin19) █%s\n", CYAN, END);
+	printf("\n%s█ Developed by jocuni-p & castorga                          █%s\n", CYAN, END);
+	printf("\n%s█████████████████████████████████████████████████████████████ %s\n\n", CYAN, END);
+	return (0);
+}
+
 /*----Welcome message-----*/
 void	init_msg(void)
 {

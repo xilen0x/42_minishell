@@ -14,7 +14,6 @@ int	main(int ac, char *av[], char *envp[])
 		exit(EXIT_FAILURE);
 	}
 	env_init_list(envp, &envlist);
-	// bg_color();
 	// init_msg();
 	while (1)
 	{

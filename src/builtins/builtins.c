@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 18:26:18 by castorga          #+#    #+#             */
-/*   Updated: 2024/05/27 18:26:21 by castorga         ###   ########.fr       */
+/*   Created: 2024/05/29 10:58:14 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/29 10:58:18 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	builtins(t_cmd *cmd, t_env **env)
 		builtin_export(cmd, env);
 	else if (ft_strcmp(*cmd->commands, "unset") == 0)
 		builtin_unset(cmd, env);
+	else if (ft_strcmp(*cmd->commands, "help") == 0)
+		help_mini();
 	else
 		return (0);
 	return (1);
@@ -56,6 +58,7 @@ int	is_builtins(t_cmd *cmd)
 		return (1);
 	else if (ft_strcmp(*cmd->commands, "unset") == 0)
 		return (1);
-	else
-		return (0);
+	else if (ft_strcmp(*cmd->commands, "help") == 0)
+		return (1);
+	return (0);
 }

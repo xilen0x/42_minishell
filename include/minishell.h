@@ -130,8 +130,6 @@ typedef struct s_exe
 
 /*---------------------------minishell -------------------------*/
 int		g_get_signal;
-int		bg_color(void);
-void	init_msg(void);
 int		set_signals(int mode);
 void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
@@ -139,6 +137,12 @@ int		parser(t_cmd **cmd, t_tok *tok);
 void	init_exe(t_exe *exe, t_cmd *cmd);	
 void	handle_error(char *str, t_tok **tok);
 void	cleaner_envlist(t_env **lst);
+
+/*--------------------------- wellcome_msg -------------------------*/
+int		bg_color(void);
+void	init_msg(void);
+int		help_mini(void);
+
 
 /*---------------------------array 2d -------------------------*/
 size_t	size_arr2d(char **arr2d);
