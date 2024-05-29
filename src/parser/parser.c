@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 16:01:29 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/05/29 16:02:04 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*Reordena los tokens en una nueva lista donde cada pipe es un nodo 
 que a su vez contiene un array de comandos-argumentos y una lista 
 con las redirecciones. Retorna 0 o 1 si encontro algun error de sintaxis*/
+//RENOMBRAR EN INGLES<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 int	parser(t_cmd **cmd, t_tok *tok)
 {
 	t_cmd   *node;
