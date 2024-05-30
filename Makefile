@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/29 15:02:51 by castorga          #+#    #+#              #
+#    Updated: 2024/05/30 12:35:47 by jocuni-p         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME =	minishell
 
@@ -5,7 +16,7 @@ NAME =	minishell
 GCC := gcc
 
 # Compiler flags
-FLAGS := -Wall -Werror -Wextra -MMD -g #-fsanitize=address
+FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
 
 # Remove
 RM 	:=	rm -rf
@@ -58,6 +69,7 @@ FILES =	main.c \
 									builtins/builtins.c \
 									builtins/utils_pwd/oldpwd.c \
 									builtins/utils_export/var_exists.c \
+									builtins/utils_export/checks.c \
 									cmd/cmd_add_back.c \
 									cmd/cmd_free.c \
 									cmd/cmd_last.c \

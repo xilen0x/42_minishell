@@ -1,15 +1,16 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 16:22:00 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 16:22:03 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// int	ca_isnumber(const char *str)
-// {
-// 	while (*str)
-// 	{
-// 		if (!ft_isdigit(*str))
-// 			return (0);
-// 		str++;
-// 	}
-// 	return (1);
-// }
+#include "minishell.h"
 
 static int	is_space(const char *str)
 {
@@ -39,7 +40,8 @@ int	check_int(const char *str)
 		return (-1);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if ((res * sign > (LLONG_MAX - (str[i] - '0')) / 10) || (res * sign < (LLONG_MIN + (str[i] - '0')) / 10))
+		if ((res * sign > (LLONG_MAX - (str[i] - '0')) / 10) || \
+		(res * sign < (LLONG_MIN + (str[i] - '0')) / 10))
 			return (-1);
 		res *= 10;
 		res += (str[i] - '0');
@@ -50,28 +52,8 @@ int	check_int(const char *str)
 	return (0);
 }
 
-/* Borra una lista t_env y libera todos sus nodos */
-// void	cleaner_envlist(t_env **lst)
-// {
-// 	t_env	*aux;
-
-// 	aux = (*lst);
-// 	while (aux)
-// 	{
-// 		free(aux->key);
-// 		aux->key = NULL;
-// 		free(aux->val);
-// 		aux->val = NULL;
-// 		(*lst) = aux->next;
-// 		free(aux);
-// 		aux = (*lst);
-// 	}
-// 	(*lst) = NULL;
-// }
-
-int	builtin_exit(t_cmd *cmd, t_env *envlist)
+int	builtin_exit(t_cmd *cmd)
 {
-	(void)envlist;
 	if (cmd->commands[1] && check_int(cmd->commands[1]) != 0)
 	{
 		printf("minishell: exit: numeric argument required\n");//exit aesae5 || exit - || exit ++- ...etc

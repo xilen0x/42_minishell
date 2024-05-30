@@ -20,7 +20,6 @@
 # include <sys/stat.h>
 
 /*-----------------Defines-------------*/
-
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 
@@ -133,8 +132,7 @@ typedef struct s_exe
 }	t_exe;
 
 /*---------------------------minishell -------------------------*/
-int		bg_color(void);
-void	init_msg(void);
+int		g_get_signal;
 int		set_signals(int mode);
 void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
@@ -142,7 +140,13 @@ int		parser(t_cmd **cmd, t_tok *tok);
 void	init_exe(t_exe *exe, t_cmd *cmd);	
 void	cleaner_envlist(t_env **lst);
 
-/*-------------------array 2d---------------*/
+/*--------------------------- wellcome_msg -------------------------*/
+int		bg_color(void);
+void	init_msg(void);
+int		help_mini(void);
+
+
+/*---------------------------array 2d -------------------------*/
 size_t	size_arr2d(char **arr2d);
 char	**dup_arr2d(char **arr2d);
 char	**add_one_arr2d(char **arr2d, char *new);
@@ -205,21 +209,31 @@ size_t	get_len_and_free(char *str);
 
 /*---------------------utils--------------------*/
 void	*p_malloc(size_t size);
-//void	malloc_s_pointer_protect(void *name);
-//void	malloc_d_pointer_protect(char **name);
 
-/*--------------------executor.c-----------------*/
+/*--------------------------utils t_env-------------------*/
+t_env	*lstlast(t_env *lst);
+void	lstadd_back(t_env **lst, t_env *new);
+t_env	*lstnew(char *key, char *value);
+void	env_init_list(char **envp, t_env **envlist);
+void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
+void	cleaner_envlist(t_env **lst);
+int	no_path_env(t_cmd *cmd, t_exe exe, t_env *env);
+
+
+/*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
-int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
+// int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
+int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe, unsigned int size_pipe);
 int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
 int		list_to_array(t_env *env, t_exe *exe);
 int		close_fd(t_exe	*exe);
-
-/*--------------------redirections.c--------------*/
+// int		executor(t_cmd *cmd, t_env *env);
+int		executor(t_cmd *cmd, t_exe	*exe, t_env **env);
+/*---------------------------redirections.c -------------------------*/
 int		pre_redirections(t_cmd *cmd, t_exe *exe);
 
-/*---------------------utils0.c-------------------*/
+/*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n, t_cmd *cmd);
 //int		get_exit_status(t_exe *exe);//funciones repetidas ?
 //void	set_exit_status(int num, t_exe *exe);
@@ -232,41 +246,36 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 unsigned int	get_exit_status_len(void);
 char			*get_exit_status_val(void);
 
-/*--------------------builtins--------------------*/
-// int		builtin_exit(t_cmd *cmd);
-int		builtins(t_cmd *cmd, t_env **env);
-int		builtin_exit(t_cmd *cmd, t_env *envlist);
+/*--------------------------- builtins -------------------------*/
+// int		builtins(t_cmd *cmd, t_env **env);
+int		builtins(t_cmd *cmd, t_exe exe, t_env **env);
+int		builtin_exit(t_cmd *cmd);
 int		builtin_pwd(t_env *env);
 int		builtin_cd(t_cmd	*cmd, t_env **env);
-int		builtin_env(t_cmd *cmd, t_env *env);
+// int		builtin_env(t_cmd *cmd, t_env *env);
+int		builtin_env(t_cmd *cmd, t_exe exe, t_env *env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env **env);
 int		builtin_unset(t_cmd *cmd, t_env **env);
 int		is_builtins(t_cmd *cmd);
 int		exist_cwd(void);
-
-/*-------------------builtin export----------------*/
-// int		variable_exists(t_env *env, char *variable);
+/*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
-int 			variable_exists(t_env **env, char **variable);
-int				variable_exists_op2(t_env *env, char *variable);
-int				variable_exists_op3(t_env *env, char *variable);
-t_env			*variable_exists_op4(t_env *env, char *key);
-t_env			*update_env(t_env *env, char *key, char *val);
+int		variable_exists(t_env **env, char **variable);
+int		variable_exists_op2(t_env *env, char *variable);
+int		variable_exists_op3(t_env *env, char *variable);
+t_env	*variable_exists_op4(t_env *env, char *key);
+t_env	*update_env(t_env *env, char *key, char *val);
 
 /*--------------------builtin unset-----------------*/
 int		check_syntax(char *cmd);
 
 /*-----------------------oldpwd---------------------*/
 int		var_exists_oldpwd(t_env *env, char *variable);
-// int		update_pwd(t_env *env);
 char	*update_pwd(t_env *env);
-int		set_old_pwd(t_cmd *cmd, t_env *env);
-// int		go_path(char *path);
-// int		get_old_pwd(t_cmd *cmd, t_env *env);
+int		set_old_pwd(void);
 int		get_old_pwd(char *current_wd, t_env *env);
-int		go_path(t_cmd *cmd, t_env **env);
-// int		update_oldpwd(t_env *env);
+int		go_path(t_cmd *cmd);
 int		update_oldpwd(t_env *env, char *current_wd);
 
 /*----------------------prints--------------------*/

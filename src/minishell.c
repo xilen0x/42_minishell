@@ -3,49 +3,54 @@
 
 static void	control_and_d(char *line)
 {
-	if (!line)//Ctrl+D cierra el minishell y no seria necesario recoger el exit_status.
+	if (!line)
 	{
-   		//  if (isatty(STDIN_FILENO))
+		if (!isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "exit\n", 5);
 		write(STDOUT_FILENO, "exit\n", 5);
 		exit(EXIT_SUCCESS);
 	}
-}
-
-static void	line_history(char *line)
-{
-	if (line && *line)
-		add_history(line);
-}
-
-void	minishell(t_env *envlist)
-{
-	char	*line;
-	t_tok	*tok;
-	t_cmd	*cmd;
-	t_exe	exe;
-
-	tok = NULL;
-	cmd = NULL;
-	line = readline("minishell$ ");
-	control_and_d(line);
-	line_history(line);
-//	if (line && *line)
-//		add_history(line);
 	if (!*line || *line == ' ')
 	{
 		free(line);
 		return ;
 	}
+}
+
+static void	main_process(t_env **envlist)
+{
+	t_tok			*tok;
+	t_cmd			*cmd;
+	char			*line;
+	t_exe			exe;
+	unsigned int	size_pipe;
+
+	tok = NULL;
+	cmd = NULL;
+	line = readline("minishell$ ");
+	control_and_d(line);
+	if (line && *line)
+		add_history(line);
 	tokenizer(&tok, line);
-//	print_tok(tok);//ELIMINAR ANTES DE ENTREGA
 	free(line);
 	if (parser(&cmd, tok) == 1)
 		return ;
 	tok_free(&tok);
-	should_expand(cmd, envlist);
-	print_cmd(cmd);//ELIMINAR ANTES DE ENTREGA
+	should_expand(cmd, *envlist);
 	init_exe(&exe, cmd);
 	heredoc(cmd);
-	pre_executor(&envlist, cmd, &exe);
+	size_pipe = cmd_size(cmd);
+	pre_executor(envlist, cmd, &exe, size_pipe);
 	cmd_free(&cmd);
+}
+
+void	minishell(t_env *envlist)
+{
+	if (isatty(STDIN_FILENO))
+		main_process(&envlist);
+	else
+	{
+		write(2, "run ./minishell (without arguments or operators)\n", 49);
+		exit(STDERR_FILENO);
+	}
 }

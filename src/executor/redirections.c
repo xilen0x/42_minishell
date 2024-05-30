@@ -1,8 +1,22 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/28 15:17:41 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/30 12:28:35 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
+
+/*opens files for redirections and duplicates file descriptors,
+ returning 1 on error.*/
 int	open_files(t_exe *exe, t_redir *aux)
 {
-	if (aux->redir_type == REDIR_INPUT || aux->redir_type == HEREDOC_INPUT)// < || <<
+	if (aux->redir_type == REDIR_INPUT || aux->redir_type == HEREDOC_INPUT)
 	{
 		exe->fd_input = open(aux->fname, O_RDONLY);
 		if (exe->fd_input == -1)
@@ -11,12 +25,15 @@ int	open_files(t_exe *exe, t_redir *aux)
 			return (1);
 		close(exe->fd_input);
 	}
-	else if (aux->redir_type == REDIR_OUTPUT || aux->redir_type == REDIR_OUTPUT_APPEND)// > || >>
+	else if (aux->redir_type == REDIR_OUTPUT || \
+			aux->redir_type == REDIR_OUTPUT_APPEND)
 	{
-		if (aux->redir_type == REDIR_OUTPUT_APPEND)// >>
-			exe->fd_output = open(aux->fname, O_CREAT | O_WRONLY | O_APPEND, 0660);
+		if (aux->redir_type == REDIR_OUTPUT_APPEND)
+			exe->fd_output = open(aux->filename, O_CREAT | \
+												O_WRONLY | O_APPEND, 0660);
 		else
-			exe->fd_output = open(aux->fname, O_CREAT | O_WRONLY | O_TRUNC, 0660);
+			exe->fd_output = open(aux->filename, O_CREAT | \
+												O_WRONLY | O_TRUNC, 0660);
 		if (exe->fd_output == -1)
 			return (1);
 		if (dup2(exe->fd_output, STDOUT_FILENO) == -1)
@@ -26,6 +43,8 @@ int	open_files(t_exe *exe, t_redir *aux)
 	return (0);
 }
 
+/* sets up file descriptors for command redirections and 
+returns 1 if a file opening error occurs.*/
 int	pre_redirections(t_cmd *cmd, t_exe *exe)
 {
 	t_redir	*aux;
@@ -35,7 +54,6 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 	{
 		dup2(exe->fd[1], STDOUT_FILENO);
 	}
-	// close_fd(exe);
 	while (aux)
 	{
 		if (open_files(exe, aux) == 1)
@@ -57,7 +75,6 @@ int	exist_redirections(t_cmd *cmd)
 {
 	t_redir			*aux;
 
-	// aux = p_malloc(sizeof(t_redir));
 	aux = cmd->redir;
 	if (!aux)
 		return (0);
@@ -66,6 +83,5 @@ int	exist_redirections(t_cmd *cmd)
 		if (aux->redir_type != NULL_REDIR)
 			return (1);
 	}
-	// free(aux);
 	return (0);
 }

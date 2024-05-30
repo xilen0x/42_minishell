@@ -1,24 +1,16 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 16:45:46 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/30 12:29:33 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*check if export argument comes with = or += */
-unsigned int	check_export(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i] && (ft_isalpha(arg[i]) || arg[i] == '_' || ft_isdigit(arg[i])))
-		i++;
-	if (arg[i] == '+')
-	{
-		if (ft_strncmp(&arg[i], "+=", 2) == 0)
-			return (2);
-	}
-	else if (arg[i] == '=')
-		return (1);
-	else
-		return (3);//sin = ni +=
-	return (0);
-}
+#include "minishell.h"
 
 /*print the export output(without argument)*/
 static int	just_export(t_env *env)
@@ -82,57 +74,38 @@ int	overwrite_variable(t_env *env, char *cmd)
 	return (0);
 }
 
-int	check_syntax(char *cmd)
+/*Funcion que agrega una nueva variable de entorno si corresp.*/
+int	builtin_export_core(t_cmd *cmd, t_env **env)
 {
 	int	i;
+	int	chk_exp;
 
-	i = 0;
-	if (!(ft_isalpha(cmd[i]) || cmd[i] == '_'))
-		return (1);
-	while (cmd[i])
+	i = 1;
+	while (cmd->commands[i] != NULL)
 	{
-		if (!ft_isalnum(cmd[i]) && cmd[i] != '_' && cmd[i] != '=' && cmd[i] != '+')
+		if (check_syntax(cmd->commands[i]))
+		{
+			ft_msgs(5, cmd);
 			return (1);
-		if (cmd[i] == '=' && i > 0)
-			return (0);
+		}
+		chk_exp = check_export(cmd->commands[i]);
+		if ((chk_exp == 1) || (chk_exp == 3))
+			create_variable(cmd->commands[i], env);
+		else if (chk_exp == 2) // '+='
+			overwrite_variable(*env, cmd->commands[i]);
+		else
+			return (1);
 		i++;
 	}
 	return (0);
 }
 
-/*Funcion que agrega una nueva variable de entorno si corresp.*/
 int	builtin_export(t_cmd *cmd, t_env **env)
 {
-	int	chk_exp;
-	int	i;
-
 	if (size_arr2d(cmd->commands) == 1)
 		just_export(*env);
 	else
-	{
-		i = 1;
-		while (cmd->commands[i] != NULL)
-		{
-			if (check_syntax(cmd->commands[i]))
-			{
-				ft_msgs(5, cmd);
-				return (1);
-			}
-			chk_exp = check_export(cmd->commands[i]);
-			if ((chk_exp == 1) || (chk_exp == 3)) // '=' || wordx
-			{
-				create_variable(cmd->commands[i], env);
-			}
-			else if (chk_exp == 2) // '+='
-			{
-				overwrite_variable(*env, cmd->commands[i]);
-			}
-			else
-				return (1);
-			i++;
-		}
-	}
+		builtin_export_core(cmd, env);
 	g_get_signal = 0;
 	return (0);
 }
-

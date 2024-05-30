@@ -1,12 +1,22 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/28 10:48:05 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/28 10:48:12 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 /*function that search by the 'PATH' word and split the content*/
 char	**get_paths(t_env *env)
 {
-//	int		i;
 	char	**full_path;
 
-//	i = 0;
 	full_path = NULL;
 	while (env)
 	{
@@ -15,26 +25,20 @@ char	**get_paths(t_env *env)
 			full_path = ft_split(env->val, ':');
 			break ;
 		}
-//		i++;
 		env = env->next;
 	}
 	return (full_path);
 }
 
-/*funcion que crea el fullpath del comando y verifica si existe
-para poder guardarlo o no*/
-int	search_command_path(t_cmd *cmd, t_exe *exe)
+/*function that create the fullpath of the command and verify if exist
+in order to save it or not - part2*/
+int	search_command_path_core(t_cmd *cmd, t_exe *exe)
 {
 	char	*cmd_path;
 	char	*full_path;
 	int		i;
 
 	i = 0;
-	if (ft_strchr(cmd->commands[0], '/'))
-	{
-		exe->cmd_fullpath = ft_strdup(cmd->commands[0]);
-		return (0);
-	}
 	while (exe->paths[i] != NULL)
 	{
 		cmd_path = ft_strjoin("/", cmd->commands[0]);
@@ -50,5 +54,19 @@ int	search_command_path(t_cmd *cmd, t_exe *exe)
 		free(full_path);
 		i++;
 	}
+	return (1);
+}
+
+/*function that create the fullpath of the command and verify if exist
+in order to save it or not - part1*/
+int	search_command_path(t_cmd *cmd, t_exe *exe)
+{
+
+	if (ft_strchr(cmd->commands[0], '/'))
+	{
+		exe->cmd_fullpath = ft_strdup(cmd->commands[0]);
+		return (0);
+	}
+	search_command_path_core(cmd, exe);
 	return (1);
 }

@@ -1,5 +1,19 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/28 10:47:24 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/28 10:47:27 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
+
+/*creates a temp file to store the content of the heredoc until the delimiter
+ is encountered.*/
 int	heredoc_create(t_redir *redir, int hd_nbr)
 {
 	char	*tmp_dir;
@@ -26,6 +40,7 @@ int	heredoc_create(t_redir *redir, int hd_nbr)
 	return (0);
 }
 
+/*iterates commands and calls heredoc_create for each << found.*/
 int	heredoc(t_cmd *cmd)
 {
 	t_redir	*aux;
@@ -48,18 +63,3 @@ int	heredoc(t_cmd *cmd)
 	}
 	return (0);
 }
-
-/*return 1 if heredoc simbol was found*/
-// int	heredoc_found(t_cmd *cmd)
-// {
-// 	t_redir	*aux;
-
-// 	aux = cmd->redir;
-// 	while (aux)
-// 	{
-// 		if (aux->redir_type == HEREDOC_INPUT)
-// 			return (1);
-// 		aux = aux->next;
-// 	}
-// 	return (0);
-// }
