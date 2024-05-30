@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*Funcion que segun el comando recibido, redirije a su building corresp.*/
-int	builtins(t_cmd *cmd, t_env **env)
+int	builtins(t_cmd *cmd, t_exe exe, t_env **env)
 {
 	if (ft_strcmp(*cmd->commands, "exit") == 0)
 	{
@@ -26,7 +26,7 @@ int	builtins(t_cmd *cmd, t_env **env)
 	else if (ft_strcmp(*cmd->commands, "cd") == 0)
 		builtin_cd(cmd, env);
 	else if (ft_strcmp(*cmd->commands, "env") == 0)
-		builtin_env(cmd, *env);
+		builtin_env(cmd, exe, *env);
 	else if (ft_strcmp(*cmd->commands, "echo") == 0)
 		builtin_echo(cmd);
 	else if (ft_strcmp(*cmd->commands, "export") == 0)
