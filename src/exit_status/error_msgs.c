@@ -95,11 +95,12 @@ void	print_not_valid_identifier(t_cmd *cmd, const char *prefix, size_t prefix_le
 	write(2, "not a valid identifier\n", 23);
 }
 
-void	print_syntax_error(const char *prefix, size_t prefix_length)
+int	print_syntax_error(const char *prefix, size_t prefix_length)
 {
 	write(2, prefix, prefix_length);
 	write(2, ": ", 2);
 	write(2, "syntax error\n", 13);
+	return (1);
 }
 
 void	print_not_a_directory(t_cmd *cmd, const char *prefix, size_t prefix_length)

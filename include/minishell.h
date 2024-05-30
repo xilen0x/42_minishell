@@ -201,7 +201,8 @@ int	no_path_env(t_cmd *cmd, t_exe exe, t_env *env);
 
 /*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
-int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
+// int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
+int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe, unsigned int size_pipe);
 int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
 int		list_to_array(t_env *env, t_exe *exe);

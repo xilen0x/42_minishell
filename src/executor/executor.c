@@ -97,13 +97,12 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 	return (0);
 }
 
-/*Funcion que direcciona a builtin si es el caso o envia pipe a executor*/
-int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
+/*Funcion que direcciona a builtin si es el caso o envia pipe a executor
+0: if NO hay redirecciones
+1: else Sí hay redirecciones*/
+int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe, unsigned int size_pipe)
 {
-	unsigned int	size_pipe;
-
-	size_pipe = cmd_size(cmd);
-	if (!exist_redirections(cmd))//--------------0: if NO hay redirecciones
+	if (!exist_redirections(cmd))
 	{
 		if (is_builtins(cmd) && (size_pipe == 1))
 		{
@@ -115,12 +114,11 @@ int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe)
 		else
 			executor(cmd, exe, env);
 	}
-	else//---------------------------------------1: if Sí hay redirecciones
+	else
 	{
-		if (cmd->commands == NULL)	
+		if (cmd->commands == NULL)
 		{
 			ft_msgs(6, cmd);
-			// write(1, "no hay comando\n", 15);//aqui debe crear el archivo vacio(si decidimos hacerlo)
 			return (1);
 		}
 		executor(cmd, exe, env);

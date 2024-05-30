@@ -19,10 +19,11 @@ static void	control_and_d(char *line)
 
 static void	main_process(t_env **envlist)
 {
-	t_tok	*tok;
-	t_cmd	*cmd;
-	char	*line;
-	t_exe	exe;
+	t_tok			*tok;
+	t_cmd			*cmd;
+	char			*line;
+	t_exe			exe;
+	unsigned int	size_pipe;
 
 	tok = NULL;
 	cmd = NULL;
@@ -38,7 +39,8 @@ static void	main_process(t_env **envlist)
 	should_expand(cmd, *envlist);
 	init_exe(&exe, cmd);
 	heredoc(cmd);
-	pre_executor(envlist, cmd, &exe);
+	size_pipe = cmd_size(cmd);
+	pre_executor(envlist, cmd, &exe, size_pipe);
 	cmd_free(&cmd);
 }
 
