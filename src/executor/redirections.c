@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:17:41 by castorga          #+#    #+#             */
-/*   Updated: 2024/05/30 12:28:35 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:38:46 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	open_files(t_exe *exe, t_redir *aux)
 			aux->redir_type == REDIR_OUTPUT_APPEND)
 	{
 		if (aux->redir_type == REDIR_OUTPUT_APPEND)
-			exe->fd_output = open(aux->filename, O_CREAT | \
+			exe->fd_output = open(aux->fname, O_CREAT | \
 												O_WRONLY | O_APPEND, 0660);
 		else
-			exe->fd_output = open(aux->filename, O_CREAT | \
+			exe->fd_output = open(aux->fname, O_CREAT | \
 												O_WRONLY | O_TRUNC, 0660);
 		if (exe->fd_output == -1)
 			return (1);
