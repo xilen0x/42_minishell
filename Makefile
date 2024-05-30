@@ -58,11 +58,11 @@ FILES =	main.c \
 									builtins/builtins.c \
 									builtins/utils_pwd/oldpwd.c \
 									builtins/utils_export/var_exists.c \
-									commands/cmd_add_back.c \
-									commands/cmd_free.c \
-									commands/cmd_last.c \
-									commands/cmd_new_node.c \
-									commands/cmd_size.c \
+									cmd/cmd_add_back.c \
+									cmd/cmd_free.c \
+									cmd/cmd_last.c \
+									cmd/cmd_new_node.c \
+									cmd/cmd_size.c \
 									env_list/env_cleaner_list.c \
 									env_list/env_delone_lst.c \
 									env_list/env_init_list.c \
@@ -83,7 +83,8 @@ FILES =	main.c \
 									expander/new_tok_len.c \
 									expander/should_expand.c\
 									expander/get_len_and_free.c \
-									parser/commands_size.c \
+									parser/commands_counter.c \
+									parser/commands_creator.c \
 									parser/handle_error.c \
 									parser/is_operator.c \
 									parser/is_redirection.c \
