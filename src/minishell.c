@@ -37,6 +37,7 @@ static void	main_process(t_env **envlist)
 		return ;
 	tok_free(&tok);
 	should_expand(cmd, *envlist);
+	print_cmd(cmd);//ELIMINAR ANTES ENTREGA
 	init_exe(&exe, cmd);
 	heredoc(cmd);
 	size_pipe = cmd_size(cmd);

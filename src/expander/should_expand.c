@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   should_expand.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/30 15:38:41 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/05/30 15:43:44 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /* Look for any expandable or quote removable token into 'cmd' list */
+/*
 void	should_expand(t_cmd *cmd, t_env *envlist)
 {
 	size_t	i;
@@ -34,5 +47,34 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 		 	redir_aux = redir_aux->next;
 		}
 		cmd_aux = cmd_aux->next;
+	}
+}
+*/
+void	should_expand(t_cmd *cmd, t_env *envlist)
+{
+	size_t	i;
+	t_redir	*redir_aux;
+
+	redir_aux = cmd->redir;
+	while (cmd)
+	{
+		i = 0;
+		while (cmd->commands && cmd->commands[i])//busca $, ', " en los comandos
+		{
+			if (ft_strchr(cmd->commands[i], '$') != NULL \
+				|| ft_strchr(cmd->commands[i], '\'') != NULL \
+				|| ft_strchr(cmd->commands[i], '"') != NULL)
+				cmd->commands[i] = expand_quote_rm(cmd->commands[i], envlist);
+			i++;
+		}
+		while (redir_aux)//busca ', ", $ en las redirecciones
+		{
+			if (ft_strchr(redir_aux->fname, '$') != NULL \
+				|| ft_strchr(redir_aux->fname, '\'') != NULL \
+				|| ft_strchr(redir_aux->fname, '"') != NULL)
+				redir_aux->fname = expand_quote_rm(redir_aux->fname, envlist);
+			redir_aux = redir_aux->next;
+		}
+		cmd = cmd->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:08:22 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/30 12:39:29 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/30 15:36:27 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	commands_creator(t_tok *tok, t_cmd *node)
 
 	size = commands_counter(tok);
 	if (size > 0)
+	{
 		node->commands = (char **)p_malloc((size + 1) * sizeof(char *));
 		node->commands[size] = NULL;//cierro el array de strings con NULL
+	}
 }
