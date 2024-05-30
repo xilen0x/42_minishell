@@ -131,16 +131,20 @@ typedef struct s_exe
 	int				dup_stdout;
 }	t_exe;
 
-/*---------------------------minishell -------------------------*/
+/*--------------------------- minishell.c -------------------------*/
 int		g_get_signal;
 int		set_signals(int mode);
 void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
 int		parser(t_cmd **cmd, t_tok *tok);
-void	init_exe(t_exe *exe, t_cmd *cmd);	
 void	cleaner_envlist(t_env **lst);
 
-/*--------------------------- wellcome_msg -------------------------*/
+
+/*--------------------------- init_exe.c -------------------------*/
+void	init_exe(t_exe *exe, t_cmd *cmd);	
+void	exe_free(t_exe *exe);
+
+/*--------------------------- wellcome_msg.c -------------------------*/
 int		bg_color(void);
 void	init_msg(void);
 int		help_mini(void);

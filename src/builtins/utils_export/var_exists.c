@@ -24,6 +24,7 @@ int	var_exists_oldpwd(t_env *env, char *variable)
 			flag = 1;
 		env = env->next;
 	}
+	free_arr2d(var_ent);
 	return (flag);
 }
 
@@ -44,6 +45,7 @@ int	variable_exists_op3(t_env *env, char *variable)
 		}
 		env = env->next;
 	}
+	free_arr2d(var_ent);
 	return (flag);
 }
 

@@ -42,6 +42,7 @@ static void	main_process(t_env **envlist)
 	size_pipe = cmd_size(cmd);
 	pre_executor(envlist, cmd, &exe, size_pipe);
 	cmd_free(&cmd);
+	exe_free(&exe);
 }
 
 void	minishell(t_env *envlist)
