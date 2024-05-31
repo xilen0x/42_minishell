@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-static void	control_and_d(char *line)
+void	control_and_d(char *line)
 {
 	if (!line)
 	{
@@ -10,27 +10,32 @@ static void	control_and_d(char *line)
 		write(STDOUT_FILENO, "exit\n", 5);
 		exit(EXIT_SUCCESS);
 	}
-	if (!*line || *line == ' ')
-	{
-		free(line);
-		return ;
-	}
+}
+
+char	*generate_line(void)
+{
+	char	*line;
+
+	line = readline("minishell$ ");
+	if (line && *line)
+		add_history(line);
+	return (line);
 }
 
 static void	main_process(t_env **envlist)
 {
 	t_tok			*tok;
 	t_cmd			*cmd;
-	char			*line;
 	t_exe			exe;
 	unsigned int	size_pipe;
+	char			*line;
 
 	tok = NULL;
 	cmd = NULL;
-	line = readline("minishell$ ");
+	line = generate_line();
 	control_and_d(line);
-	if (line && *line)
-		add_history(line);
+	if (!line || !*line)
+		return (free(line));
 	tokenizer(&tok, line);
 	free(line);
 	if (parser(&cmd, tok) == 1)
@@ -41,8 +46,7 @@ static void	main_process(t_env **envlist)
 	heredoc(cmd);
 	size_pipe = cmd_size(cmd);
 	pre_executor(envlist, cmd, &exe, size_pipe);
-	cmd_free(&cmd);
-	exe_free(&exe);
+	cmd_free(&cmd);//exe_free(&exe);
 }
 
 void	minishell(t_env *envlist)

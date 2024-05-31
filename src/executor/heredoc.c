@@ -30,6 +30,7 @@ int	heredoc_create(t_redir *redir, int hd_nbr)
 		free(line);
 		line = readline("> ");
 	}
+	set_signals(CHILD);
 	close(fd_tmp);
 	free(line);
 	free(redir->fname);

@@ -138,7 +138,7 @@ void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
 int		parser(t_cmd **cmd, t_tok *tok);
 void	cleaner_envlist(t_env **lst);
-
+void	control_and_d(char *line);
 
 /*--------------------------- init_exe.c -------------------------*/
 void	init_exe(t_exe *exe, t_cmd *cmd);	

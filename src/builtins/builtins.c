@@ -25,9 +25,11 @@ int	builtins(t_cmd *cmd, t_exe exe, t_env **env)
 		builtin_pwd(*env);
 	else if (ft_strcmp(*cmd->commands, "cd") == 0)
 		builtin_cd(cmd, env);
-	else if (ft_strcmp(*cmd->commands, "env") == 0)
+	else if ((ft_strcmp(*cmd->commands, "env") == 0) || \
+	(ft_strcmp(*cmd->commands, "ENV") == 0))
 		builtin_env(cmd, exe, *env);
-	else if (ft_strcmp(*cmd->commands, "echo") == 0)
+	else if ((ft_strcmp(*cmd->commands, "echo") == 0) || \
+	(ft_strcmp(*cmd->commands, "ECHO") == 0))
 		builtin_echo(cmd);
 	else if (ft_strcmp(*cmd->commands, "export") == 0)
 		builtin_export(cmd, env);
@@ -50,9 +52,11 @@ int	is_builtins(t_cmd *cmd)
 		return (1);
 	else if (ft_strcmp(*cmd->commands, "cd") == 0)
 		return (1);
-	else if (ft_strcmp(*cmd->commands, "env") == 0)
+	else if ((ft_strcmp(*cmd->commands, "env") == 0) || \
+	(ft_strcmp(*cmd->commands, "ENV") == 0))
 		return (1);
-	else if (ft_strcmp(*cmd->commands, "echo") == 0)
+	else if ((ft_strcmp(*cmd->commands, "echo") == 0) || \
+	(ft_strcmp(*cmd->commands, "ECHO") == 0))
 		return (1);
 	else if (ft_strcmp(*cmd->commands, "export") == 0)
 		return (1);
