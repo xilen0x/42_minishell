@@ -6,7 +6,7 @@
 #    By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/29 15:02:51 by castorga          #+#    #+#              #
-#    Updated: 2024/05/30 12:35:47 by jocuni-p         ###   ########.fr        #
+#    Updated: 2024/05/31 18:13:57 by jocuni-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,10 +91,14 @@ FILES =	main.c \
 									expander/expand_quote_rm.c \
 									expander/get_env_key.c \
 									expander/get_env_val.c \
+									expander/get_len_and_free.c \
+									expander/handle_dollar.c \
+									expander/handle_invalid_env_var.c \
+									expander/handle_quotes.c \
+									expander/handle_valid_env_var.c \
 									expander/new_tok_builder.c \
 									expander/new_tok_len.c \
 									expander/should_expand.c\
-									expander/get_len_and_free.c \
 									parser/commands_counter.c \
 									parser/commands_creator.c \
 									parser/handle_error.c \

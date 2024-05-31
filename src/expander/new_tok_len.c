@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:08:28 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/30 17:17:16 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:10:29 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ int	new_tok_len(char *str, t_env *envlist)
 	}
 	return (len);
 }*/
-#include "minishell.h"
+//#include "minishell.h"
 
-static void	handle_quotes(char c, t_qts *quotes)
+/*Maneja y guarda el estado actual de las comillas: abiertas o cerradas*/
+/*static void	handle_quotes(char c, t_qts *quotes)
 {
 	if (c == '"' && quotes->d_quote == 0 && quotes->s_quote == 0)
 		quotes->d_quote = 1;
@@ -91,67 +92,70 @@ static void	handle_quotes(char c, t_qts *quotes)
 		quotes->s_quote = 1;
 	else if (c == '\'' && quotes->s_quote == 1)
 		quotes->s_quote = 0;
-}
-
-static size_t	handle_invalid_env_var(char *str, size_t i, size_t *len, t_qts *quotes)//OJO NOMBRE DE FUNCION TOO LONG
+}*/
+/*Retorna el length de la variable sintacticamente NO valida  */
+/*static size_t	handle_invalid_env_var(char *str, t_len *len, t_qts *quotes)
 {
-	if (str[i] == '\'' || str[i] == '"')
+	if (str[len->i] == '\'' || str[len->i] == '"')
 	{
-		handle_quotes(str[i], quotes);
-		(*len)++;
+		handle_quotes(str[len->i], quotes);
+		(len->len)++;
 	}
 	else
-		*len += 2;
-	return (i);
-}
-
-static size_t	handle_valid_env_var(char *str, size_t i, size_t *len, t_env *envlist)
+		len->len += 2;//cuento el '$' y el char actual no valido, porque los deberé añadir al nuevo token
+	return (len->i);
+}*/
+/*
+static size_t	handle_valid_env_var(char *str, t_len *len, t_env *envlist)
 {
 	char	*env_key;
 	char	*env_val;
 
-	env_key = get_env_key(str + i);
+	env_key = get_env_key(str + len->i);
 	env_val = get_env_val(env_key, envlist);
 	if (env_val != NULL)
-		*len += get_len_and_free(env_val);
-	i += get_len_and_free(env_key);
-	return (i);
-}
-
-static size_t	handle_dollar_sign(char *str, size_t i, size_t *len, t_env *envlist, t_qts *quotes)
+		len->len += get_len_and_free(env_val);//ENTREGA EL LEN DEL VALOR DE LA VARIABLE
+	len->i += get_len_and_free(env_key);//ENTREGA EL LEN DEL NOMBRE DE LA VARIABLE
+	return (len->i);
+}*/
+/*Gestiona lo que encuentra despues de '$', segun sea expansionable, invalid syntax o '$?'*/
+/*static size_t	handle_dollar(char *str, t_len *len, t_env *envlist, t_qts *quotes)
 {
-	i++;
-	if (str[i] != '?' && !ft_isalpha(str[i]) && str[i] != '_')
-		i = handle_invalid_env_var(str, i, len, quotes);
-	else if (str[i] == '?')
-		*len += get_exit_status_len();
-	else
+	len->i++;
+	if (str[len->i] != '?' && !ft_isalpha(str[len->i]) && str[len->i] != '_')//SI ES UNA VAR CON INVALID SYNTAX
+		len->i = handle_invalid_env_var(str, len, quotes);
+	else if (str[len->i] == '?')//SI ES UN $?
+		len->len += get_exit_status_len();
+	else//SI ES UNA VAR CON VALID SYNTAX
 	{
-		i = handle_valid_env_var(str, i, len, envlist);
-		i--;
+		len->i = handle_valid_env_var(str, len, envlist);
+		len->i--;
 	}
-	return (i);
+	return (len->i);
 }
-
+*/
+/*Recorre el token y retorna el lenght final que tendrá la expansion una vez
+ quitadas comillas y expandida si procede*/
 int	new_tok_len(char *str, t_env *envlist)
 {
-	size_t	i;
-	size_t	len;
+//	size_t	i;
+//	size_t	len;
+	t_len	len;
 	t_qts	quotes;
 
-	i = 0;
-	len = 0;
+	len.i = 0;
+	len.len = 0;
 	quotes.d_quote = 0;
 	quotes.s_quote = 0;
-	while (str && str[i])
+	while (str && str[len.i])
 	{
-		if (str[i] == '"' || str[i] == '\'')
-			handle_quotes(str[i], &quotes);
-		else if (str[i] == '$' && quotes.s_quote == 0 && str[i + 1])
-			i = handle_dollar_sign(str, i, &len, envlist, &quotes);
-		else
-			len++;
-		i++;
+		if (str[len.i] == '"' || str[len.i] == '\'')//SI COMILLAS
+			handle_quotes(str[len.i], &quotes);
+		else if (str[len.i] == '$' && quotes.s_quote == 0 && str[len.i + 1])//SI $
+			len.i = handle_dollar(str, &len, envlist, &quotes);
+		else//SI CUALQUIER OTRO CASO
+			len.len++;
+		len.i++;
 	}
-	return (len);
+	return (len.len);
 }

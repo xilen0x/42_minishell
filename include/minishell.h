@@ -117,6 +117,14 @@ typedef struct s_qts
 	int	d_quote;
 }	t_qts;
 
+/*------Hecho para ahorrar lineas------*/
+/*contiene el iterador del token y el nuevo len del token una vez expansionado*/
+typedef struct s_len
+{
+	size_t	i;
+	size_t len;
+}	t_len;
+
 typedef struct s_exe
 {
 	char			**paths;
@@ -207,6 +215,10 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
 size_t	get_len_and_free(char *str);
+void	handle_quotes(char c, t_qts *quotes);
+size_t	handle_dollar(char *str, t_len *len, t_env *envlist, t_qts *quotes);
+size_t	handle_valid_env_var(char *str, t_len *len, t_env *envlist);
+size_t	handle_invalid_env_var(char *str, t_len *len, t_qts *quotes);
 
 /*---------------------utils--------------------*/
 void	*p_malloc(size_t size);
