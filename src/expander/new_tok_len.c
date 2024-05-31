@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_tok_len.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:08:28 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/31 18:10:29 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:50:33 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,10 +150,10 @@ int	new_tok_len(char *str, t_env *envlist)
 	while (str && str[len.i])
 	{
 		if (str[len.i] == '"' || str[len.i] == '\'')//SI COMILLAS
-			handle_quotes(str[len.i], &quotes);
+			handle_quotes(str[len.i], &quotes, &len);
 		else if (str[len.i] == '$' && quotes.s_quote == 0 && str[len.i + 1])//SI $
 			len.i = handle_dollar(str, &len, envlist, &quotes);
-		else//SI CUALQUIER OTRO CASO
+		else//SI CUALQUIER OTRO CARACTER
 			len.len++;
 		len.i++;
 	}

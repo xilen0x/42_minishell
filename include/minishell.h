@@ -215,7 +215,7 @@ char	*new_tok_builder(char *str, t_env *envlist, char *result);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
 size_t	get_len_and_free(char *str);
-void	handle_quotes(char c, t_qts *quotes);
+void	handle_quotes(char c, t_qts *quotes, t_len *len);
 size_t	handle_dollar(char *str, t_len *len, t_env *envlist, t_qts *quotes);
 size_t	handle_valid_env_var(char *str, t_len *len, t_env *envlist);
 size_t	handle_invalid_env_var(char *str, t_len *len, t_qts *quotes);
