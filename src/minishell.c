@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 void	control_and_d(char *line)
@@ -46,7 +45,7 @@ static void	main_process(t_env **envlist)
 	heredoc(cmd);
 	size_pipe = cmd_size(cmd);
 	pre_executor(envlist, cmd, &exe, size_pipe);
-	cmd_free(&cmd);//exe_free(&exe);
+	cmd_free(&cmd);
 }
 
 void	minishell(t_env *envlist)

@@ -42,6 +42,7 @@ int	exist_cwd(void)
 	curr_wd = getcwd(NULL, 0);
 	if (curr_wd == NULL)
 		return (0);
+	free(curr_wd);
 	return (1);
 }
 

@@ -32,27 +32,10 @@ static int	go_home(void)
 	return (0);
 }
 
-/*
-    S_ISDIR(mode): Esta macro se utiliza para verificar si el archivo 
-	representado por mode es un directorio. Devuelve un valor distinto 
-	de cero si mode indica un directorio; de lo contrario, devuelve cero.
-
-    S_IRUSR: Esta macro indica los permisos de lectura del propietario 
-	del archivo. Es un bit en el modo de archivo (st_mode) que indica 
-	si el propietario del archivo tiene permisos de lectura. Si el bit 
-	correspondiente a S_IRUSR está encendido en el modo de archivo, el 
-	propietario del archivo tiene permisos de lectura.
-
-    S_IXUSR: Esta macro indica los permisos de ejecución del propietario 
-	del archivo. Es un bit en el modo de archivo (st_mode) que indica si 
-	el propietario del archivo tiene permisos de ejecución. Si el bit 
-	correspondiente a S_IXUSR está encendido en el modo de archivo, el 
-	propietario del archivo tiene permisos de ejecución.
-*/
+/*get information about a file*/
 int	get_info_file(t_cmd *cmd, struct stat *info_f)
 {
-
-	if (stat(cmd->commands[1], info_f) == -1)// Obtener información sobre el archivo
+	if (stat(cmd->commands[1], info_f) == -1)
 	{
 		ft_msgs(4, cmd);
 		return (1);
@@ -66,7 +49,7 @@ int	get_info_file(t_cmd *cmd, struct stat *info_f)
 	return (0);
 }
 
-/* Cambia a un directorio especifico */
+/* Change to a specific directory */
 int	go_path(t_cmd *cmd)
 {
 	struct stat	info_f;
@@ -86,7 +69,32 @@ int	go_path(t_cmd *cmd)
 	return (0);
 }
 
-/*Funcion que cambia de directorio segun parámetro*/
+// int	change_to_opcions(t_cmd	*cmd)
+// {
+// 	if ((size_arr2d(cmd->commands)) == 1)
+// 		{
+// 			go_home();
+// 		return (0);}
+// 	else if (ft_strcmp(cmd->commands[1], "~") == 0)
+// 		{
+// 			go_home();
+// 		return (0);}
+// 	else if (ft_strcmp(cmd->commands[1], "-") == 0)
+// 		{
+// 			set_old_pwd();
+// 		return (0);}
+// 	else if (ft_strcmp(cmd->commands[1], ".") == 0)
+// 		return (0);
+// 	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || \
+// 			(ft_strcmp(cmd->commands[1], " / ") == 0))
+// 	{
+// 		ft_msgs(4, cmd);
+// 		return (1);
+// 	}
+// 	return (0);
+// }
+
+/*Change to a specific directory accordingly the parameter*/
 int	builtin_cd(t_cmd	*cmd, t_env **env)
 {
 	char	*current_wd;
@@ -113,5 +121,13 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 	}
 	update_pwd(*env);
 	update_oldpwd(*env, current_wd);
-	return (0);
+	if (current_wd != NULL)
+	{
+		free(current_wd);
+		return (0);
+	}
+	else
+		return (0);
 }
+
+

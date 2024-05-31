@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 int	main(int ac, char *av[], char *envp[])
@@ -6,7 +5,7 @@ int	main(int ac, char *av[], char *envp[])
 	t_env	*envlist;
 
 	(void)av;
-	g_get_signal = 0;//INIT VAR GLOBAL
+	g_get_signal = 0;
 	envlist = NULL;
 	if (ac != 1)
 	{
@@ -14,7 +13,6 @@ int	main(int ac, char *av[], char *envp[])
 		exit(EXIT_FAILURE);
 	}
 	env_init_list(envp, &envlist);
-//	ft_printstack(envlist);
 	// init_msg();
 	while (1)
 	{
