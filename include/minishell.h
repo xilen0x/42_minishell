@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/02 16:27:34 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/06/02 16:27:41 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -115,15 +127,15 @@ typedef struct s_qts
 {
 	int	s_quote;
 	int	d_quote;
-}	t_qts;
+}		t_qts;
 
 /*------Hecho para ahorrar lineas------*/
 /*contiene el iterador del token y el nuevo len del token una vez expansionado*/
-typedef struct s_len
+typedef struct s_iter
 {
 	size_t	i;
-	size_t len;
-}	t_len;
+	size_t	len;
+}			t_iter;
 
 typedef struct s_exe
 {
@@ -137,7 +149,7 @@ typedef struct s_exe
 	int				fd[2];
 	int				dup_stdin;
 	int				dup_stdout;
-}	t_exe;
+}					t_exe;
 
 /*---------------------------minishell -------------------------*/
 int		g_get_signal;
@@ -210,15 +222,21 @@ void	commands_creator(t_tok *tok, t_cmd *node);
 /*------------expander & quote removal----------*/
 void	should_expand(t_cmd *cmd, t_env *envlist);
 char	*expand_quote_rm(char *str, t_env *envlist);
-int		new_tok_len(char *str, t_env *envlist);
-char	*new_tok_builder(char *str, t_env *envlist, char *result);
+size_t	new_tok_len(char *str, t_env *envlist);
+void	init_quotes(t_qts *quotes);
+void	init_iter(t_iter *iter);
+void	handle_dollar(char *str, t_iter *iter, t_qts *quotes, t_env *envlist);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
+void	handle_quote_1(char c, t_iter *iter, t_qts *quotes);
+void	handle_quote_2(char c, t_iter *iter, t_qts *quotes);
 size_t	get_len_and_free(char *str);
-void	handle_quotes(char c, t_qts *quotes, t_len *len);
-size_t	handle_dollar(char *str, t_len *len, t_env *envlist, t_qts *quotes);
-size_t	handle_valid_env_var(char *str, t_len *len, t_env *envlist);
-size_t	handle_invalid_env_var(char *str, t_len *len, t_qts *quotes);
+char	*new_tok_builder(char *str, t_env *envlist, char *result);
+
+//void	handle_quotes(char c, t_qts *quotes, t_len *len);
+//size_t	handle_dollar(char *str, t_len *len, t_env *envlist, t_qts *quotes);
+//size_t	handle_valid_env_var(char *str, t_len *len, t_env *envlist);
+//size_t	handle_invalid_env_var(char *str, t_len *len, t_qts *quotes);
 
 /*---------------------utils--------------------*/
 void	*p_malloc(size_t size);

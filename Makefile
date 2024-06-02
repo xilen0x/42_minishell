@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/29 15:02:51 by castorga          #+#    #+#              #
-#    Updated: 2024/05/31 18:13:57 by jocuni-p         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 NAME =	minishell
 
@@ -94,8 +83,11 @@ FILES =	main.c \
 									expander/get_len_and_free.c \
 									expander/handle_dollar.c \
 									expander/handle_invalid_env_var.c \
-									expander/handle_quotes.c \
+									expander/handle_quote_1.c \
+									expander/handle_quote_2.c \
 									expander/handle_valid_env_var.c \
+									expander/init_iter.c \
+									expander/init_quotes.c \
 									expander/new_tok_builder.c \
 									expander/new_tok_len.c \
 									expander/should_expand.c\

@@ -3,17 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   new_tok_len.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:08:28 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/31 18:50:33 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 16:39:28 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*Calcula el len que tendra el token(str) una vez haya eliminado comillas 
-y expandido las variables que procedan*/
+/*Returns the token length once expanded and the quote removed if it applies*/
+size_t	new_tok_len(char *str, t_env *envlist)
+{
+	t_iter	*iter;//contiene el iterador del str y el len resultante
+	t_qts	*quotes;//si es molesta amb el quotes del builder posar quotes1 y quotes2
+
+	init_iter(iter);
+	init_quotes(quotes);
+	while (str && str[iter->i])
+	{
+		if (str[iter->i] == '"' || str[iter->i] == '\'')//gestiona las comillas
+			handle_quote_1(str[iter->i], iter, quotes);
+		else if (str[iter->i] == '$' && quotes->s_quote == 0 \
+			&& str[iter->i + 1])//gestiona '$'
+		{
+			iter->i++;//salta el '$'
+			handle_dollar(str, iter, quotes, envlist);
+			iter->i++;
+		}
+		else//gestiona los demas caracteres
+		{
+			iter->len++;
+			iter->i++;
+		}
+	}
+	return (iter->len);
+}
+
+//>>>>>>>>>>>>>>>>>>>>FUNCIO MEVA ORIGINAL BONA PERO MASSA LLARGA>>>>>>>>>>>>>
 /*
 int	new_tok_len(char *str, t_env *envlist)
 {
@@ -80,7 +107,7 @@ int	new_tok_len(char *str, t_env *envlist)
 	return (len);
 }*/
 //#include "minishell.h"
-
+//>>>>>>>>>>>>>>>>>>>>>PROPOSTA DE LA IA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 /*Maneja y guarda el estado actual de las comillas: abiertas o cerradas*/
 /*static void	handle_quotes(char c, t_qts *quotes)
 {
@@ -136,6 +163,7 @@ static size_t	handle_valid_env_var(char *str, t_len *len, t_env *envlist)
 */
 /*Recorre el token y retorna el lenght final que tendrá la expansion una vez
  quitadas comillas y expandida si procede*/
+/*
 int	new_tok_len(char *str, t_env *envlist)
 {
 //	size_t	i;
@@ -158,4 +186,4 @@ int	new_tok_len(char *str, t_env *envlist)
 		len.i++;
 	}
 	return (len.len);
-}
+}*/

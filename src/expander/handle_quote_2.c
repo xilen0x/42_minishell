@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_len_and_free.c                                 :+:      :+:    :+:   */
+/*   handle_quote_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 10:41:33 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/02 16:31:56 by jocuni-p         ###   ########.fr       */
+/*   Created: 2024/06/02 13:38:42 by joan              #+#    #+#             */
+/*   Updated: 2024/06/02 16:30:47 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*Gets the length of a *str, frees it, and sets it to NULL*/
-size_t	get_len_and_free(char *str)
+void	handle_quote_2(char c, t_iter *iter, t_qts *quotes)
 {
-	size_t	len;
-
-	len = ft_strlen(str);
-	free(str);
-	str = NULL;
-	return (len);
+	if (c == '"' && quotes->d_quote == 0 && quotes->s_quote == 0)
+		quotes->d_quote = 1;
+	else if (c == '"' && quotes->d_quote == 1)
+		quotes->d_quote = 0;
+	else if (c == '\'' && quotes->s_quote == 0 && quotes->d_quote == 0)
+		quotes->s_quote = 1;
+	else if (c == '\'' && quotes->s_quote == 1)
+		quotes->s_quote = 0;
 }

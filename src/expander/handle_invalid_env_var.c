@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   handle_invalid_env_var.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 18:05:21 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/31 18:54:31 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 16:31:19 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*Retorna el length de la variable sintacticamente NO valida  */
-size_t	handle_invalid_env_var(char *str, t_len *len, t_qts *quotes)
+size_t	handle_invalid_env_var(char *str, t_iter *len, t_qts *quotes)
 {
 	if (str[len->i] == '\'' || str[len->i] == '"')
 	{
