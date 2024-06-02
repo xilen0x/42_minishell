@@ -46,5 +46,3 @@ The **minishell** project involves creating a simplified version of a shell, sim
 
 
 ![game](https://raw.githubusercontent.com/xilen0x/xilen0x/master/images_x_repos/Screenshot%20from%202024-06-02%2013-26-40.png)
-
-[Visit the project page](https://xilen0x.github.io/42_so_long.github.io/)
