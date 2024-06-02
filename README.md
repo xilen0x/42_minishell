@@ -1,6 +1,6 @@
 ## Minishell Project
 
-The **minishell** project involves creating a simplified version of a shell, similar to bash, with the following functionalities:
+The **minishell** project involves creating a simplified version of a shell, similar to bash, that efficiently handles command execution, redirections, pipes, and signals, while implementing essential built-in commands with the following functionalities:
 
 #### User Interface
 - Displays a prompt when waiting for a new command.
@@ -44,16 +44,7 @@ The **minishell** project involves creating a simplified version of a shell, sim
 - `env` with no options or arguments.
 - `exit` with no options.
 
-The goal is to create a basic shell that efficiently handles command execution, redirections, pipes, and signals, while implementing essential built-in commands.
 
 ![game](https://raw.githubusercontent.com/xilen0x/xilen0x/master/images_x_repos/Screenshot%20from%202024-06-02%2013-26-40.png)
 
 [Visit the project page](https://xilen0x.github.io/42_so_long.github.io/)
-
-## The Philosophers Problem
-
-Project that seeks to understand the concepts of threading a process, how to create threads and work with mutexes.
-
-![game](https://raw.githubusercontent.com/xilen0x/xilen0x/master/images_x_repos/philosophers_diagram.png)
-
-[Visit the project page](https://github.com/xilen0x/42_philosophers)
