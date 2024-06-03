@@ -33,6 +33,7 @@ unsigned int	check_export(char *arg)
 	return (0);
 }
 
+/*check if the syntax of the export command is correct */
 int	check_syntax(char *cmd)
 {
 	int	i;

@@ -69,6 +69,7 @@ int	go_path(t_cmd *cmd)
 	return (0);
 }
 
+/*Change to a specific directory*/
 static int	change_directory(t_cmd *cmd, char **current_wd)
 {
 	*current_wd = getcwd(NULL, 0);
@@ -86,7 +87,7 @@ static int	change_directory(t_cmd *cmd, char **current_wd)
 	return (0);
 }
 
-/*Change to a specific directory accordingly the parameter*/
+/*Change to a directory accordingly the parameter if applicable..*/
 int	builtin_cd(t_cmd *cmd, t_env **env)
 {
 	char	*current_wd;

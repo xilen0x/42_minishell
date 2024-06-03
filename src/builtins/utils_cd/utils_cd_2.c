@@ -1,11 +1,13 @@
 #include "minishell.h"
 
+/* update environment variables*/
 void	update_environment(t_env *env, char *current_wd)
 {
 	update_pwd(env);
 	update_oldpwd(env, current_wd);
 }
 
+/* free current working directory */
 int	free_current_wd(char *current_wd)
 {
 	if (current_wd != NULL && *current_wd != '\0')

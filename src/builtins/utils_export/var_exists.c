@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include "minishell.h"
 
+/*checks if the variable oldpwd already exists in the env.*/
 int	var_exists_oldpwd(t_env *env, char *variable)
 {
 	char	**var_ent;
@@ -28,7 +29,7 @@ int	var_exists_oldpwd(t_env *env, char *variable)
 	return (flag);
 }
 
-/*verifica si la variable ya existe en el env.*/
+/*checks if the variable already exists in the env. op3*/
 int	variable_exists_op3(t_env *env, char *variable)
 {
 	char	**var_ent;
@@ -49,6 +50,7 @@ int	variable_exists_op3(t_env *env, char *variable)
 	return (flag);
 }
 
+/*checks if the variable already exists in the env. op4*/
 t_env	*variable_exists_op4(t_env *env, char *key)
 {
 	while (env != NULL)
@@ -60,8 +62,8 @@ t_env	*variable_exists_op4(t_env *env, char *key)
 	return (NULL);
 }
 
-/*verifica si la variable ya existe en el env y la actualiza 
-de ser así(caso +=)*/
+/*checks if the variable already exists in the env. and updates it,
+ if applicable(case +=)*/
 int	variable_exists_op2(t_env *env, char *variable)
 {
 	char	**var_ent1;
@@ -89,8 +91,8 @@ int	variable_exists_op2(t_env *env, char *variable)
 	return (flag);
 }
 
-/*verifica si la variable ya existe en el env y la actualiza 
-de ser así(caso =)*/
+/*checks if the variable already exists in the env. and updates it,
+ if applicable(case =)*/
 int	variable_exists(t_env **env, char **variable)
 {
 	char	**var_ent;

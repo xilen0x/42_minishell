@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+/*check if the PATH variable exists*/
 int	no_path_env(t_cmd *cmd, t_exe exe, t_env *env)
 {
 	int		flag;
@@ -26,7 +27,6 @@ int	no_path_env(t_cmd *cmd, t_exe exe, t_env *env)
 	}
 	if (flag == 0)
 	{
-		// executor(cmd, &exe, &env);//aki voy
 		ft_msgs(4, cmd);
 		return (1);
 	}
@@ -43,7 +43,7 @@ void	print_env(t_env *env)
 	}
 }
 
-/*builtin que imprime el environment*/
+/*builtin that handle the environment*/
 int	builtin_env(t_cmd *cmd, t_exe exe, t_env *env)
 {
 	if (size_arr2d(cmd->commands) > 1)

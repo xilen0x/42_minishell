@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+/* removes environment variables specified in the command, checking their 
+syntax and existence, and sets a status flag based on the result.*/
 static int	builtin_unset_core(t_cmd *cmd, t_env **env, int *flag)
 {
 	int	chk_exp;
@@ -40,18 +42,17 @@ static int	builtin_unset_core(t_cmd *cmd, t_env **env, int *flag)
 	return (0);
 }
 
+/*builtin unset*/
 int	builtin_unset(t_cmd *cmd, t_env **env)
 {
 	int	flag;
 
 	flag = 0;
-	//---------------UNSET SIN ARGUMENTOS
 	if (size_arr2d(cmd->commands) == 1)
 	{
 		// g_get_signal = 0;
 		return (0);
 	}
-	//---------------UNSET + VARIABLE
 	else
 	{
 		if (builtin_unset_core(cmd, env, &flag))

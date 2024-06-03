@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+/* echo ~ option */
 static int	echo_options(t_cmd *cmd, int i, int *print_newline)
 {
 	if (ft_strcmp(cmd->commands[1], "~") == 0)
@@ -30,6 +31,7 @@ static int	echo_options(t_cmd *cmd, int i, int *print_newline)
 	return (0);
 }
 
+/* builtin echo */
 int	builtin_echo(t_cmd *cmd)
 {
 	int	i;
