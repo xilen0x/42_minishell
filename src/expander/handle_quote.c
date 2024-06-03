@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_quote_1.c                                   :+:      :+:    :+:   */
+/*   handle_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 23:11:47 by joan              #+#    #+#             */
-/*   Updated: 2024/06/02 16:30:55 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:41:30 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_quote_1(char c, t_iter *iter, t_qts *quotes)
+/*-----------Manages quotes---------*/
+void	handle_quote(char c, t_xpdr *xpdr)
 {
-	if (c == '"' && quotes->d_quote == 0 && quotes->s_quote == 0)
+	if (c == '"' && xpdr->d_quote == CLOSED && xpdr->s_quote == CLOSED)
 	{
-		quotes->d_quote = 1;
-		iter->i++;
+		xpdr->d_quote = OPEN;
+		xpdr->i++;
 	}
-	else if (c == '"' && quotes->d_quote == 1)
+	else if (c == '"' && xpdr->d_quote == OPEN)
 	{
-		quotes->d_quote = 0;
-		iter->i++;
+		xpdr->d_quote = CLOSED;
+		xpdr->i++;
 	}
-	else if (c == '\'' && quotes->s_quote == 0 && quotes->d_quote == 0)
+	else if (c == '\'' && xpdr->s_quote == CLOSED && xpdr->d_quote == CLOSED)
 	{
-		quotes->s_quote = 1;
-		iter->i++;
+		xpdr->s_quote = OPEN;
+		xpdr->i++;
 	}
-	else if (c == '\'' && quotes->s_quote == 1)
+	else if (c == '\'' && xpdr->s_quote == OPEN)
 	{
-		quotes->s_quote = 0;
-		iter->i++;
+		xpdr->s_quote = CLOSED;
+		xpdr->i++;
 	}
+//>>>>>>>>>>>>OJO ARREGLAR< NO SE SI VA
+	else if (c == '"' && xpdr->s_quote == OPEN)//added para solucionar echo '"h"'
+		xpdr->len++;
 }

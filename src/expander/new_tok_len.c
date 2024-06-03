@@ -6,38 +6,33 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:08:28 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/02 16:39:28 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:23:03 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*Returns the token length once expanded and the quote removed if it applies*/
-size_t	new_tok_len(char *str, t_env *envlist)
+/*Returns the token length once expanded and quote removed if it applies*/
+size_t	new_tok_len(char *str, t_xpdr *xpdr, t_env *envlist)
 {
-	t_iter	*iter;//contiene el iterador del str y el len resultante
-	t_qts	*quotes;//si es molesta amb el quotes del builder posar quotes1 y quotes2
-
-	init_iter(iter);
-	init_quotes(quotes);
-	while (str && str[iter->i])
+	while (str && str[xpdr->i])
 	{
-		if (str[iter->i] == '"' || str[iter->i] == '\'')//gestiona las comillas
-			handle_quote_1(str[iter->i], iter, quotes);
-		else if (str[iter->i] == '$' && quotes->s_quote == 0 \
-			&& str[iter->i + 1])//gestiona '$'
+		if (str[xpdr->i] == '"' || str[xpdr->i] == '\'')//gestiona las comillas
+			handle_quote(str[xpdr->i], xpdr);
+		else if (str[xpdr->i] == '$' && xpdr->s_quote == CLOSED \
+			&& str[xpdr->i + 1])//gestiona el '$'
 		{
-			iter->i++;//salta el '$'
-			handle_dollar(str, iter, quotes, envlist);
-			iter->i++;
+			xpdr->i++;//salta el '$'
+			get_dollar_len(str, xpdr, envlist);
+			xpdr->i++;
 		}
 		else//gestiona los demas caracteres
 		{
-			iter->len++;
-			iter->i++;
+			xpdr->len++;
+			xpdr->i++;
 		}
 	}
-	return (iter->len);
+	return (xpdr->len);
 }
 
 //>>>>>>>>>>>>>>>>>>>>FUNCIO MEVA ORIGINAL BONA PERO MASSA LLARGA>>>>>>>>>>>>>

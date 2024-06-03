@@ -39,3 +39,10 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	}
 	return (dest);
 }
+/*Frees and sets to NULL a char *str passed as argument by reference*/
+void	str_free_and_null(char **str)
+{
+	if (*str != NULL)
+    free(*str);
+    *str = NULL;
+}

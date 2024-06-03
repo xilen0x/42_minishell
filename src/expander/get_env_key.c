@@ -6,14 +6,14 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:38:25 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/02 16:32:18 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:29:42 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*Retorna un posible nombre de variable mallocado.
-No tiene en cuenta si existe o no en el env.*/
+/*Returns an allocated var name, or NULL if str is NULL.
+It does not take into account whether or not it exists on the env.*/
 char	*get_env_key(char *str)
 {
 	size_t	i;

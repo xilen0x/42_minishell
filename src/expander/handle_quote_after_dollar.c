@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_quote_2.c                                   :+:      :+:    :+:   */
+/*   handle_quote_after_dollar.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 13:38:42 by joan              #+#    #+#             */
-/*   Updated: 2024/06/02 16:30:47 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/03 11:03:19 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_quote_2(char c, t_iter *iter, t_qts *quotes)
+/*Manages quote just if it occurs next to a '$'*/
+void	handle_quote_after_dollar(char c, t_xpdr *xpdr)
 {
-	if (c == '"' && quotes->d_quote == 0 && quotes->s_quote == 0)
-		quotes->d_quote = 1;
-	else if (c == '"' && quotes->d_quote == 1)
-		quotes->d_quote = 0;
-	else if (c == '\'' && quotes->s_quote == 0 && quotes->d_quote == 0)
-		quotes->s_quote = 1;
-	else if (c == '\'' && quotes->s_quote == 1)
-		quotes->s_quote = 0;
+	if (c == '"' && xpdr->d_quote == CLOSED && xpdr->s_quote == CLOSED)
+		xpdr->d_quote = OPEN;
+	else if (c == '"' && xpdr->d_quote == OPEN)
+		xpdr->d_quote = CLOSED;
+	else if (c == '\'' && xpdr->s_quote == CLOSED && xpdr->d_quote == CLOSED)
+		xpdr->s_quote = OPEN;
+	else if (c == '\'' && xpdr->s_quote == OPEN)
+		xpdr->s_quote = CLOSED;
 }

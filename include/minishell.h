@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:27:34 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/02 16:27:41 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:25:52 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define READLINE_LIBRARY
 # endif
 
+/*--------Libraries---------*/
 # include "../lib/libft/libft.h"
 # include <readline.h>
 # include <history.h>
@@ -30,6 +31,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <stdbool.h>
 
 /*-----------------Defines-------------*/
 # define EXIT_SUCCESS 0
@@ -60,6 +62,10 @@
 # define PRINT_SYNTAX_ERR_1 "syntax error near unexpected token `|'\n"
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
+
+/*------------------Quote status--------*/
+# define CLOSED 0
+# define OPEN 1
 
 /*-----------global variable------------*/
 int	g_get_signal;//recoge todos los exit_status
@@ -122,21 +128,29 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }					t_cmd;
 
-/*---si las comillas simples o dobles estan abiertas (1) o cerradas (0)----*/
+/*---contiene el estado de las comillas (abiertas 1 o cerradas 0)----*/
+/*
 typedef struct s_qts
 {
 	int	s_quote;
 	int	d_quote;
-}		t_qts;
+}		t_qts;*/
 
-/*------Hecho para ahorrar lineas------*/
-/*contiene el iterador del token y el nuevo len del token una vez expansionado*/
-typedef struct s_iter
+/*---variables para expand_quote_rm---*/
+typedef struct s_xpdr
 {
-	size_t	i;
+	size_t	i;//iteradores
+	size_t	j;
+	size_t	k;
 	size_t	len;
-}			t_iter;
+	bool  	s_quote;//estado de las comillas
+	bool 	d_quote;
+	char	*key;
+	char	*val;
+	char	*result;//token final expandido
+}			t_xpdr;
 
+/*------variables para executor-------*/
 typedef struct s_exe
 {
 	char			**paths;
@@ -222,24 +236,18 @@ void	commands_creator(t_tok *tok, t_cmd *node);
 /*------------expander & quote removal----------*/
 void	should_expand(t_cmd *cmd, t_env *envlist);
 char	*expand_quote_rm(char *str, t_env *envlist);
-size_t	new_tok_len(char *str, t_env *envlist);
-void	init_quotes(t_qts *quotes);
-void	init_iter(t_iter *iter);
-void	handle_dollar(char *str, t_iter *iter, t_qts *quotes, t_env *envlist);
+void	init_xpdr(t_xpdr *xpdr);
+size_t	new_tok_len(char *str, t_xpdr *xpdr, t_env *envlist);
+void	init_xpdr_except_result(t_xpdr *xpdr);
+void	get_dollar_len(char *str, t_xpdr *xpdr, t_env *envlist);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
-void	handle_quote_1(char c, t_iter *iter, t_qts *quotes);
-void	handle_quote_2(char c, t_iter *iter, t_qts *quotes);
+void	handle_quote(char c, t_xpdr *xpdr);
+void	handle_quote_after_dollar(char c, t_xpdr *xpdr);
 size_t	get_len_and_free(char *str);
-char	*new_tok_builder(char *str, t_env *envlist, char *result);
-
-//void	handle_quotes(char c, t_qts *quotes, t_len *len);
-//size_t	handle_dollar(char *str, t_len *len, t_env *envlist, t_qts *quotes);
-//size_t	handle_valid_env_var(char *str, t_len *len, t_env *envlist);
-//size_t	handle_invalid_env_var(char *str, t_len *len, t_qts *quotes);
-
-/*---------------------utils--------------------*/
-void	*p_malloc(size_t size);
+void	*new_tok_builder(char *str, t_xpdr *xpdr, t_env *envlist);
+//void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist);
+void	get_dollar_expansion(char *str, t_xpdr *xpdr, t_env *envlist);
 
 /*--------------------------utils t_env-------------------*/
 t_env	*lstlast(t_env *lst);
@@ -249,7 +257,6 @@ void	env_init_list(char **envp, t_env **envlist);
 void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 void	cleaner_envlist(t_env **lst);
 int	no_path_env(t_cmd *cmd, t_exe exe, t_env *env);
-
 
 /*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
@@ -261,6 +268,7 @@ int		list_to_array(t_env *env, t_exe *exe);
 int		close_fd(t_exe	*exe);
 // int		executor(t_cmd *cmd, t_env *env);
 int		executor(t_cmd *cmd, t_exe	*exe, t_env **env);
+
 /*---------------------------redirections.c -------------------------*/
 int		pre_redirections(t_cmd *cmd, t_exe *exe);
 
@@ -272,10 +280,12 @@ int		ft_msgs(int n, t_cmd *cmd);
 /*---------------------utils1.c-------------------*/
 int		ca_strchr(const char *s, int c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
+void	*p_malloc(size_t size);
+void	str_free_and_null(char **str);
 
 /*-------------------exit_status------------------*/
-unsigned int	get_exit_status_len(void);
-char			*get_exit_status_val(void);
+size_t	get_exit_status_len(void);
+char	*get_exit_status_val(void);
 
 /*--------------------------- builtins -------------------------*/
 // int		builtins(t_cmd *cmd, t_env **env);
