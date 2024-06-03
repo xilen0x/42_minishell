@@ -12,3 +12,5 @@ minishell
 README.md
 *.d
 teste
+/mpanic
+.timmer

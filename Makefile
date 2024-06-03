@@ -1,11 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/29 15:02:51 by castorga          #+#    #+#              #
+#    Updated: 2024/05/30 12:35:47 by jocuni-p         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME =	minishell
 
 # Compiler
 GCC := gcc
 
-# Compiler flags
-FLAGS := -Werror -Wextra -Wall -MMD -g -fsanitize=address
+# Compiler flags ........................#!!!!eliminar -fsanitize=address antes de subir!!!!!
+FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
 
 # Remove
 RM 	:=	rm -rf
@@ -29,7 +40,7 @@ READLINE := ${READLINE_ROOT}libreadline.a ${READLINE_ROOT}libhistory.a
 
 # Libft
 LIBFT_ROOT := ${LIB_ROOT}libft/
-LIBFT_INC := $(LIBFT_ROOT)include/
+LIBFT_INC := $(LIBFT_ROOT)include/ 
 LIBFT := $(LIBFT_ROOT)libft.a
 
 INC_DIRS += ${LIBFT_INC}
@@ -41,62 +52,85 @@ LIBS += -L${READLINE_ROOT} -ltermcap
 # Source Files
 ################################################################################
 
-FILES =	minishell.c \
-									utils/p_malloc.c \
-									builtins/builtins.c \
-									builtins/builtin_env.c \
-									builtins/builtin_cd.c \
-									builtins/builtin_echo.c \
-									builtins/builtin_export.c \
-									builtins/builtin_unset.c \
-									builtins/builtin_exit.c \
-									builtins/builtin_pwd.c \
-									executor/executor.c \
+FILES =	main.c \
+									minishell.c \
 									arr2d/add_one_arr2d.c \
 									arr2d/dup_arr2d.c \
 									arr2d/free_arr2d.c \
-									arr2d/size_arr2d.c \
 									arr2d/rm_one_arr2d.c \
-									tokens/tok_new_node.c \
-									tokens/tok_add_back.c \
-									tokens/tok_last.c \
-									tokens/tok_size.c \
-									tokens/tok_free.c \
-									commands/cmd_new_node.c \
-									commands/cmd_add_back.c \
-									commands/cmd_free.c \
-									commands/cmd_last.c \
-									commands/cmd_size.c \
-									utils/utils_env.c \
-									utils/utils0.c \
-									utils/utils1.c \
-									utils/utils2.c \
-									utils/utils3.c \
-									tokenizer/tokenizer.c \
-									utils_parser/is_operator.c \
-									utils_parser/command_and_arg_size.c \
-									utils_parser/handle_error.c \
+									arr2d/size_arr2d.c \
+									builtins/builtin_cd.c \
+									builtins/builtin_echo.c \
+									builtins/builtin_env.c \
+									builtins/builtin_exit.c \
+									builtins/builtin_export.c \
+									builtins/builtin_pwd.c \
+									builtins/builtin_unset.c \
+									builtins/builtins.c \
+									builtins/utils_pwd/oldpwd.c \
+									builtins/utils_export/var_exists.c \
+									builtins/utils_export/checks.c \
+									builtins/utils_cd/utils_cd.c \
+									builtins/utils_cd/utils_cd_2.c \
+									cmd/cmd_add_back.c \
+									cmd/cmd_free.c \
+									cmd/cmd_last.c \
+									cmd/cmd_new_node.c \
+									cmd/cmd_size.c \
+									env_list/env_cleaner_list.c \
+									env_list/env_delone_lst.c \
+									env_list/env_init_list.c \
+									env_list/env_lstadd_back.c \
+									env_list/env_lstlast.c \
+									env_list/env_lstnew.c \
+									executor/executor.c \
+									executor/redirections.c \
+									executor/path.c \
+									executor/heredoc.c \
+									exit_status/error_msgs.c \
+									exit_status/get_exit_status_len.c \
+									exit_status/get_exit_status_val.c \
+									expander/expand_quote_rm.c \
+									expander/get_env_key.c \
+									expander/get_env_val.c \
+									expander/new_tok_builder.c \
+									expander/new_tok_len.c \
+									expander/should_expand.c\
+									expander/get_len_and_free.c \
+									parser/commands_counter.c \
+									parser/commands_creator.c \
+									parser/handle_error.c \
+									parser/is_operator.c \
+									parser/is_redirection.c \
+									parser/parser.c \
+									parser/syntax_check_1.c \
+									parser/syntax_check_2.c \
+									prints/print_arr2d.c \
+									prints/print_cmd_para_executor.c \
+									prints/print_cmd.c \
+									prints/print_envlist.c \
+									prints/print_redir.c \
+									prints/print_tok.c \
 									redirs/redir_add_back.c \
 									redirs/redir_free.c \
 									redirs/redir_last.c \
 									redirs/redir_new_node.c \
 									redirs/redir_size.c \
-									parser/parser.c \
-									expander/should_expand.c\
-									expander/expand_and_quote_remove.c \
-									expander/get_env_val.c \
-									expander/new_tok_len.c \
-									expander/new_tok_builder.c \
-									expander/get_env_key.c \
-									signals.c \
-									exit_status/get_exit_status_val.c \
-									exit_status/get_exit_status_len.c \
-									prints/print_tok.c \
-									prints/print_cmd.c \
-									prints/print_redir.c \
-									prints/print_envlist.c \
-									prints/print_arr2d.c \
-									prints/print_cmd_para_executor.c
+									tokenizer/tokenizer.c \
+									tokenizer/init_operator_type.c \
+									tokenizer/tok_len.c \
+									tokenizer/init_word_str.c \
+									tokens/tok_add_back.c \
+									tokens/tok_free.c \
+									tokens/tok_last.c \
+									tokens/tok_new_node.c \
+									tokens/tok_size.c \
+									utils/p_malloc.c \
+									utils/utils1.c \
+									utils/utils3.c \
+									utils/wellcome_msg.c \
+									init_exe.c \
+									signals.c
 
 SRC 	:= $(addprefix $(SRC_ROOT), $(FILES))
 OBJS 	:= $(addprefix $(OBJ_ROOT), $(FILES:.c=.o))

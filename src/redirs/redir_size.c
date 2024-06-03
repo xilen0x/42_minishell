@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_size.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 10:20:38 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/05/29 10:21:04 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-/*=========ELIMINAR ANTES DE ENTRGA SI SOLO SE USA EN print_redir=========*/
 /*Counts the number of nodes of a t_redir list*/
 int	redir_size(t_redir *lst)
 {

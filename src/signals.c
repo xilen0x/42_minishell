@@ -1,26 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 14:54:49 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/29 14:54:51 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	signal_handler(int sig)
+void	signal_parent(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == CTRL_C)
 	{
-		//printf("\nCtrl-C recibido.\n");
 		printf("\n");
-		rl_replace_line("", 1);//reemplaza la línea actual de entrada con una cadena vacía.
-		rl_on_new_line();// cursor debe moverse a una nueva línea.
-		rl_redisplay();//redibuja la línea actual. Se utiliza después de realizar cambios en la línea de entrada para actualizar la pantalla y mostrar los cambios.
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		// g_get_signal = 1;
 	}
-	else if (sig == SIGQUIT)
-		//printf("\nCtrl-\\ recibido.\n");
-	return ;
 }
 
-void	set_signals(void)
+void	signal_child(int sig)
 {
-	rl_catch_signals = 0;//para eliminar el ^C al hacer ctrl-c
-	//ctrl-C 
-	signal(SIGINT, signal_handler);
+	if (sig == CTRL_C)
+		write (2, "\n", 1);
+}
 
-	//ctrl-backslash 
-	signal(SIGQUIT, signal_handler);
+int	set_signals(int mode)
+{
+	rl_catch_signals = 0;
+	if (mode == PARENT)
+	{
+		signal(CTRL_C, signal_parent);
+		signal(CTRL_SLASH, signal_parent);
+	}
+	else if (mode == CHILD)
+	{
+		signal(CTRL_C, signal_child);
+	}
+	return (1);
 }

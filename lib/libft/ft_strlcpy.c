@@ -6,22 +6,24 @@
 /*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:48:43 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/04/30 12:43:04 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:31:19 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-     /*the same input parameters.
-	 strlcpy() and strlcat() take the full size of the destination buffer and
-     guarantee NUL-termination if there is room.  Note that room for the NUL
-     should be included in dstsize.
-	 strlcpy() copies up to dstsize - 1 characters from the string src to dst,
-     NUL-terminating the result if dstsize is not 0.
-	 If the src and dst strings overlap, the behavior is undefined.
-	 Function return the total
-     length of the string they tried to create.  For strlcpy() that means the
-     length of src.
-	 If the return value is >= dstsize, the output string has been truncated.
-     It is the caller's responsibility to handle this.*/
+/*
+ The strlcpy() and strlcat() functions copy and concatenate strings with the
+  same input parameters.
+ strlcpy() and strlcat() take the full size of the destination buffer and
+ guarantee NUL-termination if there is room.  Note that room for the NUL
+ should be included in dstsize.
+ strlcpy() copies up to dstsize - 1 characters from the string src to dst,
+ NUL-terminating the result if dstsize is not 0.
+ If the src and dst strings overlap, the behavior is undefined.
+ Function return the total
+ length of the string they tried to create.  For strlcpy() that means the
+ length of src.
+ If the return value is >= dstsize, the output string has been truncated.
+ It is the caller's responsibility to handle this.*/
 
 //#include<string.h>
 //#include<stdio.h>

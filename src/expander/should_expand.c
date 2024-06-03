@@ -1,46 +1,40 @@
 #include "minishell.h"
 
-/*Verifica si en el array de comandos o en la lista de 
-redirecciones hay alguna comilla simple, doble o '$' que debiera ser expandido*/
-void	should_expand(t_cmd *cmd, t_env *envlist, unsigned int *exit_status )
+static void	should_expand_core(t_cmd *cmd_aux, t_env *envlist)
 {
 	size_t	i;
-	char	*redir_tmp;
+	t_redir	*redir_aux;
 
-	while (cmd)
+	redir_aux = cmd_aux->redir;
+	i = 0;
+	while (cmd_aux->commands && cmd_aux->commands[i])//busca $, ', " en los comandos
 	{
-		i = 0;
-		while ((cmd)->command_and_arg[i] != NULL)//recorre el array de strings de los comandos
-		{
-			if (ft_strchr((cmd)->command_and_arg[i], '$') != NULL \
-			|| ft_strchr((cmd)->command_and_arg[i], '\'') != NULL \
-			|| ft_strchr((cmd)->command_and_arg[i], '"') != NULL)
-			{
-				printf("Expansion:\n");
-				printf("<%s>\n", (cmd)->command_and_arg[i]);
-				(cmd)->command_and_arg[i] = expand_and_quote_remove((cmd)->command_and_arg[i], envlist, exit_status);//el res lo envio a la lista original, no al aux				free((cmd)->command_and_arg[i]);
-				printf("<%s>\n", (cmd)->command_and_arg[i]);
-				printf("-----------\n");
-			}
-			i++;
-		}
-		 while ((cmd)->redir != NULL)//recorre lista redir buscando, '\'' '"' '$'
-		 {
-		 	if (ft_strchr((cmd)->redir->filename, '$') != NULL \
-		 	|| ft_strchr((cmd)->redir->filename, '\'') != NULL \
-		 	|| ft_strchr((cmd)->redir->filename, '"') != NULL)
-		 	{
-		 		printf("Expansión:\n");
-		 		printf("<%s>\n", (cmd)->redir->filename);
-	 			redir_tmp = expand_and_quote_remove((cmd)->redir->filename, envlist, exit_status);//el res lo envio a la lista original, no al aux
-		 		free((cmd)->redir->filename);
-		 		(cmd)->redir->filename = redir_tmp;
-	 			printf("<%s>\n", (cmd)->redir->filename);
-		 		printf("-----------\n");
-		 	}
-		 	(cmd)->redir = (cmd)->redir->next;
-		 }
-		(cmd) = (cmd)->next;
+		if (ft_strchr(cmd_aux->commands[i], '$') != NULL ||
+			ft_strchr(cmd_aux->commands[i], '\'') != NULL ||
+			ft_strchr(cmd_aux->commands[i], '"') != NULL)
+			cmd_aux->commands[i] = expand_quote_rm(cmd_aux->commands[i], \
+			envlist);
+		i++;
 	}
-	printf("\n");//ELIMINAR ANTES DE ENTREGA
+	while (redir_aux)//busca ', ", $ en las redirecciones
+	{
+		if (ft_strchr(redir_aux->fname, '$') != NULL ||
+			ft_strchr(redir_aux->fname, '\'') != NULL ||
+			ft_strchr(redir_aux->fname, '"') != NULL)
+			redir_aux->fname = expand_quote_rm(redir_aux->fname, envlist);
+		redir_aux = redir_aux->next;
+	}
+}
+
+/* Look for any expandable or quote removable token into 'cmd' list */
+void	should_expand(t_cmd *cmd, t_env *envlist)
+{
+	t_cmd	*cmd_aux;
+
+	cmd_aux = cmd;
+	while (cmd_aux)
+	{
+		should_expand_core(cmd_aux, envlist);
+		cmd_aux = cmd_aux->next;
+	}
 }

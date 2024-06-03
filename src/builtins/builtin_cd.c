@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_cd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 15:51:57 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 15:52:00 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*cambia al directorio home del usuario */
-static int	go_home(void)
+int	go_home(void)
 {
 	char	*home_dir;
 
@@ -9,80 +21,89 @@ static int	go_home(void)
 	if (home_dir == NULL)
 	{
 		perror("getenv() error");
-		set_exit_status(1);
 		return (1);
 	}
 	if (chdir(home_dir) != 0)
 	{
 		perror("chdir() error");
-		set_exit_status(1);
 		return (1);
 	}
+	// g_get_signal = 0;
 	return (0);
 }
 
-/*cambia al directorio raiz */
-// static int	go_root(void)
-// {
-// 	if (chdir("/") != 0)
-// 	{
-// 		perror("chdir() error");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-// /*cambia al directorio padre */
-// static int	go_parent(void)
-// {
-// 	if (chdir("..") != 0)
-// 	{
-// 		perror("chdir() error");
-// 		set_exit_status(1);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-// /*cambia al directorio anterior(si existe) */
-// static int	go_old_pwd(void)
-// {
-
-// 	if (chdir("OLDPWD") != 0)
-// 	{
-// 		perror("cd: OLDPWD not set");
-// 		set_exit_status(1);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
-/*cambia a un directorio especifico */
-int	go_path(char *path)
+/*get information about a file*/
+int	get_info_file(t_cmd *cmd, struct stat *info_f)
 {
-	if (chdir(path) != 0)
+	if (stat(cmd->commands[1], info_f) == -1)
 	{
-		ft_msgs(2);
-		set_exit_status(1);
+		ft_msgs(4, cmd);
+		return (1);
+	}
+	if (!S_ISDIR(info_f->st_mode) || \
+		!(info_f->st_mode & S_IRUSR) || !(info_f->st_mode & S_IXUSR))
+	{
+		ft_msgs(7, cmd);
 		return (1);
 	}
 	return (0);
 }
 
-/*Funcion que cambia de directorio al home del usuario en el caso de 'cd'
-o a una ruta absoluta o relativa*/
-int	builtin_cd(t_cmd	*cmd, t_env **env)
+/* Change to a specific directory */
+int	go_path(t_cmd *cmd)
 {
-	//cmd = cmd;
-	if ((size_arr2d(cmd->command_and_arg)) == 1)// cd only
-		go_home();
-	else if (ft_strcmp(cmd->command_and_arg[1], "~") == 0)
-		go_home();
-	else if (ft_strcmp(cmd->command_and_arg[1], "-") == 0)//no terminado
-		old_pwd();
+	struct stat	info_f;
+
+	if (!exist_cwd())
+		return (1);
 	else
-		go_path(cmd->command_and_arg[1]);
-	get_pwd(*env);
-	set_exit_status(0);
+	{
+		if (cmd->commands[1] == NULL)
+			return (1);
+		get_info_file(cmd, &info_f);
+		if (chdir(cmd->commands[1]) == -1)
+		{
+			return (1);
+		}
+	}
 	return (0);
+}
+
+static int	change_directory(t_cmd *cmd, char **current_wd)
+{
+	*current_wd = getcwd(NULL, 0);
+	if (*current_wd == NULL)
+	{
+		perror("getcwd() error");
+		return (1);
+	}
+	if (go_path(cmd) != 0)
+	{
+		free(*current_wd);
+		*current_wd = NULL;
+		return (1);
+	}
+	return (0);
+}
+
+/*Change to a specific directory accordingly the parameter*/
+int	builtin_cd(t_cmd *cmd, t_env **env)
+{
+	char	*current_wd;
+
+	current_wd = NULL;
+	if (handle_no_argument(cmd) == 1)
+		return (1);
+	if (handle_tilde(cmd) == 1)
+		return (1);
+	if (handle_dash(cmd) == 1)
+		return (1);
+	if (handle_dot(cmd) == 1)
+		return (0);
+	if (handle_invalid_path(cmd) == 1) 
+		return (1);
+	if (change_directory(cmd, &current_wd) != 0)
+		return (1);
+	update_environment(*env, current_wd);
+	return (free_current_wd(current_wd));
 }

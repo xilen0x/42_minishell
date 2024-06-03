@@ -1,15 +1,33 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 15:52:45 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 15:52:47 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	print_without_quotes(char *str)
+#include "minishell.h"
+
+static int	echo_options(t_cmd *cmd, int i, int *print_newline)
 {
-	int	len;
-
-	len = ft_strlen(str);
-	if ((len >= 2 && str[0] == '"' && str[len - 1] == '"') || \
-	(len >= 2 && str[0] == '\'' && str[len - 1] == '\''))
-		printf("%.*s", len - 2, str + 1);
-	else
-		printf("%s", str);
+	if (ft_strcmp(cmd->commands[1], "~") == 0)
+	{
+		printf("%s\n", getenv("HOME"));
+		*print_newline = 0;
+		return (0);
+	}
+	while (cmd->commands[i])
+	{
+		printf("%s", cmd->commands[i]);
+		if (cmd->commands[i + 1] && cmd->commands[i][0] != '\0')
+			printf(" ");
+		i++;
+	}
+	return (0);
 }
 
 int	builtin_echo(t_cmd *cmd)
@@ -19,24 +37,20 @@ int	builtin_echo(t_cmd *cmd)
 
 	i = 1;
 	print_newline = 1;
-	if (size_arr2d(cmd->command_and_arg) == 1)
+	if (size_arr2d(cmd->commands) == 1)
 	{
 		printf("\n");
+		// g_get_signal = 0;
 		return (0);
 	}
-	else if (ft_strcmp(cmd->command_and_arg[1], "-n") == 0)
+	if (ft_strcmp(cmd->commands[1], "-n") == 0)
 	{
 		print_newline = 0;
 		i++;
 	}
-	while (cmd->command_and_arg[i])
-	{
-		print_without_quotes(cmd->command_and_arg[i]);
-		if (cmd->command_and_arg[i + 1])
-			printf(" ");
-		i++;
-	}
+	echo_options(cmd, i, &print_newline);
 	if (print_newline)
 		printf("\n");
+	// g_get_signal = 0;
 	return (0);
 }

@@ -1,29 +1,66 @@
-# include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_unset.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/27 17:05:34 by castorga          #+#    #+#             */
+/*   Updated: 2024/05/27 17:05:39 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	builtin_unset(t_cmd *cmd, t_env **env)
+#include "minishell.h"
+
+static int	builtin_unset_core(t_cmd *cmd, t_env **env, int *flag)
 {
-	int		chk_exp;
+	int	chk_exp;
+	int	i;
 
-	//---------------UNSET SIN ARGUMENTOS
-	if (size_arr2d(cmd->command_and_arg) == 1)
-		return (0);
-	//---------------UNSET + VARIABLE
-	else
+	i = 1;
+	while (cmd->commands[i] != NULL)
 	{
-		chk_exp = check_export(cmd->command_and_arg[1]);
-		if (chk_exp == 1 || chk_exp == 2) 
+		if (check_syntax(cmd->commands[i]))
+			return (1);
+		chk_exp = check_export(cmd->commands[i]);
+		if (chk_exp == 1 || chk_exp == 2)
 			return (0);
 		else
 		{
-			if (!(variable_exists_op3(*env, cmd->command_and_arg[1])))
-				printf("NO existe la variable!\n");//cambiar luego por printf("\n")
+			if (!(variable_exists_op3(*env, cmd->commands[i])))
+				*flag = 1;
 			else
 			{
-				env_delone(env, &cmd->command_and_arg[1], &free);
-				printf("variable elimninada!\n");
+				env_delone(env, &cmd->commands[i], &free);
+				*flag = 2;
 			}
-			return (0);
 		}
+		i++;
 	}
+	return (0);
+}
+
+int	builtin_unset(t_cmd *cmd, t_env **env)
+{
+	int	flag;
+
+	flag = 0;
+	//---------------UNSET SIN ARGUMENTOS
+	if (size_arr2d(cmd->commands) == 1)
+	{
+		// g_get_signal = 0;
+		return (0);
+	}
+	//---------------UNSET + VARIABLE
+	else
+	{
+		if (builtin_unset_core(cmd, env, &flag))
+		{
+			ft_msgs(5, cmd);
+			return (1);
+		}
+		builtin_unset_core(cmd, env, &flag);
+	}
+	// g_get_signal = 0;
 	return (0);
 }
