@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-/*cambia al directorio home del usuario */
+/*Change to the user's home directory*/
 int	go_home(void)
 {
 	char	*home_dir;
@@ -32,7 +32,7 @@ int	go_home(void)
 	return (0);
 }
 
-/*get information about a file*/
+/*Get information about a file*/
 int	get_info_file(t_cmd *cmd, struct stat *info_f)
 {
 	if (stat(cmd->commands[1], info_f) == -1)
@@ -69,6 +69,7 @@ int	go_path(t_cmd *cmd)
 	return (0);
 }
 
+/*Change to the previous directory*/
 static int	change_directory(t_cmd *cmd, char **current_wd)
 {
 	*current_wd = getcwd(NULL, 0);
