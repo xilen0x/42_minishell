@@ -69,29 +69,11 @@ int	go_path(t_cmd *cmd)
 	return (0);
 }
 
-// int	change_to_opcions(t_cmd	*cmd)
-// {
-// 	if ((size_arr2d(cmd->commands)) == 1)
-// 		{
-// 			go_home();
-// 		return (0);}
-// 	else if (ft_strcmp(cmd->commands[1], "~") == 0)
-// 		{
-// 			go_home();
-// 		return (0);}
-// 	else if (ft_strcmp(cmd->commands[1], "-") == 0)
-// 		{
-// 			set_old_pwd();
-// 		return (0);}
-// 	else if (ft_strcmp(cmd->commands[1], ".") == 0)
-// 		return (0);
-// 	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || // 			(ft_strcmp(cmd->commands[1], " / ") == 0))
-// 	{
-// 		ft_msgs(4, cmd);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+int	change_to_opcions(t_cmd	*cmd)
+{
+
+	return (0);
+}
 
 /*Change to a specific directory accordingly the parameter*/
 int	builtin_cd(t_cmd	*cmd, t_env **env)

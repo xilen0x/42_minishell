@@ -60,7 +60,6 @@ t_env	*variable_exists_op4(t_env *env, char *key)
 	return (NULL);
 }
 
-
 /*verifica si la variable ya existe en el env y la actualiza 
 de ser así(caso +=)*/
 int	variable_exists_op2(t_env *env, char *variable)

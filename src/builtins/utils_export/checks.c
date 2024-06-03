@@ -29,7 +29,7 @@ unsigned int	check_export(char *arg)
 	else if (arg[i] == '=')
 		return (1);
 	else
-		return (3);//sin = ni +=
+		return (3);
 	return (0);
 }
 
