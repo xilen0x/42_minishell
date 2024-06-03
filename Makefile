@@ -70,6 +70,8 @@ FILES =	main.c \
 									builtins/utils_pwd/oldpwd.c \
 									builtins/utils_export/var_exists.c \
 									builtins/utils_export/checks.c \
+									builtins/utils_cd/utils_cd.c \
+									builtins/utils_cd/utils_cd_2.c \
 									cmd/cmd_add_back.c \
 									cmd/cmd_free.c \
 									cmd/cmd_last.c \

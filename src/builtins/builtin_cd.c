@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*cambia al directorio home del usuario */
-static int	go_home(void)
+int	go_home(void)
 {
 	char	*home_dir;
 
@@ -69,44 +69,41 @@ int	go_path(t_cmd *cmd)
 	return (0);
 }
 
-int	change_to_opcions(t_cmd	*cmd)
+static int	change_directory(t_cmd *cmd, char **current_wd)
 {
-
+	*current_wd = getcwd(NULL, 0);
+	if (*current_wd == NULL)
+	{
+		perror("getcwd() error");
+		return (1);
+	}
+	if (go_path(cmd) != 0)
+	{
+		free(*current_wd);
+		*current_wd = NULL;
+		return (1);
+	}
 	return (0);
 }
 
 /*Change to a specific directory accordingly the parameter*/
-int	builtin_cd(t_cmd	*cmd, t_env **env)
+int	builtin_cd(t_cmd *cmd, t_env **env)
 {
 	char	*current_wd;
 
-	current_wd = "";
-	if ((size_arr2d(cmd->commands)) == 1)
-		go_home();
-	else if (ft_strcmp(cmd->commands[1], "~") == 0)
-		go_home();
-	else if (ft_strcmp(cmd->commands[1], "-") == 0)
-		set_old_pwd();
-	else if (ft_strcmp(cmd->commands[1], ".") == 0)
-		return (0);
-	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || \
-			(ft_strcmp(cmd->commands[1], " / ") == 0))
-	{
-		ft_msgs(4, cmd);
+	current_wd = NULL;
+	if (handle_no_argument(cmd) == 1)
 		return (1);
-	}
-	else
-	{
-		current_wd = getcwd(NULL, 0);
-		go_path(cmd);
-	}
-	update_pwd(*env);
-	update_oldpwd(*env, current_wd);
-	if (*current_wd != '\0')
-	{
-		free(current_wd);
+	if (handle_tilde(cmd) == 1)
 		return (1);
-	}
-	else
+	if (handle_dash(cmd) == 1)
+		return (1);
+	if (handle_dot(cmd) == 1)
 		return (0);
+	if (handle_invalid_path(cmd) == 1) 
+		return (1);
+	if (change_directory(cmd, &current_wd) != 0)
+		return (1);
+	update_environment(*env, current_wd);
+	return (free_current_wd(current_wd));
 }

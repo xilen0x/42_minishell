@@ -263,6 +263,16 @@ int		builtin_export(t_cmd *cmd, t_env **env);
 int		builtin_unset(t_cmd *cmd, t_env **env);
 int		is_builtins(t_cmd *cmd);
 int		exist_cwd(void);
+
+/*--------------------------- utils_cd utils_cd_2 ---------------*/
+int	handle_no_argument(t_cmd *cmd);
+int	handle_tilde(t_cmd *cmd);
+int	handle_dash(t_cmd *cmd);
+int	handle_dot(t_cmd *cmd);
+int	handle_invalid_path(t_cmd *cmd);
+void	update_environment(t_env *env, char *current_wd);
+int	free_current_wd(char *current_wd);
+int	go_home(void);
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
 int		variable_exists(t_env **env, char **variable);
