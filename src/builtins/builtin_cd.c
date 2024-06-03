@@ -28,7 +28,7 @@ static int	go_home(void)
 		perror("chdir() error");
 		return (1);
 	}
-	g_get_signal = 0;
+	// g_get_signal = 0;
 	return (0);
 }
 
@@ -85,8 +85,7 @@ int	go_path(t_cmd *cmd)
 // 		return (0);}
 // 	else if (ft_strcmp(cmd->commands[1], ".") == 0)
 // 		return (0);
-// 	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || \
-// 			(ft_strcmp(cmd->commands[1], " / ") == 0))
+// 	else if ((ft_strcmp(cmd->commands[1], " ") == 0) || // 			(ft_strcmp(cmd->commands[1], " / ") == 0))
 // 	{
 // 		ft_msgs(4, cmd);
 // 		return (1);
@@ -121,13 +120,11 @@ int	builtin_cd(t_cmd	*cmd, t_env **env)
 	}
 	update_pwd(*env);
 	update_oldpwd(*env, current_wd);
-	if (current_wd != NULL)
+	if (*current_wd != '\0')
 	{
 		free(current_wd);
-		return (0);
+		return (1);
 	}
 	else
 		return (0);
 }
-
-

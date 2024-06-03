@@ -20,7 +20,7 @@ void	signal_parent(int sig)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
-		g_get_signal = 1;
+		// g_get_signal = 1;
 	}
 }
 

@@ -48,7 +48,7 @@ int	builtin_unset(t_cmd *cmd, t_env **env)
 	//---------------UNSET SIN ARGUMENTOS
 	if (size_arr2d(cmd->commands) == 1)
 	{
-		g_get_signal = 0;
+		// g_get_signal = 0;
 		return (0);
 	}
 	//---------------UNSET + VARIABLE
@@ -61,6 +61,6 @@ int	builtin_unset(t_cmd *cmd, t_env **env)
 		}
 		builtin_unset_core(cmd, env, &flag);
 	}
-	g_get_signal = 0;
+	// g_get_signal = 0;
 	return (0);
 }

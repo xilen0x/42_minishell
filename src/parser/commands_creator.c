@@ -20,6 +20,9 @@ void	commands_creator(t_tok *tok, t_cmd *node)
 
 	size = commands_counter(tok);
 	if (size > 0)
+	{
+
 		node->commands = (char **)p_malloc((size + 1) * sizeof(char *));
 		node->commands[size] = NULL;//cierro el array de strings con NULL
+	}
 }

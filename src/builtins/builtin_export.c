@@ -106,6 +106,6 @@ int	builtin_export(t_cmd *cmd, t_env **env)
 		just_export(*env);
 	else
 		builtin_export_core(cmd, env);
-	g_get_signal = 0;
+	// g_get_signal = 0;
 	return (0);
 }

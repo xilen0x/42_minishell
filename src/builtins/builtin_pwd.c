@@ -65,7 +65,7 @@ int	builtin_pwd(t_env *env)
 		printf("%s\n", current_wd);
 		free(current_wd);
 	}
-	g_get_signal = 0;
+	// g_get_signal = 0;
 	return (0);
 }
 

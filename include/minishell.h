@@ -50,7 +50,7 @@
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 /*-----------global variable------------*/
-int	g_get_signal;//recoge todos los exit_status
+// int	g_get_signal;//recoge todos los exit_status
 
 /*--------------------------- Pipe ---------------------------*/
 # define READ 0
@@ -132,7 +132,6 @@ typedef struct s_exe
 }	t_exe;
 
 /*--------------------------- minishell.c -------------------------*/
-int		g_get_signal;
 int		set_signals(int mode);
 void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);

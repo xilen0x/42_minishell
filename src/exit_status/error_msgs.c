@@ -21,7 +21,7 @@ void	print_command_not_found(t_cmd *cmd, const char *prefix, size_t prefix_lengt
 	write(2, cmd->commands[0], len_cmd);
 	write(2, ": ", 2);
 	write(2, "command not found\n", 18);
-	g_get_signal = 127;
+	// g_get_signal = 127;
 }
 
 void	print_cannot_execute_binary_file(t_cmd *cmd, const char *prefix, size_t prefix_length)
@@ -148,6 +148,6 @@ int	ft_msgs(int n, t_cmd *cmd)
 		write(2, "invalid option\n", 15);//no utilizado
 	else if (n == 10)
 		print_run_without_arguments();
-	g_get_signal = 1;
+	// g_get_signal = 1;
 	return (1);
 }

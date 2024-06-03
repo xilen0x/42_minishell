@@ -67,6 +67,6 @@ int	builtin_env(t_cmd *cmd, t_exe exe, t_env *env)
 			return (1);
 		print_env(env);
 	}
-	g_get_signal = 0;
+	// g_get_signal = 0;
 	return (0);
 }

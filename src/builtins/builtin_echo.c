@@ -40,7 +40,7 @@ int	builtin_echo(t_cmd *cmd)
 	if (size_arr2d(cmd->commands) == 1)
 	{
 		printf("\n");
-		g_get_signal = 0;
+		// g_get_signal = 0;
 		return (0);
 	}
 	if (ft_strcmp(cmd->commands[1], "-n") == 0)
@@ -51,6 +51,6 @@ int	builtin_echo(t_cmd *cmd)
 	echo_options(cmd, i, &print_newline);
 	if (print_newline)
 		printf("\n");
-	g_get_signal = 0;
+	// g_get_signal = 0;
 	return (0);
 }

@@ -16,7 +16,7 @@
 void	handle_error(char *str, t_tok **tok)
 {
 	write(2, str, ft_strlen(str));
-	g_get_signal = 2;
+	// g_get_signal = 2;
 	if (tok != NULL)
 		tok_free(tok);
 }
