@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:27:34 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/03 18:25:52 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:49:19 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,9 @@ size_t	get_len_and_free(char *str);
 void	*new_tok_builder(char *str, t_xpdr *xpdr, t_env *envlist);
 //void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist);
 void	get_dollar_expansion(char *str, t_xpdr *xpdr, t_env *envlist);
+void	handle_dollar_question(t_xpdr *xpdr);
+void	handle_dollar_invalid_syntax(char *str, t_xpdr *xpdr);
+
 
 /*--------------------------utils t_env-------------------*/
 t_env	*lstlast(t_env *lst);

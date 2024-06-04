@@ -78,16 +78,17 @@ FILES =	main.c \
 									exit_status/get_exit_status_len.c \
 									exit_status/get_exit_status_val.c \
 									expander/expand_quote_rm.c \
+									expander/get_dollar_expansion.c \
+									expander/get_dollar_len.c \
 									expander/get_env_key.c \
 									expander/get_env_val.c \
 									expander/get_len_and_free.c \
-									expander/handle_dollar.c \
-									expander/handle_invalid_env_var.c \
-									expander/handle_quote_1.c \
-									expander/handle_quote_2.c \
-									expander/handle_valid_env_var.c \
-									expander/init_iter.c \
-									expander/init_quotes.c \
+									expander/handle_dollar_invalid_syntax.c \
+									expander/handle_dollar_question.c \
+									expander/handle_quote_after_dollar.c \
+									expander/handle_quote.c \
+									expander/init_xpdr_except_result.c \
+									expander/init_xpdr.c \
 									expander/new_tok_builder.c \
 									expander/new_tok_len.c \
 									expander/should_expand.c\
