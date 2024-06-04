@@ -37,6 +37,7 @@ static void	main_process(t_env **envlist)
 	if (parser(&cmd, tok) == 1)
 		return ;
 	tok_free(&tok);
+//	print_cmd(cmd);//ELIMINAR ANTES ENTREGA
 	should_expand(cmd, *envlist);
 	print_cmd(cmd);//ELIMINAR ANTES ENTREGA
 	init_exe(&exe, cmd);
