@@ -78,7 +78,7 @@ FILES =	main.c \
 									exit_status/get_exit_status_len.c \
 									exit_status/get_exit_status_val.c \
 									expander/expand_quote_rm.c \
-									expander/get_dollar_expansion.c \
+									expander/get_dollar_builder.c \
 									expander/get_dollar_len.c \
 									expander/get_env_key.c \
 									expander/get_env_val.c \
@@ -86,7 +86,8 @@ FILES =	main.c \
 									expander/handle_dollar_invalid_syntax.c \
 									expander/handle_dollar_question.c \
 									expander/handle_quote_after_dollar.c \
-									expander/handle_quote.c \
+									expander/handle_quote_builder.c \
+									expander/handle_quote_len.c \
 									expander/init_xpdr_except_result.c \
 									expander/init_xpdr.c \
 									expander/new_tok_builder.c \
