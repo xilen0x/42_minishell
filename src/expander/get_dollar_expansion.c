@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:48:05 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/04 12:08:50 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:35:18 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	get_dollar_expansion(char *str, t_xpdr *xpdr, t_env *envlist)
 					xpdr->k++;
 				}
 		str_free_and_null(&xpdr->val);//libera 'val'
+		xpdr->k = 0;
 		xpdr->i--;//para contrarestar el i++ que encontrara al volver a la funcion que lo llamó
 	}
 }
