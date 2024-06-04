@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_dollar_expansion.c                             :+:      :+:    :+:   */
+/*   get_dollar_builder.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*Handles what is found after '$' sign*/
-void	get_dollar_expansion(char *str, t_xpdr *xpdr, t_env *envlist)
+void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist)
 {
 	if (str[xpdr->i] == '?')//SI ES '?'
 		handle_dollar_question(xpdr);

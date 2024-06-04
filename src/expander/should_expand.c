@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:28:34 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/04 14:03:43 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:22:30 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 			if (ft_strchr(cmd_aux->commands[i], '$') != NULL ||
 				ft_strchr(cmd_aux->commands[i], '\'') != NULL ||
 				ft_strchr(cmd_aux->commands[i], '"') != NULL)
-				cmd_aux->commands[i] = expand_quote_rm(cmd_aux->commands[i], envlist);
+				cmd_aux->commands[i] = expander(cmd_aux->commands[i], envlist);
 			i++;
 		}
 		while (redir_aux)//busca ', ", $ en las redirecciones
@@ -40,10 +40,10 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 				ft_strchr(redir_aux->fname, '\'') != NULL ||
 				ft_strchr(redir_aux->fname, '"') != NULL)
 //		 	{
-//	 			redir_tmp = expand_quote_rm(redir_aux->filename, envlist);
+//	 			redir_tmp = expander(redir_aux->filename, envlist);
 //		 		redir_aux->filename = redir_tmp;
 //		 	}
-				redir_aux->fname = expand_quote_rm(redir_aux->fname, envlist);
+				redir_aux->fname = expander(redir_aux->fname, envlist);
 		 	redir_aux = redir_aux->next;
 		}
 		cmd_aux = cmd_aux->next;
@@ -64,7 +64,7 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 			if (ft_strchr(cmd->commands[i], '$') != NULL \
 				|| ft_strchr(cmd->commands[i], '\'') != NULL \
 				|| ft_strchr(cmd->commands[i], '"') != NULL)
-				cmd->commands[i] = expand_quote_rm(cmd->commands[i], envlist);
+				cmd->commands[i] = expander(cmd->commands[i], envlist);
 			i++;
 		}
 		while (redir_aux)//busca ', ", $ en las redirecciones
@@ -72,7 +72,7 @@ void	should_expand(t_cmd *cmd, t_env *envlist)
 			if (ft_strchr(redir_aux->fname, '$') != NULL \
 				|| ft_strchr(redir_aux->fname, '\'') != NULL \
 				|| ft_strchr(redir_aux->fname, '"') != NULL)
-				redir_aux->fname = expand_quote_rm(redir_aux->fname, envlist);
+				redir_aux->fname = expander(redir_aux->fname, envlist);
 			redir_aux = redir_aux->next;
 		}
 		cmd = cmd->next;

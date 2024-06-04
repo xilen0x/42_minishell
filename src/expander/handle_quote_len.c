@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_quote.c                                     :+:      :+:    :+:   */
+/*   handle_quote_len.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/01 23:11:47 by joan              #+#    #+#             */
-/*   Updated: 2024/06/04 14:40:23 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 21:23:21 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*-----------Manages quotes---------*/
-void	handle_quote(char c, t_xpdr *xpdr)
+void	handle_quote_len(char c, t_xpdr *xpdr)
 {
 	if (c == '"' && xpdr->d_quote == CLOSED && xpdr->s_quote == CLOSED)
 	{

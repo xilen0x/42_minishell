@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_quote_rm.c                                  :+:      :+:    :+:   */
+/*   expander.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /* Returns a *char expanded and quote removed */
-char	*expand_quote_rm(char *str, t_env *envlist)
+char	*expander(char *str, t_env *envlist)
 {
 	t_xpdr	*xpdr;
 	char	*res;

@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:29:07 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/03 18:25:43 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:16:52 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	*new_tok_builder(char *str, t_xpdr *xpdr, t_env *envlist)
 	while (str && str[xpdr->i])
 	{
 		if (str[xpdr->i] == '"' || str[xpdr->i] == '\'')//gestiona las comillas
-			handle_quote(str[xpdr->i], xpdr);
+			handle_quote_builder(str[xpdr->i], xpdr);
 		else if (str[xpdr->i] == '$' && xpdr->s_quote == CLOSED \
 			&& str[xpdr->i + 1])//gestiona '$'
 		{
 			xpdr->i++;//salto el '$'
-			get_dollar_expansion(str, xpdr, envlist);
+			get_dollar_builder(str, xpdr, envlist);
 			xpdr->i++;//crec que va aqui l'increment si comparo amb new_tok_len
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:08:28 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/03 14:23:03 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:11:30 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	new_tok_len(char *str, t_xpdr *xpdr, t_env *envlist)
 	while (str && str[xpdr->i])
 	{
 		if (str[xpdr->i] == '"' || str[xpdr->i] == '\'')//gestiona las comillas
-			handle_quote(str[xpdr->i], xpdr);
+			handle_quote_len(str[xpdr->i], xpdr);
 		else if (str[xpdr->i] == '$' && xpdr->s_quote == CLOSED \
 			&& str[xpdr->i + 1])//gestiona el '$'
 		{

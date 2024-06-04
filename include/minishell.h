@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:27:34 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/04 11:49:19 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:24:02 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_qts
 	int	d_quote;
 }		t_qts;*/
 
-/*---variables para expand_quote_rm---*/
+/*---variables para expander---*/
 typedef struct s_xpdr
 {
 	size_t	i;//iteradores
@@ -235,19 +235,19 @@ void	commands_creator(t_tok *tok, t_cmd *node);
 
 /*------------expander & quote removal----------*/
 void	should_expand(t_cmd *cmd, t_env *envlist);
-char	*expand_quote_rm(char *str, t_env *envlist);
+char	*expander(char *str, t_env *envlist);
 void	init_xpdr(t_xpdr *xpdr);
 size_t	new_tok_len(char *str, t_xpdr *xpdr, t_env *envlist);
 void	init_xpdr_except_result(t_xpdr *xpdr);
 void	get_dollar_len(char *str, t_xpdr *xpdr, t_env *envlist);
 char 	*get_env_key(char *str);
 char 	*get_env_val(char *env_key, t_env *envlist);
-void	handle_quote(char c, t_xpdr *xpdr);
+void	handle_quote_len(char c, t_xpdr *xpdr);
 void	handle_quote_after_dollar(char c, t_xpdr *xpdr);
 size_t	get_len_and_free(char *str);
 void	*new_tok_builder(char *str, t_xpdr *xpdr, t_env *envlist);
 //void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist);
-void	get_dollar_expansion(char *str, t_xpdr *xpdr, t_env *envlist);
+void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist);
 void	handle_dollar_question(t_xpdr *xpdr);
 void	handle_dollar_invalid_syntax(char *str, t_xpdr *xpdr);
 
