@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 21:48:05 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/04 12:08:50 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:34:53 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ void	get_dollar_expansion(char *str, t_xpdr *xpdr, t_env *envlist)
 		str_free_and_null(&xpdr->key);//libero 'key'
 		if (xpdr->val != NULL)
 			while (xpdr->val && xpdr->val[xpdr->k] != '\0')//ponemos 'val' en 'result'
-				{
-					xpdr->result[xpdr->j] = xpdr->val[xpdr->k];
-					xpdr->j++;
-					xpdr->k++;
-				}
+			{
+				xpdr->result[xpdr->j] = xpdr->val[xpdr->k];
+				xpdr->j++;
+				xpdr->k++;
+			}
 		str_free_and_null(&xpdr->val);//libera 'val'
+		xpdr->k = 0;
 		xpdr->i--;//para contrarestar el i++ que encontrara al volver a la funcion que lo llamó
 	}
 }
