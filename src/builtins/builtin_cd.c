@@ -28,7 +28,7 @@ int	go_home(void)
 		perror("chdir() error");
 		return (1);
 	}
-	// g_get_signal = 0;
+	set_exit_status(0);
 	return (0);
 }
 
@@ -93,6 +93,11 @@ int	builtin_cd(t_cmd *cmd, t_env **env)
 	char	*current_wd;
 
 	current_wd = NULL;
+	if ((size_arr2d(cmd->commands)) > 2)
+	{
+		ft_msgs(9, cmd);
+		return (1);
+	}
 	if (handle_no_argument(cmd) == 1)
 		return (1);
 	if (handle_tilde(cmd) == 1)

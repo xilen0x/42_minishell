@@ -50,7 +50,7 @@
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
 /*-----------global variable------------*/
-// int	g_get_signal;//recoge todos los exit_status
+extern int	g_get_signal;//recoge todos los exit_status
 
 /*--------------------------- Pipe ---------------------------*/
 # define READ 0
@@ -240,8 +240,7 @@ int		pre_redirections(t_cmd *cmd, t_exe *exe);
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n, t_cmd *cmd);
 //int		get_exit_status(t_exe *exe);//funciones repetidas ?
-//void	set_exit_status(int num, t_exe *exe);
-
+void    set_exit_status(int n);
 /*---------------------utils1.c-------------------*/
 int		ca_strchr(const char *s, int c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);

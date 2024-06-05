@@ -62,15 +62,3 @@ char	*ft_itoa(int n)
 	}
 	return (itoa);
 }
-/*
-int	main(void)
-{
-	int		n = -77747745;
-	char	*itoa;
-
-	printf("int  >%i<\n", n);
-	itoa = ft_itoa(n);
-	printf("ascii>%s<\n\n", itoa);
-	free(itoa);
-	return (0);
-}*/

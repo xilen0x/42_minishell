@@ -17,6 +17,7 @@ GCC := gcc
 
 # Compiler flags ........................#!!!!eliminar -fsanitize=address antes de subir!!!!!
 FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
+#FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=leak
 
 # Remove
 RM 	:=	rm -rf
@@ -90,6 +91,7 @@ FILES =	main.c \
 									exit_status/error_msgs.c \
 									exit_status/get_exit_status_len.c \
 									exit_status/get_exit_status_val.c \
+									exit_status/set_exit_status.c \
 									expander/expand_quote_rm.c \
 									expander/get_env_key.c \
 									expander/get_env_val.c \
