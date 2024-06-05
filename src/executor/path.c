@@ -61,7 +61,6 @@ int	search_command_path_core(t_cmd *cmd, t_exe *exe)
 in order to save it or not - part1*/
 int	search_command_path(t_cmd *cmd, t_exe *exe)
 {
-
 	if (ft_strchr(cmd->commands[0], '/'))
 	{
 		exe->cmd_fullpath = ft_strdup(cmd->commands[0]);

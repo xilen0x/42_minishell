@@ -246,8 +246,10 @@ int		ca_strchr(const char *s, int c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 
 /*-------------------exit_status------------------*/
-unsigned int	get_exit_status_len(void);
-char			*get_exit_status_val(void);
+int		get_exit_status_len(void);
+char	*get_exit_status_val(void);
+void	command_not_found(t_cmd *cmd, const char *prefix, size_t prefix_len);
+void	no_file_or_dir(t_cmd *cmd, const char *prefix, size_t prefix_len);
 
 /*--------------------------- builtins -------------------------*/
 // int		builtins(t_cmd *cmd, t_env **env);

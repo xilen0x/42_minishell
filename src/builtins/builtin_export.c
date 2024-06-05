@@ -93,7 +93,7 @@ int	builtin_export_core(t_cmd *cmd, t_env **env)
 		chk_exp = check_export(cmd->commands[i]);
 		if ((chk_exp == 1) || (chk_exp == 3))
 			create_variable(cmd->commands[i], env);
-		else if (chk_exp == 2) // '+='
+		else if (chk_exp == 2)
 			overwrite_variable(*env, cmd->commands[i]);
 		else
 			return (1);

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void    set_exit_status(int n)
+void	set_exit_status(int n)
 {
-    g_get_signal = n;
+	g_get_signal = n;
 }

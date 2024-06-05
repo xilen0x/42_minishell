@@ -14,7 +14,6 @@
 
 void	signal_parent(int sig)
 {
-
 	if (sig == CTRL_C)
 	{
 		printf("\n");
@@ -33,7 +32,6 @@ void	signal_child(int sig)
 
 int	set_signals(int mode)
 {
-	//rl_catch_signals = 0;
 	if (mode == PARENT)
 	{
 		signal(CTRL_C, signal_parent);

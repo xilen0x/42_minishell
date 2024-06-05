@@ -106,7 +106,7 @@ int	builtin_cd(t_cmd *cmd, t_env **env)
 		return (1);
 	if (handle_dot(cmd) == 1)
 		return (0);
-	if (handle_invalid_path(cmd) == 1) 
+	if (handle_invalid_path(cmd) == 1)
 		return (1);
 	if (change_directory(cmd, &current_wd) != 0)
 		return (1);

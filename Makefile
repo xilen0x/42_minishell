@@ -89,6 +89,7 @@ FILES =	main.c \
 									executor/path.c \
 									executor/heredoc.c \
 									exit_status/error_msgs.c \
+									exit_status/error_msgs2.c \
 									exit_status/get_exit_status_len.c \
 									exit_status/get_exit_status_val.c \
 									exit_status/set_exit_status.c \

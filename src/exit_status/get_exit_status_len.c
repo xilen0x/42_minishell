@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*Returns the exit_status length of the last executed command*/
-unsigned int	get_exit_status_len(void)
+int	get_exit_status_len(void)
 {
 	unsigned int	len;
 	char			*val;

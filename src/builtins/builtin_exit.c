@@ -73,7 +73,7 @@ int	builtin_exit(t_cmd *cmd)
 			printf("minishell: exit: too many arguments\n");
 			return (1);
 		}
-		printf("exit\n");//exit 356
+		printf("exit\n");
 		exit(ft_atoi(cmd->commands[1]));
 	}
 	printf("exit\n");
