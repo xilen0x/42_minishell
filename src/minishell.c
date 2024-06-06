@@ -33,13 +33,13 @@ static void	main_process(t_env **envlist)
 		add_history(line);
 	tokenizer(&tok, line);
 	free(line);
-	print_tok(tok);//ELIMINAR ANTES ENTREGA
+//	print_tok(tok);//ELIMINAR ANTES ENTREGA
 	if (parser(&cmd, tok) == 1)
 		return ;
 	tok_free(&tok);
 //	print_cmd(cmd);//ELIMINAR ANTES ENTREGA
 	should_expand(cmd, *envlist);
-	print_cmd(cmd);//ELIMINAR ANTES ENTREGA
+//	print_cmd(cmd);//ELIMINAR ANTES ENTREGA
 	init_exe(&exe, cmd);
 	heredoc(cmd);
 	size_pipe = cmd_size(cmd);
