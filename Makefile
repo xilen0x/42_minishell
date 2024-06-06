@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: castorga <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/06/06 17:59:33 by castorga          #+#    #+#              #
+#    Updated: 2024/06/06 17:59:37 by castorga         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 
 NAME =	minishell
 
@@ -129,6 +141,7 @@ FILES =	main.c \
 									utils/p_malloc.c \
 									utils/utils1.c \
 									utils/utils3.c \
+									utils/signals_utils.c \
 									utils/wellcome_msg.c \
 									init_exe.c \
 									signals.c
