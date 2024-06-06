@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-/*Funcion que cambia al directorio anterior y actualiza la variable OLDPWD*/
+/*Changes to the previous directory and updates the OLDPWD variable*/
 int	set_old_pwd(void)
 {
 	char	*previous_directory;
@@ -23,7 +23,7 @@ int	set_old_pwd(void)
 	return (0);
 }
 
-/*actualiza la variable OLDPWD del entorno*/
+/* Update the OLDPWD environment variable */
 int	update_oldpwd(t_env *env, char *current_wd)
 {
 	char	*previous_directory;
@@ -39,7 +39,7 @@ int	update_oldpwd(t_env *env, char *current_wd)
 	return (0);
 }
 
-// consulta el directorio anterior(si existe)
+/* Consult the previous directory (if it exists)*/
 int	get_old_pwd(char *current_wd, t_env *env)
 {
 	if (!(variable_exists_op3(env, "OLDPWD")))

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_error.c                                     :+:      :+:    :+:   */
+/*   set_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 10:57:51 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/29 10:58:42 by jocuni-p         ###   ########.fr       */
+/*   Created: 2024/06/05 15:43:08 by castorga          #+#    #+#             */
+/*   Updated: 2024/06/05 15:43:11 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*------FREES t_tok list AND PRINTS AN ERROR MESSAGE-----*/
-void	handle_error(char *str, t_tok **tok)
+void	set_exit_status(int n)
 {
-	write(2, str, ft_strlen(str));
-	// g_get_signal = 2;
-	set_exit_status(2);
-	if (tok != NULL)
-		tok_free(tok);
+	g_get_signal = n;
 }

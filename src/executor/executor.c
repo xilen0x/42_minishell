@@ -49,21 +49,19 @@ int	child_process(t_cmd *cmd, t_exe *exe, t_env **env)
 /*execute commands in pipes - p2.*/
 int	executor_core(t_cmd *cmd, t_exe	*exe, t_env **env, int *i)
 {
-
 	exe->fd_input = dup(STDIN_FILENO);
 	exe->fd_output = dup(STDOUT_FILENO);
 	while (cmd)
 	{
-		if (pipe(exe->fd) == -1) // guarda en fd los dos file descriptors
+		if (pipe(exe->fd) == -1)
 			error_exe(1);
 		exe->pid[*i] = fork();
 		if (exe->pid[*i] < 0)
 			error_exe(2);
-		else if (exe->pid[*i] == 0) // Si condicion se cumple, se ejecutará el proceso hijo
+		else if (exe->pid[*i] == 0)
 			child_process(cmd, exe, env);
 		dup2(exe->fd[0], STDIN_FILENO);
 		close_fd(exe);
-		// *i++;
 		cmd = cmd->next;
 	}
 	return (0);
@@ -93,7 +91,7 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 		}
 		i++;
 	}
-	g_get_signal = status;
+	set_exit_status(status);
 	return (0);
 }
 

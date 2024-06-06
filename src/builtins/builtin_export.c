@@ -23,6 +23,7 @@ static int	just_export(t_env *env)
 	return (0);
 }
 
+/*check if a variable exists. If not, create it*/
 int	create_variable(char *cmd, t_env **env)
 {
 	char	**tokens;
@@ -50,6 +51,7 @@ int	create_variable(char *cmd, t_env **env)
 	return (0);
 }
 
+/*check if a variable exists. If not, create it. If yes, concatenates it*/
 int	overwrite_variable(t_env *env, char *cmd)
 {
 	char	**tokens;
@@ -74,7 +76,7 @@ int	overwrite_variable(t_env *env, char *cmd)
 	return (0);
 }
 
-/*Funcion que agrega una nueva variable de entorno si corresp.*/
+/*Function that adds a new environment variable if applicable.*/
 int	builtin_export_core(t_cmd *cmd, t_env **env)
 {
 	int	i;
@@ -91,7 +93,7 @@ int	builtin_export_core(t_cmd *cmd, t_env **env)
 		chk_exp = check_export(cmd->commands[i]);
 		if ((chk_exp == 1) || (chk_exp == 3))
 			create_variable(cmd->commands[i], env);
-		else if (chk_exp == 2) // '+='
+		else if (chk_exp == 2)
 			overwrite_variable(*env, cmd->commands[i]);
 		else
 			return (1);
@@ -100,12 +102,13 @@ int	builtin_export_core(t_cmd *cmd, t_env **env)
 	return (0);
 }
 
+/*builtin export*/
 int	builtin_export(t_cmd *cmd, t_env **env)
 {
 	if (size_arr2d(cmd->commands) == 1)
 		just_export(*env);
 	else
 		builtin_export_core(cmd, env);
-	g_get_signal = 0;
+	set_exit_status(0);
 	return (0);
 }

@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+/*checks if a str is a space or not.*/
 static int	is_space(const char *str)
 {
 	int	i;
@@ -22,7 +23,7 @@ static int	is_space(const char *str)
 	return (i);
 }
 
-/*verifica si un str es un entero válido o no*/
+/*checks if a str is a valid integer or not.*/
 int	check_int(const char *str)
 {
 	int			i;
@@ -52,29 +53,30 @@ int	check_int(const char *str)
 	return (0);
 }
 
+/*builtin exit*/
 int	builtin_exit(t_cmd *cmd)
 {
 	if (cmd->commands[1] && check_int(cmd->commands[1]) != 0)
 	{
-		printf("minishell: exit: numeric argument required\n");//exit aesae5 || exit - || exit ++- ...etc
+		printf("minishell: exit: numeric argument required\n");
 		exit(255);
 	}
 	else if ((size_arr2d(cmd->commands)) == 1)
 	{
-		printf("exit\n");//exit solo
+		printf("exit\n");
 		exit(0);
 	}
 	else if (cmd->commands[1])
 	{
 		if ((size_arr2d(cmd->commands)) > 2)
 		{
-			printf("minishell: exit: too many arguments\n");//exit 34 343
+			printf("minishell: exit: too many arguments\n");
 			return (1);
 		}
-		printf("exit\n");//exit 356
+		printf("exit\n");
 		exit(ft_atoi(cmd->commands[1]));
 	}
-	printf("exit\n");//otros casos
+	printf("exit\n");
 	exit(0);
 	return (0);
 }

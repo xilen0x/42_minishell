@@ -29,10 +29,11 @@ unsigned int	check_export(char *arg)
 	else if (arg[i] == '=')
 		return (1);
 	else
-		return (3);//sin = ni +=
+		return (3);
 	return (0);
 }
 
+/*check if the syntax of the export command is correct */
 int	check_syntax(char *cmd)
 {
 	int	i;

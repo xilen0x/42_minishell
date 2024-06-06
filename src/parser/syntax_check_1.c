@@ -18,6 +18,8 @@ int	syntax_check_1(t_tok *tok)
 	t_tok	*tmp;
 
 	tmp = tok_last(tok);
+	if (!tmp)
+		return (1);
 	if (tok->type == PIPE || tmp->type == PIPE)//SI EMPIEZA O ACABA EN '|'
 	{
 		handle_error(PRINT_SYNTAX_ERR_1, &tok);

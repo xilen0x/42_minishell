@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:27:34 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/04 21:42:58 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:03:26 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@
 # define OPEN 1
 
 /*-----------global variable------------*/
-int	g_get_signal;//recoge todos los exit_status
+extern int	g_get_signal;//recoge todos los exit_status
 
 /*--------------------------- Pipe ---------------------------*/
 # define READ 0
@@ -165,16 +165,19 @@ typedef struct s_exe
 	int				dup_stdout;
 }					t_exe;
 
-/*---------------------------minishell -------------------------*/
-int		g_get_signal;
+/*--------------------------- minishell.c -------------------------*/
 int		set_signals(int mode);
 void	minishell(t_env	*envlist);
 void	tokenizer(t_tok **tok, char *line);
 int		parser(t_cmd **cmd, t_tok *tok);
-void	init_exe(t_exe *exe, t_cmd *cmd);	
 void	cleaner_envlist(t_env **lst);
+void	control_and_d(char *line);
 
-/*--------------------------- wellcome_msg -------------------------*/
+/*--------------------------- init_exe.c -------------------------*/
+void	init_exe(t_exe *exe, t_cmd *cmd);	
+void	exe_free(t_exe *exe);
+
+/*--------------------------- wellcome_msg.c -------------------------*/
 int		bg_color(void);
 void	init_msg(void);
 int		help_mini(void);
@@ -278,8 +281,7 @@ int		pre_redirections(t_cmd *cmd, t_exe *exe);
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n, t_cmd *cmd);
 //int		get_exit_status(t_exe *exe);//funciones repetidas ?
-//void	set_exit_status(int num, t_exe *exe);
-
+void    set_exit_status(int n);
 /*---------------------utils1.c-------------------*/
 int		ca_strchr(const char *s, int c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
@@ -287,8 +289,10 @@ void	*p_malloc(size_t size);
 void	str_free_and_null(char **str);
 
 /*-------------------exit_status------------------*/
-size_t	get_exit_status_len(void);
+int		get_exit_status_len(void);
 char	*get_exit_status_val(void);
+void	command_not_found(t_cmd *cmd, const char *prefix, size_t prefix_len);
+void	no_file_or_dir(t_cmd *cmd, const char *prefix, size_t prefix_len);
 
 /*--------------------------- builtins -------------------------*/
 // int		builtins(t_cmd *cmd, t_env **env);
@@ -303,6 +307,16 @@ int		builtin_export(t_cmd *cmd, t_env **env);
 int		builtin_unset(t_cmd *cmd, t_env **env);
 int		is_builtins(t_cmd *cmd);
 int		exist_cwd(void);
+
+/*--------------------------- utils_cd utils_cd_2 ---------------*/
+int	handle_no_argument(t_cmd *cmd);
+int	handle_tilde(t_cmd *cmd);
+int	handle_dash(t_cmd *cmd);
+int	handle_dot(t_cmd *cmd);
+int	handle_invalid_path(t_cmd *cmd);
+void	update_environment(t_env *env, char *current_wd);
+int	free_current_wd(char *current_wd);
+int	go_home(void);
 /*--------------------------- builtin export -------------------------*/
 unsigned int	check_export(char *arg);
 int		variable_exists(t_env **env, char **variable);

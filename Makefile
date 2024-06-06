@@ -4,8 +4,9 @@ NAME =	minishell
 # Compiler
 GCC := gcc
 
-# Compiler flags
+# Compiler flags ........................#!!!!eliminar -fsanitize=address antes de subir!!!!!
 FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
+#FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=leak
 
 # Remove
 RM 	:=	rm -rf
@@ -59,6 +60,8 @@ FILES =	main.c \
 									builtins/utils_pwd/oldpwd.c \
 									builtins/utils_export/var_exists.c \
 									builtins/utils_export/checks.c \
+									builtins/utils_cd/utils_cd.c \
+									builtins/utils_cd/utils_cd_2.c \
 									cmd/cmd_add_back.c \
 									cmd/cmd_free.c \
 									cmd/cmd_last.c \
@@ -75,8 +78,10 @@ FILES =	main.c \
 									executor/path.c \
 									executor/heredoc.c \
 									exit_status/error_msgs.c \
+									exit_status/error_msgs2.c \
 									exit_status/get_exit_status_len.c \
 									exit_status/get_exit_status_val.c \
+									exit_status/set_exit_status.c \
 									expander/expand_quote_rm.c \
 									expander/get_dollar_builder.c \
 									expander/get_dollar_len.c \

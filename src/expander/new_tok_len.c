@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:08:28 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/04 18:11:30 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:06:07 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int	new_tok_len(char *str, t_env *envlist)
 				continue;//salto el ciclo para que no se incremente 'i' de nuevo
 			}
 		}
-		else
-			len++; 
 		i++;
 	}
 	return (len);

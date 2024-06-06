@@ -12,6 +12,7 @@
 
 #include "minishell.h"
 
+/* echo ~ option */
 static int	echo_options(t_cmd *cmd, int i, int *print_newline)
 {
 	if (ft_strcmp(cmd->commands[1], "~") == 0)
@@ -30,6 +31,7 @@ static int	echo_options(t_cmd *cmd, int i, int *print_newline)
 	return (0);
 }
 
+/* builtin echo */
 int	builtin_echo(t_cmd *cmd)
 {
 	int	i;
@@ -40,7 +42,7 @@ int	builtin_echo(t_cmd *cmd)
 	if (size_arr2d(cmd->commands) == 1)
 	{
 		printf("\n");
-		g_get_signal = 0;
+		set_exit_status(0);
 		return (0);
 	}
 	if (ft_strcmp(cmd->commands[1], "-n") == 0)
@@ -51,6 +53,6 @@ int	builtin_echo(t_cmd *cmd)
 	echo_options(cmd, i, &print_newline);
 	if (print_newline)
 		printf("\n");
-	g_get_signal = 0;
+	set_exit_status(0);
 	return (0);
 }

@@ -69,7 +69,6 @@ int	pre_redirections(t_cmd *cmd, t_exe *exe)
 	return (0);
 }
 
-
 /*check if a redirection operator(>, >>, <, <<) was found*/
 int	exist_redirections(t_cmd *cmd)
 {

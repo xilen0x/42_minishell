@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_cd_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 17:55:12 by castorga          #+#    #+#             */
-/*   Updated: 2024/06/05 17:55:14 by castorga         ###   ########.fr       */
+/*   Created: 2024/06/05 16:35:47 by castorga          #+#    #+#             */
+/*   Updated: 2024/06/05 16:35:49 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_get_signal = 0;
-
-int	main(int ac, char *av[], char *envp[])
+/* update environment variables*/
+void	update_environment(t_env *env, char *current_wd)
 {
-	t_env	*envlist;
+	update_pwd(env);
+	update_oldpwd(env, current_wd);
+}
 
-	(void)av;
-	envlist = NULL;
-	if (ac != 1)
+/* free current working directory */
+int	free_current_wd(char *current_wd)
+{
+	if (current_wd != NULL && *current_wd != '\0')
 	{
-		ft_msgs(10, NULL);
-		exit(EXIT_FAILURE);
-	}
-	env_init_list(envp, &envlist);
-	// init_msg();
-	while (1)
-	{
-		set_signals(PARENT);
-		minishell(envlist);
+		free(current_wd);
+		return (1);
 	}
 	return (0);
 }
