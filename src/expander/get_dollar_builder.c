@@ -15,25 +15,28 @@
 /*Handles what is found after '$' sign*/
 void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist)
 {
-	if (str[xpdr->i] == '?')//SI ES '?'
+	if (str[xpdr->i] == '?')
 		handle_dollar_question(xpdr);
-	else if (!ft_isalpha(str[xpdr->i]) && str[xpdr->i] != '_')//SI INVALID SYNTAX
+	else if (!ft_isalpha(str[xpdr->i]) && str[xpdr->i] != '_')
 		handle_dollar_invalid_syntax(str, xpdr);
-	else //SI VALID SYNTAX
+	else
 	{
-		xpdr->key = get_env_key(str + xpdr->i);//retorna un puntero mallocado al nombre despues del '$'
-		xpdr->val = get_env_val(xpdr->key, envlist);//busco su valor en el env y retorna un mallocado o un NULL si no lo hay
-		xpdr->i += ft_strlen(xpdr->key);//salto el len de 'key' en el recorrido del token
-		str_free_and_null(&xpdr->key);//libero 'key'
+		xpdr->key = get_env_key(str + xpdr->i);
+		xpdr->val = get_env_val(xpdr->key, envlist);
+		xpdr->i += ft_strlen(xpdr->key);
+		str_free_and_null(&xpdr->key);
 		if (xpdr->val != NULL)
-			while (xpdr->val && xpdr->val[xpdr->k] != '\0')//ponemos 'val' en 'result'
+		{
+			while (xpdr->val && xpdr->val[xpdr->k] != '\0')
 			{
-				xpdr->result[xpdr->j] = xpdr->val[xpdr->k];
+				aux = xpdr->val[xpdr->k];
+				xpdr->result[xpdr->j] = aux;
 				xpdr->j++;
 				xpdr->k++;
 			}
-		str_free_and_null(&xpdr->val);//libera 'val'
+		}
+		str_free_and_null(&xpdr->val);
 		xpdr->k = 0;
-		xpdr->i--;//para contrarestar el i++ que encontrara al volver a la funcion que lo llamó
+		xpdr->i--;
 	}
 }

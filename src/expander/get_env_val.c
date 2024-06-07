@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:32:42 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/03 10:33:21 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:22:18 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_env_val(char *env_key, t_env *envlist)
 	char	*val_aux;
 
 	val_aux = NULL;
-	if (env_key == NULL)//protect por si despues de $ hay un num o especial
+	if (env_key == NULL)
 		return (NULL);
 	while (envlist)
 	{

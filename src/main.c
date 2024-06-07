@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 17:55:12 by castorga          #+#    #+#             */
-/*   Updated: 2024/06/05 17:55:14 by castorga         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:59:38 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int ac, char *av[], char *envp[])
 		exit(EXIT_FAILURE);
 	}
 	env_init_list(envp, &envlist);
-	// init_msg();
 	while (1)
 	{
 		set_signals(PARENT);

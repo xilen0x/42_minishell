@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:38:25 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/07 14:52:35 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:22:05 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*get_env_key(char *str)
 
 	i = 0;
 	var_name = NULL;
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))//Si caracter es valido, cuenta, malloca, rellena
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	if (i > 0)
 	{

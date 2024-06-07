@@ -23,8 +23,8 @@ char	*expander(char *str, t_env *envlist)
 	xpdr->len = new_tok_len(str, xpdr, envlist);
 	xpdr->result = (char *)p_malloc(sizeof(char) * (xpdr->len + 1));
 	init_xpdr_except_result(xpdr);
-	new_tok_builder(str, xpdr, envlist);//rellena el nuevo token expandido y libera el antiguo
-	res = ft_strdup(xpdr->result);//copia mallocada de result para retornar y poder borrar xpdr
+	new_tok_builder(str, xpdr, envlist);
+	res = ft_strdup(xpdr->result);
 	free(xpdr->result);
 	free(xpdr);
 	return (res);

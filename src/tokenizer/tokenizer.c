@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 12:09:43 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/29 12:11:57 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:22:51 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void	tokenizer(t_tok **tok, char *line)
 			i++;
 		if (line[i])
 		{
-			new_tok = tok_new_node(NULL, NULL_TYPE);//inicialitzat a NULL
-			len = tok_len(line + i, &new_tok);//inicializa 'type' si es operador y retorna un 'len' > 0 si es una WORD
-			init_word_str(len, new_tok, line, i);//si len > 0, inicializo tok->str con la palabra mallocada y tok->type con el enum 'WORD' 
+			new_tok = tok_new_node(NULL, NULL_TYPE);
+			len = tok_len(line + i, &new_tok);
+			init_word_str(len, new_tok, line, i);
 			if (new_tok->type == D_GREATER || new_tok->type == D_SMALLER)
-				len += 2;//por el doble operador
+				len += 2;
 			if (new_tok->type == GREATER || new_tok->type == SMALLER \
 			|| new_tok->type == PIPE)
-				len += 1;//por el operador simple
+				len += 1;
 			tok_add_back(tok, new_tok);
 		}
 		i += len;
