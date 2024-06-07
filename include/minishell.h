@@ -54,6 +54,7 @@
 # define CTRL_C SIGINT
 # define CTRL_D SIGQUIT
 # define CTRL_SLASH SIGQUIT
+# define CTRL_Z SIGTSTP
 // Modes signals
 # define PARENT 0
 # define CHILD 1
@@ -282,11 +283,15 @@ int		pre_redirections(t_cmd *cmd, t_exe *exe);
 int		ft_msgs(int n, t_cmd *cmd);
 //int		get_exit_status(t_exe *exe);//funciones repetidas ?
 void    set_exit_status(int n);
+
 /*---------------------utils1.c-------------------*/
 int		ca_strchr(const char *s, int c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 void	*p_malloc(size_t size);
 void	str_free_and_null(char **str);
+
+void	signal_child(int sig);
+void	signal_parent(int sig);
 
 /*-------------------exit_status------------------*/
 int		get_exit_status_len(void);
