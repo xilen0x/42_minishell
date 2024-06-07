@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:50:44 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/29 10:52:49 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:00:52 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	syntax_check_2(t_tok *tok)
 	{
 		if (is_operator(tmp) && is_operator(tmp->next))
 		{
-			handle_error(PRINT_SYNTAX_ERR_3, &tok);//printa error y libera tok
+			handle_error(PRINT_SYNTAX_ERR_3, &tok);
 			return (1);
 		}
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 09:58:35 by jocuni-p          #+#    #+#             */
-/*   Updated: 2023/05/31 09:46:41 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:13:50 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*tests for any character for which isupper(3) or islower(3) is true. 

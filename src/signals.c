@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 14:54:49 by castorga          #+#    #+#             */
-/*   Updated: 2024/05/29 14:54:51 by castorga         ###   ########.fr       */
+/*   Updated: 2024/06/07 17:08:19 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-
-
 
 int	set_signal_handler(int signal, void (*handler)(int))
 {
@@ -59,4 +55,3 @@ int	set_signals(int mode)
 		return (set_child_signals());
 	return (-1);
 }
-
