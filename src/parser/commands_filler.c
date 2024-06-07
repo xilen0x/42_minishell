@@ -3,20 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   commands_filler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 10:26:29 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/30 10:27:27 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:07:42 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-???	commands_filler(??????)
-{
-
-
-
-
-
-}

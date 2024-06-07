@@ -17,46 +17,8 @@ void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist)
 {
 	if (str[xpdr->i] == '?')//SI ES '?'
 		handle_dollar_question(xpdr);
-//------------------------------------------------
-/*
-	if (str[xpdr->i] == '?')//SI ES '?'
-	{
-		xpdr->val = get_exit_status_val();//retorna un char* mallocado
-		while (xpdr->val && xpdr->val[xpdr->k] != '\0')//mientras exista y no sea \0
-		{
-			xpdr->result[xpdr->j] = (xpdr->val[xpdr->k]);
-			xpdr->j++;
-			xpdr->k++;
-		}
-//		free (xpdr->val);
-//		xpdr->val = NULL;
-		str_free_and_null(xpdr->val);//potser hauria de pasar-lo per referencia???
-		xpdr->k = 0;
-	}
-*/
-
 	else if (!ft_isalpha(str[xpdr->i]) && str[xpdr->i] != '_')//SI INVALID SYNTAX
 		handle_dollar_invalid_syntax(str, xpdr);
-//------------------------------------------------
-/*
-	else if (!ft_isalpha(str[xpdr->i]) && str[xpdr->i] != '_')//SI INVALID SYNTAX
-	{
-		if (str[xpdr->i] == '\'' || str[xpdr->i] == '"')//SI ES COMILLA.
-		{
-			xpdr->result[xpdr->j] = '$';//incluimos '$' en el result
-			xpdr->j++;
-			handle_quote_after_dollar(str[xpdr->i], xpdr);
-		}
-		else//SI NO ES COMILLA
-		{
-			xpdr->result[xpdr->j] = '$';//incluimos '$' en el resultado
-			xpdr->j++;
-			xpdr->result[xpdr->j] = str[xpdr->i];//incluimos el char actual
-			xpdr->j++;
-		}
-	}
-*/
-
 	else //SI VALID SYNTAX
 	{
 		xpdr->key = get_env_key(str + xpdr->i);//retorna un puntero mallocado al nombre despues del '$'

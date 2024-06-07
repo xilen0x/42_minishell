@@ -30,7 +30,7 @@ READLINE := ${READLINE_ROOT}libreadline.a ${READLINE_ROOT}libhistory.a
 
 # Libft
 LIBFT_ROOT := ${LIB_ROOT}libft/
-LIBFT_INC := $(LIBFT_ROOT)include/ 
+LIBFT_INC := $(LIBFT_ROOT) 
 LIBFT := $(LIBFT_ROOT)libft.a
 
 INC_DIRS += ${LIBFT_INC}
@@ -161,7 +161,7 @@ all:	$(READLINE_MK_ROOT)
 		@echo "$(DARK_GREEN)GNU READLINE 8.2 COMPILING... $(DEF_COLOR)"
 		@$(MAKE) -sC $(READLINE_ROOT)
 		@echo "$(DARK_GREEN)LIBFT COMPILING... $(DEF_COLOR)"
-		@$(MAKE) $(LIBFT)
+		@$(MAKE) -C  $(LIBFT_ROOT)
 		@echo "$(DARK_GREEN)MINISHELL COMPILING... $(DEF_COLOR)"
 		@$(MAKE) $(NAME)
 		@echo "                              $(DEF_COLOR)"
@@ -194,12 +194,12 @@ $(READLINE_MK_ROOT):
 		cd ${BLOCK}
 
 $(LIBFT):
-		@$(MAKE) -sC $(LIBFT_ROOT)
+		@$(MAKE) -C  $(LIBFT_ROOT)
 
 $(NAME): $(OBJS)
 		@$(GCC) $(FLAGS) $(OBJS) $(READLINE) $(LIBS) -o $(NAME)
 
-$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(READLINE) $(MKF)
+$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(READLINE) $(MKF) $(LIBFT)
 		@mkdir -p $(dir $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
 		@echo "▶ Compiling minishell file: <$(notdir $<)>"
 		@$(GCC) $(FLAGS) $(INCS) -c $< -o $@

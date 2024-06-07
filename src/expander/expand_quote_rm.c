@@ -18,9 +18,9 @@ char	*expander(char *str, t_env *envlist)
 	t_xpdr	*xpdr;
 	char	*res;
 
- 	xpdr = (t_xpdr *)malloc(sizeof(t_xpdr));
+	xpdr = (t_xpdr *)malloc(sizeof(t_xpdr));
 	init_xpdr(xpdr);
-	xpdr->len = new_tok_len(str, xpdr, envlist);//len del token, quote removed y expandido
+	xpdr->len = new_tok_len(str, xpdr, envlist);
 	xpdr->result = (char *)p_malloc(sizeof(char) * (xpdr->len + 1));
 	init_xpdr_except_result(xpdr);
 	new_tok_builder(str, xpdr, envlist);//rellena el nuevo token expandido y libera el antiguo

@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 10:38:25 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/03 14:29:42 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:52:35 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ char	*get_env_key(char *str)
 
 	i = 0;
 	var_name = NULL;
-/*SI CARACT VALIDS PARA UNA VAR DE ENTORNO, CUENTA, RESERVA MEMORIA Y RELLENA*/
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))//Si caracter es valido, cuenta, malloca, rellena
 		i++;
 	if (i > 0)
 	{
@@ -31,12 +30,3 @@ char	*get_env_key(char *str)
 	}
 	return (var_name);
 }
-/*SI HAY CARACTERES QUE NO SON ', ", $, \0, ME LOS LLEVO
-	while (str[i] && str[i] != '\'' && str[i] != '"' && str[i] != '$')
-		i++;
-	if (i > 0)
-	{
-		var_name = (char *)p_malloc(sizeof(char) * (i + 1));
-		ft_strlcpy(var_name, str, i + 1);
-	}
-	return (var_name);*/
