@@ -36,6 +36,8 @@ char	*ft_strdup(char *s1)
 	char	*dup;
 	int		len;
 
+	if (!s1)
+		return (NULL);
 	len = ft_strlen(s1) + 1;
 	dup = malloc(len * sizeof(char));
 	if (!dup)
