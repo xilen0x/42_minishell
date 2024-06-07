@@ -29,8 +29,7 @@ void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist)
 		{
 			while (xpdr->val && xpdr->val[xpdr->k] != '\0')
 			{
-				aux = xpdr->val[xpdr->k];
-				xpdr->result[xpdr->j] = aux;
+				xpdr->result[xpdr->j] = xpdr->val[xpdr->k];
 				xpdr->j++;
 				xpdr->k++;
 			}
