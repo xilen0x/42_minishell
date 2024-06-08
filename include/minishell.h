@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:27:34 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/07 17:22:09 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:27:32 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ size_t	commands_counter(t_tok *tok);
 int		syntax_check_1(t_tok *tok);
 int		syntax_check_2(t_tok *tok);
 void	commands_creator(t_tok *tok, t_cmd *node);
+void	commands_filler(t_tok **tok, t_cmd *node);
 //size_t 	tok_operator_cnt(t_tok *tokens);//OJO DE MOMENTO NO SE USA
 //size_t tok_word_cnt(t_tok *tokens);//OJO DE MOMENTO NO SE USA
 

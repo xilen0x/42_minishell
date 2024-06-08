@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 16:01:29 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/07 17:04:52 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:34:28 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,24 @@ con las redirecciones. Retorna 0 o 1 si encontro algun error de sintaxis*/
 int	parser(t_cmd **cmd, t_tok *tok)
 {
 	t_cmd	*node;
-    size_t  i;
-	char	*str_duplicate;
-    t_redir *node_redir;
+//    size_t  i;
+//	char	*str_duplicate;
+//    t_redir *node_redir;
 
     node = NULL;
-    node_redir = NULL;
+//    node_redir = NULL;
     if (syntax_check_1(tok) == 1)
         return (1);
     if (syntax_check_2(tok) == 1)
         return (1);
     while (tok && tok->type != NULL_TYPE)
     {
-        i = 0;        
+//        i = 0;        
         node = cmd_new_node();
 
-		commands_creator(tok, node);
-         while (tok && tok->type != NULL_TYPE)
+		commands_creator(tok, node);//se podria llamar mallocator
+		commands_filler(&tok, node);//
+/*        while (tok && tok->type != NULL_TYPE)
         {
             if (tok->type == WORD)
             {
@@ -54,7 +55,7 @@ int	parser(t_cmd **cmd, t_tok *tok)
                 tok = tok->next;
                 break;
             }
-        }
+        }*/
         cmd_add_back(cmd, node);
     }
     return (0);

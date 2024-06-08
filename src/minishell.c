@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 17:00:08 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/07 17:00:11 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/08 15:41:03 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ static void	main_process(t_env **envlist)
 		return (free(line));
 	tokenizer(&tok, line);
 	free(line);
+//	printf("tok antes de parser=%p\n", tok);//eliminar despues
 	if (parser(&cmd, tok) == 1)
 		return ;
+//	printf("tok after de parser=%p\n", tok);//eliminar despues
 	tok_free(&tok);
 	should_expand(cmd, *envlist);
+	print_cmd(cmd);
 	init_exe(&exe, cmd);
 	heredoc(cmd);
 	size_pipe = cmd_size(cmd);
