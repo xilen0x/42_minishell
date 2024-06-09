@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 16:01:29 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/08 15:34:28 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:36:58 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	parser(t_cmd **cmd, t_tok *tok)
     {
 //        i = 0;        
         node = cmd_new_node();
-
 		commands_creator(tok, node);//se podria llamar mallocator
 		commands_filler(&tok, node);//
 /*        while (tok && tok->type != NULL_TYPE)

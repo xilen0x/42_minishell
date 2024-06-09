@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 14:16:07 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/08 15:21:26 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:33:07 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	commands_filler(t_tok **tok, t_cmd *node)
         }
     }
 }
-
 
 /*
 {

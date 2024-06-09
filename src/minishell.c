@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 17:00:08 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/08 15:41:03 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/09 19:11:15 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*generate_line(void)
 	return (line);
 }
 
-static void	main_process(t_env **envlist)
+static void	main_process(t_env *envlist)
 {
 	t_tok			*tok;
 	t_cmd			*cmd;
@@ -49,24 +49,21 @@ static void	main_process(t_env **envlist)
 		return (free(line));
 	tokenizer(&tok, line);
 	free(line);
-//	printf("tok antes de parser=%p\n", tok);//eliminar despues
 	if (parser(&cmd, tok) == 1)
 		return ;
-//	printf("tok after de parser=%p\n", tok);//eliminar despues
 	tok_free(&tok);
-	should_expand(cmd, *envlist);
-	print_cmd(cmd);
+	should_expand(cmd, envlist);
 	init_exe(&exe, cmd);
 	heredoc(cmd);
 	size_pipe = cmd_size(cmd);
-	pre_executor(envlist, cmd, &exe, size_pipe);
+	pre_executor(&envlist, cmd, &exe, size_pipe);
 	cmd_free(&cmd);
 }
 
 void	minishell(t_env *envlist)
 {
 	if (isatty(STDIN_FILENO))
-		main_process(&envlist);
+		main_process(envlist);
 	else
 	{
 		write(2, "run ./minishell (without arguments or operators)\n", 49);
