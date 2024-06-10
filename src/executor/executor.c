@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:29:12 by castorga          #+#    #+#             */
-/*   Updated: 2024/05/30 12:29:01 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:51:23 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	executor(t_cmd *cmd, t_exe	*exe, t_env **env)
 /*Funcion que direcciona a builtin si es el caso o envia pipe a executor
 0: if NO hay redirecciones
 1: else Sí hay redirecciones*/
-int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe, unsigned int size_pipe)
+int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe, int size_pipe)
 {
 	if (!exist_redirections(cmd))
 	{

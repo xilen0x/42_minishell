@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 17:00:08 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/09 19:11:15 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:51:57 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	main_process(t_env *envlist)
 	t_tok			*tok;
 	t_cmd			*cmd;
 	t_exe			exe;
-	unsigned int	size_pipe;
+	int				size_pipe;
 	char			*line;
 
 	tok = NULL;

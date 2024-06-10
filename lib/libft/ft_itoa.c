@@ -6,14 +6,13 @@
 /*   By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:51:44 by jocuni-p          #+#    #+#             */
-/*   Updated: 2023/06/28 16:58:51 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:01:29 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*Utilizando malloc(3), genera una string que representa el valor entero
 recibido como argumento. Los números negativos tambien se gestionan.*/
-//#include<stdio.h>
-//#include<stdlib.h>
+
 #include "libft.h"
 
 static int	count_dig(int n)

@@ -6,7 +6,7 @@
 #    By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 17:59:33 by castorga          #+#    #+#              #
-#    Updated: 2024/06/08 17:53:16 by jocuni-p         ###   ########.fr        #
+#    Updated: 2024/06/10 11:33:10 by jocuni-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,10 @@
 NAME =	minishell
 
 # Compiler
-GCC := gcc
+GCC := cc
 
 # Compiler flags ........................#!!!!eliminar -fsanitize=address antes de subir!!!!!
 FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
-#FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=leak
 
 # Remove
 RM 	:=	rm -rf
@@ -157,14 +156,7 @@ INCS 	:= $(addprefix -I, $(INC_DIRS))
 ################################################################################
 
 DEF_COLOR =		\033[0;39m
-#DEL_LINE =		\033[2K
-#ITALIC =		\033[3m
-#GRAY =			\033[0;90m
-#RED =			\033[0;91m
-#BROWN =		\033[38;2;184;143;29m
-#YELLOW =		\033[33m
 DARK_YELLOW =	\033[38;5;143m
-#DARK_GRAY 	=	\033[38;5;234m
 DARK_GREEN 	=	\033[1m\033[38;2;75;179;82m
 GREEN 		=	\033[0;32m
 

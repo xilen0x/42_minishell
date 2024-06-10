@@ -6,7 +6,7 @@
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:17:06 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/04 12:31:12 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:40:19 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*ft_strdup(char *s1)
 	char	*dup;
 	int		len;
 
+	if (!s1)
+		return (NULL);
 	len = ft_strlen(s1) + 1;
 	dup = malloc(len * sizeof(char));
 	if (!dup)
