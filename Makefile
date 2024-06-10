@@ -16,8 +16,8 @@ NAME =	minishell
 # Compiler
 GCC := cc
 
-# Compiler flags ........................#!!!!eliminar -fsanitize=address antes de subir!!!!!
-FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
+# Compiler flags
+FLAGS := -Wall -Werror -Wextra -MMD -g
 
 # Remove
 RM 	:=	rm -rf
