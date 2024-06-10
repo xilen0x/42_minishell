@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: castorga <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 17:59:33 by castorga          #+#    #+#              #
-#    Updated: 2024/06/06 17:59:37 by castorga         ###   ########.fr        #
+#    Updated: 2024/06/10 11:33:10 by jocuni-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,10 @@
 NAME =	minishell
 
 # Compiler
-GCC := gcc
+GCC := cc
 
 # Compiler flags ........................#!!!!eliminar -fsanitize=address antes de subir!!!!!
 FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
-#FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=leak
 
 # Remove
 RM 	:=	rm -rf
@@ -112,6 +111,7 @@ FILES =	main.c \
 									expander/should_expand.c\
 									parser/commands_counter.c \
 									parser/commands_creator.c \
+									parser/commands_filler.c \
 									parser/handle_error.c \
 									parser/is_operator.c \
 									parser/is_redirection.c \
@@ -156,14 +156,7 @@ INCS 	:= $(addprefix -I, $(INC_DIRS))
 ################################################################################
 
 DEF_COLOR =		\033[0;39m
-#DEL_LINE =		\033[2K
-#ITALIC =		\033[3m
-#GRAY =			\033[0;90m
-#RED =			\033[0;91m
-#BROWN =		\033[38;2;184;143;29m
-#YELLOW =		\033[33m
 DARK_YELLOW =	\033[38;5;143m
-#DARK_GRAY 	=	\033[38;5;234m
 DARK_GREEN 	=	\033[1m\033[38;2;75;179;82m
 GREEN 		=	\033[0;32m
 
@@ -182,6 +175,29 @@ all:	$(READLINE_MK_ROOT)
 		@echo "                              $(DEF_COLOR)"
 		@echo "$(DARK_GREEN)-->	Now you can run ./minishell$(DEF_COLOR)"
 
+$(READLINE_MK_ROOT):
+		pwd ${BLOCK}
+		cd ./${READLINE_ROOT} && ./configure
+		cd ${BLOCK}
+
+$(LIBFT):
+		@$(MAKE) -C  $(LIBFT_ROOT)
+
+$(NAME): $(OBJS)
+		@$(GCC) $(FLAGS) $(OBJS) $(READLINE) $(LIBS) -o $(NAME)
+
+#$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(READLINE) $(MKF) $(LIBFT)
+$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(MKF)
+		@mkdir -p $(dir $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
+		@echo "▶ Compiling minishell file: <$(notdir $<)>"
+		@$(GCC) $(FLAGS) $(INCS) -c $< -o $@
+		@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
+
+-include $(DEPS)
+
+readline:
+		@$(MAKE) $(READLINE_MK_ROOT)
+
 clean:
 		@$(RM) $(OBJ_ROOT)
 		@$(RM) $(DEP_ROOT)
@@ -195,29 +211,9 @@ re:
 		@$(MAKE) fclean
 		@$(MAKE) all
 
-readline:
-		@$(MAKE) $(READLINE_MK_ROOT)
 
 cleanrl:
 		@$(MAKE) clean -sC $(READLINE_ROOT)
 
-$(READLINE_MK_ROOT):
-		pwd ${BLOCK}
-		cd ./${READLINE_ROOT} && ./configure
-		cd ${BLOCK}
-
-$(LIBFT):
-		@$(MAKE) -C  $(LIBFT_ROOT)
-
-$(NAME): $(OBJS)
-		@$(GCC) $(FLAGS) $(OBJS) $(READLINE) $(LIBS) -o $(NAME)
-
-$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(READLINE) $(MKF) $(LIBFT)
-		@mkdir -p $(dir $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
-		@echo "▶ Compiling minishell file: <$(notdir $<)>"
-		@$(GCC) $(FLAGS) $(INCS) -c $< -o $@
-		@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
-
--include $(DEPS)
 
 .PHONY:	all bonus update clean fclean re
