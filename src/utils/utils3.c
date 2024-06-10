@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/05 17:50:39 by castorga          #+#    #+#             */
+/*   Updated: 2024/06/05 17:50:41 by castorga         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-//OJO: REVISAR SI HACE FALTA, porque ya tenemos free_arr2d para liberar un char**
 void	free_memory(char **array, int size)
 {
 	int	j;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/05 17:49:56 by castorga          #+#    #+#             */
+/*   Updated: 2024/06/07 17:26:28 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*Returns 1 if 'c' ('\0' included) is located in 's', otherwise returns 0*/
@@ -38,4 +50,12 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 		i++;
 	}
 	return (dest);
+}
+
+/*Frees and sets to NULL a char *str passed as argument by reference*/
+void	str_free_and_null(char **str)
+{
+	if (*str != NULL)
+		free(*str);
+	*str = NULL;
 }

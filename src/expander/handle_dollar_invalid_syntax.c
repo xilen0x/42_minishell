@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands_creator.c                                 :+:      :+:    :+:   */
+/*   handle_dollar_invalid_syntax.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 10:08:22 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/07 17:01:20 by jocuni-p         ###   ########.fr       */
+/*   Created: 2024/06/04 11:45:27 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/06/07 16:23:00 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*Allocates memory for an array of strings if any command is found
- on the tok list. Sets to NULL the last element of the array.*/
-void	commands_creator(t_tok *tok, t_cmd *node)
+void	handle_dollar_invalid_syntax(char *str, t_xpdr *xpdr)
 {
-	size_t	size;
-
-	size = commands_counter(tok);
-	if (size > 0)
+	if (str[xpdr->i] == '\'' || str[xpdr->i] == '"')
 	{
-		node->commands = (char **)p_malloc((size + 1) * sizeof(char *));
-		node->commands[size] = NULL;
+		xpdr->result[xpdr->j] = '$';
+		xpdr->j++;
+		handle_quote_after_dollar(str[xpdr->i], xpdr);
+	}
+	else
+	{
+		xpdr->result[xpdr->j] = '$';
+		xpdr->j++;
+		xpdr->result[xpdr->j] = str[xpdr->i];
+		xpdr->j++;
 	}
 }

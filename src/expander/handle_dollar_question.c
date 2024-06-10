@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tok_word_cnt.c                                     :+:      :+:    :+:   */
+/*   handle_dollar_question.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 10:43:49 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/29 10:45:29 by jocuni-p         ###   ########.fr       */
+/*   Created: 2024/06/04 11:38:34 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/06/07 16:23:25 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*OJO, DE MOMENTO NO SE USA*/
-/*-Counts the num of WORD on a list are found-*/
-size_t	tok_word_cnt(t_tok *tokens)
+void	handle_dollar_question(t_xpdr *xpdr)
 {
-	t_tok	*aux;
-	size_t	cnt;
-
-	aux = tokens;
-	cnt = 0;
-	while (aux && aux->type != PIPE)
+	xpdr->val = get_exit_status_val();
+	while (xpdr->val && xpdr->val[xpdr->k] != '\0')
 	{
-		if (aux->type == WORD)
-			cnt++;
-		aux = aux->next;
+		xpdr->result[xpdr->j] = (xpdr->val[xpdr->k]);
+		xpdr->j++;
+		xpdr->k++;
 	}
-	return (cnt);
+	str_free_and_null(&xpdr->val);
+	xpdr->k = 0;
 }

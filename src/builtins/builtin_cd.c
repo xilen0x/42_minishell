@@ -28,7 +28,7 @@ int	go_home(void)
 		perror("chdir() error");
 		return (1);
 	}
-	// g_get_signal = 0;
+	set_exit_status(0);
 	return (0);
 }
 
@@ -69,7 +69,7 @@ int	go_path(t_cmd *cmd)
 	return (0);
 }
 
-/*Change to the previous directory*/
+/*Change to a specific directory*/
 static int	change_directory(t_cmd *cmd, char **current_wd)
 {
 	*current_wd = getcwd(NULL, 0);
@@ -87,12 +87,17 @@ static int	change_directory(t_cmd *cmd, char **current_wd)
 	return (0);
 }
 
-/*Change to a specific directory accordingly the parameter*/
+/*Change to a directory accordingly the parameter if applicable..*/
 int	builtin_cd(t_cmd *cmd, t_env **env)
 {
 	char	*current_wd;
 
 	current_wd = NULL;
+	if ((size_arr2d(cmd->commands)) > 2)
+	{
+		ft_msgs(9, cmd);
+		return (1);
+	}
 	if (handle_no_argument(cmd) == 1)
 		return (1);
 	if (handle_tilde(cmd) == 1)
@@ -101,7 +106,7 @@ int	builtin_cd(t_cmd *cmd, t_env **env)
 		return (1);
 	if (handle_dot(cmd) == 1)
 		return (0);
-	if (handle_invalid_path(cmd) == 1) 
+	if (handle_invalid_path(cmd) == 1)
 		return (1);
 	if (change_directory(cmd, &current_wd) != 0)
 		return (1);

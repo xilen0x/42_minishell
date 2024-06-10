@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_cd_2.c                                       :+:      :+:    :+:   */
+/*   signals_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: castorga <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/05 16:35:47 by castorga          #+#    #+#             */
-/*   Updated: 2024/06/05 16:35:49 by castorga         ###   ########.fr       */
+/*   Created: 2024/06/06 17:59:21 by castorga          #+#    #+#             */
+/*   Updated: 2024/06/06 17:59:23 by castorga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* update environment variables*/
-void	update_environment(t_env *env, char *current_wd)
+void	signal_child(int sig)
 {
-	update_pwd(env);
-	update_oldpwd(env, current_wd);
+	if (sig == CTRL_C)
+	{
+		write(2, "\n", 1);
+	}
 }
 
-/* free current working directory */
-int	free_current_wd(char *current_wd)
+void	signal_parent(int sig)
 {
-	if (current_wd != NULL && *current_wd != '\0')
+	if (sig == CTRL_C)
 	{
-		free(current_wd);
-		return (1);
+		write(2, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+		rl_redisplay();
+		set_exit_status(1);
 	}
-	return (0);
 }

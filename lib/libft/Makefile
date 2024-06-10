@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jocuni-p <jocuni-p@student.42barcel>       +#+  +:+       +#+         #
+#    By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 16:15:05 by jocuni-p          #+#    #+#              #
-#    Updated: 2024/01/20 17:07:44 by jocuni-p         ###   ########.fr        #
+#    Updated: 2024/06/08 17:26:10 by jocuni-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,20 +42,25 @@ all: $(NAME)
 
 
 $(NAME): $(OBJ)
-	$(LIB) $(NAME) $(OBJ)
+	@$(LIB) $(NAME) $(OBJ)
+	@echo "Library $(NAME) created."
 
 
-%.o : %.c libft.h  Makefile libft.a
-	$(CC) -c $(CFLAGS) $< -o $@
+#%.o : %.c libft.h  Makefile libft.a
+%.o : %.c libft.h  Makefile
+	@$(CC) -c $(CFLAGS) $< -o $@
+	@echo "Compiled $< to $@."
 #La var automatica $< agafa el nom del .c (src) i $@ el dona al .o (target)
 
 
 clean:
-	rm -f *.o 
+	@rm -f *.o
+	@echo "Cleaned up libft object files."
 # amb -f ignorem els arxius que no existeixen, borrats ja previament
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "Removed library $(NAME)."
 
 re: fclean all
 

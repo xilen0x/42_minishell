@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands_creator.c                                 :+:      :+:    :+:   */
+/*   init_xpdr_0.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 10:08:22 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/06/07 17:01:20 by jocuni-p         ###   ########.fr       */
+/*   Created: 2024/06/03 09:36:49 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/06/03 11:16:46 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*Allocates memory for an array of strings if any command is found
- on the tok list. Sets to NULL the last element of the array.*/
-void	commands_creator(t_tok *tok, t_cmd *node)
+void	init_xpdr(t_xpdr *xpdr)
 {
-	size_t	size;
-
-	size = commands_counter(tok);
-	if (size > 0)
-	{
-		node->commands = (char **)p_malloc((size + 1) * sizeof(char *));
-		node->commands[size] = NULL;
-	}
+	xpdr->i = 0;
+	xpdr->j = 0;
+	xpdr->k = 0;
+	xpdr->len = 0;
+	xpdr->s_quote = CLOSED;
+	xpdr->d_quote = CLOSED;
+	xpdr->key = NULL;
+	xpdr->val = NULL;
+	xpdr->result = NULL;
 }

@@ -29,12 +29,12 @@ t_env	*update_env(t_env *env, char *key, char *val)
 		}
 		current = current->next;
 	}
-	// Si no se encontró la variable de entorno, se agrega al final de la lista
 	new_env = lstnew(key, val);
 	lstadd_back(&env, new_env);
 	return (env);
 }
 
+/*checks if the current working directory exists*/
 int	exist_cwd(void)
 {
 	char	*curr_wd;
@@ -46,7 +46,8 @@ int	exist_cwd(void)
 	return (1);
 }
 
-/*Funcion que retorna el path actual(pwd). Utiliza para ello la funcion getcwd*/
+/*Function that returns the current path(pwd). 
+Use the getcwd function to do this.*/
 int	builtin_pwd(t_env *env)
 {
 	char	*current_wd;
@@ -65,11 +66,11 @@ int	builtin_pwd(t_env *env)
 		printf("%s\n", current_wd);
 		free(current_wd);
 	}
-	// g_get_signal = 0;
+	set_exit_status(0);
 	return (0);
 }
 
-/*actualiza la variable PWD del entorno*/
+/*updates the PWD environment variable*/
 char	*update_pwd(t_env *env)
 {
 	char	*current_wd;

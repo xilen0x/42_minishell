@@ -17,8 +17,7 @@ char	*get_exit_status_val(void)
 {
 	char	*result;
 
-	// result = ft_itoa(g_get_signal);//cambio temporal para eliminar errores en linux de variable global
-	result = ft_itoa(0);
+	result = ft_itoa(g_get_signal);
 	if (!result)
 		exit (EXIT_FAILURE);
 	return (result);

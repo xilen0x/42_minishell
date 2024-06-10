@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:33:42 by jocuni-p          #+#    #+#             */
-/*   Updated: 2024/05/28 17:33:44 by jocuni-p         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:15:21 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	env_init_list(char **envp, t_env **envlist)
 	i = 0;
 	while (envp[i])
 	{
-		tokens = ft_split(envp[i], '=');//Divide cada linea de env en key y val
+		tokens = ft_split(envp[i], '=');
 		if (tokens != NULL && tokens[0] != NULL && tokens[1] != NULL)
 		{
 			key = tokens[0];
 			value = tokens[1];
 			lstadd_back(envlist, lstnew(key, value));
 		}
-		free_arr2d(tokens);//libera el malloc que entrega el split a tokens
+		free_arr2d(tokens);
 		i++;
 	}
 	return ;

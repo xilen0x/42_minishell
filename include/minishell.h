@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/02 16:27:34 by jocuni-p          #+#    #+#             */
+/*   Updated: 2024/06/10 11:25:40 by jocuni-p         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -5,7 +17,8 @@
 #  define READLINE_LIBRARY
 # endif
 
-# include "../lib/libft/libft.h"
+/*--------Libraries---------*/
+# include "libft.h"
 # include <readline.h>
 # include <history.h>
 # include <signal.h>
@@ -18,6 +31,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <sys/stat.h>
+# include <stdbool.h>
 
 /*-----------------Defines-------------*/
 # define EXIT_SUCCESS 0
@@ -40,6 +54,7 @@
 # define CTRL_C SIGINT
 # define CTRL_D SIGQUIT
 # define CTRL_SLASH SIGQUIT
+# define CTRL_Z SIGTSTP
 // Modes signals
 # define PARENT 0
 # define CHILD 1
@@ -49,8 +64,12 @@
 # define PRINT_SYNTAX_ERR_2 "syntax error near unexpected token `newline'\n"
 # define PRINT_SYNTAX_ERR_3 "syntax error\n"
 
+/*------------------Quote status--------*/
+# define CLOSED 0
+# define OPEN 1
+
 /*-----------global variable------------*/
-// int	g_get_signal;//recoge todos los exit_status
+extern int	g_get_signal;
 
 /*--------------------------- Pipe ---------------------------*/
 # define READ 0
@@ -110,13 +129,21 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }					t_cmd;
 
-/*---si las comillas simples o dobles estan abiertas (1) o cerradas (0)----*/
-typedef struct s_qts
+/*---variables para expander---*/
+typedef struct s_xpdr
 {
-	int	s_quote;
-	int	d_quote;
-}	t_qts;
+	size_t	i;//iteradores
+	size_t	j;
+	size_t	k;
+	size_t	len;
+	bool	s_quote;//estado de las comillas
+	bool	d_quote;
+	char	*key;
+	char	*val;
+	char	*result;//token final expandido
+}			t_xpdr;
 
+/*------variables para executor-------*/
 typedef struct s_exe
 {
 	char			**paths;
@@ -129,7 +156,7 @@ typedef struct s_exe
 	int				fd[2];
 	int				dup_stdin;
 	int				dup_stdout;
-}	t_exe;
+}					t_exe;
 
 /*--------------------------- minishell.c -------------------------*/
 int		set_signals(int mode);
@@ -147,7 +174,6 @@ void	exe_free(t_exe *exe);
 int		bg_color(void);
 void	init_msg(void);
 int		help_mini(void);
-
 
 /*---------------------------array 2d -------------------------*/
 size_t	size_arr2d(char **arr2d);
@@ -199,20 +225,25 @@ size_t	commands_counter(t_tok *tok);
 int		syntax_check_1(t_tok *tok);
 int		syntax_check_2(t_tok *tok);
 void	commands_creator(t_tok *tok, t_cmd *node);
-//size_t 	tok_operator_cnt(t_tok *tokens);//OJO DE MOMENTO NO SE USA
-//size_t tok_word_cnt(t_tok *tokens);//OJO DE MOMENTO NO SE USA
+void	commands_filler(t_tok **tok, t_cmd *node);
 
 /*------------expander & quote removal----------*/
 void	should_expand(t_cmd *cmd, t_env *envlist);
-char	*expand_quote_rm(char *str, t_env *envlist);
-int		new_tok_len(char *str, t_env *envlist);
-char	*new_tok_builder(char *str, t_env *envlist, char *result);
-char 	*get_env_key(char *str);
-char 	*get_env_val(char *env_key, t_env *envlist);
+char	*expander(char *str, t_env *envlist);
+void	init_xpdr(t_xpdr *xpdr);
+size_t	new_tok_len(char *str, t_xpdr *xpdr, t_env *envlist);
+void	init_xpdr_except_result(t_xpdr *xpdr);
+void	get_dollar_len(char *str, t_xpdr *xpdr, t_env *envlist);
+char	*get_env_key(char *str);
+char	*get_env_val(char *env_key, t_env *envlist);
+void	handle_quote_len(char c, t_xpdr *xpdr);
+void	handle_quote_builder(char c, t_xpdr *xpdr);
+void	handle_quote_after_dollar(char c, t_xpdr *xpdr);
 size_t	get_len_and_free(char *str);
-
-/*---------------------utils--------------------*/
-void	*p_malloc(size_t size);
+void	*new_tok_builder(char *str, t_xpdr *xpdr, t_env *envlist);
+void	get_dollar_builder(char *str, t_xpdr *xpdr, t_env *envlist);
+void	handle_dollar_question(t_xpdr *xpdr);
+void	handle_dollar_invalid_syntax(char *str, t_xpdr *xpdr);
 
 /*--------------------------utils t_env-------------------*/
 t_env	*lstlast(t_env *lst);
@@ -221,42 +252,44 @@ t_env	*lstnew(char *key, char *value);
 void	env_init_list(char **envp, t_env **envlist);
 void	env_delone(t_env **env, char **node_to_del, void (*del)(void*));
 void	cleaner_envlist(t_env **lst);
-int	no_path_env(t_cmd *cmd, t_exe exe, t_env *env);
-
+int		no_path_env(t_cmd *cmd, t_exe exe, t_env *env);
 
 /*---------------------------executor.c -------------------------*/
 char	**get_paths(t_env *env);
-// int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe);
-int	pre_executor(t_env **env, t_cmd *cmd, t_exe *exe, unsigned int size_pipe);
+int		pre_executor(t_env **env, t_cmd *cmd, t_exe *exe, int size_pipe);
 int		search_command_path(t_cmd *cmd, t_exe *exe);
 void	error_exe(int num);
 int		list_to_array(t_env *env, t_exe *exe);
 int		close_fd(t_exe	*exe);
-// int		executor(t_cmd *cmd, t_env *env);
 int		executor(t_cmd *cmd, t_exe	*exe, t_env **env);
+
 /*---------------------------redirections.c -------------------------*/
 int		pre_redirections(t_cmd *cmd, t_exe *exe);
 
 /*---------------------------utils0.c -------------------------*/
 int		ft_msgs(int n, t_cmd *cmd);
-//int		get_exit_status(t_exe *exe);//funciones repetidas ?
-//void	set_exit_status(int num, t_exe *exe);
+void	set_exit_status(int n);
 
 /*---------------------utils1.c-------------------*/
 int		ca_strchr(const char *s, int c);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
+void	*p_malloc(size_t size);
+void	str_free_and_null(char **str);
+
+void	signal_child(int sig);
+void	signal_parent(int sig);
 
 /*-------------------exit_status------------------*/
-unsigned int	get_exit_status_len(void);
-char			*get_exit_status_val(void);
+int		get_exit_status_len(void);
+char	*get_exit_status_val(void);
+void	command_not_found(t_cmd *cmd, const char *prefix, size_t prefix_len);
+void	no_file_or_dir(t_cmd *cmd, const char *prefix, size_t prefix_len);
 
 /*--------------------------- builtins -------------------------*/
-// int		builtins(t_cmd *cmd, t_env **env);
 int		builtins(t_cmd *cmd, t_exe exe, t_env **env);
 int		builtin_exit(t_cmd *cmd);
 int		builtin_pwd(t_env *env);
 int		builtin_cd(t_cmd	*cmd, t_env **env);
-// int		builtin_env(t_cmd *cmd, t_env *env);
 int		builtin_env(t_cmd *cmd, t_exe exe, t_env *env);
 int		builtin_echo(t_cmd *cmd);
 int		builtin_export(t_cmd *cmd, t_env **env);
@@ -265,16 +298,16 @@ int		is_builtins(t_cmd *cmd);
 int		exist_cwd(void);
 
 /*--------------------------- utils_cd utils_cd_2 ---------------*/
-int	handle_no_argument(t_cmd *cmd);
-int	handle_tilde(t_cmd *cmd);
-int	handle_dash(t_cmd *cmd);
-int	handle_dot(t_cmd *cmd);
-int	handle_invalid_path(t_cmd *cmd);
+int		handle_no_argument(t_cmd *cmd);
+int		handle_tilde(t_cmd *cmd);
+int		handle_dash(t_cmd *cmd);
+int		handle_dot(t_cmd *cmd);
+int		handle_invalid_path(t_cmd *cmd);
 void	update_environment(t_env *env, char *current_wd);
-int	free_current_wd(char *current_wd);
-int	go_home(void);
+int		free_current_wd(char *current_wd);
+int		go_home(void);
 /*--------------------------- builtin export -------------------------*/
-unsigned int	check_export(char *arg);
+int		check_export(char *arg);
 int		variable_exists(t_env **env, char **variable);
 int		variable_exists_op2(t_env *env, char *variable);
 int		variable_exists_op3(t_env *env, char *variable);

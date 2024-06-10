@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-/*Funcion que segun el comando recibido, redirije a su building corresp.*/
+/*according to the command received, redirects to its corresponding building.*/
 int	builtins(t_cmd *cmd, t_exe exe, t_env **env)
 {
 	if (ft_strcmp(*cmd->commands, "exit") == 0)

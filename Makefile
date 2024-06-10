@@ -3,20 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jocuni-p <jocuni-p@student.42.fr>          +#+  +:+       +#+         #
+#    By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/29 15:02:51 by castorga          #+#    #+#              #
-#    Updated: 2024/05/30 12:35:47 by jocuni-p         ###   ########.fr        #
+#    Created: 2024/06/06 17:59:33 by castorga          #+#    #+#              #
+#    Updated: 2024/06/10 11:33:10 by jocuni-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME =	minishell
 
 # Compiler
-GCC := gcc
+GCC := cc
 
-# Compiler flags ........................#!!!!eliminar -fsanitize=address antes de subir!!!!!
-FLAGS := -Wall -Werror -Wextra -MMD -g -fsanitize=address
+# Compiler flags
+FLAGS := -Wall -Werror -Wextra -MMD -g
 
 # Remove
 RM 	:=	rm -rf
@@ -40,7 +41,7 @@ READLINE := ${READLINE_ROOT}libreadline.a ${READLINE_ROOT}libhistory.a
 
 # Libft
 LIBFT_ROOT := ${LIB_ROOT}libft/
-LIBFT_INC := $(LIBFT_ROOT)include/ 
+LIBFT_INC := $(LIBFT_ROOT) 
 LIBFT := $(LIBFT_ROOT)libft.a
 
 INC_DIRS += ${LIBFT_INC}
@@ -88,17 +89,29 @@ FILES =	main.c \
 									executor/path.c \
 									executor/heredoc.c \
 									exit_status/error_msgs.c \
+									exit_status/error_msgs2.c \
 									exit_status/get_exit_status_len.c \
 									exit_status/get_exit_status_val.c \
+									exit_status/set_exit_status.c \
 									expander/expand_quote_rm.c \
+									expander/get_dollar_builder.c \
+									expander/get_dollar_len.c \
 									expander/get_env_key.c \
 									expander/get_env_val.c \
+									expander/get_len_and_free.c \
+									expander/handle_dollar_invalid_syntax.c \
+									expander/handle_dollar_question.c \
+									expander/handle_quote_after_dollar.c \
+									expander/handle_quote_builder.c \
+									expander/handle_quote_len.c \
+									expander/init_xpdr_except_result.c \
+									expander/init_xpdr.c \
 									expander/new_tok_builder.c \
 									expander/new_tok_len.c \
 									expander/should_expand.c\
-									expander/get_len_and_free.c \
 									parser/commands_counter.c \
 									parser/commands_creator.c \
+									parser/commands_filler.c \
 									parser/handle_error.c \
 									parser/is_operator.c \
 									parser/is_redirection.c \
@@ -128,6 +141,7 @@ FILES =	main.c \
 									utils/p_malloc.c \
 									utils/utils1.c \
 									utils/utils3.c \
+									utils/signals_utils.c \
 									utils/wellcome_msg.c \
 									init_exe.c \
 									signals.c
@@ -142,14 +156,7 @@ INCS 	:= $(addprefix -I, $(INC_DIRS))
 ################################################################################
 
 DEF_COLOR =		\033[0;39m
-#DEL_LINE =		\033[2K
-#ITALIC =		\033[3m
-#GRAY =			\033[0;90m
-#RED =			\033[0;91m
-#BROWN =		\033[38;2;184;143;29m
-#YELLOW =		\033[33m
 DARK_YELLOW =	\033[38;5;143m
-#DARK_GRAY 	=	\033[38;5;234m
 DARK_GREEN 	=	\033[1m\033[38;2;75;179;82m
 GREEN 		=	\033[0;32m
 
@@ -160,13 +167,36 @@ all:	$(READLINE_MK_ROOT)
 		@echo "$(DARK_GREEN)GNU READLINE 8.2 COMPILING... $(DEF_COLOR)"
 		@$(MAKE) -sC $(READLINE_ROOT)
 		@echo "$(DARK_GREEN)LIBFT COMPILING... $(DEF_COLOR)"
-		@$(MAKE) $(LIBFT)
+		@$(MAKE) -C  $(LIBFT_ROOT)
 		@echo "$(DARK_GREEN)MINISHELL COMPILING... $(DEF_COLOR)"
 		@$(MAKE) $(NAME)
 		@echo "                              $(DEF_COLOR)"
 		@echo "$(GREEN)▶  MINISHELL BUILD COMPLETED!$(DEF_COLOR)"
 		@echo "                              $(DEF_COLOR)"
 		@echo "$(DARK_GREEN)-->	Now you can run ./minishell$(DEF_COLOR)"
+
+$(READLINE_MK_ROOT):
+		pwd ${BLOCK}
+		cd ./${READLINE_ROOT} && ./configure
+		cd ${BLOCK}
+
+$(LIBFT):
+		@$(MAKE) -C  $(LIBFT_ROOT)
+
+$(NAME): $(OBJS)
+		@$(GCC) $(FLAGS) $(OBJS) $(READLINE) $(LIBS) -o $(NAME)
+
+#$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(READLINE) $(MKF) $(LIBFT)
+$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(MKF)
+		@mkdir -p $(dir $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
+		@echo "▶ Compiling minishell file: <$(notdir $<)>"
+		@$(GCC) $(FLAGS) $(INCS) -c $< -o $@
+		@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
+
+-include $(DEPS)
+
+readline:
+		@$(MAKE) $(READLINE_MK_ROOT)
 
 clean:
 		@$(RM) $(OBJ_ROOT)
@@ -181,29 +211,9 @@ re:
 		@$(MAKE) fclean
 		@$(MAKE) all
 
-readline:
-		@$(MAKE) $(READLINE_MK_ROOT)
 
 cleanrl:
 		@$(MAKE) clean -sC $(READLINE_ROOT)
 
-$(READLINE_MK_ROOT):
-		pwd ${BLOCK}
-		cd ./${READLINE_ROOT} && ./configure
-		cd ${BLOCK}
-
-$(LIBFT):
-		@$(MAKE) -sC $(LIBFT_ROOT)
-
-$(NAME): $(OBJS)
-		@$(GCC) $(FLAGS) $(OBJS) $(READLINE) $(LIBS) -o $(NAME)
-
-$(OBJ_ROOT)%.o: $(SRC_ROOT)%.c $(READLINE) $(MKF)
-		@mkdir -p $(dir $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
-		@echo "▶ Compiling minishell file: <$(notdir $<)>"
-		@$(GCC) $(FLAGS) $(INCS) -c $< -o $@
-		@mv $(patsubst %.o, %.d, $@) $(dir $(subst $(OBJ_ROOT), $(DEP_ROOT), $@))
-
--include $(DEPS)
 
 .PHONY:	all bonus update clean fclean re

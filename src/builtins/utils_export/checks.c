@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: castorga <castorga@student.42barcel>       +#+  +:+       +#+        */
+/*   By: jocuni-p <jocuni-p@student.42barcelona.com +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:46:09 by castorga          #+#    #+#             */
-/*   Updated: 2024/05/27 16:46:11 by castorga         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:52:54 by jocuni-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*check if export argument comes with = or += */
-unsigned int	check_export(char *arg)
+int	check_export(char *arg)
 {
 	int	i;
 
@@ -33,6 +33,7 @@ unsigned int	check_export(char *arg)
 	return (0);
 }
 
+/*check if the syntax of the export command is correct */
 int	check_syntax(char *cmd)
 {
 	int	i;
