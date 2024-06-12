@@ -52,3 +52,19 @@ The **minishell** project involves creating a simplified version of a shell, sim
 
 
 ![game](https://raw.githubusercontent.com/xilen0x/xilen0x/master/images_x_repos/help_msg.png)
+
+## Installation
+`git clone url`
+
+`cd 42_minishell`
+
+`make`
+
+`./minishell`
+
+### Others make commands
+`make clean` To clean the .o & .d files generated
+
+`make fclean` To clean the .o & .a
+
+`make cleanrl` To clean the readline .o & .a
