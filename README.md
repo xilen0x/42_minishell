@@ -54,7 +54,7 @@ The **minishell** project involves creating a simplified version of a shell, sim
 ![game](https://raw.githubusercontent.com/xilen0x/xilen0x/master/images_x_repos/help_msg.png)
 
 ## Installation
-`git clone url`
+`git clone git@github.com:xilen0x/42_minishell.git`
 
 `cd 42_minishell`
 
